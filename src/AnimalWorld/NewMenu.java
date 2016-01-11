@@ -50,7 +50,7 @@ public class NewMenu extends Application {
 	    return -1;
 	}
 	
-	public MenuBar CreateMenuBar(World world, Configuration config){
+	public MenuBar CreateMenuBar(World world, final Configuration config){
 		
 		MenuBar menuBar = new MenuBar();
 
@@ -263,17 +263,15 @@ public class NewMenu extends Application {
 	@Override
 	public void start(Stage stage1) throws Exception {
 		final Configuration config = new Configuration();
-		config.EndSave();
+		//config.EndSave();
 		config.StartLoad();
 		
 		//AWorld world = new AWorld(config);
 		Group root = new Group();
 		final Scene scene = new Scene (root, width, height);
-		World world = new World(config, scene);
-		
-		System.out.println("HELLO ?");
-		
-		Rectangle rectangle = new Rectangle(0, height-50, width, 50);
+		final World world = new World(config, scene);
+				
+		final Rectangle rectangle = new Rectangle(0, height-50, width, 50);
 		root.getChildren().add(rectangle);
 		
 		//Menu
@@ -287,15 +285,15 @@ public class NewMenu extends Application {
 		//ArrayList<ACircle> circles = CreateRandomCircles();
 		
 		for (int i = 0; i < world.animalList.size(); i++){
-			root.getChildren().add(world.foodList.get(i));
-			root.getChildren().add(world.obstacleList.get(i).object);
-			root.getChildren().add(world.animalList.get(i));
+			root.getChildren().add(world.foodList.get(i).getBody());
+			root.getChildren().add(world.obstacleList.get(i).getBody());
+			root.getChildren().add(world.animalList.get(i).getBody());
 
 		}
 		
 		
 		//creating buttons
-		Button pauseBtn = new Button();
+		final Button pauseBtn = new Button();
 		pauseBtn.setText("Pause");
 		pauseBtn.setOnAction(new EventHandler<ActionEvent>(){
 			
@@ -314,7 +312,7 @@ public class NewMenu extends Application {
 			
 		});		
 		
-		Button stopBtn = new Button();
+		final Button stopBtn = new Button();
 		pauseBtn.setVisible(false);
 		stopBtn.setText("START");
 		stopBtn.setOnAction(new EventHandler<ActionEvent>(){
@@ -329,8 +327,8 @@ public class NewMenu extends Application {
 				}
 				else {
 					for (int i = 0; i < world.animalList.size(); i++){
-						world.animalList.get(i).setTranslateX(0);
-						world.animalList.get(i).setTranslateY(0);
+						world.animalList.get(i).getBody().setTranslateX(0);
+						world.animalList.get(i).getBody().setTranslateY(0);
 					}
 					pauseBtn.setVisible(false);
 					stopBtn.setText("START");
@@ -369,9 +367,12 @@ public class NewMenu extends Application {
 					for (int i = 0; i < world.animalList.size(); i++) {
 						world.animalList.get(i).update();
 						world.animalList.get(i).collideWalls(world);
-						world.animalList.get(i).collideAnimals(world.animalList, true);
-						world.animalList.get(i).collideObstacle(world, true);
-
+						Collisions.collideAnimals(world.animalList.get(i).getBody(), world.animalList);
+						Collisions.collideObstacle(world.animalList.get(i).getBody(), world);
+						
+						if (Collisions.collideFood(world.animalList.get(i).getBody(), world)){
+							//eat
+						}
 					}
 					
 				}
@@ -387,6 +388,7 @@ public class NewMenu extends Application {
 		stage1.setScene(scene);
 		
 		stage1.show();
+
 	}
 	
 	public static void main(String[] args) {

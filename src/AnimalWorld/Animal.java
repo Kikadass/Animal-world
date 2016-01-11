@@ -1,19 +1,17 @@
 package AnimalWorld;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
 
-public abstract class Animal extends Circle{
+public abstract class Animal{
+	private Circle Body= new Circle(), smellRange = new Circle();
 	private String name;
 	private int ID;
 	private int energy;
 	private int strenght;
 	private int foodCarring;
 	private int minFoodCons;	// minimum of calories that the meat has to be in order to eat it
-	private int smellRange;
 	private int age;			// in days
 	private int forgetfulness;
 	private int nestX;
@@ -55,7 +53,7 @@ public abstract class Animal extends Circle{
 		return this.minFoodCons;
 	}
 	
-	public int getSmellRange(){
+	public Circle getSmellRange(){
 		return this.smellRange;
 	}
 	
@@ -84,7 +82,7 @@ public abstract class Animal extends Circle{
 	}
 	
 	public int getSize(){
-		return (int) this.getRadius();
+		return (int) this.Body.getRadius();
 	}
 	
 	public int getMinSize(){
@@ -101,6 +99,10 @@ public abstract class Animal extends Circle{
 	
 	public float getDy(){
 		return this.dy;
+	}
+	
+	public Circle getBody(){
+		return this.Body;
 	}
 	
 	public void setName(String name){
@@ -128,7 +130,9 @@ public abstract class Animal extends Circle{
 	}
 	
 	public void setSmellRange(int smellRange){
-		this.smellRange = smellRange;
+		this.smellRange.setRadius(smellRange);
+		this.smellRange.setCenterX(this.Body.getCenterX());
+		this.smellRange.setCenterY(this.Body.getCenterY());
 	}
 	
 	public void setAge(int age){
@@ -156,7 +160,7 @@ public abstract class Animal extends Circle{
 	}
 	
 	public void setSize(int size){
-		this.setRadius(size);
+		this.Body.setRadius(size);
 	}
 	
 	public void setMinSize(int minSize){
@@ -175,99 +179,40 @@ public abstract class Animal extends Circle{
 		this.dy = dy;
 	}
 	
-	public boolean collideAnimals(ArrayList<Animal> circles, boolean modifySpeeds){
-			// check collision against other bugs	
-		for (int i = 0; i < circles.size(); i++){
-			if (this.getCenterX() != circles.get(i).getCenterX() && this.getCenterY() != circles.get(i).getCenterY()){
-				
-				// (x2-x1)^2 + (y1-y2)^2 <= (r1+r2)^2
-				int a = (int) Math.pow(((this.getCenterX() + this.getTranslateX()) - (circles.get(i).getCenterX() + circles.get(i).getTranslateX())), 2);
-				int b = (int) Math.pow(((this.getCenterY() + this.getTranslateY()) - (circles.get(i).getCenterY() + circles.get(i).getTranslateY())), 2);
-				int c = (int) Math.pow(this.getRadius() + circles.get(i).getRadius(), 2);
-				
-				if (a + b <= c){
-					if (modifySpeeds) this.newSpeeds(circles, i);
-					else return true;
-				}
-			}
-		}
-		return false;
-	}
+	
 	
 	public void collideWalls(World world){
 		// check collision against walls
-		if (this.getTranslateX()+ this.getCenterX() < this.getRadius() && dx < 0)	dx = -dx;
-		else if (world.getWidth() - this.getTranslateX()- this.getCenterX()  < this.getRadius() && dx > 0) dx = -dx;
-		if (this.getTranslateY()+ this.getCenterY()  < this.getRadius()+25 && dy < 0)	dy = -dy;
-		else if (world.getHeight() - 50 - this.getCenterY() - this.getTranslateY()  < this.getRadius() && dy > 0) dy = -dy;
+		if (this.Body.getTranslateX()+ this.Body.getCenterX() < this.Body.getRadius() && dx < 0)	dx = -dx;
+		else if (world.getWidth() - this.Body.getTranslateX()- this.Body.getCenterX()  < this.Body.getRadius() && dx > 0) dx = -dx;
+		if (this.Body.getTranslateY()+ this.Body.getCenterY()  < this.Body.getRadius()+25 && dy < 0)	dy = -dy;
+		else if (world.getHeight() - 50 - this.Body.getCenterY() - this.Body.getTranslateY()  < this.Body.getRadius() && dy > 0) dy = -dy;
 	
 	}
 	
-	public boolean collideObstacle(World world, boolean modifyDirection){
-		for (int i = 0; i < world.obstacleList.size(); i++){
-			if (Circle.class.isInstance(world.obstacleList.get(i).object)){
-					if (this.getCenterX() != world.obstacleList.get(i).getX() && this.getCenterY() != world.obstacleList.get(i).getY()){
-						
-						// (x2-x1)^2 + (y1-y2)^2 <= (r1+r2)^2
-						int a = (int) Math.pow(((this.getCenterX() + this.getTranslateX()) - (world.obstacleList.get(i).getX() + world.obstacleList.get(i).object.getTranslateX())), 2);
-						int b = (int) Math.pow(((this.getCenterY() + this.getTranslateY()) - (world.obstacleList.get(i).getY() + world.obstacleList.get(i).object.getTranslateY())), 2);
-						int c = (int) Math.pow(this.getRadius() + world.obstacleList.get(i).getSize(), 2);
-						
-						if (a + b <= c) {
-							if (modifyDirection) this.newSpeedsO(world.obstacleList, i);
-							else return true;
-						}
-					}
-				}
-			else {
-				if (this.intersects(world.obstacleList.get(i).object.getBoundsInParent())) return true;
-			}
-		}
-		return false;
-	}
-	
-	public boolean collideFood(World world){
-		for (int i = 0; i < world.foodList.size(); i++){
-			if (this.intersects(world.foodList.get(i).getBoundsInParent())) return true;
-		}		
-		return false;
-	}
-	
-	public void newSpeeds(ArrayList<Animal> circles, int i){
-		float newdx = 
-				  (float) ((this.dx * (this.getRadius() - circles.get(i).getRadius()) + (2 * circles.get(i).getRadius() * circles.get(i).dx)) 
-				 / (this.getRadius() + circles.get(i).getRadius()));
-		float newdy = 
-				  (float) ((this.dy * (this.getRadius() - circles.get(i).getRadius()) + (2 * circles.get(i).getRadius() * circles.get(i).dy)) 
-				 / (this.getRadius() + circles.get(i).getRadius()));
-		circles.get(i).dx = 
-				  (float) ((circles.get(i).dx * (circles.get(i).getRadius() - this.getRadius()) + (2 * this.getRadius() * this.dx)) 
-						 / (circles.get(i).getRadius() + this.getRadius()));
-		circles.get(i).dy = 
-				 (float) ((circles.get(i).dy * (circles.get(i).getRadius() - this.getRadius()) + (2 * this.getRadius() * this.dy)) 
-						 / (circles.get(i).getRadius() + this.getRadius()));
-		this.setTranslateX(this.getTranslateX()- dx);
-		this.setTranslateY(this.getTranslateY()- dy);  
-		this.dx = newdx;
-		this.dy = newdy;	
-	}
-	
-	public void newSpeedsO(ArrayList<Obstacle> circles, int i){
-		float newdx = 
-				  (float) ((this.dx * (this.getRadius()) 
-				 / (this.getRadius() + circles.get(i).getSize())));
-		float newdy = 
-				  (float) ((this.dy * (this.getRadius() - circles.get(i).getSize())) 
-				 / (this.getRadius() + circles.get(i).getSize()));
-		this.setTranslateX(this.getTranslateX()- dx);
-		this.setTranslateY(this.getTranslateY()- dy);  
-		this.dx = newdx;
-		this.dy = newdy;	
-	}
-	
+	//getImage = Animal's Body
+	// get angle for going to the target
+	public double getAngleTo(double targetX, double targetY){
+        double thisX = Body.getCenterX() + Body.getTranslateX();
+        double thisY = Body.getCenterY() + Body.getTranslateY();
+        return Math.atan2(targetY - thisY, targetX - thisX);
+    }
+
+	/*
+	// Direct the bug to the target
+    public void directDxDy(){
+        double targetX = (getLocalTarget().getCircle().getCenterX() + getLocalTarget().getCircle().getTranslateX());
+        double targetY = (getLocalTarget().getCircle().getCenterY() + getLocalTarget().getCircle().getTranslateY());
+        double angle = getAngleTo(targetX, targetY);
+        setDx((Math.cos(angle) * getSpeed()));
+        setDy((Math.sin(angle) * getSpeed()));
+    }
+	*/
 	
 	public void update(){
-		this.setTranslateX(this.getTranslateX()+ this.dx);
-		this.setTranslateY(this.getTranslateY() + this.dy);
+		this.Body.setTranslateX(this.Body.getTranslateX()+ this.dx);
+		this.Body.setTranslateY(this.Body.getTranslateY() + this.dy);
+		this.smellRange.setTranslateX(this.smellRange.getTranslateX()+ this.dx);
+		this.smellRange.setTranslateY(this.smellRange.getTranslateY() + this.dy);
 	}
 }

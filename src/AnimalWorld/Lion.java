@@ -28,14 +28,14 @@ public class Lion extends Predator {
 		this.setMaxSize(400);
 		
 		do{
-			this.setCenterX(rnd.nextInt(world.getWidth() - (int)this.getRadius()*2) + this.getRadius());
-			this.setCenterY(rnd.nextInt(world.getHeight() - (int)this.getRadius()*2 - 80) + this.getRadius() + 50);
-		}while(collideObstacle(world, false) || collideAnimals(world.animalList, false) || collideFood(world));
+			this.getBody().setCenterX(rnd.nextInt(world.getWidth() - (int) this.getBody().getRadius()*2) + this.getBody().getRadius());
+			this.getBody().setCenterY(rnd.nextInt(world.getHeight() - (int)this.getBody().getRadius()*2 - 80) + this.getBody().getRadius() + 50);
+		}while(Collisions.collideObstacle(getBody(), world) || Collisions.collideAnimals(getBody(), world.animalList) || Collisions.collideFood(getBody(), world));
 		
 		this.setDx(1);
 		this.setDy(1);
 		
-		this.setFill(Color.YELLOW);
+		this.getBody().setFill(Color.YELLOW);
 	}
 	
 	public void addCounter(){

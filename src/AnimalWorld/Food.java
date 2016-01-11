@@ -1,14 +1,14 @@
 package AnimalWorld;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 
-public class Food extends Rectangle{
+public class Food{
 	private int energy;
 	private String type;
+	private Circle Body = new Circle();
 	
 	public Food(World world){
 		Random rnd = new Random();
@@ -17,37 +17,31 @@ public class Food extends Rectangle{
 		switch (rnd.nextInt(2)+1) {
 	        case 1: 
 	        	this.type = "Meat";
-				this.setFill(Color.RED);
+				this.Body.setFill(Color.RED);
 	            break;
 	        case 2: 
 	        	this.type = "NonMeat";
-	        	this.setFill(Color.GREEN);
+	        	this.Body.setFill(Color.GREEN);
 	            break;
 	        default:
 	        	this.type = "NonMeat";
-	        	this.setFill(Color.GREEN);
+	        	this.Body.setFill(Color.GREEN);
 	            break;
 	    }
 		
-		this.setHeight(rnd.nextInt(50)+5);
-		this.setWidth(this.getHeight()); 
+		this.Body.setRadius(rnd.nextInt(50)+5); 
 		
-		boolean intersecting = false;
 		do{
-			this.setX(rnd.nextInt(world.getWidth() - (int)this.getHeight()*2)+ this.getHeight());
-			this.setY(rnd.nextInt(world.getHeight() - (int)this.getHeight()*2 - 80)+ this.getHeight() + 50);
-			for(int i = 0; i < world.foodList.size(); i++){
-				intersecting = this.intersects(world.foodList.get(i).getBoundsInParent());
-				if (intersecting) break;
-			}
-			System.out.println("HELLO3");
-
-			for(int i = 0; i < world.obstacleList.size(); i++){
-				if (intersecting) break;
-				intersecting = this.intersects(world.obstacleList.get(i).object.getBoundsInParent());
-			}
-			
-		}while(intersecting);
-		
+			this.Body.setCenterX(rnd.nextInt(world.getWidth() - (int)this.Body.getRadius()*2) + this.Body.getRadius());
+			this.Body.setCenterY(rnd.nextInt(world.getHeight() - (int)this.Body.getRadius()*2 - 80) + this.Body.getRadius() + 50);
+		}while(Collisions.collideObstacle(Body, world) || Collisions.collideAnimals(Body, world.animalList) || Collisions.collideFood(Body, world));
+	}
+	
+	public int getEnergy(){
+		return this.energy;
+	}
+	
+	public Circle getBody(){
+		return this.Body;
 	}
 }

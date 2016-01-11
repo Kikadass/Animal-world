@@ -4,53 +4,56 @@ import java.util.Random;
 
 import javafx.scene.shape.*;
 
-public class Obstacle {
+public class Obstacle{
 	private int weight;
-	private int size;
-	private int x;
-	private int y;
-	//private String[] shapes = {"Rectangle", "Circle"};
-	Shape object;
+	private Circle Body = new Circle();
 	
-	public Obstacle(int width, int height){
+	public Obstacle(World world){
 		Random rnd = new Random();
 		this.weight = rnd.nextInt(200)+ 10;
-		this.size = rnd.nextInt(100)+ 10;
-		this.x = rnd.nextInt(width - size*2)+ size;
-		this.y = rnd.nextInt(height - size*2 - 80)+ size + 50;
+		this.Body.setRadius(rnd.nextInt(50)+ 10);
 				
-		int shape = rnd.nextInt(2);
-		if (shape == 0) {
-			System.out.println("Rectangle");
-			this.object = new Rectangle(x, y, size, size);
-		}
-		else {
-			System.out.println("Circle");
-			this.object = new Circle(x, y, size);
-		}
+		do{
+			this.Body.setCenterX(rnd.nextInt(world.getWidth() - (int)this.Body.getRadius()*2) + this.Body.getRadius());
+			this.Body.setCenterY(rnd.nextInt(world.getHeight() - (int)this.Body.getRadius()*2 - 80) + this.Body.getRadius() + 50);
+		}while(Collisions.collideObstacle(Body, world) || Collisions.collideAnimals(Body, world.animalList) || Collisions.collideFood(Body, world));
 	}
-
+	
 	public void setX(int x){
-		this.x = x;
+		this.Body.setCenterX(x);
 	}
 	
 	public void setY(int y){
-		this.y = y;
+		this.Body.setCenterY(y);
 	}
 	
 	public void setSize(int size){
-		this.size = size;
+		this.Body.setRadius(size);
+	}
+	
+	public void setWeight(int weight){
+		this.weight = weight;
 	}
 	
 	public int getX(){
-		return this.x;
+		return (int) this.Body.getCenterX();
 	}
 	
 	public int getY(){
-		return this.y;
+		return (int) this.Body.getCenterY();
 	}
 	
 	public int getSize(){
-		return this.size;
+		return (int) this.Body.getRadius();
 	}
+	
+	public int getWeight(){
+		return this.weight;
+	}
+	
+	public Circle getBody(){
+		return this.Body;
+	}
+	
+	
 }

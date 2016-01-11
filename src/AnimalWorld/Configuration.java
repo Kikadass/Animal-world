@@ -172,6 +172,7 @@ public class Configuration implements Serializable{
 	      {
 	          i.printStackTrace();
 	      }
+		this.EndSave();
 	}
 
 	public void EndSave(){
@@ -225,13 +226,13 @@ public class Configuration implements Serializable{
 		this.setConfiguration(e);
 	}
 	
-	public Configuration Load(){
+	public void Load(){
 		Configuration e = new Configuration();
 
 		e = tryLoad(this.lastFile);
 		
 		System.out.println("Deserialized Configuration...");
 		e.displayConfig();
-		return e;
+		this.setConfiguration(e);
 	}
 }

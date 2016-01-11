@@ -22,22 +22,21 @@ public class World {
 		for (int i = 0; i < /*config.getObstacles()*/ 1; i++){
 			this.addObstacle();
 		}
-		
-		System.out.println("HELLO");
-		
+				
 		// creating Food
 		for (int i = 0; i < /*config.getFood()*/ 1; i++){
 			this.addFood();
 		}	
 		
-		System.out.println("HELLO2");
 
 		// create Animals
-		this.addLion();
+		for (int i = 0; i < /*config.getBugs()*/ 1; i++){
+			this.addLion();
+		}
 	}
 
 	public void addObstacle(){
-		Obstacle obstacle = new Obstacle(this.width, this.height);
+		Obstacle obstacle = new Obstacle(this);
 		obstacleList.add(obstacle);
 	}
 	
