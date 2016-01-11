@@ -283,7 +283,7 @@ public class NewMenu extends Application {
         System.out.print("HELLO");
 
 		//Menu
-		MenuBar menuBar1 = new MenuBar();
+        MenuBar menuBar1 = new MenuBar();
 		menuBar1 = CreateMenuBar(world, config);
 		menuBar1.setMinWidth(width);
 		final MenuBar menuBar = menuBar1;
