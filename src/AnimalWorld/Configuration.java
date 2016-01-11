@@ -1,8 +1,11 @@
 package AnimalWorld;
 
 import java.io.*;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.*;
+import javafx.scene.control.TextInputDialog;
 
-import javax.swing.JOptionPane;
 
 public class Configuration implements Serializable{
 	private String lastFile;
@@ -11,7 +14,7 @@ public class Configuration implements Serializable{
 	private int amountBugs;
 	private int sizeMap;
 	private int cycles;
-	
+
 	public Configuration(){
 		this.lastFile = new String();
 		this.lastFile = "defConfiguration.ser";
@@ -42,42 +45,88 @@ public class Configuration implements Serializable{
 	
 	public void EditConfig(){
 		String check = null;
-		do{
-			check = JOptionPane.showInputDialog(null, "How much Food do you want to create?");
-		}while(check == null);
-		this.amountFood = Integer.parseInt(check);
-		
-		check = null;
-		do{
-			check = JOptionPane.showInputDialog(null, "How many Obstacles do you want to create?");
-		}while(check == null);
+
+        do {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Food");
+            dialog.setHeaderText("How much Food do you want to create?");
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                check = result.get();
+            }
+        }while(check == null);
+        this.amountFood = Integer.parseInt(check);
+
+
+        check = null;
+
+        do {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Obstacles");
+            dialog.setHeaderText("How many Obstacles do you want to create?");
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                check = result.get();
+            }
+        }while(check == null);
 		this.amountObstacles = Integer.parseInt(check);
-		
+
+
 		check = null;
-		do{
-			check = JOptionPane.showInputDialog(null, "How many Bugs do you want to create?");
-		}while(check == null);
+        do {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Animals");
+            dialog.setHeaderText("How many Bugs do you want to create?");
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                check = result.get();
+            }
+        }while(check == null);
 		this.amountBugs = Integer.parseInt(check);
-		
+
+
 		check = null;
-		do{
-			check = JOptionPane.showInputDialog(null, "What would be the size of the World?");
-		}while(check == null);
+        do {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("World Size");
+            dialog.setHeaderText("What would be the size of the World?");
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                check = result.get();
+            }
+        }while(check == null);
 		this.sizeMap = Integer.parseInt(check);
 		
 		check = null;
-		do{
-			check = JOptionPane.showInputDialog(null, "How many cycles do you want to do?");
-		}while(check == null);
+        do {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Amount of cycles");
+            dialog.setHeaderText("How many cycles do you want to do?");
+            Optional<String> result = dialog.showAndWait();
 
+            if (result.isPresent()) {
+                check = result.get();
+            }
+        }while(check == null);
 		this.cycles = Integer.parseInt(check);
 	}
 	
 	public void NewConfiguration(){
 		String check = null;
-		do{
-			check = JOptionPane.showInputDialog(null, "What is the location where you want to safe the config file?");
-		}while(check == null);
+        do {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("New Location");
+            dialog.setHeaderText("What is the location where you want to safe the config file?");
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                check = result.get();
+            }
+        }while(check == null);
 		this.lastFile = check;
 		
 		this.EditConfig();
@@ -85,9 +134,17 @@ public class Configuration implements Serializable{
 	
 	public void OpenConfigurationFile(){
 		String location = null;
-		do{
-			location = JOptionPane.showInputDialog(null, "What is the location of the config file?");
-		}while(location == null);
+        do {
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("File Location");
+            dialog.setHeaderText("What is the location of the config file?");
+            Optional<String> result = dialog.showAndWait();
+
+            if (result.isPresent()) {
+                location = result.get();
+            }
+        }while(location == null);
+
 		this.lastFile = location;
 		this.Load();
 	}
@@ -141,23 +198,33 @@ public class Configuration implements Serializable{
 	} 
 
 	public void displayConfig(){
-		String print = new String();
+		String print;
 		print = "Name of file: " + this.lastFile + "\n" + 
 				"Amount of Food: " + this.amountFood + "\n" +
 				"Amount of Obstacles: " + this.amountObstacles + "\n" + 
 				"Amount of Bugs: " + this.amountBugs + "\n" +
 				"Size of Map: " + this.sizeMap + "\n" +
 				"Cycles: " + this.cycles;
-		JOptionPane.showMessageDialog(null, print);
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Configuration loaded:");
+        alert.setContentText(print);
+        alert.showAndWait();
+
+        //JOptionPane.showMessageDialog(null, print);
 	}
 	
 	public void displayMap(){
-		String print = new String();
+		String print;
 		print = "Amount of Food: " + this.amountFood + "\n" +
 				"Amount of Obstacles: " + this.amountObstacles + "\n" + 
 				"Amount of Bugs: " + this.amountBugs + "\n" +
 				"Size of Map: " + this.sizeMap;
-		JOptionPane.showMessageDialog(null, print);
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Configuration loaded:");
+        alert.setContentText(print);
+        alert.showAndWait();
 	}
 	
 	public void Save(){
@@ -220,14 +287,10 @@ public class Configuration implements Serializable{
 			e = tryLoad(e.lastFile);
 			e.Save();
 		}
-		System.out.print("HELLO");
 
 		System.out.println("Deserialized Configuration...");
-        System.out.print("HELLO");
 
         e.displayConfig();
-
-		System.out.print("HELLO");
 
 		this.setConfiguration(e);
 	}

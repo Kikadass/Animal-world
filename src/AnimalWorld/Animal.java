@@ -1,6 +1,7 @@
 package AnimalWorld;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.scene.shape.Circle;
 
@@ -9,6 +10,7 @@ public abstract class Animal{
 	private String name;
 	private int ID;
 	private int energy;
+    private int food;
 	private int strenght;
 	private int foodCarring;
 	private int minFoodCons;	// minimum of calories that the meat has to be in order to eat it
@@ -16,12 +18,20 @@ public abstract class Animal{
 	private int forgetfulness;
 	private int nestX;
 	private int nestY;
-	private int angle;			// angle of normal movement
+	private int angleRange;			// angleRange of normal movement
+    private int lastAngle;
 	private int lifeExpectancy;	// how old are can that specie live for
 	private int minSize;
 	private int maxSize;	
-	private float dx;
-	private float dy;
+	private double dx;
+	private double dy;
+	private double speed;
+    private Target houseTarget;
+    private Target foodTarget;
+    private Target waterTarget;
+	private Target mainTarget;
+    private Target provisionalTarget = new Target(0, 0);
+
 	
 	public Animal(){
 		this.name = new String();
@@ -73,8 +83,8 @@ public abstract class Animal{
 		return this.nestY;
 	}
 	
-	public int getAngle(){
-		return this.angle;
+	public int getangleRange(){
+		return this.angleRange;
 	}
 	
 	public int getLifeExpectancy(){
@@ -93,18 +103,30 @@ public abstract class Animal{
 		return this.maxSize;
 	}
 	
-	public float getDx(){
+	public double getDx(){
 		return this.dx;
 	}
 	
-	public float getDy(){
+	public double getDy(){
 		return this.dy;
 	}
 	
 	public Circle getBody(){
 		return this.Body;
 	}
-	
+
+	public double getSpeed() {
+		return this.speed;
+	}
+
+    public Target getProvisionalTarget() {
+        return provisionalTarget;
+    }
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
 	public void setName(String name){
 		this.name = name;
 	}
@@ -151,8 +173,8 @@ public abstract class Animal{
 		this.nestY = nestY;
 	}
 	
-	public void setAngle(int angle){
-		this.angle = angle;
+	public void setAngleRange(int angleRange){
+		this.angleRange = angleRange;
 	}
 	
 	public void setLifeExpectancy(int lifeExpectancy){
@@ -171,15 +193,17 @@ public abstract class Animal{
 		this.minSize = maxSize;
 	}
 
-	public void setDx(float dx){
+	public void setDx(double dx){
 		this.dx = dx;
 	}
 	
-	public void setDy(float dy){
+	public void setDy(double dy){
 		this.dy = dy;
 	}
-	
-	
+
+    public void setProvisionalTarget(Target provisionalTarget) {
+        this.provisionalTarget = provisionalTarget;
+    }
 	
 	public void collideWalls(World world){
 		// check collision against walls
@@ -198,21 +222,94 @@ public abstract class Animal{
         return Math.atan2(targetY - thisY, targetX - thisX);
     }
 
-	/*
+
 	// Direct the bug to the target
     public void directDxDy(){
-        double targetX = (getLocalTarget().getCircle().getCenterX() + getLocalTarget().getCircle().getTranslateX());
-        double targetY = (getLocalTarget().getCircle().getCenterY() + getLocalTarget().getCircle().getTranslateY());
+        double targetX = (this.provisionalTarget.getBody().getCenterX() + this.provisionalTarget.getBody().getTranslateX());
+        double targetY = (this.provisionalTarget.getBody().getCenterY() + this.provisionalTarget.getBody().getTranslateY());
         double angle = getAngleTo(targetX, targetY);
         setDx((Math.cos(angle) * getSpeed()));
         setDy((Math.sin(angle) * getSpeed()));
     }
-	*/
-	
+
+    public void getRandomLocalTarget(){
+        Random rand = new Random();
+        int randomAttemptTracker = 0;
+        int anAngle, tX, tY, path = (int)this.smellRange.getRadius();
+        do{
+            if (randomAttemptTracker < this.angleRange * 2){
+                anAngle = rand.nextInt(this.angleRange * 2) + this.lastAngle - this.angleRange;
+                randomAttemptTracker++;
+            } else{
+                // Too many attempts at picking an angle within the turn range were made
+                anAngle = rand.nextInt(360);
+                path = rand.nextInt((int)this.smellRange.getRadius());
+            }
+            double angle = Math.toRadians(anAngle);
+            tX = (int) ((this.smellRange.getCenterX() + this.smellRange.getTranslateX()) + path * Math.cos(angle));
+            tY = (int) ((this.smellRange.getCenterY() + this.smellRange.getTranslateY()) + path * Math.sin(angle));
+        } while(!isValidTarget(tX, tY));
+        this.provisionalTarget = new Target(tX, tY);
+        this.lastAngle = anAngle;
+    }
+
+    public boolean isValidTarget(int tx, int ty){
+        if (tx > (NewMenu.width-Body.getRadius()+smellRange.getRadius()) || ty > (NewMenu.height-Body.getRadius()+smellRange.getRadius()-50) || tx < Body.getRadius()-smellRange.getRadius() || ty < Body.getRadius()+30-smellRange.getRadius()) {
+            if (this.Body.getCenterX() + this.Body.getTranslateX() > (NewMenu.width - Body.getRadius()) || this.Body.getCenterY() + this.Body.getTranslateY() > (NewMenu.height - Body.getRadius() - 50) || this.Body.getCenterX() + this.Body.getTranslateX() < Body.getRadius() || this.Body.getCenterY() + this.Body.getTranslateY() < Body.getRadius() + 30) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 	public void update(){
+		/*
+        select maintarget
+            if energy too low
+             go home to sleep
+            else if food too low
+                if distance of food is more than distance of home
+                    go home
+                else go foodTarget
+
+
+            ...... optional if additional time ......
+            else if water too low
+                if distance of water is more than distance of home
+                    go home
+                else go waterTarget
+             ...... optional if additional time ......
+
+
+
+        select provisionaltarget
+            go in the direction of main target
+                getting a random point inside the angle.
+
+		go to provisionaltarget
+		    each cycle substract 1 energy, 1 food, (1 water)
+
+		    if collision with obstacle (inner circle)
+		        ...... optional if additional time...... if obstacle's weight < strenght move obstacle
+		        choose random target not taking into account the angle
+            if collision with food (smell circle)
+                detect position of detection
+                set its position as provisional target
+		*/
+        if (this.provisionalTarget.getBody().getCenterX() == 0 &&  this.provisionalTarget.getBody().getCenterY() == 0){
+            getRandomLocalTarget();
+        }
+
+        if (this.Body.getCenterX() + this.Body.getTranslateX() > (NewMenu.width - Body.getRadius()) || this.Body.getCenterY() + this.Body.getTranslateY() > (NewMenu.height - Body.getRadius() - 50) || this.Body.getCenterX() + this.Body.getTranslateX() < Body.getRadius() || this.Body.getCenterY() + this.Body.getTranslateY() < Body.getRadius() + 30) {
+            this.lastAngle += 180;
+            if (this.lastAngle >= 360) this.lastAngle -= 360;
+            getRandomLocalTarget();
+        }
+        directDxDy();
+
 		this.Body.setTranslateX(this.Body.getTranslateX()+ this.dx);
 		this.Body.setTranslateY(this.Body.getTranslateY() + this.dy);
-		this.smellRange.setTranslateX(this.smellRange.getTranslateX()+ this.dx);
-		this.smellRange.setTranslateY(this.smellRange.getTranslateY() + this.dy);
+		this.smellRange.setTranslateX(this.Body.getTranslateX());
+		this.smellRange.setTranslateY(this.Body.getTranslateY());
 	}
 }

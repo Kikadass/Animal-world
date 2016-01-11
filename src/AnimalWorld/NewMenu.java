@@ -17,8 +17,8 @@ import javafx.util.Duration;
 
 public class NewMenu extends Application {
 
-	int width = 1000;
-	int height = 700;
+	static int width = 1000;
+	static int height = 700;
 	int nCircles = 10;
 	boolean pause = true;
 	boolean stop = true;
@@ -262,25 +262,19 @@ public class NewMenu extends Application {
 
 	@Override
 	public void start(Stage stage1) throws Exception {
-
         final Configuration config = new Configuration();
-		//config.EndSave();
-
+        //config.EndSave();
         config.StartLoad();
 
-        System.out.print("HELLO");
 
         //AWorld world = new AWorld(config);
-		Group root = new Group();
+		final Group root = new Group();
 		final Scene scene = new Scene(root, width, height);
 		final World world = new World(config, scene);
 
-        System.out.print("HELLO");
 
         final Rectangle rectangle = new Rectangle(0, height - 50, width, 50);
 		root.getChildren().add(rectangle);
-
-        System.out.print("HELLO");
 
 		//Menu
         MenuBar menuBar1 = new MenuBar();
@@ -292,13 +286,19 @@ public class NewMenu extends Application {
 
 		//ArrayList<ACircle> circles = CreateRandomCircles();
 
+        //add animals, food and obstacles into the screen
 		for (int i = 0; i < world.animalList.size(); i++) {
-			root.getChildren().add(world.foodList.get(i).getBody());
-			root.getChildren().add(world.obstacleList.get(i).getBody());
 			root.getChildren().add(world.animalList.get(i).getBody());
+            root.getChildren().add(world.animalList.get(i).getSmellRange());
+            root.getChildren().add(world.animalList.get(i).getProvisionalTarget().getBody());
 
 		}
-
+        for (int i = 0; i < world.foodList.size(); i++) {
+            root.getChildren().add(world.foodList.get(i).getBody());
+        }
+        for (int i = 0; i < world.obstacleList.size(); i++) {
+            root.getChildren().add(world.obstacleList.get(i).getBody());
+        }
 
 		//creating buttons
 		final Button pauseBtn = new Button();
@@ -372,9 +372,18 @@ public class NewMenu extends Application {
 				if (!pause) {
 					for (int i = 0; i < world.animalList.size(); i++) {
 						world.animalList.get(i).update();
-						world.animalList.get(i).collideWalls(world);
-						Collisions.collideAnimals(world.animalList.get(i).getBody(), world.animalList);
-						Collisions.collideObstacle(world.animalList.get(i).getBody(), world);
+						//world.animalList.get(i).collideWalls(world)
+
+                        if (Collisions.nonEfficientCollide(world.animalList.get(i).getBody(), world.animalList.get(i).getProvisionalTarget().getBody())){
+                            world.animalList.get(i).getRandomLocalTarget();
+                        }
+
+						if (Collisions.collideAnimals(world.animalList.get(i).getBody(), world.animalList)){
+                            // reproduce
+                        }
+						if (Collisions.collideObstacle(world.animalList.get(i).getBody(), world)){
+                            // choose new target
+                        }
 
 						if (Collisions.collideFood(world.animalList.get(i).getBody(), world)) {
 							//eat

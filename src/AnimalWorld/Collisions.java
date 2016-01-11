@@ -11,7 +11,7 @@ public class Collisions {
 		int b = (int) Math.pow(((c1.getCenterY() + c1.getTranslateY()) - (c2.getCenterY() + c2.getTranslateY())), 2);
 		int c = (int) Math.pow(c1.getRadius() + c2.getRadius(), 2);
 		
-		if (a + b <= c)return true;
+		if (a + b <= c) return true;
 		return false;
 	}
 	
