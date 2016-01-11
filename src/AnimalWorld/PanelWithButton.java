@@ -27,7 +27,7 @@ public class PanelWithButton extends JPanel{
 
     }
 
-    public void initComponents(AWorld world, int cycles){
+    public void initComponents(final AWorld world, final int cycles){
     	
         // Construct components
         

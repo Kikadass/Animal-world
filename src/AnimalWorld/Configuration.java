@@ -215,14 +215,20 @@ public class Configuration implements Serializable{
 		Configuration e = tryLoad("defConfiguration.ser");
 		//e.lastFile = "defConfiguration.ser";
 
+
 		if (e.lastFile != "defConfiguration.ser"){
 			e = tryLoad(e.lastFile);
 			e.Save();
 		}
-		
+		System.out.print("HELLO");
+
 		System.out.println("Deserialized Configuration...");
-		e.displayConfig();
-		
+        System.out.print("HELLO");
+
+        e.displayConfig();
+
+		System.out.print("HELLO");
+
 		this.setConfiguration(e);
 	}
 	

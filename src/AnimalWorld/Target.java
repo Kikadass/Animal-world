@@ -7,9 +7,8 @@ import javafx.scene.shape.Circle;
 public class Target{
 	private Circle Body;
 	
-	public Target(){
+	public Target(World world){
 		Random rnd = new Random();
-		this.weight = rnd.nextInt(200)+ 10;
 		this.Body.setRadius(rnd.nextInt(100)+ 10);
 				
 			this.Body.setCenterX(rnd.nextInt(world.getWidth() - (int)this.Body.getRadius()*2) + this.Body.getRadius());
