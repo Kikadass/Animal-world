@@ -76,6 +76,15 @@ public class World {
         targetsGroup.getChildren().add(lion.getMainTarget().getBody());
 
     }
+
+	public void deleteAnimal(int i){
+		animalList.remove(i);
+		animalGroup.getChildren().remove(i);
+		smellRangeGroup.getChildren().remove(i);
+		statsGroup.getChildren().remove(i);
+		targetsGroup.getChildren().remove(i);
+
+	}
 	
 	public void setWidth(int width){
 		this.width = width;

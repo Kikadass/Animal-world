@@ -341,6 +341,38 @@ public abstract class Animal{
         if (this.lastAngle >= 360) this.lastAngle -= 360;
     }
 
+	public void updateTarget(){
+		if (this.mainTarget.getBody().getCenterX() != 0 &&  this.mainTarget.getBody().getCenterY() != 0) {
+			if ((int) this.mainTarget.getBody().getCenterX() <= this.getPosX()+5 && (int) this.mainTarget.getBody().getCenterX() >= this.getPosX()-5 && (int) this.mainTarget.getBody().getCenterY() <= this.getPosY()+5 && (int) this.mainTarget.getBody().getCenterY() >= this.getPosY()-5) {
+				this.setMainTarget(new Target(0, 0));
+			}
+			else getLocalTarget();
+		}
+		else if (this.provisionalTarget.getBody().getCenterX() == 0 &&  this.provisionalTarget.getBody().getCenterY() == 0){
+			getRandomLocalTarget();
+		}
+
+		if (this.getPosX() > (NewMenu.width - Body.getRadius()) || this.getPosY() > (NewMenu.height - Body.getRadius() - 50) || this.getPosX() < Body.getRadius() || this.getPosY() < Body.getRadius() + 30) {
+			this.getOut();
+			getRandomLocalTarget();
+		}
+	}
+
+    public void updateFood(){
+        this.setFood(this.getFood()-1);
+
+        if (this.getFood() < this.getMaxFood()/2){
+            if (this.foodCarring > 0){
+                this.setFood(this.getFood() + 1);
+                this.setFoodCarring(this.getFoodCarring() - 1);
+            }
+            else {
+                //goHome
+            }
+        }
+
+    }
+
 	public void update(){
 		/*
         select maintarget
@@ -376,20 +408,8 @@ public abstract class Animal{
                 set its position as provisional target
 		*/
 
-        if (this.mainTarget.getBody().getCenterX() != 0 &&  this.mainTarget.getBody().getCenterY() != 0) {
-            if ((int) this.mainTarget.getBody().getCenterX() <= this.getPosX()+5 && (int) this.mainTarget.getBody().getCenterX() >= this.getPosX()-5 && (int) this.mainTarget.getBody().getCenterY() <= this.getPosY()+5 && (int) this.mainTarget.getBody().getCenterY() >= this.getPosY()-5) {
-                this.setMainTarget(new Target(0, 0));
-            }
-            else getLocalTarget();
-        }
-        else if (this.provisionalTarget.getBody().getCenterX() == 0 &&  this.provisionalTarget.getBody().getCenterY() == 0){
-                getRandomLocalTarget();
-        }
+        this.updateTarget();
 
-        if (this.getPosX() > (NewMenu.width - Body.getRadius()) || this.getPosY() > (NewMenu.height - Body.getRadius() - 50) || this.getPosX() < Body.getRadius() || this.getPosY() < Body.getRadius() + 30) {
-            this.getOut();
-            getRandomLocalTarget();
-        }
         directDxDy();
 
 		this.Body.setTranslateX(this.Body.getTranslateX()+ this.dx);
@@ -397,8 +417,7 @@ public abstract class Animal{
 		this.smellRange.setTranslateX(this.Body.getTranslateX());
 		this.smellRange.setTranslateY(this.Body.getTranslateY());
 
-
-        this.setFood(this.getFood()-1);
+        this.updateFood();
         this.setEnergy(this.getEnergy()-1);
 
         this.setStats();

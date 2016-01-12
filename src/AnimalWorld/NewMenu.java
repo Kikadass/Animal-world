@@ -22,6 +22,7 @@ public class NewMenu extends Application {
 	int nCircles = 10;
 	boolean pause = true;
 	boolean stop = true;
+    static boolean startOver = false;
 
 	public static int Loop(String[] Options, String WindowName, boolean Edit) {
 		List<String> optionList = new ArrayList<String>();
@@ -102,6 +103,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.NewConfiguration();
+                startOver = true;
 			}
 		});
 
@@ -110,6 +112,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.OpenConfigurationFile();
+                startOver = true;
 			}
 		});
 
@@ -118,7 +121,9 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.Save();
-			}
+                startOver = true;
+
+            }
 		});
 
 		menu14.setOnAction(new EventHandler<ActionEvent>() {
@@ -131,7 +136,6 @@ public class NewMenu extends Application {
 				} while (lastFile == null);
 
 				config.setLastFile(lastFile);
-				config.Save();
 			}
 		});
 
@@ -150,6 +154,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.EditConfig();
+                startOver = true;
 			}
 		});
 
@@ -305,127 +310,122 @@ public class NewMenu extends Application {
     }
 
 
-	@Override
-	public void start(Stage stage1) throws Exception {
-        final Configuration config = new Configuration();
-        //config.EndSave();
-        config.StartLoad();
-
+    public void mainProgram(final Stage stage1, final Configuration config){
 
         //AWorld world = new AWorld(config);
-		final Group root = new Group();
-		final Scene scene = new Scene(root, width, height);
-		final World world = new World(root, config, scene);
+        final Group root = new Group();
+        final Scene scene = new Scene(root, width, height);
+        final World world = new World(root, config, scene);
 
 
         final Rectangle rectangle = new Rectangle(0, height - 50, width, 50);
-		root.getChildren().add(rectangle);
+        root.getChildren().add(rectangle);
 
-		//Menu
+        //Menu
         MenuBar menuBar1 = new MenuBar();
-		menuBar1 = CreateMenuBar(world, config);
-		menuBar1.setMinWidth(width);
-		final MenuBar menuBar = menuBar1;
+        menuBar1 = CreateMenuBar(world, config);
+        menuBar1.setMinWidth(width);
+        final MenuBar menuBar = menuBar1;
 
-		root.getChildren().add(menuBar);
+        root.getChildren().add(menuBar);
 
-		//ArrayList<ACircle> circles = CreateRandomCircles();
+        //ArrayList<ACircle> circles = CreateRandomCircles();
 
-		//creating buttons
-		final Button pauseBtn = new Button();
-		pauseBtn.setText("Pause");
-		pauseBtn.setOnAction(new EventHandler<ActionEvent>() {
+        //creating buttons
+        final Button pauseBtn = new Button();
+        pauseBtn.setText("Pause");
+        pauseBtn.setOnAction(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent arg0) {
-				if (pause) {
-					pauseBtn.setText("Pause");
-					pause = false;
-				} else {
-					pauseBtn.setText("Replay");
-					pause = true;
-				}
+            @Override
+            public void handle(ActionEvent arg0) {
+                if (pause) {
+                    pauseBtn.setText("Pause");
+                    pause = false;
+                } else {
+                    pauseBtn.setText("Replay");
+                    pause = true;
+                }
 
-			}
+            }
 
-		});
+        });
 
-		final Button stopBtn = new Button();
-		pauseBtn.setVisible(false);
-		stopBtn.setText("START");
-		stopBtn.setOnAction(new EventHandler<ActionEvent>() {
+        final Button stopBtn = new Button();
+        pauseBtn.setVisible(false);
+        stopBtn.setText("START");
+        stopBtn.setOnAction(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent arg0) {
-				if (stop) {
-					pauseBtn.setVisible(true);
-					stopBtn.setText("STOP");
-					stop = false;
-					pause = false;
-				} else {
-					for (int i = 0; i < world.animalList.size(); i++) {
-						world.animalList.get(i).getBody().setTranslateX(0);
-						world.animalList.get(i).getBody().setTranslateY(0);
-					}
-					pauseBtn.setVisible(false);
-					stopBtn.setText("START");
-					stop = true;
-					pause = true;
-				}
+            @Override
+            public void handle(ActionEvent arg0) {
+                if (stop) {
+                    pauseBtn.setVisible(true);
+                    stopBtn.setText("STOP");
+                    stop = false;
+                    pause = false;
+                } else {
+                    for (int i = 0; i < world.animalList.size(); i++) {
+                        world.animalList.get(i).getBody().setTranslateX(0);
+                        world.animalList.get(i).getBody().setTranslateY(0);
+                    }
+                    pauseBtn.setVisible(false);
+                    stopBtn.setText("START");
+                    stop = true;
+                    pause = true;
+                }
 
-			}
+            }
 
-		});
+        });
 
-		root.getChildren().add(stopBtn);
-		root.getChildren().add(pauseBtn);
+        root.getChildren().add(stopBtn);
+        root.getChildren().add(pauseBtn);
 
 
-		KeyFrame frame = new KeyFrame(Duration.millis(16), new EventHandler<ActionEvent>() {
+        KeyFrame frame = new KeyFrame(Duration.millis(16), new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent t) {
+            @Override
+            public void handle(ActionEvent t) {
                 width = (int)scene.getWidth();
                 height = (int)scene.getHeight();
 
                 pauseBtn.setLayoutX(scene.getWidth() / 2 - 50);
-				pauseBtn.setLayoutY(scene.getHeight() - 40);
+                pauseBtn.setLayoutY(scene.getHeight() - 40);
 
-				stopBtn.setLayoutX(scene.getWidth() / 2 + 10);
-				stopBtn.setLayoutY(scene.getHeight() - 40);
+                stopBtn.setLayoutX(scene.getWidth() / 2 + 10);
+                stopBtn.setLayoutY(scene.getHeight() - 40);
 
-				rectangle.setLayoutY(scene.getHeight()-700);
-				rectangle.setWidth(scene.getWidth());
+                rectangle.setLayoutY(scene.getHeight()-700);
+                rectangle.setWidth(scene.getWidth());
 
-				menuBar.setMinWidth(scene.getWidth());
+                menuBar.setMinWidth(scene.getWidth());
 
-				world.setWidth((int) scene.getWidth());
-				world.setHeight((int) scene.getHeight());
+                world.setWidth((int) scene.getWidth());
+                world.setHeight((int) scene.getHeight());
 
 
-				if (!pause) {
-					for (int i = 0; i < world.animalList.size(); i++) {
-						world.animalList.get(i).update();
-						//world.animalList.get(i).collideWalls(world)
+                if (!pause && !startOver) {
+                    for (int i = 0; i < world.animalList.size(); i++) {
+                        world.animalList.get(i).update();
+                        //world.animalList.get(i).collideWalls(world)
 
                         // ANIMAL COLISIONS
                         if (Collisions.nonEfficientCollide(world.animalList.get(i).getBody(), world.animalList.get(i).getProvisionalTarget().getBody())){
                             world.animalList.get(i).getRandomLocalTarget();
                         }
 
-						if (Collisions.collideAnimals(world.animalList.get(i).getBody(), world.animalList)){
+                        if (Collisions.collideAnimals(world.animalList.get(i).getBody(), world.animalList)){
                             // reproduce
                         }
-						if (Collisions.collideObstacle(world.animalList.get(i).getBody(), world)){
+                        if (Collisions.collideObstacle(world.animalList.get(i).getBody(), world)){
                             // choose new target
                             world.animalList.get(i).getOut();
                             world.animalList.get(i).getRandomLocalTarget();
                         }
 
-						if (Collisions.collideFood(world.animalList.get(i).getBody(), world)) {
+                        if (Collisions.collideFood(world.animalList.get(i).getBody(), world)) {
                             eat(world, i);
 
-						}
+                        }
 
                         // SMELLING COLLISIONS
                         if (world.animalList.get(i).getFoodCarring() < world.animalList.get(i).getStrenght()){
@@ -449,30 +449,42 @@ public class NewMenu extends Application {
                         }
 
                         else if (world.animalList.get(i).getMainTarget().getBody().getCenterX() != 0){
-                            System.out.println("GET RID OF THE FUCKING TARGET");
                             world.animalList.get(i).setMainTarget(new Target(0, 0));
                         }
 
                     }
 
-				}
+                }
+                if (startOver){
+                    stage1.close();
+                    startOver = false;
+                    mainProgram(stage1, config);
+                }
 
-			}
+            }
 
-		});
+        });
 
-		TimelineBuilder.create().cycleCount(javafx.animation.Animation.INDEFINITE).keyFrames(frame).build().play();
+        TimelineBuilder.create().cycleCount(javafx.animation.Animation.INDEFINITE).keyFrames(frame).build().play();
 
+        stage1.setTitle("Deez nuts!");
+        stage1.setScene(scene);
 
-		stage1.setTitle("Deez nuts!");
-		stage1.setScene(scene);
+        stage1.show();
 
-		stage1.show();
+    }
 
-	}
+	@Override
+	public void start(Stage stage1) throws Exception {
+        final Configuration config = new Configuration();
+        //config.EndSave();
+        config.StartLoad();
+
+        mainProgram(stage1, config);
+    }
 
 	public static void main(String[] args) {
-		launch(args);
+            launch(args);
 
 	}
 
