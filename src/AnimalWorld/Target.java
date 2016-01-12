@@ -11,7 +11,7 @@ public class Target{
 		this.Body.setCenterX(Tx);
 		this.Body.setCenterY(Ty);
 
-		this.Body.setFill(Color.GREEN);
+		this.Body.setFill(Color.ORANGE);
 	}
 
 	public Circle getBody(){

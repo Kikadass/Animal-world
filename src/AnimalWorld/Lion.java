@@ -3,6 +3,7 @@ package AnimalWorld;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class Lion extends Predator {
 	private static int counter;
@@ -12,8 +13,11 @@ public class Lion extends Predator {
 		Random rnd = new Random();
 		this.setName(names[rnd.nextInt(2)]);
 		this.setID(counter);
-		this.setEnergy(rnd.nextInt(200)+200);
-		this.setStrenght(rnd.nextInt(200)+200);
+		this.setEnergy(rnd.nextInt(200)+100);
+        this.setMaxEnergy(this.getEnergy());
+        this.setFood(rnd.nextInt(200)+100);
+        this.setMaxFood(this.getFood());
+		this.setStrenght(rnd.nextInt(200)+100);
 		this.setFoodCarring(0);
 		this.setMinFoodCons(100);
         this.setSize(rnd.nextInt(50)+20);
@@ -37,7 +41,12 @@ public class Lion extends Predator {
         this.getSmellRange().setOpacity(0.10);
 
         this.setSpeed(rnd.nextInt(50)*0.1);
-		
+
+        this.getStats().setFont(new Font(10));
+        this.getStats().setX(this.getBody().getCenterX());
+        this.getStats().setY(this.getBody().getCenterY());
+        this.setStats();
+
 		this.getBody().setFill(Color.YELLOW);
 
 		addCounter();

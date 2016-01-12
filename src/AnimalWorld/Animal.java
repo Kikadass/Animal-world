@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public abstract class Animal{
 	private Circle Body= new Circle(), smellRange = new Circle();
+    private Text stats = new Text();
 	private String name;
 	private int ID;
 	private int energy;
     private int food;
+    private int maxEnergy;
+    private int maxFood;
 	private int strenght;
 	private int foodCarring;
 	private int minFoodCons;	// minimum of calories that the meat has to be in order to eat it
@@ -29,7 +34,7 @@ public abstract class Animal{
     private Target houseTarget;
     private Target foodTarget;
     private Target waterTarget;
-	private Target mainTarget;
+    private Target mainTarget = new Target (0,0);
     private Target provisionalTarget = new Target(0, 0);
 
 	
@@ -123,6 +128,54 @@ public abstract class Animal{
         return provisionalTarget;
     }
 
+    public int getFood() {
+        return food;
+    }
+
+    public int getMaxFood() {
+        return maxFood;
+    }
+
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    public Text getStats() {
+        return stats;
+    }
+
+    public Target getMainTarget() {
+        return mainTarget;
+    }
+
+    public void setMainTarget(Target mainTarget) {
+        this.mainTarget = mainTarget;
+    }
+
+    public void setStats() {
+        String print = "MaxFood: " + this.maxFood + "\n" +
+                "Food: " + this.food + "\n" +
+                "MaxEnergy: " + this.maxEnergy + "\n" +
+                "Energy: " + this.energy + "\n" +
+                "Strenght: " + this.strenght + "\n" +
+                "FoodCarrier: " + this.foodCarring + "\n";
+        this.stats.setText(print);
+        this.stats.setTranslateX(this.getBody().getTranslateX());
+        this.stats.setTranslateY(this.getBody().getTranslateY());
+    }
+
+    public void setMaxEnergy(int maxEnergy) {
+        this.maxEnergy = maxEnergy;
+    }
+
+    public void setMaxFood(int maxFood) {
+        this.maxFood = maxFood;
+    }
+
+    public void setFood(int food) {
+        this.food = food;
+    }
+
 	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
@@ -201,6 +254,14 @@ public abstract class Animal{
 		this.dy = dy;
 	}
 
+    public int getPosX(){
+        return (int)(this.Body.getCenterX() + this.Body.getTranslateX());
+    }
+
+    public int getPosY(){
+        return (int)(this.Body.getCenterY() + this.Body.getTranslateY());
+    }
+
     public void setProvisionalTarget(Target provisionalTarget) {
         this.provisionalTarget = provisionalTarget;
     }
@@ -232,6 +293,15 @@ public abstract class Animal{
         setDy((Math.sin(angle) * getSpeed()));
     }
 
+    public void getLocalTarget(){
+        double angle = getAngleTo(this.mainTarget.getBody().getCenterX(), this.mainTarget.getBody().getCenterY());
+        int path = (int)this.smellRange.getRadius();
+        int tX = (int) ((this.smellRange.getCenterX() + this.smellRange.getTranslateX()) + path * Math.cos(angle));
+        int tY = (int) ((this.smellRange.getCenterY() + this.smellRange.getTranslateY()) + path * Math.sin(angle));
+        this.provisionalTarget.getBody().setCenterX(tX);
+        this.provisionalTarget.getBody().setCenterY(tY);
+    }
+
     public void getRandomLocalTarget(){
         Random rand = new Random();
         int randomAttemptTracker = 0;
@@ -249,7 +319,8 @@ public abstract class Animal{
             tX = (int) ((this.smellRange.getCenterX() + this.smellRange.getTranslateX()) + path * Math.cos(angle));
             tY = (int) ((this.smellRange.getCenterY() + this.smellRange.getTranslateY()) + path * Math.sin(angle));
         } while(!isValidTarget(tX, tY));
-        this.provisionalTarget = new Target(tX, tY);
+        this.provisionalTarget.getBody().setCenterX(tX);
+        this.provisionalTarget.getBody().setCenterY(tY);
         this.lastAngle = anAngle;
     }
 
@@ -260,6 +331,14 @@ public abstract class Animal{
             }
         }
         return true;
+    }
+
+    public void getOut(){
+        this.Body.setTranslateX(this.Body.getTranslateX() - this.dx);
+        this.Body.setTranslateY(this.Body.getTranslateY() - this.dy);
+
+        this.lastAngle += 90;
+        if (this.lastAngle >= 360) this.lastAngle -= 360;
     }
 
 	public void update(){
@@ -296,13 +375,19 @@ public abstract class Animal{
                 detect position of detection
                 set its position as provisional target
 		*/
-        if (this.provisionalTarget.getBody().getCenterX() == 0 &&  this.provisionalTarget.getBody().getCenterY() == 0){
-            getRandomLocalTarget();
+
+        if (this.mainTarget.getBody().getCenterX() != 0 &&  this.mainTarget.getBody().getCenterY() != 0) {
+            if ((int) this.mainTarget.getBody().getCenterX() <= this.getPosX()+5 && (int) this.mainTarget.getBody().getCenterX() >= this.getPosX()-5 && (int) this.mainTarget.getBody().getCenterY() <= this.getPosY()+5 && (int) this.mainTarget.getBody().getCenterY() >= this.getPosY()-5) {
+                this.setMainTarget(new Target(0, 0));
+            }
+            else getLocalTarget();
+        }
+        else if (this.provisionalTarget.getBody().getCenterX() == 0 &&  this.provisionalTarget.getBody().getCenterY() == 0){
+                getRandomLocalTarget();
         }
 
-        if (this.Body.getCenterX() + this.Body.getTranslateX() > (NewMenu.width - Body.getRadius()) || this.Body.getCenterY() + this.Body.getTranslateY() > (NewMenu.height - Body.getRadius() - 50) || this.Body.getCenterX() + this.Body.getTranslateX() < Body.getRadius() || this.Body.getCenterY() + this.Body.getTranslateY() < Body.getRadius() + 30) {
-            this.lastAngle += 180;
-            if (this.lastAngle >= 360) this.lastAngle -= 360;
+        if (this.getPosX() > (NewMenu.width - Body.getRadius()) || this.getPosY() > (NewMenu.height - Body.getRadius() - 50) || this.getPosX() < Body.getRadius() || this.getPosY() < Body.getRadius() + 30) {
+            this.getOut();
             getRandomLocalTarget();
         }
         directDxDy();
@@ -311,5 +396,11 @@ public abstract class Animal{
 		this.Body.setTranslateY(this.Body.getTranslateY() + this.dy);
 		this.smellRange.setTranslateX(this.Body.getTranslateX());
 		this.smellRange.setTranslateY(this.Body.getTranslateY());
+
+
+        this.setFood(this.getFood()-1);
+        this.setEnergy(this.getEnergy()-1);
+
+        this.setStats();
 	}
 }

@@ -40,7 +40,11 @@ public class Food{
 	public int getEnergy(){
 		return this.energy;
 	}
-	
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
 	public Circle getBody(){
 		return this.Body;
 	}
