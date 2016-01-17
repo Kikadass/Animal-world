@@ -19,8 +19,10 @@ public class World {
 	ArrayList<Animal> animalList = new ArrayList<Animal>();
 	private int width;
 	private int height;
+	private int day;
+	private int year;
 	
-	public World(Group root, Configuration config, Scene scene){
+	public World(Group root, Configuration config){
 
         root.getChildren().add(targetsGroup);
         root.getChildren().add(foodGroup);
@@ -29,8 +31,8 @@ public class World {
         root.getChildren().add(smellRangeGroup);
         root.getChildren().add(statsGroup);
 
-		this.width = (int) scene.getWidth();
-		this.height = (int) scene.getHeight();
+		this.width =  NewMenu.getWidth();
+		this.height =  NewMenu.getHeight();
 
 		// creating Obstacles
 		for (int i = 0; i < config.getObstacles(); i++){
@@ -44,22 +46,28 @@ public class World {
 		
 
 		// create Animals
-		for (int i = 0; i < /*config.getBugs()*/ 1; i++){
+		for (int i = 0; i < config.getBugs(); i++){
 			this.addLion();
 		}
 	}
 
 	public void addObstacle(){
 		Obstacle obstacle = new Obstacle(this);
-		obstacleList.add(obstacle);
-        obstacleGroup.getChildren().add(obstacle.getBody());
+
+        if (obstacle.getBody().getRadius() > 0){
+            obstacleList.add(obstacle);
+            obstacleGroup.getChildren().add(obstacle.getBody());
+        }
 	}
 	
-	public void addFood(){
-		Food food = new Food(this);
-		foodList.add(food);
-        foodGroup.getChildren().add(food.getBody());
-	}
+	public void addFood() {
+        Food food = new Food(this);
+
+        if (food.getBody().getRadius() > 0) {
+            foodList.add(food);
+            foodGroup.getChildren().add(food.getBody());
+        }
+    }
 
 	public void deleteFood(int i){
         foodList.remove(i);
@@ -68,13 +76,14 @@ public class World {
 
 	public void addLion(){
 		Lion lion = new Lion(this);
-		animalList.add(lion);
-        animalGroup.getChildren().add(lion.getBody());
-        smellRangeGroup.getChildren().add(lion.getSmellRange());
-        statsGroup.getChildren().add(lion.getStats());
-        targetsGroup.getChildren().add(lion.getProvisionalTarget().getBody());
-        targetsGroup.getChildren().add(lion.getMainTarget().getBody());
 
+        if (lion.getBody().getRadius() > 0) {
+            animalList.add(lion);
+            animalGroup.getChildren().add(lion.getBody());
+            smellRangeGroup.getChildren().add(lion.getSmellRange());
+            statsGroup.getChildren().add(lion.getStats());
+            targetsGroup.getChildren().add(lion.getProvisionalTarget().getBody());
+        }
     }
 
 	public void deleteAnimal(int i){
@@ -85,16 +94,11 @@ public class World {
 		targetsGroup.getChildren().remove(i);
 
 	}
-	
-	public void setWidth(int width){
-		this.width = width;
-	}
-	
-	public void setHeight(int height){
-		this.height = height;
+
+	public int getDay() {
+		return day;
 	}
 
-	
 	public int getWidth(){
 		return this.width;
 	}
@@ -102,4 +106,48 @@ public class World {
 	public int getHeight(){
 		return this.height;
 	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+	public void setWidth(int width){
+		this.width = width;
+	}
+
+	public void setHeight(int height){
+		this.height = height;
+	}
+
+	public void hideSmellRange(){
+		smellRangeGroup.setVisible(false);
+	}
+
+	public void hideTargets(){
+		targetsGroup.setVisible(false);
+	}
+
+	public void hideStats(){
+		statsGroup.setVisible(false);
+	}
+
+    public void showSmellRange(){
+        smellRangeGroup.setVisible(true);
+    }
+
+    public void showTargets(){
+        targetsGroup.setVisible(true);
+    }
+
+    public void showStats(){
+        statsGroup.setVisible(true);
+    }
 }

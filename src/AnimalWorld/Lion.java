@@ -16,12 +16,13 @@ public class Lion extends Predator {
 		this.setEnergy(rnd.nextInt(200)+100);
         this.setMaxEnergy(this.getEnergy());
         this.setFood(rnd.nextInt(200)+100);
-        this.setMaxFood(this.getFood());
+		this.setMetabolism(rnd.nextInt(10)*0.01 + 0.05);
+        this.setMaxFood((int) this.getFood());
 		this.setStrenght(rnd.nextInt(200)+100);
 		this.setFoodCarring(0);
 		this.setMinFoodCons(100);
-        this.setSize(rnd.nextInt(50)+20);
-        this.setSmellRange(rnd.nextInt(100)+100+ (int)getBody().getRadius());
+        this.setSize(rnd.nextInt(10)+10);
+        this.setSmellRange(rnd.nextInt(10)+(int)getBody().getRadius()*2);
 		this.setAge(0);			
 		this.setForgetfulness(rnd.nextInt(1000));
 		this.setNestX(20);
@@ -30,17 +31,24 @@ public class Lion extends Predator {
 		this.setLifeExpectancy(rnd.nextInt(1500)+4000);	
 		this.setMinSize(200);
 		this.setMaxSize(400);
-		
+
+		int tries = 0;
 		do{
+			tries++;
 			this.getBody().setCenterX(rnd.nextInt(world.getWidth() - (int) this.getBody().getRadius()*2) + this.getBody().getRadius());
 			this.getBody().setCenterY(rnd.nextInt(world.getHeight() - (int)this.getBody().getRadius()*2 - 80) + this.getBody().getRadius() + 30);
-		}while(Collisions.collideObstacle(getBody(), world) || Collisions.collideAnimals(getBody(), world.animalList) || Collisions.collideFood(getBody(), world));
+		}while((Collisions.collideObstacle(getBody(), world) || Collisions.collideAnimals(getBody(), world.animalList) || Collisions.collideFood(getBody(), world)) && tries <= 100);
+
+        if (tries >= 100) {
+            this.getBody().setRadius(0);
+            System.out.println("No space to add another Lion");
+        }
 
         this.getSmellRange().setCenterX(this.getBody().getCenterX());
         this.getSmellRange().setCenterY(this.getBody().getCenterY());
         this.getSmellRange().setOpacity(0.10);
 
-        this.setSpeed(rnd.nextInt(50)*0.1);
+        this.setSpeed((rnd.nextInt(10)+10)*0.1);
 
         this.getStats().setFont(new Font(10));
         this.getStats().setX(this.getBody().getCenterX());

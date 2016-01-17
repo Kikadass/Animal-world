@@ -2,7 +2,6 @@ package AnimalWorld;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -17,14 +16,41 @@ import javafx.util.Duration;
 
 public class NewMenu extends Application {
 
-	static int width = 1000;
-	static int height = 700;
-	int nCircles = 10;
-	boolean pause = true;
-	boolean stop = true;
+    static int width = 1280;
+    static int height = 720;
+    boolean toggleSmellRange = true;
+    boolean toggleTargets = true;
+    boolean toggleStats = true;
+	static boolean pause = true;
+	static boolean stop = true;
     static boolean startOver = false;
+    int cycle = 0;
+    int collisionCycles = -50;
+    int tries = 0;
 
-	public static int Loop(String[] Options, String WindowName, boolean Edit) {
+    public static int getWidth() {
+        return width;
+    }
+
+    public static int getHeight() {
+        return height;
+    }
+
+    public static void setHeight(int height) {
+        NewMenu.height = height;
+    }
+
+    public static void setWidth(int width) {
+        NewMenu.width = width;
+    }
+
+    public static void setStartOver(){
+        startOver = true;
+        pause = true;
+        stop = true;
+    }
+
+    public static int Loop(String[] Options, String WindowName, boolean Edit) {
 		List<String> optionList = new ArrayList<String>();
 		for (int i = 0; i < Options.length; i++) {
 			optionList.add(Options[i]);
@@ -51,11 +77,10 @@ public class NewMenu extends Application {
 		return -1;
 	}
 
-	public MenuBar CreateMenuBar(World world, final Configuration config) {
+	public MenuBar CreateMenuBar(final World world, final Configuration config) {
 
 		MenuBar menuBar = new MenuBar();
 
-		//final Menu menu1 = new Menu("File");
 		final Menu menu1 = new Menu("File");
 		final Menu menu2 = new Menu("View");
 		final Menu menu3 = new Menu("Edit");
@@ -71,17 +96,21 @@ public class NewMenu extends Application {
 		menu1.getItems().addAll(menu11, menu12, menu13, menu14);
 
 		MenuItem menu21 = new MenuItem("Display Configuration");
-		MenuItem menu22 = new MenuItem("Edit Configuration");
 		MenuItem menu23 = new MenuItem("Info About Life Forms");
 		MenuItem menu24 = new MenuItem("Info About Map");
+        final MenuItem menu25 = new MenuItem("Hide Smell Range");
+        final MenuItem menu26 = new MenuItem("Hide Targets");
+        final MenuItem menu27 = new MenuItem("Hide Stats");
 
-		menu2.getItems().addAll(menu21, menu22, menu23, menu24);
+        menu2.getItems().addAll(menu21, menu23, menu24, menu25, menu26, menu27);
 
 		MenuItem menu31 = new MenuItem("Modify Life Form parameters");
 		MenuItem menu32 = new MenuItem("Remove Life Form");
 		MenuItem menu33 = new MenuItem("Add Life Form");
+		MenuItem menu34 = new MenuItem("Edit Configuration");
 
-		menu3.getItems().addAll(menu31, menu32, menu33);
+
+		menu3.getItems().addAll(menu31, menu32, menu33, menu34);
 				/*
 				MenuItem menu41 = new MenuItem("Run");
 				MenuItem menu42 = new MenuItem("Pause/Restart");
@@ -103,7 +132,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.NewConfiguration();
-                startOver = true;
+                setStartOver();
 			}
 		});
 
@@ -112,7 +141,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.OpenConfigurationFile();
-                startOver = true;
+                setStartOver();
 			}
 		});
 
@@ -121,8 +150,6 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.Save();
-                startOver = true;
-
             }
 		});
 
@@ -149,15 +176,6 @@ public class NewMenu extends Application {
 			}
 		});
 
-		menu22.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				config.EditConfig();
-                startOver = true;
-			}
-		});
-
 		menu23.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -172,12 +190,62 @@ public class NewMenu extends Application {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				config.displayMap();
+
+            config.displayMap();
 			}
 		});
 
+        menu25.setOnAction(new EventHandler<ActionEvent>() {
 
-		//Menu 3
+            @Override
+            public void handle(ActionEvent arg0) {
+
+                if (toggleSmellRange) {
+                    world.hideSmellRange();
+                    menu25.setText("Show Smell Range");
+                    toggleSmellRange = false;
+                } else {
+                    world.showSmellRange();
+                    menu25.setText("Hide Smell Range");
+                    toggleSmellRange = true;
+                }
+            }
+        });
+
+        menu26.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                if (toggleTargets) {
+                    world.hideTargets();
+                    menu26.setText("Show Targets");
+                    toggleTargets = false;
+                } else {
+                    world.showTargets();
+                    menu26.setText("Hide Targets");
+                    toggleTargets = true;
+                }
+            }
+        });
+
+        menu27.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                if (toggleStats) {
+                    world.hideStats();
+                    menu27.setText("Show Stats");
+                    toggleStats = false;
+                } else {
+                    world.showStats();
+                    menu27.setText("Hide Stats");
+                    toggleStats = true;
+                }
+            }
+        });
+
+
+        //Menu 3
 
 		EditMenu bugsMenu = new EditMenu();
 
@@ -219,50 +287,16 @@ public class NewMenu extends Application {
 			}
 		});
 
+		menu34.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				config.EditConfig2();
+				//startOver = true;
+			}
+		});
 
 		return menuBar;
-	}
-
-	public ArrayList<ACircle> CreateRandomCircles() {
-		ArrayList<ACircle> circles = new ArrayList<ACircle>();
-		for (int i = 0; i < nCircles; i++) {
-			Random rnd = new Random();
-			ACircle circle = new ACircle();
-			do {
-				int radius = rnd.nextInt(40) + 10;
-				int x = rnd.nextInt(width - radius * 2) + radius;
-				int y = rnd.nextInt(height - 80 - radius * 2) + radius + 30;
-				float dx = rnd.nextInt(10);
-				float dy = rnd.nextInt(10);
-
-				circle = new ACircle(x, y, radius, dx, dy);
-
-			} while (circle.colliding(circles));
-			circles.add(circle);
-
-		}
-		return circles;
-	}
-
-	public ArrayList<ACircle> CreateCircles(AWorld world) {
-		ArrayList<ACircle> circles = new ArrayList<ACircle>();
-		for (int i = 0; i < world.BugList.length; i++) {
-			Random rnd = new Random();
-			ACircle circle = new ACircle();
-			do {
-				int radius = rnd.nextInt(40) + 10;
-				int x = rnd.nextInt(width - radius * 2) + radius;
-				int y = rnd.nextInt(height - 80 - radius * 2) + radius + 30;
-				float dx = rnd.nextInt(10);
-				float dy = rnd.nextInt(10);
-
-				circle = new ACircle(x, y, radius, dx, dy);
-
-			} while (circle.colliding(circles));
-			circles.add(circle);
-
-		}
-		return circles;
 	}
 
     public void eat(World world, int i) {
@@ -271,14 +305,14 @@ public class NewMenu extends Application {
                 // if hungry: eat one by one until not hungry or finished
                 // if there is still food, carry what you can depending on strenght
 
-                int amount = world.foodList.get(j).getEnergy() + world.animalList.get(i).getFood();
+                double amount = world.foodList.get(j).getEnergy() + world.animalList.get(i).getFood();
                 if (amount >= world.animalList.get(i).getMaxFood()) {
                     world.animalList.get(i).setFood(world.animalList.get(i).getMaxFood());
                     amount -= world.animalList.get(i).getMaxFood();
 
                     // if after eating there is still food left take it or leave it:
                     if (amount > 0) {
-                        int amount2 = amount + world.animalList.get(i).getFoodCarring();
+                        double amount2 = amount + world.animalList.get(i).getFoodCarring();
                         if (amount2 >= world.animalList.get(i).getStrenght()) {
                             world.animalList.get(i).setFoodCarring(world.animalList.get(i).getStrenght());
                             amount2 -= world.animalList.get(i).getStrenght();
@@ -287,18 +321,26 @@ public class NewMenu extends Application {
                             if (amount2 > 0) {
                                 world.foodList.get(j).setEnergy(amount2);
                             }
-                            else world.deleteFood(j);
+                            else {
+                                world.deleteFood(j);
+                                j--;
+                            }
                         }
                         else {
                             world.animalList.get(i).setFoodCarring(amount2);
                             world.deleteFood(j);
+                            j--;
                         }
                     }
-                    else world.deleteFood(j);
+                    else {
+                        world.deleteFood(j);
+                        j--;
+                    }
                 }
                 else {
                     world.animalList.get(i).setFood(amount);
                     world.deleteFood(j);
+                    j--;
                 }
             }
         }
@@ -309,13 +351,14 @@ public class NewMenu extends Application {
         return distance;
     }
 
-
     public void mainProgram(final Stage stage1, final Configuration config){
+        setHeight(config.getHeight());
+        setWidth(config.getWidth());
 
-        //AWorld world = new AWorld(config);
+
         final Group root = new Group();
-        final Scene scene = new Scene(root, width, height);
-        final World world = new World(root, config, scene);
+        final World world = new World(root, config);
+        final Scene scene = new Scene(root, config.getWidth(), config.getHeight());
 
 
         final Rectangle rectangle = new Rectangle(0, height - 50, width, 50);
@@ -329,7 +372,6 @@ public class NewMenu extends Application {
 
         root.getChildren().add(menuBar);
 
-        //ArrayList<ACircle> circles = CreateRandomCircles();
 
         //creating buttons
         final Button pauseBtn = new Button();
@@ -363,14 +405,10 @@ public class NewMenu extends Application {
                     stop = false;
                     pause = false;
                 } else {
-                    for (int i = 0; i < world.animalList.size(); i++) {
-                        world.animalList.get(i).getBody().setTranslateX(0);
-                        world.animalList.get(i).getBody().setTranslateY(0);
-                    }
+                    setStartOver();
                     pauseBtn.setVisible(false);
                     stopBtn.setText("START");
-                    stop = true;
-                    pause = true;
+
                 }
 
             }
@@ -381,32 +419,45 @@ public class NewMenu extends Application {
         root.getChildren().add(pauseBtn);
 
 
-        KeyFrame frame = new KeyFrame(Duration.millis(16), new EventHandler<ActionEvent>() {
+        KeyFrame frame = new KeyFrame(Duration.millis(15), new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
-                width = (int)scene.getWidth();
-                height = (int)scene.getHeight();
 
-                pauseBtn.setLayoutX(scene.getWidth() / 2 - 50);
-                pauseBtn.setLayoutY(scene.getHeight() - 40);
+                NewMenu.setHeight((int)scene.getHeight());
+                NewMenu.setWidth((int)scene.getWidth());
 
-                stopBtn.setLayoutX(scene.getWidth() / 2 + 10);
-                stopBtn.setLayoutY(scene.getHeight() - 40);
+                pauseBtn.setLayoutX(NewMenu.getWidth() / 2 - 50);
+                pauseBtn.setLayoutY(NewMenu.getHeight() - 40);
 
-                rectangle.setLayoutY(scene.getHeight()-700);
-                rectangle.setWidth(scene.getWidth());
+                stopBtn.setLayoutX(NewMenu.getWidth() / 2 + 10);
+                stopBtn.setLayoutY(NewMenu.getHeight() - 40);
 
-                menuBar.setMinWidth(scene.getWidth());
+                rectangle.setY(getHeight()-50);
+                rectangle.setWidth(NewMenu.getWidth());
 
-                world.setWidth((int) scene.getWidth());
-                world.setHeight((int) scene.getHeight());
+                menuBar.setMinWidth(NewMenu.getWidth());
+
+                world.setWidth(NewMenu.getWidth());
+                world.setHeight(NewMenu.getHeight());
+
 
 
                 if (!pause && !startOver) {
+                    cycle++;
+
+                    // 4000 cycles = 1day == 1 real minute
+                    if (cycle%4000 == 0){
+                        System.out.println("Day 1");
+                        world.setDay(world.getDay() + 1);
+                        if (world.getDay() == 365 ){
+                            world.setYear(world.getYear() +1);
+                            world.setDay(0);
+                        }
+                    }
+
                     for (int i = 0; i < world.animalList.size(); i++) {
                         world.animalList.get(i).update();
-                        //world.animalList.get(i).collideWalls(world)
 
                         // ANIMAL COLISIONS
                         if (Collisions.nonEfficientCollide(world.animalList.get(i).getBody(), world.animalList.get(i).getProvisionalTarget().getBody())){
@@ -416,41 +467,60 @@ public class NewMenu extends Application {
                         if (Collisions.collideAnimals(world.animalList.get(i).getBody(), world.animalList)){
                             // reproduce
                         }
+
+                        // if it finds an obstacle try to avoid it and find a new target
                         if (Collisions.collideObstacle(world.animalList.get(i).getBody(), world)){
                             // choose new target
                             world.animalList.get(i).getOut();
                             world.animalList.get(i).getRandomLocalTarget();
-                        }
-
-                        if (Collisions.collideFood(world.animalList.get(i).getBody(), world)) {
-                            eat(world, i);
-
-                        }
-
-                        // SMELLING COLLISIONS
-                        if (world.animalList.get(i).getFoodCarring() < world.animalList.get(i).getStrenght()){
-                            if (Collisions.collideFood(world.animalList.get(i).getSmellRange(), world)) {
-                                // main target: center of that food.
-                                for (int j = 0; j < world.foodList.size(); j++) {
-                                    if (Collisions.efficientCollide(world.animalList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
-                                        if (Math.abs(distance(world.animalList.get(i).getPosX(), world.animalList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(world.animalList.get(i).getPosX(), world.animalList.get(i).getPosY(), world.animalList.get(i).getMainTarget().getBody().getCenterX(), world.animalList.get(i).getMainTarget().getBody().getCenterY()))) {
-                                            int tx = (int) world.foodList.get(j).getBody().getCenterX();
-                                            int ty = (int) world.foodList.get(j).getBody().getCenterY();
-                                            world.animalList.get(i).setMainTarget(new Target(tx, ty));
-                                           /* System.out.println("Setting main target");
-                                            System.out.println(world.animalList.get(i).getMainTarget().getBody().getCenterX());
-                                            System.out.println(world.animalList.get(i).getMainTarget().getBody().getCenterY());
-                                            */
-                                        }
-                                    }
-                                }
+                            if (world.animalList.get(i).getMainTarget().getBody().getCenterX() != 0){
+                                world.animalList.get(i).setMainTarget(new Target(0,0 ,2));
+                                collisionCycles =  cycle;
+                                tries++;
                             }
 
                         }
 
-                        else if (world.animalList.get(i).getMainTarget().getBody().getCenterX() != 0){
-                            world.animalList.get(i).setMainTarget(new Target(0, 0));
+                        // SMELLING COLLISIONS
+                        if (collisionCycles+50*tries <= cycle){
+                            if (world.animalList.get(i).getFoodCarring() < world.animalList.get(i).getStrenght()) {
+                                if (Collisions.collideFood(world.animalList.get(i).getSmellRange(), world)) {
+                                    // main target: center of that food.
+                                    for (int j = 0; j < world.foodList.size(); j++) {
+                                        if (Collisions.nonEfficientCollide(world.animalList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
+                                            // if food is closer than actual main target --> go to it
+                                            if (Math.abs(distance(world.animalList.get(i).getPosX(), world.animalList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(world.animalList.get(i).getPosX(), world.animalList.get(i).getPosY(), world.animalList.get(i).getMainTarget().getBody().getCenterX(), world.animalList.get(i).getMainTarget().getBody().getCenterY()))) {
+
+                                                int tx;
+                                                int ty;
+                                                int rad;
+
+                                                ty = (int) world.foodList.get(j).getBody().getCenterY();
+
+                                                tx = (int) world.foodList.get(j).getBody().getCenterX();
+                                                rad = (int)world.foodList.get(j).getBody().getRadius();
+
+                                                // create the main target depending on tx and ty
+                                                world.animalList.get(i).setMainTarget(new Target(tx, ty, rad));
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                            else if (world.animalList.get(i).getMainTarget().getBody().getCenterX() != 0){
+                                world.animalList.get(i).setMainTarget(new Target(0, 0, 1));
+                            }
                         }
+
+
+                        if (Collisions.collideFood(world.animalList.get(i).getBody(), world)) {
+                            eat(world, i);
+                            tries = 0;
+                        }
+
+
+
 
                     }
 
@@ -467,7 +537,7 @@ public class NewMenu extends Application {
 
         TimelineBuilder.create().cycleCount(javafx.animation.Animation.INDEFINITE).keyFrames(frame).build().play();
 
-        stage1.setTitle("Deez nuts!");
+        stage1.setTitle("Animal World");
         stage1.setScene(scene);
 
         stage1.show();
@@ -477,7 +547,6 @@ public class NewMenu extends Application {
 	@Override
 	public void start(Stage stage1) throws Exception {
         final Configuration config = new Configuration();
-        //config.EndSave();
         config.StartLoad();
 
         mainProgram(stage1, config);

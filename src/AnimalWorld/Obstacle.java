@@ -11,12 +11,22 @@ public class Obstacle{
 	public Obstacle(World world){
 		Random rnd = new Random();
 		this.weight = rnd.nextInt(200)+ 10;
-		this.Body.setRadius(rnd.nextInt(50)+ 10);
-				
+		this.Body.setRadius(rnd.nextInt(10)+ 10);
+
+		int tries = 0;
 		do{
+			tries++;
 			this.Body.setCenterX(rnd.nextInt(world.getWidth() - (int)this.Body.getRadius()*2) + this.Body.getRadius());
 			this.Body.setCenterY(rnd.nextInt(world.getHeight() - (int)this.Body.getRadius()*2 - 80) + this.Body.getRadius() + 30);
-		}while(Collisions.collideObstacle(Body, world) || Collisions.collideAnimals(Body, world.animalList) || Collisions.collideFood(Body, world));
+		}while((Collisions.collideObstacle(Body, world) || Collisions.collideAnimals(Body, world.animalList) || Collisions.collideFood(Body, world)) && tries <= 100);
+        if (tries >= 100) {
+            System.out.println("No space to add another obstacle");
+            this.Body.setRadius(0);
+
+        }
+
+
+
 	}
 	
 	public void setX(int x){

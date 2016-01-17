@@ -13,11 +13,12 @@ public abstract class Animal{
 	private String name;
 	private int ID;
 	private int energy;
-    private int food;
+    private double food;
+    private double metabolism;
     private int maxEnergy;
     private int maxFood;
 	private int strenght;
-	private int foodCarring;
+	private double foodCarring;
 	private int minFoodCons;	// minimum of calories that the meat has to be in order to eat it
 	private int age;			// in days
 	private int forgetfulness;
@@ -27,15 +28,15 @@ public abstract class Animal{
     private int lastAngle;
 	private int lifeExpectancy;	// how old are can that specie live for
 	private int minSize;
-	private int maxSize;	
+	private int maxSize;
 	private double dx;
 	private double dy;
 	private double speed;
     private Target houseTarget;
     private Target foodTarget;
     private Target waterTarget;
-    private Target mainTarget = new Target (0,0);
-    private Target provisionalTarget = new Target(0, 0);
+    private Target mainTarget = new Target (0,0, 1);
+    private Target provisionalTarget = new Target(0, 0, 3);
 
 	
 	public Animal(){
@@ -60,7 +61,7 @@ public abstract class Animal{
 		return this.strenght;
 	}
 	
-	public int getFoodCarring(){
+	public double getFoodCarring(){
 		return this.foodCarring;
 	}
 	
@@ -128,7 +129,7 @@ public abstract class Animal{
         return provisionalTarget;
     }
 
-    public int getFood() {
+    public double getFood() {
         return food;
     }
 
@@ -147,6 +148,15 @@ public abstract class Animal{
     public Target getMainTarget() {
         return mainTarget;
     }
+
+    public double getMetabolism() {
+        return metabolism;
+    }
+
+    public void setMetabolism(double metabolism) {
+        this.metabolism = metabolism;
+    }
+
 
     public void setMainTarget(Target mainTarget) {
         this.mainTarget = mainTarget;
@@ -172,7 +182,7 @@ public abstract class Animal{
         this.maxFood = maxFood;
     }
 
-    public void setFood(int food) {
+    public void setFood(double food) {
         this.food = food;
     }
 
@@ -196,7 +206,7 @@ public abstract class Animal{
 		this.strenght = strenght;
 	}
 	
-	public void setFoodCarring(int foodCarring){
+	public void setFoodCarring(double foodCarring){
 		this.foodCarring = foodCarring;
 	}
 	
@@ -334,17 +344,29 @@ public abstract class Animal{
     }
 
     public void getOut(){
+        Random rnd = new Random();
         this.Body.setTranslateX(this.Body.getTranslateX() - this.dx);
         this.Body.setTranslateY(this.Body.getTranslateY() - this.dy);
 
-        this.lastAngle += 90;
+        this.lastAngle += rnd.nextInt(360);
         if (this.lastAngle >= 360) this.lastAngle -= 360;
+
     }
 
 	public void updateTarget(){
+        double x1 = this.mainTarget.getBody().getCenterX();
+        double x2 = this.getPosX();
+        double y1 = this.mainTarget.getBody().getCenterY();
+        double y2 = this.getPosY();
+
+        double distance1 = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+        double distance2 = this.getBody().getRadius() + this.mainTarget.getBody().getRadius();
+
+        // if animal has reached main target delete it and look for new target
 		if (this.mainTarget.getBody().getCenterX() != 0 &&  this.mainTarget.getBody().getCenterY() != 0) {
-			if ((int) this.mainTarget.getBody().getCenterX() <= this.getPosX()+5 && (int) this.mainTarget.getBody().getCenterX() >= this.getPosX()-5 && (int) this.mainTarget.getBody().getCenterY() <= this.getPosY()+5 && (int) this.mainTarget.getBody().getCenterY() >= this.getPosY()-5) {
-				this.setMainTarget(new Target(0, 0));
+			if (distance1 <= distance2) {
+				this.setMainTarget(new Target(0, 0, 1));
+                getRandomLocalTarget();
 			}
 			else getLocalTarget();
 		}
@@ -355,16 +377,17 @@ public abstract class Animal{
 		if (this.getPosX() > (NewMenu.width - Body.getRadius()) || this.getPosY() > (NewMenu.height - Body.getRadius() - 50) || this.getPosX() < Body.getRadius() || this.getPosY() < Body.getRadius() + 30) {
 			this.getOut();
 			getRandomLocalTarget();
+
 		}
 	}
 
     public void updateFood(){
-        this.setFood(this.getFood()-1);
+        this.setFood(this.getFood()-1*this.metabolism);
 
         if (this.getFood() < this.getMaxFood()/2){
             if (this.foodCarring > 0){
-                this.setFood(this.getFood() + 1);
-                this.setFoodCarring(this.getFoodCarring() - 1);
+                this.setFood(this.getFood() + 1*this.metabolism);
+                this.setFoodCarring(this.getFoodCarring() - 1*this.metabolism);
             }
             else {
                 //goHome

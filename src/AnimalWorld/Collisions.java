@@ -27,11 +27,9 @@ public class Collisions {
 	
 	public static boolean collideObstacle(Circle c1, World world){
 		for (int i = 0; i < world.obstacleList.size(); i++){
-			if (c1.getCenterX() != world.obstacleList.get(i).getBody().getCenterX() && c1.getCenterY() != world.obstacleList.get(i).getBody().getCenterY()){
-				if (Collisions.efficientCollide(c1, world.obstacleList.get(i).getBody())){
-					if (Collisions.nonEfficientCollide(c1, world.obstacleList.get(i).getBody())){
-						return true;
-					}
+			if (Collisions.efficientCollide(c1, world.obstacleList.get(i).getBody())){
+				if (Collisions.nonEfficientCollide(c1, world.obstacleList.get(i).getBody())){
+					return true;
 				}
 			}
 		}
@@ -40,25 +38,22 @@ public class Collisions {
 	
 	public static boolean collideFood(Circle c1, World world){
 		for (int i = 0; i < world.foodList.size(); i++){
-			if (c1.getCenterX() != world.foodList.get(i).getBody().getCenterX() && c1.getCenterY() != world.foodList.get(i).getBody().getCenterY()){
 				if (Collisions.efficientCollide(c1, world.foodList.get(i).getBody())){
 					if (Collisions.nonEfficientCollide(c1, world.foodList.get(i).getBody())){
 						return true;
 					}
 				}
 			}
-		}
+
 		return false;
 	}
 	
 	public static boolean collideAnimals(Circle c1, ArrayList<Animal> circles){
 		// check collision against other bugs	
 		for (int i = 0; i < circles.size(); i++){
-			if (c1.getCenterX() != circles.get(i).getBody().getCenterX() && c1.getCenterY() != circles.get(i).getBody().getCenterY()){
-				if (Collisions.efficientCollide(c1, circles.get(i).getBody())){
-					if (Collisions.nonEfficientCollide(c1, circles.get(i).getBody())){
-						return true;
-					}
+			if (Collisions.efficientCollide(c1, circles.get(i).getBody())){
+				if (Collisions.nonEfficientCollide(c1, circles.get(i).getBody())){
+					return true;
 				}
 			}
 		}
