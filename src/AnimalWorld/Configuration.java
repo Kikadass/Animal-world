@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -272,8 +273,31 @@ public class Configuration implements Serializable{
         }while(check == null);
         this.width = Integer.parseInt(check);
 	}
-	
-	public void NewConfiguration(){
+
+    /**
+     * I think those are java docs comments
+     *
+     */
+    public void NewConfiguration2(){
+        Stage stage = new Stage();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("New Location");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Config Files", "*.ser"));
+        File existDirectory = new File(System.getProperty("user.dir"));
+        fileChooser.setInitialDirectory(existDirectory);
+        File file =  fileChooser.showSaveDialog(stage);
+
+
+        if (file != null) {
+            String location = file.getPath();
+
+            this.lastFile = location;
+            this.EditConfig2();
+        }
+    }
+
+	public void NewConfiguration1(){
 		String check = null;
         do {
             TextInputDialog dialog = new TextInputDialog();
@@ -289,8 +313,27 @@ public class Configuration implements Serializable{
 		
 		this.EditConfig2();
 	}
-	
-	public void OpenConfigurationFile(){
+
+	public void OpenConfigurationFile2(){
+		Stage stage = new Stage();
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Configuration File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Config Files", "*.ser"));
+		File existDirectory = new File(System.getProperty("user.dir"));
+		fileChooser.setInitialDirectory(existDirectory);
+		File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            String location = file.getPath();
+
+            this.lastFile = location;
+            this.Load();
+            NewMenu.setStartOver();
+        }
+	}
+
+	public void OpenConfigurationFile1(){
 		String location = null;
         do {
             TextInputDialog dialog = new TextInputDialog();
@@ -303,7 +346,8 @@ public class Configuration implements Serializable{
             }
         }while(location == null);
 
-		this.lastFile = location;
+        System.out.println(location);
+        this.lastFile = location;
 		this.Load();
 	}
 	
@@ -357,7 +401,20 @@ public class Configuration implements Serializable{
 
 	public void displayConfig(){
 		String print;
-		print = "Name of file: " + this.lastFile + "\n" + 
+
+        String nameOfFile;
+        int i = this.lastFile.length()-1;
+        char[] temp = this.lastFile.toCharArray();
+
+        // check when the first / or \ character appears
+        while((int)temp[i] != 92 && (int)temp[i] != 47){
+            i--;
+        }
+
+        i++;
+        nameOfFile = this.lastFile.substring(i,this.lastFile.length());
+
+		print = "Name of file: " + nameOfFile + "\n" +
 				"Amount of Food: " + this.amountFood + "\n" +
 				"Amount of Obstacles: " + this.amountObstacles + "\n" + 
 				"Amount of Bugs: " + this.amountBugs + "\n" +
@@ -401,7 +458,27 @@ public class Configuration implements Serializable{
 		this.EndSave();
 	}
 
-	public void EndSave(){
+    public void SaveAs(){
+        Stage stage = new Stage();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("New Location");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Config Files", "*.ser"));
+        File existDirectory = new File(System.getProperty("user.dir"));
+        fileChooser.setInitialDirectory(existDirectory);
+        File file =  fileChooser.showSaveDialog(stage);
+
+
+        if (file != null) {
+            String location = file.getPath();
+
+            this.lastFile = location;
+
+            this.Save();
+        }
+    }
+
+    public void EndSave(){
 		try{
 	         FileOutputStream fileOut = new FileOutputStream("defConfiguration.ser");
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -460,7 +537,7 @@ public class Configuration implements Serializable{
 	}
 	
 	public void Load(){
-		Configuration e = new Configuration();
+		Configuration e;
 
 		e = tryLoad(this.lastFile);
 		

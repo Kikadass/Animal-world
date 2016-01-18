@@ -24,6 +24,7 @@ public class NewMenu extends Application {
 	static boolean pause = true;
 	static boolean stop = true;
     static boolean startOver = false;
+    static boolean exit = false;
     int cycle = 0;
     int collisionCycles = -50;
     int tries = 0;
@@ -92,8 +93,9 @@ public class NewMenu extends Application {
 		MenuItem menu12 = new MenuItem("Open Configuration File");
 		MenuItem menu13 = new MenuItem("Save");
 		MenuItem menu14 = new MenuItem("Save As");
+        MenuItem menu15 = new MenuItem("Exit");
 
-		menu1.getItems().addAll(menu11, menu12, menu13, menu14);
+		menu1.getItems().addAll(menu11, menu12, menu13, menu14, menu15);
 
 		MenuItem menu21 = new MenuItem("Display Configuration");
 		MenuItem menu23 = new MenuItem("Info About Life Forms");
@@ -125,26 +127,28 @@ public class NewMenu extends Application {
 
 		menu4.getItems().addAll(menu41, menu42);
 
-		// setting the actions of sub menus
-		// Menu 1
+		// Setting the actions of sub menus
+
+        // Menu 1 --> File
 		menu11.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				config.NewConfiguration();
-                setStartOver();
+				config.NewConfiguration2();
 			}
 		});
 
+
+        //Open Config file
 		menu12.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				config.OpenConfigurationFile();
-                setStartOver();
+				config.OpenConfigurationFile2();
 			}
 		});
 
+        //Save
 		menu13.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -153,21 +157,27 @@ public class NewMenu extends Application {
             }
 		});
 
+        //Save as
 		menu14.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				String lastFile = null;
-				do {
-					lastFile = JOptionPane.showInputDialog(null, "What is the location where you want to safe the config file?");
-				} while (lastFile == null);
-
-				config.setLastFile(lastFile);
+				config.SaveAs();
 			}
 		});
 
+        //Exit
+        menu15.setOnAction(new EventHandler<ActionEvent>() {
 
-		//Menu 2
+            @Override
+            public void handle(ActionEvent arg0) {
+                exit = true;
+            }
+        });
+
+
+		//Menu 2 --> View
+        //Display config
 		menu21.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -176,6 +186,8 @@ public class NewMenu extends Application {
 			}
 		});
 
+
+        // Display Bugs
 		menu23.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -186,6 +198,8 @@ public class NewMenu extends Application {
 			}
 		});
 
+
+        // display map
 		menu24.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -195,6 +209,8 @@ public class NewMenu extends Application {
 			}
 		});
 
+
+        //Show and hide Smell Range
         menu25.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -212,6 +228,8 @@ public class NewMenu extends Application {
             }
         });
 
+
+        //Show and hide Targets
         menu26.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -228,6 +246,8 @@ public class NewMenu extends Application {
             }
         });
 
+
+        // Show and hide Stats
         menu27.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -529,6 +549,9 @@ public class NewMenu extends Application {
                     stage1.close();
                     startOver = false;
                     mainProgram(stage1, config);
+                }
+                if (exit){
+                    stage1.close();
                 }
 
             }
