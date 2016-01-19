@@ -21,18 +21,21 @@ public class World {
 	private int day;
 	private int year;
 	
-	public World(Group root, Configuration config){
+	public World(Group root, Configuration config, int animalTypes){
 
         Lion.restartCounter();
+		Zebra.restartCounter();
 
-        targetsGroup.add(new Group());
-        foodGroup.add(new Group());
-        obstacleGroup.add(new Group());
-        animalGroup.add(new Group());
-        smellRangeGroup.add(new Group());
-        statsGroup.add(new Group());
-        idsGroup.add(new Group());
-        animalList.add(new ArrayList<Animal>());
+		for (int i = 0; i < animalTypes; i++) {
+			targetsGroup.add(new Group());
+			foodGroup.add(new Group());
+			obstacleGroup.add(new Group());
+			animalGroup.add(new Group());
+			smellRangeGroup.add(new Group());
+			statsGroup.add(new Group());
+			idsGroup.add(new Group());
+			animalList.add(new ArrayList<Animal>());
+		}
 
 		for (Group g : targetsGroup){
             root.getChildren().add(g);
@@ -72,9 +75,14 @@ public class World {
 		}	
 		
 
-		// create Animals
-		for (int i = 0; i < config.getBugs(); i++){
+		// create Lions
+		for (int i = 0; i < config.getLions(); i++){
 			this.addLion();
+		}
+
+		// create Zebras
+		for (int i = 0; i < config.getZebras(); i++){
+			this.addZebra();
 		}
 
         hideAll();
@@ -107,6 +115,9 @@ public class World {
         if (i == 0){
             addLion();
         }
+		if (i == 1){
+			addZebra();
+		}
     }
 
 	public void addLion(){
@@ -118,14 +129,22 @@ public class World {
             smellRangeGroup.get(0).getChildren().add(lion.getSmellRange());
             statsGroup.get(0).getChildren().add(lion.getStats());
             targetsGroup.get(0).getChildren().add(lion.getProvisionalTarget().getBody());
-
-
-
             idsGroup.get(0).getChildren().add(lion.getID());
-
-
         }
     }
+
+	public void addZebra(){
+		Zebra zebra = new Zebra(this);
+
+		if (zebra.getBody().getRadius() > 0) {
+			animalList.get(1).add(zebra);
+			animalGroup.get(1).getChildren().add(zebra.getBody());
+			smellRangeGroup.get(1).getChildren().add(zebra.getSmellRange());
+			statsGroup.get(1).getChildren().add(zebra.getStats());
+			targetsGroup.get(1).getChildren().add(zebra.getProvisionalTarget().getBody());
+			idsGroup.get(1).getChildren().add(zebra.getID());
+		}
+	}
 
 	public void removeAnimal(int j, int i){
 		animalList.get(j).remove(i);

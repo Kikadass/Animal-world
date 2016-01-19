@@ -24,7 +24,7 @@ import javafx.util.Duration;
 
 public class NewMenu extends Application {
 
-    String[] animalTypes = {"Lion"};
+    String[] animalTypes = {"Lion", "Zebra"};
     static int width = 1280;
     static int height = 720;
     boolean toggleSmellRange = false;
@@ -128,7 +128,8 @@ public class NewMenu extends Application {
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
                         world.addAnimal(value);
-                        config.setBugs(config.getBugs() + 1);
+                        if (value == 0) config.setLions(config.getLions() + 1);
+                        if (value == 0) config.setZebras(config.getZebras() + 1);
 
                     }
                 }
@@ -328,7 +329,8 @@ public class NewMenu extends Application {
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
                         world.removeAnimal(value, value2);
-                        config.setBugs(config.getBugs() - 1);
+                        if (value == 0) config.setLions(config.getLions() - 1);
+                        if (value == 0) config.setZebras(config.getZebras() - 1);
 
                         idCb.getItems().remove(0, idCb.getItems().size());
                         idCb.getItems().addAll(
@@ -651,45 +653,45 @@ public class NewMenu extends Application {
     public void eat(World world, ArrayList<Animal> animalTypeList, int i) {
         for (int j = 0; j < world.foodList.size(); j++) {
             if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.foodList.get(j).getBody())) {
-                // if hungry: eat one by one until not hungry or finished
-                // if there is still food, carry what you can depending on strenght
+                for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
+                    if (world.foodList.get(j).getType().equals(foodPreference)) {
+                        // if hungry: eat one by one until not hungry or finished
+                        // if there is still food, carry what you can depending on strenght
 
-                double amount = world.foodList.get(j).getEnergy() + animalTypeList.get(i).getFood();
-                if (amount >= animalTypeList.get(i).getMaxFood()) {
-                    animalTypeList.get(i).setFood(animalTypeList.get(i).getMaxFood());
-                    amount -= animalTypeList.get(i).getMaxFood();
+                        double amount = world.foodList.get(j).getEnergy() + animalTypeList.get(i).getFood();
+                        if (amount >= animalTypeList.get(i).getMaxFood()) {
+                            animalTypeList.get(i).setFood(animalTypeList.get(i).getMaxFood());
+                            amount -= animalTypeList.get(i).getMaxFood();
 
-                    // if after eating there is still food left take it or leave it:
-                    if (amount > 0) {
-                        double amount2 = amount + animalTypeList.get(i).getFoodCarring();
-                        if (amount2 >= animalTypeList.get(i).getStrenght()) {
-                            animalTypeList.get(i).setFoodCarring(animalTypeList.get(i).getStrenght());
-                            amount2 -= animalTypeList.get(i).getStrenght();
+                            // if after eating there is still food left take it or leave it:
+                            if (amount > 0) {
+                                double amount2 = amount + animalTypeList.get(i).getFoodCarring();
+                                if (amount2 >= animalTypeList.get(i).getStrenght()) {
+                                    animalTypeList.get(i).setFoodCarring(animalTypeList.get(i).getStrenght());
+                                    amount2 -= animalTypeList.get(i).getStrenght();
 
-                            // if not strong enough leave extra food
-                            if (amount2 > 0) {
-                                world.foodList.get(j).setEnergy(amount2);
-                            }
-                            else {
+                                    // if not strong enough leave extra food
+                                    if (amount2 > 0) {
+                                        world.foodList.get(j).setEnergy(amount2);
+                                    } else {
+                                        world.deleteFood(j);
+                                        j--;
+                                    }
+                                } else {
+                                    animalTypeList.get(i).setFoodCarring(amount2);
+                                    world.deleteFood(j);
+                                    j--;
+                                }
+                            } else {
                                 world.deleteFood(j);
                                 j--;
                             }
-                        }
-                        else {
-                            animalTypeList.get(i).setFoodCarring(amount2);
+                        } else {
+                            animalTypeList.get(i).setFood(amount);
                             world.deleteFood(j);
                             j--;
                         }
                     }
-                    else {
-                        world.deleteFood(j);
-                        j--;
-                    }
-                }
-                else {
-                    animalTypeList.get(i).setFood(amount);
-                    world.deleteFood(j);
-                    j--;
                 }
             }
         }
@@ -732,23 +734,28 @@ public class NewMenu extends Application {
                     if (Collisions.collideFood(animalTypeList.get(i).getSmellRange(), world)) {
                         // main target: center of that food.
                         for (int j = 0; j < world.foodList.size(); j++) {
-                            if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
-                                // if food is closer than actual main target --> go to it
-                                if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
+                            for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
+                                if (world.foodList.get(j).getType().equals(foodPreference)) {
+                                    if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
 
-                                    int tx;
-                                    int ty;
-                                    int rad;
+                                        // if food is closer than actual main target --> go to it
+                                        if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
 
-                                    ty = (int) world.foodList.get(j).getBody().getCenterY();
+                                            int tx;
+                                            int ty;
+                                            int rad;
 
-                                    tx = (int) world.foodList.get(j).getBody().getCenterX();
-                                    rad = (int) world.foodList.get(j).getBody().getRadius();
+                                            ty = (int) world.foodList.get(j).getBody().getCenterY();
 
-                                    // create the main target depending on tx and ty
-                                    animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+                                            tx = (int) world.foodList.get(j).getBody().getCenterX();
+                                            rad = (int) world.foodList.get(j).getBody().getRadius();
+
+                                            // create the main target depending on tx and ty
+                                            animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+                                        }
+
+                                    }
                                 }
-
                             }
                         }
                     }
@@ -772,7 +779,7 @@ public class NewMenu extends Application {
 
 
         final Group root = new Group();
-        final World world = new World(root, config);
+        final World world = new World(root, config, animalTypes.length);
         final Scene scene = new Scene(root, config.getWidth(), config.getHeight());
 
 

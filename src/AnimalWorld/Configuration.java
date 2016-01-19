@@ -18,25 +18,28 @@ public class Configuration implements Serializable{
 	private String lastFile;
 	private int amountFood;
 	private int amountObstacles;
-	private int amountBugs;
+	private int amountLions;
+	private int amountZebras;
     private int height;
     private int width;
 
 	public Configuration(){
 		this.lastFile = new String();
-		this.lastFile = "defConfiguration.ser";
+		this.lastFile = "/defConfiguration.ser";
 		this.amountFood = 10;
 		this.amountObstacles = 10;
-		this.amountBugs = 1;
-        this.height = 720;
+		this.amountLions = 1;
+		this.amountZebras = 1;
+		this.height = 720;
 		this.width = 1280;
 	}
 	
-	public Configuration(String lastFile, int amountFood, int amountObstacles, int amountBugs, int height, int width){
+	public Configuration(String lastFile, int amountFood, int amountObstacles, int amountLions, int amountZebras, int height, int width){
 		this.lastFile = lastFile;
 		this.amountFood = amountFood;
 		this.amountObstacles = amountObstacles;
-		this.amountBugs = amountBugs;
+		this.amountLions = amountLions;
+		this.amountZebras = amountZebras;
         this.height = height;
         this.width = width;
 	}
@@ -45,8 +48,9 @@ public class Configuration implements Serializable{
 		this.lastFile = config.lastFile;
 		this.amountFood = config.amountFood;
 		this.amountObstacles = config.amountObstacles;
-		this.amountBugs = config.amountBugs;
-        this.height = config.height;
+		this.amountLions = config.amountLions;
+		this.amountZebras = config.amountZebras;
+		this.height = config.height;
         this.width = config.width;
 	}
 
@@ -65,78 +69,104 @@ public class Configuration implements Serializable{
 		grid.setVgap(5);
 		grid.setHgap(5);
 
+		int configThings = 0;
+
 		//Defining the Food text field
 		final TextField food = new TextField();
 		food.setPromptText("Enter amount of food.");
 		food.setPrefColumnCount(10);
 		food.getText();
-        GridPane.setConstraints(food, 1, 0);
+        GridPane.setConstraints(food, 1, configThings);
 		grid.getChildren().add(food);
         Label label1 = new Label("Food:");
-        GridPane.setConstraints(label1, 0, 0);
+        GridPane.setConstraints(label1, 0, configThings);
         grid.getChildren().add(label1);
+
+		configThings++;
 
 		//Defining the obstacles text field
 		final TextField obstacles = new TextField();
 		obstacles.setPromptText("Enter amount of obstacles.");
 		obstacles.setPrefColumnCount(10);
 		obstacles.getText();
-		GridPane.setConstraints(obstacles, 1, 1);
+		GridPane.setConstraints(obstacles, 1, configThings);
 		grid.getChildren().add(obstacles);
         Label label2 = new Label("Obstacles:");
-        GridPane.setConstraints(label2, 0, 1);
+        GridPane.setConstraints(label2, 0, configThings);
         grid.getChildren().add(label2);
 
-		//Defining the animals text field
-		final TextField animals = new TextField();
-		animals.setPromptText("Enter amount of animals.");
-		animals.setPrefColumnCount(10);
-		animals.getText();
-		GridPane.setConstraints(animals, 1, 2);
-		grid.getChildren().add(animals);
-        Label label3 = new Label("Animals:");
-        GridPane.setConstraints(label3, 0, 2);
+		configThings++;
+
+		//Defining the Lions text field
+		final TextField lions = new TextField();
+		lions.setPromptText("Enter amount of lions.");
+		lions.setPrefColumnCount(10);
+		lions.getText();
+		GridPane.setConstraints(lions, 1, configThings);
+		grid.getChildren().add(lions);
+        Label label3 = new Label("lions:");
+        GridPane.setConstraints(label3, 0, configThings);
         grid.getChildren().add(label3);
 
+		configThings++;
+
+        //Defining the zebras text field
+        final TextField zebras = new TextField();
+        zebras.setPromptText("Enter amount of zebras.");
+        zebras.setPrefColumnCount(10);
+        zebras.getText();
+        GridPane.setConstraints(zebras, 1, configThings);
+        grid.getChildren().add(zebras);
+        Label label6 = new Label("zebras:");
+        GridPane.setConstraints(label6, 0, configThings);
+        grid.getChildren().add(label6);
+
+        configThings++;
 
 		//Defining the world text field
 		final TextField height = new TextField();
 		height.setPromptText("Enter height of the world.");
-		GridPane.setConstraints(height, 1, 3);
+		GridPane.setConstraints(height, 1, configThings);
 		grid.getChildren().add(height);
         Label label4 = new Label("Height:");
-        GridPane.setConstraints(label4, 0, 3);
+        GridPane.setConstraints(label4, 0, configThings);
         grid.getChildren().add(label4);
+
+		configThings++;
 
         //Defining the world text field
         final TextField width = new TextField();
         width.setPromptText("Enter width of the world.");
-        GridPane.setConstraints(width, 1, 4);
+        GridPane.setConstraints(width, 1, configThings);
         grid.getChildren().add(width);
         Label label5 = new Label("Width:");
-        GridPane.setConstraints(label5, 0, 4);
+        GridPane.setConstraints(label5, 0, configThings);
         grid.getChildren().add(label5);
+
+		configThings++;
+
+		//Adding a Label
+		final Label label = new Label();
+		GridPane.setConstraints(label, 0, configThings);
+		GridPane.setColumnSpan(label, 2);
+		grid.getChildren().add(label);
+
+		configThings++;
 
 		//Defining the Apply button
 		Button apply = new Button("Apply");
-		GridPane.setConstraints(apply, 0, 6);
+		GridPane.setConstraints(apply, 0, configThings);
 		grid.getChildren().add(apply);
 
 		//Defining the Clear button
 		Button clear = new Button("Clear");
-		GridPane.setConstraints(clear, 2, 6);
+		GridPane.setConstraints(clear, 2, configThings);
 		grid.getChildren().add(clear);
 
         //Defining the Current Values button
         Button current = new Button("Current Values");
-        GridPane.setConstraints(current, 1, 6);
+        GridPane.setConstraints(current, 1, configThings);
         grid.getChildren().add(current);
-
-		//Adding a Label
-		final Label label = new Label();
-		GridPane.setConstraints(label, 0, 5);
-		GridPane.setColumnSpan(label, 2);
-		grid.getChildren().add(label);
 
 
 
@@ -147,15 +177,17 @@ public class Configuration implements Serializable{
 			public void handle(ActionEvent e) {
 				if ((food.getText() != null && !food.getText().isEmpty()) &&
                     (obstacles.getText() != null && !obstacles.getText().isEmpty()) &&
-                    (animals.getText() != null && !animals.getText().isEmpty()) &&
-                    (height.getText() != null && !height.getText().isEmpty()) &&
+                    (lions.getText() != null && !lions.getText().isEmpty()) &&
+					(zebras.getText() != null && !zebras.getText().isEmpty()) &&
+					(height.getText() != null && !height.getText().isEmpty()) &&
                     (width.getText() != null && !width.getText().isEmpty())){
 
                     if (Integer.parseInt(height.getText()) >= 300 && Integer.parseInt(width.getText()) >= 300){
                         setFood(Integer.parseInt(food.getText()));
                         setObstacles(Integer.parseInt(obstacles.getText()));
-                        setBugs(Integer.parseInt(animals.getText()));
-                        if (Integer.parseInt(height.getText()) != getHeight() || Integer.parseInt(width.getText()) != getWidth()) {
+                        setLions(Integer.parseInt(lions.getText()));
+						setZebras(Integer.parseInt(zebras.getText()));
+						if (Integer.parseInt(height.getText()) != getHeight() || Integer.parseInt(width.getText()) != getWidth()) {
                             setHeight(Integer.parseInt(height.getText()));
                             setWidth(Integer.parseInt(width.getText()));
                             NewMenu.setStartOver();
@@ -178,8 +210,9 @@ public class Configuration implements Serializable{
             public void handle(ActionEvent e) {
                 food.setText(String.valueOf(amountFood));
                 obstacles.setText(String.valueOf(amountObstacles));
-                animals.setText(String.valueOf(amountBugs));
-                height.setText(String.valueOf(getHeight()));
+                lions.setText(String.valueOf(amountLions));
+				zebras.setText(String.valueOf(amountZebras));
+				height.setText(String.valueOf(getHeight()));
                 width.setText(String.valueOf(getWidth()));
                 label.setText(null);
             }
@@ -192,7 +225,8 @@ public class Configuration implements Serializable{
 			public void handle(ActionEvent e) {
 				food.clear();
 				obstacles.clear();
-                animals.clear();
+                lions.clear();
+				zebras.clear();
                 height.clear();
                 width.clear();
 				label.setText(null);
@@ -236,15 +270,15 @@ public class Configuration implements Serializable{
 		check = null;
         do {
             TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Animals");
-            dialog.setHeaderText("How many Bugs do you want to create?");
+            dialog.setTitle("Lions");
+            dialog.setHeaderText("How many Lions do you want to create?");
             Optional<String> result = dialog.showAndWait();
 
             if (result.isPresent()) {
                 check = result.get();
             }
         }while(check == null);
-		this.amountBugs = Integer.parseInt(check);
+		this.amountLions = Integer.parseInt(check);
 
 
 		check = null;
@@ -375,15 +409,23 @@ public class Configuration implements Serializable{
 		this.amountObstacles = amountObstacles;
 	} 
 	
-	public int getBugs(){
-		return this.amountBugs;
+	public int getLions(){
+		return this.amountLions;
 	}
-	
-	public void setBugs(int amountBugs){
-		this.amountBugs = amountBugs;
-	} 
-	
-	public int getWidth(){
+
+	public void setLions(int amountBugs){
+		this.amountLions = amountBugs;
+	}
+
+    public int getZebras(){
+        return this.amountZebras;
+    }
+
+    public void setZebras(int amountBugs){
+        this.amountZebras = amountBugs;
+    }
+
+    public int getWidth(){
 		return this.width;
 	}
 	
@@ -417,7 +459,8 @@ public class Configuration implements Serializable{
 		print = "Name of file: " + nameOfFile + "\n" +
 				"Amount of Food: " + this.amountFood + "\n" +
 				"Amount of Obstacles: " + this.amountObstacles + "\n" + 
-				"Amount of Bugs: " + this.amountBugs + "\n" +
+				"Amount of Lions: " + this.amountLions + "\n" +
+                "Amount of Zebras: " + this.amountZebras + "\n" +
 				"Height: " + this.height + "\n" +
                 "Width: " + this.width;
 
@@ -431,8 +474,9 @@ public class Configuration implements Serializable{
 	public void displayMap(){
 		String print;
 		print = "Amount of Food: " + this.amountFood + "\n" +
-				"Amount of Obstacles: " + this.amountObstacles + "\n" + 
-				"Amount of Bugs: " + this.amountBugs + "\n" +
+				"Amount of Obstacles: " + this.amountObstacles + "\n" +
+                "Amount of Lions: " + this.amountLions + "\n" +
+                "Amount of Zebras: " + this.amountZebras + "\n" +
                 "Height: " + this.height + "\n" +
                 "Width: " + this.width;
 
@@ -523,7 +567,7 @@ public class Configuration implements Serializable{
             e = config;
         }
 
-		if (e.lastFile != "defConfiguration.ser"){
+		if (e.lastFile != "/defConfiguration.ser"){
 			e = tryLoad(e.lastFile);
 			e.Save();
 		}

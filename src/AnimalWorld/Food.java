@@ -49,11 +49,22 @@ public class Food{
 		return this.energy;
 	}
 
+	public Circle getBody(){
+		return this.Body;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
 	public void setEnergy(double energy) {
 		this.energy = energy;
 	}
 
-	public Circle getBody(){
-		return this.Body;
-	}
+
 }

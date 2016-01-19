@@ -42,6 +42,7 @@ public abstract class Animal{
 	private double dx;
 	private double dy;
 	private double speed;
+    private ArrayList<String> foodPreferences = new ArrayList<String>();
     private Target houseTarget;
     private Target foodTarget;
     private Target waterTarget;
@@ -385,6 +386,14 @@ public abstract class Animal{
         this.provisionalTarget.getBody().setCenterX(tX);
         this.provisionalTarget.getBody().setCenterY(tY);
         this.lastAngle = anAngle;
+    }
+
+    public ArrayList<String> getFoodPreferences() {
+        return foodPreferences;
+    }
+
+    public void addFoodPreferences(String foodPreference) {
+        this.foodPreferences.add(foodPreference);
     }
 
     public void setMetabolism(double metabolism) {
