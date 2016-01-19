@@ -65,7 +65,7 @@ public class Configuration implements Serializable{
 		grid.setVgap(5);
 		grid.setHgap(5);
 
-		//Defining the Name text field
+		//Defining the Food text field
 		final TextField food = new TextField();
 		food.setPromptText("Enter amount of food.");
 		food.setPrefColumnCount(10);

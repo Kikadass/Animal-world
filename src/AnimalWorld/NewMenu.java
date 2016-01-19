@@ -2,6 +2,7 @@ package AnimalWorld;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.JOptionPane;
 
@@ -12,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.layout.GridPane;
@@ -58,32 +60,341 @@ public class NewMenu extends Application {
         stop = true;
     }
 
-    public static int Loop(String[] Options, String WindowName, boolean Edit) {
-		List<String> optionList = new ArrayList<String>();
-		for (int i = 0; i < Options.length; i++) {
-			optionList.add(Options[i]);
-		}
-		if (!Edit) optionList.add("Exit");
+    public void addLifeForm(final World world, final Configuration config){
+        GridPane grid = new GridPane();
+        Scene scene = new Scene(grid, 250, 100);
+        final Stage stage = new Stage();
 
-		Object[] options = optionList.toArray();
+        stage.setTitle("Add Life Form");
+        stage.setScene(scene);
+        stage.sizeToScene();
 
-		int value = JOptionPane.showOptionDialog(
-				null,
-				"Please select:\n",
-				WindowName,
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE,
-				null,
-				options,
-				optionList.get(0));
-		String opt = optionList.get(value);
+        grid.setPadding(new Insets(10, 10, 10, 50));  // sets margins
+        grid.setVgap(5);
+        grid.setHgap(5);
 
-		for (int i = 0; i < Options.length; i++) {
-			if (opt == "Exit" || value == JOptionPane.CLOSED_OPTION) return -1;
-			else if (opt == Options[i]) return i;
-		}
-		return -1;
-	}
+
+        // Defining the Type ChoiceBox
+        final ChoiceBox typeCb  = new ChoiceBox(FXCollections.observableArrayList(
+                "Choose an animal type",
+                new Separator()
+        ));
+        typeCb.getSelectionModel().selectFirst();   // In order to have "Choose an ID" already selected
+
+        //To input all the animal Types:
+        for (String animalType : animalTypes){
+            typeCb.getItems().add(animalType);
+        }
+
+        GridPane.setHalignment(typeCb, HPos.CENTER);
+        GridPane.setConstraints(typeCb, 0, 0, 2, 1);
+        grid.getChildren().add(typeCb);
+
+
+        //BUTTONS
+
+        //Defining the ok button
+        Button ok = new Button("OK");
+        ok.alignmentProperty();
+        GridPane.setHalignment(ok, HPos.RIGHT);
+        GridPane.setConstraints(ok, 0, 2);
+        grid.getChildren().add(ok);
+
+
+
+        //Defining the cancel button
+        Button cancel = new Button("Cancel");
+        GridPane.setHalignment(cancel, HPos.RIGHT);
+        GridPane.setConstraints(cancel, 1, 2);
+        grid.getChildren().add(cancel);
+
+
+        //Setting an action for the OK button
+        ok.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                int value = typeCb.getSelectionModel().getSelectedIndex()-2;
+                if (value >= 0) {
+                    String print;
+
+                    print = "Are you sure you want to Add this Life Form?";
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Add Life Form:");
+                    alert.setContentText(print);
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        // ... user chose OK
+                        world.addAnimal(value);
+                        config.setBugs(config.getBugs() + 1);
+
+                    }
+                }
+            }
+        });
+
+
+        //Setting an action for the cancel button
+        cancel.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+               stage.close();
+            }
+        });
+
+
+
+
+        stage.showAndWait();
+
+    }
+
+    public void chooseLifeForm(final World world, final Configuration config){
+        GridPane grid = new GridPane();
+        Scene scene = new Scene(grid, 300, 100);
+        final Stage stage = new Stage();
+
+        stage.setTitle("Choose Life Form");
+        stage.setScene(scene);
+        stage.sizeToScene();
+
+        grid.setPadding(new Insets(10, 10, 10, 10));  // sets margins
+        grid.setVgap(5);
+        grid.setHgap(5);
+
+
+        // Defining the Type ChoiceBox
+        final ChoiceBox typeCb  = new ChoiceBox(FXCollections.observableArrayList(
+                "Choose an animal type",
+                new Separator()
+        ));
+        typeCb.getSelectionModel().selectFirst();   // In order to have "Choose an ID" already selected
+
+        //To input all the animal Types:
+        for (String animalType : animalTypes){
+            typeCb.getItems().add(animalType);
+        }
+
+        GridPane.setConstraints(typeCb, 0, 0, 2, 1);
+        grid.getChildren().add(typeCb);
+
+
+
+        // Defining the ID ChoiceBox
+        final ChoiceBox idCb  = new ChoiceBox(FXCollections.observableArrayList (
+                "Choose an ID",
+                new Separator()
+        ));
+        idCb.getSelectionModel().selectFirst();     // In order to have "Choose an ID" already selected
+        idCb.setVisible(false);
+
+        GridPane.setConstraints(idCb, 2, 0, 2, 1);
+        grid.getChildren().add(idCb);
+
+
+
+        // Defining label
+        final Label label = new Label();
+        GridPane.setConstraints(label, 0, 2);
+        GridPane.setColumnSpan(label, 3);
+        grid.getChildren().add(label);
+
+
+
+        //Defining the show button
+        Button show = new Button("Show");
+        show.alignmentProperty();
+        GridPane.setHalignment(show, HPos.CENTER);
+        GridPane.setConstraints(show, 0, 3);
+        grid.getChildren().add(show);
+
+
+
+        //Defining the Modify button
+        Button modify = new Button("Modify");
+        modify.alignmentProperty();
+        GridPane.setHalignment(modify, HPos.CENTER);
+        GridPane.setConstraints(modify, 1, 3);
+        grid.getChildren().add(modify);
+
+
+
+        //Defining the remove button
+        Button remove = new Button("Remove");
+        remove.alignmentProperty();
+        GridPane.setHalignment(remove, HPos.CENTER);
+        GridPane.setConstraints(remove, 2, 3);
+        grid.getChildren().add(remove);
+
+
+
+        //Defining the done button
+        Button done = new Button("Done");
+        GridPane.setHalignment(done, HPos.CENTER);
+        GridPane.setConstraints(done, 3, 3);
+        grid.getChildren().add(done);
+
+
+
+        // Setting the action for the Type ChoiceBox
+        typeCb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                // action
+                final int value = newValue.intValue() - 2;
+                if (newValue != oldValue){
+                    if (oldValue.intValue()-2 >= 0) {
+                        world.hideSpecificID(oldValue.intValue() - 2);
+                    }
+                    idCb.getItems().remove(0, idCb.getItems().size());
+                    if (newValue.intValue() >= 2) {
+                        idCb.getItems().addAll(
+                                "Choose an ID",
+                                new Separator()
+                        );
+                        idCb.getSelectionModel().selectFirst();
+                    }
+                    else idCb.setVisible(false);
+                }
+
+                if (newValue.intValue() >= 2) {
+                    for (Animal animal : world.animalList.get(value)) {
+                        idCb.getItems().add(animal.getID().getText());
+                    }
+                    idCb.setVisible(true);
+
+                    // show that specific animals ID visible
+                    world.showSpecificID(value);
+
+                }
+            }
+        });
+
+
+
+        //Setting an action for the show button
+        show.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                int value2 = idCb.getSelectionModel().getSelectedIndex() -2;
+                int value = typeCb.getSelectionModel().getSelectedIndex()-2;
+                if (value >= 0 && value2 >= 0) {
+                    // show information for that animal
+                    world.animalList.get(value).get(value2).displayAnimal();
+                }
+                else label.setText("Please choose an animal type and an ID");
+            }
+        });
+
+
+
+        //Setting an action for the Modify button
+        modify.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                int value2 = idCb.getSelectionModel().getSelectedIndex() -2;
+                int value = typeCb.getSelectionModel().getSelectedIndex()-2;
+                if (value >= 0 && value2 >= 0) {
+                    world.animalList.get(value).get(value2).modifyAnimal();
+                }
+            }
+        });
+
+
+
+        //Setting an action for the Remove button
+        remove.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                int value2 = idCb.getSelectionModel().getSelectedIndex() -2;
+                int value = typeCb.getSelectionModel().getSelectedIndex()-2;
+                if (value >= 0 && value2 >= 0) {
+
+                    String print;
+
+                    print = "Are you sure you want to remove this Life Form?";
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Remove Life Form:");
+                    alert.setContentText(print);
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK){
+                        // ... user chose OK
+                        world.removeAnimal(value, value2);
+                        config.setBugs(config.getBugs() - 1);
+
+                        idCb.getItems().remove(0, idCb.getItems().size());
+                        idCb.getItems().addAll(
+                                "Choose an ID",
+                                new Separator()
+                        );
+                        idCb.getSelectionModel().selectFirst();
+
+
+                        for (Animal animal : world.animalList.get(value)) {
+                            idCb.getItems().add(animal.getID().getText());
+                        }
+
+                    }
+
+                }
+            }
+        });
+
+
+
+        //Setting an action for the done button
+        done.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                int value = typeCb.getSelectionModel().getSelectedIndex()-2;
+                if (value >= 0) {
+                    world.hideSpecificID(value);
+                }
+                stage.close();
+            }
+        });
+
+
+
+        stage.showAndWait();
+    }
+
+    public void displayApplication(){
+        String print  =
+                        "Built since: 09/01/2016" + "\n" +
+                        "Version Finished in: 21/01/2016" + "\n" +
+                        "Version: 1.0  " + "\n";
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Animal World application");
+        alert.setTitle("About Animal World");
+        alert.setContentText(print);
+        alert.showAndWait();
+    }
+
+    public void displayAuthor(){
+        String print  =
+                    "Student number: 23021090" + "\n" +
+                    "Student username: jw021090" + "\n" +
+                    "Course: Bsc Computer Science with Industrial Year" +  "\n" +
+                    "Tutor: Dr Richard Mitchel" + "\n" +
+                    "Send any questions to: kikadass@gmail.com " + "\n";
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Enrique Piera Serra");
+        alert.setTitle("About the Author");
+        alert.setContentText(print);
+        alert.showAndWait();
+    }
 
 	public MenuBar CreateMenuBar(final World world, final Configuration config) {
 
@@ -199,93 +510,7 @@ public class NewMenu extends Application {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
-                GridPane grid = new GridPane();
-                Scene scene = new Scene(grid, 350, 250);
-                final Stage stage = new Stage();
-
-                stage.setTitle("Edit Configuration");
-                stage.setScene(scene);
-                stage.sizeToScene();
-
-                grid.setPadding(new Insets(10, 10, 10, 10));
-                grid.setVgap(5);
-                grid.setHgap(5);
-
-
-
-                //Create a window to choose a type of animal and it's ID
-                final ChoiceBox typeCb  = new ChoiceBox(FXCollections.observableArrayList(
-                        "Choose an animal type",
-                        new Separator()
-                ));
-
-                typeCb.getSelectionModel().selectFirst();
-
-                GridPane.setConstraints(typeCb, 1, 0);
-                grid.getChildren().add(typeCb);
-
-                for (String animalType : animalTypes){
-                    typeCb.getItems().add(animalType);
-                }
-
-
-                final ChoiceBox idCb  = new ChoiceBox(FXCollections.observableArrayList (
-                        "Choose an ID",
-                        new Separator()
-                ));
-                idCb.getSelectionModel().selectFirst();
-
-
-                GridPane.setConstraints(idCb, 1, 1);
-                grid.getChildren().add(idCb);
-
-                idCb.setVisible(false);
-
-                typeCb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        // action
-                        if (newValue != oldValue){
-                            idCb.getItems().remove(0, idCb.getItems().size());
-                            if (newValue.intValue() >= 2) {
-                                idCb.getItems().addAll(
-                                        "Choose an ID",
-                                        new Separator()
-                                );
-                                idCb.getSelectionModel().selectFirst();
-                            }
-                            else idCb.setVisible(false);
-                        }
-
-
-                        if (newValue.intValue() >= 2) {
-                            int value = newValue.intValue() - 2;
-                            for (Animal animal : world.animalList.get(value)) {
-                                idCb.getItems().add(animal.getID().getText());
-                            }
-                            idCb.setVisible(true);
-
-                            System.out.println(value);
-                            // show that specific animals ID visible
-                            world.showSpecificID(value);
-
-                        }
-                    }
-                });
-
-
-                idCb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        // action
-
-                       // show information for that animal
-
-                    }
-                });
-
-                stage.showAndWait();
+                chooseLifeForm(world, config);
             }
 		});
 
@@ -357,55 +582,68 @@ public class NewMenu extends Application {
 
 
         //Menu 3
-
-		EditMenu bugsMenu = new EditMenu();
-
+        //Modify Life Form parameters
 		menu31.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				// choose between bugs
-				//int bugChosen = Loop(bugsMenu.getBugOptions(world.BugList), "Bug List", true);
-				//world.BugList[bugChosen].printBug();	// print bug chosen
-				String[] Modify = {"Yes", "No"};
-				int change = Loop(Modify, "Modify?", true);
-				//if (change == 0) bugsMenu.ChangeBug(world.BugList[bugChosen]);	// modify bug
+				chooseLifeForm(world, config);
 			}
 		});
 
+
+        // Remove Life Form
 		menu32.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				// choose between bugs
-				//int bugChosen = Loop(bugsMenu.getBugOptions(world.BugList), "Bug List", true);
-				String[] Modify = {"Yes", "No"};
-				int change = Loop(Modify, "DELETE?", true);
-				if (change == 0) {
-					//world.BugList[bugChosen].die();	// delete bug visually
-					//world.BugList = world.deleteBug(bugChosen, world.BugList); // delete bug from list
-					config.setBugs(config.getBugs() - 1);
-				}
-			}
+                chooseLifeForm(world, config);
+            }
 		});
 
+        //Add Life Form
 		menu33.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				//world.AddBug();
-				config.setBugs(config.getBugs() + 1);
+
+                addLifeForm(world, config);
 			}
 		});
 
+
+        //Edit config
 		menu34.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.EditConfig2();
-				//startOver = true;
 			}
 		});
+
+
+        //Menu4 --> Help
+        //Display info about application
+        menu41.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                displayApplication();
+            }
+        });
+
+
+
+        //Display info about author
+        menu42.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent arg0) {
+                displayAuthor();
+            }
+        });
+
+
 
 		return menuBar;
 	}

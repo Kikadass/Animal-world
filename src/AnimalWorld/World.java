@@ -1,12 +1,9 @@
 package AnimalWorld;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+
 
 public class World {
     private ArrayList<Group> targetsGroup = new  ArrayList<Group>();
@@ -106,6 +103,12 @@ public class World {
         foodGroup.get(0).getChildren().remove(i);
 	}
 
+    public void addAnimal(int i){
+        if (i == 0){
+            addLion();
+        }
+    }
+
 	public void addLion(){
 		Lion lion = new Lion(this);
 
@@ -124,13 +127,13 @@ public class World {
         }
     }
 
-	public void deleteAnimal(int i){
-		animalList.get(0).remove(i);
-		animalGroup.get(0).getChildren().remove(i);
-		smellRangeGroup.get(0).getChildren().remove(i);
-		statsGroup.get(0).getChildren().remove(i);
-		targetsGroup.get(0).getChildren().remove(i);
-        idsGroup.get(0).getChildren().remove(i);
+	public void removeAnimal(int j, int i){
+		animalList.get(j).remove(i);
+		animalGroup.get(j).getChildren().remove(i);
+		smellRangeGroup.get(j).getChildren().remove(i);
+		statsGroup.get(j).getChildren().remove(i);
+		targetsGroup.get(j).getChildren().remove(i);
+        idsGroup.get(j).getChildren().remove(i);
 
 	}
 
@@ -202,9 +205,7 @@ public class World {
     }
 
     public void showSpecificID(int i){
-        System.out.println("Value:" + i);
         idsGroup.get(i).setVisible(true);
-
     }
 
     public void showID(){

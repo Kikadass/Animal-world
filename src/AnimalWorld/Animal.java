@@ -3,10 +3,19 @@ package AnimalWorld;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public abstract class Animal{
 	private Circle Body= new Circle(), smellRange = new Circle();
@@ -44,6 +53,192 @@ public abstract class Animal{
 		this.name = new String();
 		this.energy = 0;
 	}
+
+    public void modifyAnimal(){
+
+        //Creating a GridPane container
+        GridPane grid = new GridPane();
+        Scene scene = new Scene(grid, 350, 350);
+        final Stage stage = new Stage();
+
+        stage.setTitle("Modify Life Form");
+        stage.setScene(scene);
+        stage.sizeToScene();
+
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setVgap(5);
+        grid.setHgap(5);
+
+        //Defining the Name text field
+        final TextField name = new TextField();
+        name.setPromptText("Enter a Name.");
+        name.setPrefColumnCount(10);
+        name.getText();
+        GridPane.setConstraints(name, 1, 0);
+        grid.getChildren().add(name);
+        Label label1 = new Label("Name:");
+        GridPane.setConstraints(label1, 0, 0);
+        grid.getChildren().add(label1);
+
+        //Defining the smellRange text field
+        final TextField smellRange = new TextField();
+        smellRange.setPromptText("eg. 30");
+        smellRange.setPrefColumnCount(10);
+        smellRange.getText();
+        GridPane.setConstraints(smellRange, 1, 1);
+        grid.getChildren().add(smellRange);
+        Label label3 = new Label("Smell Range:");
+        GridPane.setConstraints(label3, 0, 1);
+        grid.getChildren().add(label3);
+
+
+        //Defining the maxEnergy text field
+        final TextField maxEnergy = new TextField();
+        maxEnergy.setPromptText("eg. 200");
+        GridPane.setConstraints(maxEnergy, 1, 2);
+        grid.getChildren().add(maxEnergy);
+        Label label4 = new Label("Max Energy:");
+        GridPane.setConstraints(label4, 0, 2);
+        grid.getChildren().add(label4);
+
+        //Defining the Max Food text field
+        final TextField maxFood = new TextField();
+        maxFood.setPromptText("eg. 200");
+        GridPane.setConstraints(maxFood, 1, 3);
+        grid.getChildren().add(maxFood);
+        Label label5 = new Label("Max Food:");
+        GridPane.setConstraints(label5, 0, 3);
+        grid.getChildren().add(label5);
+
+        //Defining the Metabolism text field
+        final TextField metabolism = new TextField();
+        metabolism.setPromptText("eg. 0.05");
+        GridPane.setConstraints(metabolism, 1, 4);
+        grid.getChildren().add(metabolism);
+        Label label6 = new Label("Metabolism:");
+        GridPane.setConstraints(label6, 0, 4);
+        grid.getChildren().add(label6);
+
+        //Defining the Strength text field
+        final TextField strength = new TextField();
+        strength.setPromptText("eg. 200");
+        GridPane.setConstraints(strength, 1, 5);
+        grid.getChildren().add(strength);
+        Label label7 = new Label("Strength:");
+        GridPane.setConstraints(label7, 0, 5);
+        grid.getChildren().add(label7);
+
+        //Defining the Angle of Movement text field
+        final TextField angle = new TextField();
+        angle.setPromptText("eg. 30");
+        GridPane.setConstraints(angle, 1, 6);
+        grid.getChildren().add(angle);
+        Label label8 = new Label("Angle of Movement:");
+        GridPane.setConstraints(label8, 0, 6);
+        grid.getChildren().add(label8);
+
+        //Defining the Speed text field
+        final TextField speed = new TextField();
+        speed.setPromptText("eg. 1.5");
+        GridPane.setConstraints(speed, 1, 7);
+        grid.getChildren().add(speed);
+        Label label9 = new Label("Speed:");
+        GridPane.setConstraints(label9, 0, 7);
+        grid.getChildren().add(label9);
+
+        //Defining the Apply button
+        Button apply = new Button("Apply");
+        GridPane.setConstraints(apply, 0, 9);
+        grid.getChildren().add(apply);
+
+        //Defining the Current Values button
+        Button current = new Button("Current Values");
+        GridPane.setConstraints(current, 1, 9);
+        grid.getChildren().add(current);
+
+        //Defining the Clear button
+        Button clear = new Button("Clear");
+        GridPane.setConstraints(clear, 2, 9);
+        grid.getChildren().add(clear);
+
+        //Adding a Label
+        final Label label = new Label();
+        GridPane.setConstraints(label, 0, 8);
+        GridPane.setColumnSpan(label, 2);
+        grid.getChildren().add(label);
+
+
+
+        //Setting an action for the Apply button
+        apply.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                if ((name.getText() != null && !name.getText().isEmpty()) &&
+                    (smellRange.getText() != null && !smellRange.getText().isEmpty()) &&
+                    (maxEnergy.getText() != null && !maxEnergy.getText().isEmpty()) &&
+                    (maxFood.getText() != null && !maxFood.getText().isEmpty()) &&
+                    (metabolism.getText() != null && !metabolism.getText().isEmpty()) &&
+                    (strength.getText() != null && !strength.getText().isEmpty()) &&
+                    (angle.getText() != null && !angle.getText().isEmpty()) &&
+                    (speed.getText() != null && !speed.getText().isEmpty())){
+
+                    if (Double.parseDouble(smellRange.getText()) >= getBody().getRadius()+10) {
+                        setName(name.getText());
+                        setSmellRange(Double.parseDouble(smellRange.getText()));
+                        setMaxEnergy(Integer.parseInt(maxEnergy.getText()));
+                        setMaxFood(Integer.parseInt(maxFood.getText()));
+                        setMetabolism(Double.parseDouble(metabolism.getText()));
+                        setStrenght(Integer.parseInt(strength.getText()));
+                        setAngleRange(Integer.parseInt(angle.getText()));
+                        setSpeed(Double.parseDouble(speed.getText()));
+                        label.setText("Life Form changed!");
+                    }
+                    else    label.setText("Smell Range has to be bigger or equals than " + (getBody().getRadius()+10) + "!");
+
+                }
+                else {
+                    label.setText("Please enter all details.");
+                }
+            }
+        });
+
+        //Setting an action for the current button
+        current.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                name.setText(getName());
+                smellRange.setText(String.valueOf(getSmellRange().getRadius()));
+                maxEnergy.setText(String.valueOf(getMaxEnergy()));
+                maxFood.setText(String.valueOf(getMaxFood()));
+                metabolism.setText(String.valueOf(getMetabolism()));
+                strength.setText(String.valueOf(getStrenght()));
+                angle.setText(String.valueOf(getAngleRange()));
+                speed.setText(String.valueOf(getSpeed()));
+                label.setText(null);
+            }
+        });
+
+        //Setting an action for the Clear button
+        clear.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                name.clear();
+                smellRange.clear();
+                maxEnergy.clear();
+                maxFood.clear();
+                metabolism.clear();
+                strength.clear();
+                angle.clear();
+                speed.clear();
+                label.setText(null);
+            }
+        });
+
+        stage.showAndWait();
+    }
 
 	public String getName(){
 		return this.name;
@@ -89,7 +284,7 @@ public abstract class Animal{
 		return this.nestY;
 	}
 	
-	public int getangleRange(){
+	public int getAngleRange(){
 		return this.angleRange;
 	}
 	
@@ -161,10 +356,40 @@ public abstract class Animal{
 		return (int)(this.Body.getCenterY() + this.Body.getTranslateY());
 	}
 
+    public void getLocalTarget(){
+        double angle = getAngleTo(this.mainTarget.getBody().getCenterX(), this.mainTarget.getBody().getCenterY());
+        int path = (int)this.smellRange.getRadius();
+        int tX = (int) ((this.smellRange.getCenterX() + this.smellRange.getTranslateX()) + path * Math.cos(angle));
+        int tY = (int) ((this.smellRange.getCenterY() + this.smellRange.getTranslateY()) + path * Math.sin(angle));
+        this.provisionalTarget.getBody().setCenterX(tX);
+        this.provisionalTarget.getBody().setCenterY(tY);
+    }
+
+    public void getRandomLocalTarget(){
+        Random rand = new Random();
+        int randomAttemptTracker = 0;
+        int anAngle, tX, tY, path = (int)this.smellRange.getRadius();
+        do{
+            if (randomAttemptTracker < this.angleRange * 2){
+                anAngle = rand.nextInt(this.angleRange * 2) + this.lastAngle - this.angleRange;
+                randomAttemptTracker++;
+            } else{
+                // Too many attempts at picking an angle within the turn range were made
+                anAngle = rand.nextInt(360);
+                path = rand.nextInt((int)this.smellRange.getRadius());
+            }
+            double angle = Math.toRadians(anAngle);
+            tX = (int) ((this.smellRange.getCenterX() + this.smellRange.getTranslateX()) + path * Math.cos(angle));
+            tY = (int) ((this.smellRange.getCenterY() + this.smellRange.getTranslateY()) + path * Math.sin(angle));
+        } while(!isValidTarget(tX, tY));
+        this.provisionalTarget.getBody().setCenterX(tX);
+        this.provisionalTarget.getBody().setCenterY(tY);
+        this.lastAngle = anAngle;
+    }
+
     public void setMetabolism(double metabolism) {
         this.metabolism = metabolism;
     }
-
 
     public void setMainTarget(Target mainTarget) {
         this.mainTarget = mainTarget;
@@ -226,7 +451,7 @@ public abstract class Animal{
 		this.minFoodCons = minFoodCons;
 	}
 	
-	public void setSmellRange(int smellRange){
+	public void setSmellRange(double smellRange){
 		this.smellRange.setRadius(smellRange);
 		this.smellRange.setCenterX(this.Body.getCenterX());
 		this.smellRange.setCenterY(this.Body.getCenterY());
@@ -289,7 +514,6 @@ public abstract class Animal{
 	
 	}
 	
-	//getImage = Animal's Body
 	// get angle for going to the target
 	public double getAngleTo(double targetX, double targetY){
         double thisX = Body.getCenterX() + Body.getTranslateX();
@@ -305,37 +529,6 @@ public abstract class Animal{
         double angle = getAngleTo(targetX, targetY);
         setDx((Math.cos(angle) * getSpeed()));
         setDy((Math.sin(angle) * getSpeed()));
-    }
-
-    public void getLocalTarget(){
-        double angle = getAngleTo(this.mainTarget.getBody().getCenterX(), this.mainTarget.getBody().getCenterY());
-        int path = (int)this.smellRange.getRadius();
-        int tX = (int) ((this.smellRange.getCenterX() + this.smellRange.getTranslateX()) + path * Math.cos(angle));
-        int tY = (int) ((this.smellRange.getCenterY() + this.smellRange.getTranslateY()) + path * Math.sin(angle));
-        this.provisionalTarget.getBody().setCenterX(tX);
-        this.provisionalTarget.getBody().setCenterY(tY);
-    }
-
-    public void getRandomLocalTarget(){
-        Random rand = new Random();
-        int randomAttemptTracker = 0;
-        int anAngle, tX, tY, path = (int)this.smellRange.getRadius();
-        do{
-            if (randomAttemptTracker < this.angleRange * 2){
-                anAngle = rand.nextInt(this.angleRange * 2) + this.lastAngle - this.angleRange;
-                randomAttemptTracker++;
-            } else{
-                // Too many attempts at picking an angle within the turn range were made
-                anAngle = rand.nextInt(360);
-                path = rand.nextInt((int)this.smellRange.getRadius());
-            }
-            double angle = Math.toRadians(anAngle);
-            tX = (int) ((this.smellRange.getCenterX() + this.smellRange.getTranslateX()) + path * Math.cos(angle));
-            tY = (int) ((this.smellRange.getCenterY() + this.smellRange.getTranslateY()) + path * Math.sin(angle));
-        } while(!isValidTarget(tX, tY));
-        this.provisionalTarget.getBody().setCenterX(tX);
-        this.provisionalTarget.getBody().setCenterY(tY);
-        this.lastAngle = anAngle;
     }
 
     public boolean isValidTarget(int tx, int ty){
@@ -361,7 +554,7 @@ public abstract class Animal{
 		String print;
 
 		print = "Name: " + this.name + "\n" +
-				"ID: " + this.ID + "\n" +
+				this.ID.getText() +
 				"Size: " + this.getBody().getRadius() + "\n" +
 				"Smell Range: " + this.smellRange.getRadius() + "\n" +
 				"Max Energy: " + this.maxEnergy + "\n" +
@@ -372,7 +565,7 @@ public abstract class Animal{
 				"Speed: " + this.speed ;
 
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-		alert.setTitle("Configuration loaded:");
+		alert.setTitle("Animal Chosen:");
 		alert.setContentText(print);
 		alert.showAndWait();
 	}
