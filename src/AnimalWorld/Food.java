@@ -9,7 +9,9 @@ public class Food{
 	private double energy;
 	private String type;
 	private Circle Body = new Circle();
-	
+
+    public Food(){}
+
 	public Food(World world){
 		Random rnd = new Random();
 		this.energy = rnd.nextInt(200)+5;
@@ -31,17 +33,8 @@ public class Food{
 		
 		this.Body.setRadius(rnd.nextInt(5)+5);
 
+        this.setPos(world);
 
-		int tries = 0;
-		do{
-			tries++;
-			this.Body.setCenterX(rnd.nextInt(world.getWidth() - (int)this.Body.getRadius()*2) + this.Body.getRadius());
-			this.Body.setCenterY(rnd.nextInt(world.getHeight() - (int)this.Body.getRadius()*2 - 80) + this.Body.getRadius() + 30);
-		}while((Collisions.collideObstacle(Body, world) || Collisions.collideAnimals(Body, world.animalList) || Collisions.collideFood(Body, world)) && tries <= 100);
-		if (tries >= 100) {
-			this.Body.setRadius(0);
-			System.out.println("No space to add another piece of food");
-		}
 
 	}
 	
@@ -61,10 +54,27 @@ public class Food{
 		this.type = type;
 	}
 
-
 	public void setEnergy(double energy) {
 		this.energy = energy;
 	}
 
+    public void setPos(World world){
+        Random rnd = new Random();
+
+        int tries = 0;
+        do{
+            tries++;
+            this.Body.setCenterX(rnd.nextInt(world.getWidth() - (int)this.Body.getRadius()*2) + this.Body.getRadius());
+            this.Body.setCenterY(rnd.nextInt(world.getHeight() - (int)this.Body.getRadius()*2 - 80) + this.Body.getRadius() + 30);
+        }while((Collisions.collideObstacle(Body, world) || Collisions.collideAnimals(Body, world.animalList) || Collisions.collideFood(Body, world)) && tries <= 100);
+        if (tries >= 100) {
+            this.Body.setRadius(0);
+            System.out.println("No space to add another piece of food");
+        }
+    }
+
+    public void update(){
+        System.out.println("ERROR");
+    }
 
 }

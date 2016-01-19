@@ -25,6 +25,7 @@ import javafx.util.Duration;
 public class NewMenu extends Application {
 
     String[] animalTypes = {"Lion", "Zebra"};
+    String[] foodTypes = {"Meat", "NonMeat", "Grass"};
     static int width = 1280;
     static int height = 720;
     boolean toggleSmellRange = false;
@@ -513,6 +514,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
                 chooseLifeForm(world, config);
+                world.hideID();
             }
 		});
 
@@ -522,7 +524,6 @@ public class NewMenu extends Application {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-
             config.displayMap();
 			}
 		});
@@ -590,7 +591,8 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				chooseLifeForm(world, config);
-			}
+                world.hideID();
+            }
 		});
 
 
@@ -600,6 +602,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
                 chooseLifeForm(world, config);
+                world.hideID();
             }
 		});
 
@@ -610,6 +613,7 @@ public class NewMenu extends Application {
 			public void handle(ActionEvent arg0) {
 
                 addLifeForm(world, config);
+
 			}
 		});
 
@@ -654,6 +658,7 @@ public class NewMenu extends Application {
         for (int j = 0; j < world.foodList.size(); j++) {
             if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.foodList.get(j).getBody())) {
                 for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
+
                     if (world.foodList.get(j).getType().equals(foodPreference)) {
                         // if hungry: eat one by one until not hungry or finished
                         // if there is still food, carry what you can depending on strenght
@@ -674,22 +679,32 @@ public class NewMenu extends Application {
                                     if (amount2 > 0) {
                                         world.foodList.get(j).setEnergy(amount2);
                                     } else {
-                                        world.deleteFood(j);
-                                        j--;
+                                        if (!world.foodList.get(j).getType().equals("Grass")) {
+                                            world.deleteFood(j);
+                                            j--;
+                                        } else world.foodList.get(j).setEnergy(0);
                                     }
                                 } else {
                                     animalTypeList.get(i).setFoodCarring(amount2);
-                                    world.deleteFood(j);
-                                    j--;
+                                    if (!world.foodList.get(j).getType().equals("Grass")) {
+                                        world.deleteFood(j);
+                                        j--;
+                                    } else world.foodList.get(j).setEnergy(0);
+
                                 }
                             } else {
-                                world.deleteFood(j);
-                                j--;
+                                if (!world.foodList.get(j).getType().equals("Grass")) {
+                                    world.deleteFood(j);
+                                    j--;
+                                } else world.foodList.get(j).setEnergy(0);
+
                             }
                         } else {
                             animalTypeList.get(i).setFood(amount);
-                            world.deleteFood(j);
-                            j--;
+                            if (!world.foodList.get(j).getType().equals("Grass")) {
+                                world.deleteFood(j);
+                                j--;
+                            } else world.foodList.get(j).setEnergy(0);
                         }
                     }
                 }
@@ -736,24 +751,26 @@ public class NewMenu extends Application {
                         for (int j = 0; j < world.foodList.size(); j++) {
                             for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
                                 if (world.foodList.get(j).getType().equals(foodPreference)) {
-                                    if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
+                                    if (world.foodList.get(j).getEnergy() > animalTypeList.get(i).getMinFoodCons()) {
+                                        if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
 
-                                        // if food is closer than actual main target --> go to it
-                                        if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
+                                            // if food is closer than actual main target --> go to it
+                                            if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
 
-                                            int tx;
-                                            int ty;
-                                            int rad;
+                                                int tx;
+                                                int ty;
+                                                int rad;
 
-                                            ty = (int) world.foodList.get(j).getBody().getCenterY();
+                                                ty = (int) world.foodList.get(j).getBody().getCenterY();
 
-                                            tx = (int) world.foodList.get(j).getBody().getCenterX();
-                                            rad = (int) world.foodList.get(j).getBody().getRadius();
+                                                tx = (int) world.foodList.get(j).getBody().getCenterX();
+                                                rad = (int) world.foodList.get(j).getBody().getRadius();
 
-                                            // create the main target depending on tx and ty
-                                            animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+                                                // create the main target depending on tx and ty
+                                                animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+                                            }
+
                                         }
-
                                     }
                                 }
                             }
@@ -779,7 +796,7 @@ public class NewMenu extends Application {
 
 
         final Group root = new Group();
-        final World world = new World(root, config, animalTypes.length);
+        final World world = new World(root, config, animalTypes.length, foodTypes.length);
         final Scene scene = new Scene(root, config.getWidth(), config.getHeight());
 
 
@@ -879,6 +896,12 @@ public class NewMenu extends Application {
                     }
                     for (ArrayList<Animal> animalTypeList : world.animalList){
                         animalTypeUpdate(animalTypeList, world);
+                    }
+
+                    for (int i = 0; i < world.foodList.size(); i++){
+                        if (world.foodList.get(i).getType().equals("Grass")){
+                            world.foodList.get(i).update();
+                        }
                     }
 
                 }

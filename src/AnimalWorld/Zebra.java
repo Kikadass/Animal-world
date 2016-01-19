@@ -23,7 +23,7 @@ public class Zebra extends Animal{
         this.setMaxFood((int) this.getFood());
         this.setStrenght(rnd.nextInt(100)+50);
         this.setFoodCarring(0);
-        this.setMinFoodCons(100);
+        this.setMinFoodCons(50);
         this.setSize(rnd.nextInt(10)+10);
         this.setSmellRange(rnd.nextInt(10)+(int)getBody().getRadius()*3);
         this.setAge(0);
@@ -35,6 +35,8 @@ public class Zebra extends Animal{
         this.setMinSize(10);
         this.setMaxSize(20);
         this.addFoodPreferences("NonMeat");
+        this.addFoodPreferences("Grass");
+
 
         int tries = 0;
         do{

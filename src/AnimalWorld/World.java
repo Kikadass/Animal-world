@@ -7,7 +7,7 @@ import javafx.scene.Group;
 
 public class World {
     private ArrayList<Group> targetsGroup = new  ArrayList<Group>();
-    private ArrayList<Group> foodGroup = new  ArrayList<Group>();
+    private Group foodGroup = new Group();
     private ArrayList<Group> obstacleGroup = new  ArrayList<Group>();
     private ArrayList<Group> animalGroup = new  ArrayList<Group>();
     private ArrayList<Group> smellRangeGroup = new  ArrayList<Group>();
@@ -21,15 +21,13 @@ public class World {
 	private int day;
 	private int year;
 	
-	public World(Group root, Configuration config, int animalTypes){
+	public World(Group root, Configuration config, int animalTypes, int foodTypes){
 
         Lion.restartCounter();
 		Zebra.restartCounter();
 
 		for (int i = 0; i < animalTypes; i++) {
 			targetsGroup.add(new Group());
-			foodGroup.add(new Group());
-			obstacleGroup.add(new Group());
 			animalGroup.add(new Group());
 			smellRangeGroup.add(new Group());
 			statsGroup.add(new Group());
@@ -37,13 +35,14 @@ public class World {
 			animalList.add(new ArrayList<Animal>());
 		}
 
+		obstacleGroup.add(new Group());
+
+
 		for (Group g : targetsGroup){
             root.getChildren().add(g);
 		}
 
-		for (Group g : foodGroup){
-            root.getChildren().add(g);
-		}
+		root.getChildren().add(foodGroup);
 
 		for (Group g : obstacleGroup){
             root.getChildren().add(g);
@@ -72,8 +71,13 @@ public class World {
 		// creating Food
 		for (int i = 0; i < config.getFood(); i++){
 			this.addFood();
-		}	
-		
+		}
+
+		// creating Grass
+		for (int i = 0; i < config.getGrass(); i++){
+			this.addGrass();
+		}
+
 
 		// create Lions
 		for (int i = 0; i < config.getLions(); i++){
@@ -102,13 +106,22 @@ public class World {
 
         if (food.getBody().getRadius() > 0) {
             foodList.add(food);
-            foodGroup.get(0).getChildren().add(food.getBody());
+            foodGroup.getChildren().add(food.getBody());
         }
     }
 
+	public void addGrass() {
+		Grass food = new Grass(this);
+
+		if (food.getBody().getRadius() > 0) {
+			foodList.add(food);
+			foodGroup.getChildren().add(food.getBody());
+		}
+	}
+
 	public void deleteFood(int i){
         foodList.remove(i);
-        foodGroup.get(0).getChildren().remove(i);
+        foodGroup.getChildren().remove(i);
 	}
 
     public void addAnimal(int i){

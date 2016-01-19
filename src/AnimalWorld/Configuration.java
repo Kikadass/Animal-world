@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class Configuration implements Serializable{
 	private String lastFile;
 	private int amountFood;
+    private int amountGrass;
 	private int amountObstacles;
 	private int amountLions;
 	private int amountZebras;
@@ -27,17 +28,19 @@ public class Configuration implements Serializable{
 		this.lastFile = new String();
 		this.lastFile = "/defConfiguration.ser";
 		this.amountFood = 10;
-		this.amountObstacles = 10;
+        this.amountGrass = 1;
+        this.amountObstacles = 10;
 		this.amountLions = 1;
 		this.amountZebras = 1;
 		this.height = 720;
 		this.width = 1280;
 	}
 	
-	public Configuration(String lastFile, int amountFood, int amountObstacles, int amountLions, int amountZebras, int height, int width){
+	public Configuration(String lastFile, int amountFood, int amountGrass, int amountObstacles, int amountLions, int amountZebras, int height, int width){
 		this.lastFile = lastFile;
 		this.amountFood = amountFood;
-		this.amountObstacles = amountObstacles;
+        this.amountGrass = amountGrass;
+        this.amountObstacles = amountObstacles;
 		this.amountLions = amountLions;
 		this.amountZebras = amountZebras;
         this.height = height;
@@ -47,6 +50,7 @@ public class Configuration implements Serializable{
 	public void setConfiguration(Configuration config){
 		this.lastFile = config.lastFile;
 		this.amountFood = config.amountFood;
+        this.amountGrass = config.amountGrass;
 		this.amountObstacles = config.amountObstacles;
 		this.amountLions = config.amountLions;
 		this.amountZebras = config.amountZebras;
@@ -58,7 +62,7 @@ public class Configuration implements Serializable{
 
 		//Creating a GridPane container
 		GridPane grid = new GridPane();
-        Scene scene = new Scene(grid, 350, 250);
+        Scene scene = new Scene(grid, 350, 350);
         final Stage stage = new Stage();
 
         stage.setTitle("Edit Configuration");
@@ -84,6 +88,19 @@ public class Configuration implements Serializable{
 
 		configThings++;
 
+        //Defining the Grass text field
+        final TextField grass = new TextField();
+        grass.setPromptText("Enter amount of grass.");
+        grass.setPrefColumnCount(10);
+        grass.getText();
+        GridPane.setConstraints(grass, 1, configThings);
+        grid.getChildren().add(grass);
+        Label label7 = new Label("Grass:");
+        GridPane.setConstraints(label7, 0, configThings);
+        grid.getChildren().add(label7);
+
+        configThings++;
+
 		//Defining the obstacles text field
 		final TextField obstacles = new TextField();
 		obstacles.setPromptText("Enter amount of obstacles.");
@@ -104,7 +121,7 @@ public class Configuration implements Serializable{
 		lions.getText();
 		GridPane.setConstraints(lions, 1, configThings);
 		grid.getChildren().add(lions);
-        Label label3 = new Label("lions:");
+        Label label3 = new Label("Lions:");
         GridPane.setConstraints(label3, 0, configThings);
         grid.getChildren().add(label3);
 
@@ -117,7 +134,7 @@ public class Configuration implements Serializable{
         zebras.getText();
         GridPane.setConstraints(zebras, 1, configThings);
         grid.getChildren().add(zebras);
-        Label label6 = new Label("zebras:");
+        Label label6 = new Label("Zebras:");
         GridPane.setConstraints(label6, 0, configThings);
         grid.getChildren().add(label6);
 
@@ -176,6 +193,7 @@ public class Configuration implements Serializable{
 			@Override
 			public void handle(ActionEvent e) {
 				if ((food.getText() != null && !food.getText().isEmpty()) &&
+                    (grass.getText() != null && !grass.getText().isEmpty()) &&
                     (obstacles.getText() != null && !obstacles.getText().isEmpty()) &&
                     (lions.getText() != null && !lions.getText().isEmpty()) &&
 					(zebras.getText() != null && !zebras.getText().isEmpty()) &&
@@ -184,6 +202,7 @@ public class Configuration implements Serializable{
 
                     if (Integer.parseInt(height.getText()) >= 300 && Integer.parseInt(width.getText()) >= 300){
                         setFood(Integer.parseInt(food.getText()));
+                        setGrass(Integer.parseInt(grass.getText()));
                         setObstacles(Integer.parseInt(obstacles.getText()));
                         setLions(Integer.parseInt(lions.getText()));
 						setZebras(Integer.parseInt(zebras.getText()));
@@ -209,6 +228,7 @@ public class Configuration implements Serializable{
             @Override
             public void handle(ActionEvent e) {
                 food.setText(String.valueOf(amountFood));
+                grass.setText(String.valueOf(amountGrass));
                 obstacles.setText(String.valueOf(amountObstacles));
                 lions.setText(String.valueOf(amountLions));
 				zebras.setText(String.valueOf(amountZebras));
@@ -224,6 +244,7 @@ public class Configuration implements Serializable{
 			@Override
 			public void handle(ActionEvent e) {
 				food.clear();
+                grass.clear();
 				obstacles.clear();
                 lions.clear();
 				zebras.clear();
@@ -399,9 +420,18 @@ public class Configuration implements Serializable{
 	
 	public void setFood(int amountFood){
 		this.amountFood = amountFood;
-	} 
+	}
 
-	public int getObstacles(){
+    public int getGrass(){
+        return this.amountGrass;
+    }
+
+    public void setGrass(int amountGrass){
+        this.amountGrass = amountGrass;
+    }
+
+
+    public int getObstacles(){
 		return this.amountObstacles;
 	}
 	
@@ -458,7 +488,8 @@ public class Configuration implements Serializable{
 
 		print = "Name of file: " + nameOfFile + "\n" +
 				"Amount of Food: " + this.amountFood + "\n" +
-				"Amount of Obstacles: " + this.amountObstacles + "\n" + 
+                "Amount of Grass: " + this.amountGrass + "\n" +
+                "Amount of Obstacles: " + this.amountObstacles + "\n" +
 				"Amount of Lions: " + this.amountLions + "\n" +
                 "Amount of Zebras: " + this.amountZebras + "\n" +
 				"Height: " + this.height + "\n" +
@@ -474,7 +505,8 @@ public class Configuration implements Serializable{
 	public void displayMap(){
 		String print;
 		print = "Amount of Food: " + this.amountFood + "\n" +
-				"Amount of Obstacles: " + this.amountObstacles + "\n" +
+                "Amount of Grass: " + this.amountGrass + "\n" +
+                "Amount of Obstacles: " + this.amountObstacles + "\n" +
                 "Amount of Lions: " + this.amountLions + "\n" +
                 "Amount of Zebras: " + this.amountZebras + "\n" +
                 "Height: " + this.height + "\n" +
