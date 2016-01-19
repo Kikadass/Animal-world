@@ -25,6 +25,13 @@ public class Grass extends Food {
     public void update(){
         this.setEnergy(this.getEnergy() + 0.1);
         this.getBody().setRadius(this.getEnergy()/10);
+
+        Random rnd = new Random();
+        int chance = rnd.nextInt(100000);
+
+        if (chance == 20){
+            setPoisonous();
+        }
     }
 
 }

@@ -39,6 +39,7 @@ public abstract class Animal{
 	private int lifeExpectancy;	// how old are can that specie live for
 	private int minSize;
 	private int maxSize;
+    private boolean poisoned = false;
 	private double dx;
 	private double dy;
 	private double speed;
@@ -392,6 +393,14 @@ public abstract class Animal{
         return foodPreferences;
     }
 
+    public boolean isPoisoned() {
+        return poisoned;
+    }
+
+    public void setPoisoned(boolean poisoned) {
+        this.poisoned = poisoned;
+    }
+
     public void addFoodPreferences(String foodPreference) {
         this.foodPreferences.add(foodPreference);
     }
@@ -536,8 +545,15 @@ public abstract class Animal{
         double targetX = (this.provisionalTarget.getBody().getCenterX() + this.provisionalTarget.getBody().getTranslateX());
         double targetY = (this.provisionalTarget.getBody().getCenterY() + this.provisionalTarget.getBody().getTranslateY());
         double angle = getAngleTo(targetX, targetY);
-        setDx((Math.cos(angle) * getSpeed()));
-        setDy((Math.sin(angle) * getSpeed()));
+
+        if (this.isPoisoned()){
+            setDx((Math.cos(angle) * getSpeed()/(double)2));
+            setDy((Math.sin(angle) * getSpeed()/(double)2));
+        }
+        else {
+            setDx((Math.cos(angle) * getSpeed()));
+            setDy((Math.sin(angle) * getSpeed()));
+        }
     }
 
     public boolean isValidTarget(int tx, int ty){
@@ -608,12 +624,19 @@ public abstract class Animal{
 	}
 
     public void updateFood(){
-        this.setFood(this.getFood()-1*this.metabolism);
+        double metabolism;
+
+        if (this.isPoisoned()) {
+            metabolism = this.metabolism*2;
+        }
+        else metabolism = this.metabolism;
+
+        this.setFood(this.getFood()-1*metabolism);
 
         if (this.getFood() < this.getMaxFood()/2){
             if (this.foodCarring > 0){
-                this.setFood(this.getFood() + 1*this.metabolism);
-                this.setFoodCarring(this.getFoodCarring() - 1*this.metabolism);
+                this.setFood(this.getFood() + 1*metabolism);
+                this.setFoodCarring(this.getFoodCarring() - 1*metabolism);
             }
             else {
                 //goHome

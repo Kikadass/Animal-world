@@ -9,6 +9,7 @@ public class Food{
 	private double energy;
 	private String type;
 	private Circle Body = new Circle();
+    private boolean poisonous = false;
 
     public Food(){}
 
@@ -30,7 +31,9 @@ public class Food{
 	        	this.Body.setFill(Color.GREEN);
 	            break;
 	    }
-		
+
+
+
 		this.Body.setRadius(rnd.nextInt(5)+5);
 
         this.setPos(world);
@@ -50,7 +53,19 @@ public class Food{
 		return type;
 	}
 
-	public void setType(String type) {
+    public boolean isPoisonous() {
+        return poisonous;
+    }
+
+    public void setPoisonous() {
+        this.poisonous = true;
+        if (this.getBody().getFill() == Color.RED){
+            this.getBody().setFill(Color.DARKSALMON);
+        }
+        else this.getBody().setFill(Color.DARKSEAGREEN);
+    }
+
+    public void setType(String type) {
 		this.type = type;
 	}
 
@@ -74,7 +89,12 @@ public class Food{
     }
 
     public void update(){
-        System.out.println("ERROR");
+        Random rnd = new Random();
+        int chance = rnd.nextInt(100000);
+
+        if (chance == 20){
+            setPoisonous();
+        }
     }
 
 }

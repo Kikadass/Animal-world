@@ -67,15 +67,15 @@ public class World {
 		for (int i = 0; i < config.getObstacles(); i++){
 			this.addObstacle();
 		}
-				
+
+        // creating Grass
+        for (int i = 0; i < config.getGrass(); i++){
+            this.addGrass();
+        }
+
 		// creating Food
 		for (int i = 0; i < config.getFood(); i++){
 			this.addFood();
-		}
-
-		// creating Grass
-		for (int i = 0; i < config.getGrass(); i++){
-			this.addGrass();
 		}
 
 

@@ -658,7 +658,7 @@ public class NewMenu extends Application {
         for (int j = 0; j < world.foodList.size(); j++) {
             if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.foodList.get(j).getBody())) {
                 for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
-
+                    if (j < 0) break;
                     if (world.foodList.get(j).getType().equals(foodPreference)) {
                         // if hungry: eat one by one until not hungry or finished
                         // if there is still food, carry what you can depending on strenght
@@ -667,6 +667,11 @@ public class NewMenu extends Application {
                         if (amount >= animalTypeList.get(i).getMaxFood()) {
                             animalTypeList.get(i).setFood(animalTypeList.get(i).getMaxFood());
                             amount -= animalTypeList.get(i).getMaxFood();
+
+                            //if food is poisoned metabolism is doubled and speed halfed
+                            if (world.foodList.get(j).isPoisonous()){
+                                animalTypeList.get(i).setPoisoned(true);
+                            }
 
                             // if after eating there is still food left take it or leave it:
                             if (amount > 0) {
@@ -751,7 +756,7 @@ public class NewMenu extends Application {
                         for (int j = 0; j < world.foodList.size(); j++) {
                             for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
                                 if (world.foodList.get(j).getType().equals(foodPreference)) {
-                                    if (world.foodList.get(j).getEnergy() > animalTypeList.get(i).getMinFoodCons()) {
+                                    if (world.foodList.get(j).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
                                         if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
 
                                             // if food is closer than actual main target --> go to it
@@ -899,9 +904,7 @@ public class NewMenu extends Application {
                     }
 
                     for (int i = 0; i < world.foodList.size(); i++){
-                        if (world.foodList.get(i).getType().equals("Grass")){
-                            world.foodList.get(i).update();
-                        }
+                        world.foodList.get(i).update();
                     }
 
                 }
