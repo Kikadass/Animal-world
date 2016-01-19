@@ -6,17 +6,19 @@ import java.util.Random;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class World {
-    private Group targetsGroup = new Group();
-    private Group foodGroup = new Group();
-    private Group obstacleGroup = new Group();
-    private Group animalGroup = new Group();
-    private Group smellRangeGroup = new Group();
-    private Group statsGroup = new Group();
+    private ArrayList<Group> targetsGroup = new  ArrayList<Group>();
+    private ArrayList<Group> foodGroup = new  ArrayList<Group>();
+    private ArrayList<Group> obstacleGroup = new  ArrayList<Group>();
+    private ArrayList<Group> animalGroup = new  ArrayList<Group>();
+    private ArrayList<Group> smellRangeGroup = new  ArrayList<Group>();
+    private ArrayList<Group> statsGroup = new  ArrayList<Group>();
+    private ArrayList<Group> idsGroup = new  ArrayList<Group>();
     ArrayList<Food> foodList = new ArrayList<Food>();
 	ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
-	ArrayList<Animal> animalList = new ArrayList<Animal>();
+	ArrayList<ArrayList<Animal>> animalList = new ArrayList<ArrayList<Animal>>();
 	private int width;
 	private int height;
 	private int day;
@@ -24,12 +26,40 @@ public class World {
 	
 	public World(Group root, Configuration config){
 
-        root.getChildren().add(targetsGroup);
-        root.getChildren().add(foodGroup);
-        root.getChildren().add(obstacleGroup);
-        root.getChildren().add(animalGroup);
-        root.getChildren().add(smellRangeGroup);
-        root.getChildren().add(statsGroup);
+        Lion.restartCounter();
+
+        targetsGroup.add(new Group());
+        foodGroup.add(new Group());
+        obstacleGroup.add(new Group());
+        animalGroup.add(new Group());
+        smellRangeGroup.add(new Group());
+        statsGroup.add(new Group());
+        idsGroup.add(new Group());
+        animalList.add(new ArrayList<Animal>());
+
+		for (Group g : targetsGroup){
+            root.getChildren().add(g);
+		}
+
+		for (Group g : foodGroup){
+            root.getChildren().add(g);
+		}
+
+		for (Group g : obstacleGroup){
+            root.getChildren().add(g);
+		}
+		for (Group g : animalGroup){
+            root.getChildren().add(g);
+		}
+		for (Group g : smellRangeGroup){
+            root.getChildren().add(g);
+		}
+		for (Group g : statsGroup){
+            root.getChildren().add(g);
+		}
+        for (Group g : idsGroup){
+            root.getChildren().add(g);
+        }
 
 		this.width =  NewMenu.getWidth();
 		this.height =  NewMenu.getHeight();
@@ -49,6 +79,8 @@ public class World {
 		for (int i = 0; i < config.getBugs(); i++){
 			this.addLion();
 		}
+
+        hideAll();
 	}
 
 	public void addObstacle(){
@@ -56,7 +88,7 @@ public class World {
 
         if (obstacle.getBody().getRadius() > 0){
             obstacleList.add(obstacle);
-            obstacleGroup.getChildren().add(obstacle.getBody());
+            obstacleGroup.get(0).getChildren().add(obstacle.getBody());
         }
 	}
 	
@@ -65,33 +97,40 @@ public class World {
 
         if (food.getBody().getRadius() > 0) {
             foodList.add(food);
-            foodGroup.getChildren().add(food.getBody());
+            foodGroup.get(0).getChildren().add(food.getBody());
         }
     }
 
 	public void deleteFood(int i){
         foodList.remove(i);
-        foodGroup.getChildren().remove(i);
+        foodGroup.get(0).getChildren().remove(i);
 	}
 
 	public void addLion(){
 		Lion lion = new Lion(this);
 
         if (lion.getBody().getRadius() > 0) {
-            animalList.add(lion);
-            animalGroup.getChildren().add(lion.getBody());
-            smellRangeGroup.getChildren().add(lion.getSmellRange());
-            statsGroup.getChildren().add(lion.getStats());
-            targetsGroup.getChildren().add(lion.getProvisionalTarget().getBody());
+            animalList.get(0).add(lion);
+            animalGroup.get(0).getChildren().add(lion.getBody());
+            smellRangeGroup.get(0).getChildren().add(lion.getSmellRange());
+            statsGroup.get(0).getChildren().add(lion.getStats());
+            targetsGroup.get(0).getChildren().add(lion.getProvisionalTarget().getBody());
+
+
+
+            idsGroup.get(0).getChildren().add(lion.getID());
+
+
         }
     }
 
 	public void deleteAnimal(int i){
-		animalList.remove(i);
-		animalGroup.getChildren().remove(i);
-		smellRangeGroup.getChildren().remove(i);
-		statsGroup.getChildren().remove(i);
-		targetsGroup.getChildren().remove(i);
+		animalList.get(0).remove(i);
+		animalGroup.get(0).getChildren().remove(i);
+		smellRangeGroup.get(0).getChildren().remove(i);
+		statsGroup.get(0).getChildren().remove(i);
+		targetsGroup.get(0).getChildren().remove(i);
+        idsGroup.get(0).getChildren().remove(i);
 
 	}
 
@@ -128,26 +167,76 @@ public class World {
 	}
 
 	public void hideSmellRange(){
-		smellRangeGroup.setVisible(false);
+		for (Group g : smellRangeGroup) {
+			g.setVisible(false);
+		}
 	}
 
 	public void hideTargets(){
-		targetsGroup.setVisible(false);
+		for (Group g : targetsGroup) {
+			g.setVisible(false);
+		}
 	}
 
 	public void hideStats(){
-		statsGroup.setVisible(false);
+		for (Group g : statsGroup) {
+			g.setVisible(false);
+		}
 	}
 
+    public void hideID(){
+        for (Group g : idsGroup) {
+            g.setVisible(false);
+        }
+    }
+
+    public void hideSpecificID(int i){
+            idsGroup.get(i).setVisible(false);
+    }
+
+    public void hideAll(){
+        hideSmellRange();
+        hideTargets();
+        hideStats();
+        hideID();
+    }
+
+    public void showSpecificID(int i){
+        System.out.println("Value:" + i);
+        idsGroup.get(i).setVisible(true);
+
+    }
+
+    public void showID(){
+        for (Group g : idsGroup) {
+            g.setVisible(true);
+        }
+
+    }
+
     public void showSmellRange(){
-        smellRangeGroup.setVisible(true);
+		for (Group g : smellRangeGroup) {
+			g.setVisible(true);
+		}
+
     }
 
     public void showTargets(){
-        targetsGroup.setVisible(true);
+		for (Group g : targetsGroup) {
+			g.setVisible(true);
+		}
     }
 
     public void showStats(){
-        statsGroup.setVisible(true);
+		for (Group g : statsGroup) {
+			g.setVisible(true);
+		}
+    }
+
+    public void showAll(){
+        showID();
+        showSmellRange();
+        showStats();
+        showTargets();
     }
 }

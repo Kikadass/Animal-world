@@ -7,8 +7,14 @@ import javax.swing.JOptionPane;
 
 import javafx.animation.*;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
+import javafx.geometry.Insets;
 import javafx.scene.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -16,11 +22,12 @@ import javafx.util.Duration;
 
 public class NewMenu extends Application {
 
+    String[] animalTypes = {"Lion"};
     static int width = 1280;
     static int height = 720;
-    boolean toggleSmellRange = true;
-    boolean toggleTargets = true;
-    boolean toggleStats = true;
+    boolean toggleSmellRange = false;
+    boolean toggleTargets = false;
+    boolean toggleStats = false;
 	static boolean pause = true;
 	static boolean stop = true;
     static boolean startOver = false;
@@ -100,9 +107,9 @@ public class NewMenu extends Application {
 		MenuItem menu21 = new MenuItem("Display Configuration");
 		MenuItem menu23 = new MenuItem("Info About Life Forms");
 		MenuItem menu24 = new MenuItem("Info About Map");
-        final MenuItem menu25 = new MenuItem("Hide Smell Range");
-        final MenuItem menu26 = new MenuItem("Hide Targets");
-        final MenuItem menu27 = new MenuItem("Hide Stats");
+        final MenuItem menu25 = new MenuItem("Show Smell Range");
+        final MenuItem menu26 = new MenuItem("Show Targets");
+        final MenuItem menu27 = new MenuItem("Show Stats");
 
         menu2.getItems().addAll(menu21, menu23, menu24, menu25, menu26, menu27);
 
@@ -192,10 +199,94 @@ public class NewMenu extends Application {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				for (int i = 0; i < config.getBugs(); i++) {
-					//world.BugList[i].printBug();
-				}
-			}
+
+                GridPane grid = new GridPane();
+                Scene scene = new Scene(grid, 350, 250);
+                final Stage stage = new Stage();
+
+                stage.setTitle("Edit Configuration");
+                stage.setScene(scene);
+                stage.sizeToScene();
+
+                grid.setPadding(new Insets(10, 10, 10, 10));
+                grid.setVgap(5);
+                grid.setHgap(5);
+
+
+
+                //Create a window to choose a type of animal and it's ID
+                final ChoiceBox typeCb  = new ChoiceBox(FXCollections.observableArrayList(
+                        "Choose an animal type",
+                        new Separator()
+                ));
+
+                typeCb.getSelectionModel().selectFirst();
+
+                GridPane.setConstraints(typeCb, 1, 0);
+                grid.getChildren().add(typeCb);
+
+                for (String animalType : animalTypes){
+                    typeCb.getItems().add(animalType);
+                }
+
+
+                final ChoiceBox idCb  = new ChoiceBox(FXCollections.observableArrayList (
+                        "Choose an ID",
+                        new Separator()
+                ));
+                idCb.getSelectionModel().selectFirst();
+
+
+                GridPane.setConstraints(idCb, 1, 1);
+                grid.getChildren().add(idCb);
+
+                idCb.setVisible(false);
+
+                typeCb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                        // action
+                        if (newValue != oldValue){
+                            idCb.getItems().remove(0, idCb.getItems().size());
+                            if (newValue.intValue() >= 2) {
+                                idCb.getItems().addAll(
+                                        "Choose an ID",
+                                        new Separator()
+                                );
+                                idCb.getSelectionModel().selectFirst();
+                            }
+                            else idCb.setVisible(false);
+                        }
+
+
+                        if (newValue.intValue() >= 2) {
+                            int value = newValue.intValue() - 2;
+                            for (Animal animal : world.animalList.get(value)) {
+                                idCb.getItems().add(animal.getID().getText());
+                            }
+                            idCb.setVisible(true);
+
+                            System.out.println(value);
+                            // show that specific animals ID visible
+                            world.showSpecificID(value);
+
+                        }
+                    }
+                });
+
+
+                idCb.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                        // action
+
+                       // show information for that animal
+
+                    }
+                });
+
+                stage.showAndWait();
+            }
 		});
 
 
@@ -319,23 +410,23 @@ public class NewMenu extends Application {
 		return menuBar;
 	}
 
-    public void eat(World world, int i) {
+    public void eat(World world, ArrayList<Animal> animalTypeList, int i) {
         for (int j = 0; j < world.foodList.size(); j++) {
-            if (Collisions.nonEfficientCollide(world.animalList.get(i).getBody(), world.foodList.get(j).getBody())) {
+            if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.foodList.get(j).getBody())) {
                 // if hungry: eat one by one until not hungry or finished
                 // if there is still food, carry what you can depending on strenght
 
-                double amount = world.foodList.get(j).getEnergy() + world.animalList.get(i).getFood();
-                if (amount >= world.animalList.get(i).getMaxFood()) {
-                    world.animalList.get(i).setFood(world.animalList.get(i).getMaxFood());
-                    amount -= world.animalList.get(i).getMaxFood();
+                double amount = world.foodList.get(j).getEnergy() + animalTypeList.get(i).getFood();
+                if (amount >= animalTypeList.get(i).getMaxFood()) {
+                    animalTypeList.get(i).setFood(animalTypeList.get(i).getMaxFood());
+                    amount -= animalTypeList.get(i).getMaxFood();
 
                     // if after eating there is still food left take it or leave it:
                     if (amount > 0) {
-                        double amount2 = amount + world.animalList.get(i).getFoodCarring();
-                        if (amount2 >= world.animalList.get(i).getStrenght()) {
-                            world.animalList.get(i).setFoodCarring(world.animalList.get(i).getStrenght());
-                            amount2 -= world.animalList.get(i).getStrenght();
+                        double amount2 = amount + animalTypeList.get(i).getFoodCarring();
+                        if (amount2 >= animalTypeList.get(i).getStrenght()) {
+                            animalTypeList.get(i).setFoodCarring(animalTypeList.get(i).getStrenght());
+                            amount2 -= animalTypeList.get(i).getStrenght();
 
                             // if not strong enough leave extra food
                             if (amount2 > 0) {
@@ -347,7 +438,7 @@ public class NewMenu extends Application {
                             }
                         }
                         else {
-                            world.animalList.get(i).setFoodCarring(amount2);
+                            animalTypeList.get(i).setFoodCarring(amount2);
                             world.deleteFood(j);
                             j--;
                         }
@@ -358,7 +449,7 @@ public class NewMenu extends Application {
                     }
                 }
                 else {
-                    world.animalList.get(i).setFood(amount);
+                    animalTypeList.get(i).setFood(amount);
                     world.deleteFood(j);
                     j--;
                 }
@@ -369,6 +460,72 @@ public class NewMenu extends Application {
     public double distance(double x1, double y1, double x2, double y2) {
         double distance = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
         return distance;
+    }
+
+    public void animalTypeUpdate(ArrayList<Animal> animalTypeList, World world){
+        for (int i = 0; i < animalTypeList.size(); i++) {
+            animalTypeList.get(i).update();
+
+            // ANIMAL COLISIONS
+            if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), animalTypeList.get(i).getProvisionalTarget().getBody())) {
+                animalTypeList.get(i).getRandomLocalTarget();
+            }
+
+            if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.animalList)) {
+                // reproduce
+            }
+
+            // if it finds an obstacle try to avoid it and find a new target
+            if (Collisions.collideObstacle(animalTypeList.get(i).getBody(), world)) {
+                // choose new target
+                animalTypeList.get(i).getOut();
+                animalTypeList.get(i).getRandomLocalTarget();
+                if (animalTypeList.get(i).getMainTarget().getBody().getCenterX() != 0) {
+                    animalTypeList.get(i).setMainTarget(new Target(0, 0, 2));
+                    collisionCycles = cycle;
+                    tries++;
+                }
+
+            }
+
+            // SMELLING COLLISIONS
+            if (collisionCycles + 50 * tries <= cycle) {
+                if (animalTypeList.get(i).getFoodCarring() < animalTypeList.get(i).getStrenght()) {
+                    if (Collisions.collideFood(animalTypeList.get(i).getSmellRange(), world)) {
+                        // main target: center of that food.
+                        for (int j = 0; j < world.foodList.size(); j++) {
+                            if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
+                                // if food is closer than actual main target --> go to it
+                                if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
+
+                                    int tx;
+                                    int ty;
+                                    int rad;
+
+                                    ty = (int) world.foodList.get(j).getBody().getCenterY();
+
+                                    tx = (int) world.foodList.get(j).getBody().getCenterX();
+                                    rad = (int) world.foodList.get(j).getBody().getRadius();
+
+                                    // create the main target depending on tx and ty
+                                    animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+                                }
+
+                            }
+                        }
+                    }
+                } else if (animalTypeList.get(i).getMainTarget().getBody().getCenterX() != 0) {
+                    animalTypeList.get(i).setMainTarget(new Target(0, 0, 1));
+                }
+            }
+
+
+            if (Collisions.collideFood(animalTypeList.get(i).getBody(), world)) {
+                eat(world, animalTypeList, i);
+                tries = 0;
+            }
+        }
+
     }
 
     public void mainProgram(final Stage stage1, final Configuration config){
@@ -475,73 +632,8 @@ public class NewMenu extends Application {
                             world.setDay(0);
                         }
                     }
-
-                    for (int i = 0; i < world.animalList.size(); i++) {
-                        world.animalList.get(i).update();
-
-                        // ANIMAL COLISIONS
-                        if (Collisions.nonEfficientCollide(world.animalList.get(i).getBody(), world.animalList.get(i).getProvisionalTarget().getBody())){
-                            world.animalList.get(i).getRandomLocalTarget();
-                        }
-
-                        if (Collisions.collideAnimals(world.animalList.get(i).getBody(), world.animalList)){
-                            // reproduce
-                        }
-
-                        // if it finds an obstacle try to avoid it and find a new target
-                        if (Collisions.collideObstacle(world.animalList.get(i).getBody(), world)){
-                            // choose new target
-                            world.animalList.get(i).getOut();
-                            world.animalList.get(i).getRandomLocalTarget();
-                            if (world.animalList.get(i).getMainTarget().getBody().getCenterX() != 0){
-                                world.animalList.get(i).setMainTarget(new Target(0,0 ,2));
-                                collisionCycles =  cycle;
-                                tries++;
-                            }
-
-                        }
-
-                        // SMELLING COLLISIONS
-                        if (collisionCycles+50*tries <= cycle){
-                            if (world.animalList.get(i).getFoodCarring() < world.animalList.get(i).getStrenght()) {
-                                if (Collisions.collideFood(world.animalList.get(i).getSmellRange(), world)) {
-                                    // main target: center of that food.
-                                    for (int j = 0; j < world.foodList.size(); j++) {
-                                        if (Collisions.nonEfficientCollide(world.animalList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
-                                            // if food is closer than actual main target --> go to it
-                                            if (Math.abs(distance(world.animalList.get(i).getPosX(), world.animalList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(world.animalList.get(i).getPosX(), world.animalList.get(i).getPosY(), world.animalList.get(i).getMainTarget().getBody().getCenterX(), world.animalList.get(i).getMainTarget().getBody().getCenterY()))) {
-
-                                                int tx;
-                                                int ty;
-                                                int rad;
-
-                                                ty = (int) world.foodList.get(j).getBody().getCenterY();
-
-                                                tx = (int) world.foodList.get(j).getBody().getCenterX();
-                                                rad = (int)world.foodList.get(j).getBody().getRadius();
-
-                                                // create the main target depending on tx and ty
-                                                world.animalList.get(i).setMainTarget(new Target(tx, ty, rad));
-                                            }
-
-                                        }
-                                    }
-                                }
-                            }
-                            else if (world.animalList.get(i).getMainTarget().getBody().getCenterX() != 0){
-                                world.animalList.get(i).setMainTarget(new Target(0, 0, 1));
-                            }
-                        }
-
-
-                        if (Collisions.collideFood(world.animalList.get(i).getBody(), world)) {
-                            eat(world, i);
-                            tries = 0;
-                        }
-
-
-
-
+                    for (ArrayList<Animal> animalTypeList : world.animalList){
+                        animalTypeUpdate(animalTypeList, world);
                     }
 
                 }

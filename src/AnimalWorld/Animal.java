@@ -3,6 +3,7 @@ package AnimalWorld;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.scene.control.Alert;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -11,7 +12,7 @@ public abstract class Animal{
 	private Circle Body= new Circle(), smellRange = new Circle();
     private Text stats = new Text();
 	private String name;
-	private int ID;
+	private Text ID = new Text();
 	private int energy;
     private double food;
     private double metabolism;
@@ -42,14 +43,13 @@ public abstract class Animal{
 	public Animal(){
 		this.name = new String();
 		this.energy = 0;
-		this.ID = 0;
 	}
 
 	public String getName(){
 		return this.name;
 	}
 	
-	public int getID(){
+	public Text getID(){
 		return this.ID;
 	}
 	
@@ -153,6 +153,14 @@ public abstract class Animal{
         return metabolism;
     }
 
+	public int getPosX(){
+		return (int)(this.Body.getCenterX() + this.Body.getTranslateX());
+	}
+
+	public int getPosY(){
+		return (int)(this.Body.getCenterY() + this.Body.getTranslateY());
+	}
+
     public void setMetabolism(double metabolism) {
         this.metabolism = metabolism;
     }
@@ -195,9 +203,13 @@ public abstract class Animal{
 	}
 	
 	public void setID(int ID){
-		this.ID = ID;
+		String print = "ID: " + ID + "\n";
+
+		this.ID.setText(print);
+		this.ID.setTranslateX(this.getBody().getTranslateX());
+		this.ID.setTranslateY(this.getBody().getTranslateY());
 	}
-	
+
 	public void setEnergy(int energy){
 		this.energy = energy;
 	}
@@ -263,14 +275,6 @@ public abstract class Animal{
 	public void setDy(double dy){
 		this.dy = dy;
 	}
-
-    public int getPosX(){
-        return (int)(this.Body.getCenterX() + this.Body.getTranslateX());
-    }
-
-    public int getPosY(){
-        return (int)(this.Body.getCenterY() + this.Body.getTranslateY());
-    }
 
     public void setProvisionalTarget(Target provisionalTarget) {
         this.provisionalTarget = provisionalTarget;
@@ -352,6 +356,26 @@ public abstract class Animal{
         if (this.lastAngle >= 360) this.lastAngle -= 360;
 
     }
+
+	public void displayAnimal(){
+		String print;
+
+		print = "Name: " + this.name + "\n" +
+				"ID: " + this.ID + "\n" +
+				"Size: " + this.getBody().getRadius() + "\n" +
+				"Smell Range: " + this.smellRange.getRadius() + "\n" +
+				"Max Energy: " + this.maxEnergy + "\n" +
+				"Max Food: " + this.maxFood + "\n" +
+				"Metabolism: " + this.metabolism + "\n" +
+				"Strength: " + this.strenght + "\n" +
+				"Angle of movement: " + this.angleRange + "\n" +
+				"Speed: " + this.speed ;
+
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Configuration loaded:");
+		alert.setContentText(print);
+		alert.showAndWait();
+	}
 
 	public void updateTarget(){
         double x1 = this.mainTarget.getBody().getCenterX();
@@ -439,6 +463,8 @@ public abstract class Animal{
 		this.Body.setTranslateY(this.Body.getTranslateY() + this.dy);
 		this.smellRange.setTranslateX(this.Body.getTranslateX());
 		this.smellRange.setTranslateY(this.Body.getTranslateY());
+		this.ID.setTranslateX(this.Body.getTranslateX());
+		this.ID.setTranslateY(this.Body.getTranslateY());
 
         this.updateFood();
         this.setEnergy(this.getEnergy()-1);

@@ -53,6 +53,11 @@ public class Lion extends Predator {
         this.getStats().setFont(new Font(10));
         this.getStats().setX(this.getBody().getCenterX());
         this.getStats().setY(this.getBody().getCenterY());
+
+        this.getID().setFont(new Font(10));
+        this.getID().setX(this.getBody().getCenterX());
+        this.getID().setY(this.getBody().getCenterY());
+
         this.setStats();
 
 		this.getBody().setFill(Color.YELLOW);
@@ -63,4 +68,8 @@ public class Lion extends Predator {
 	public void addCounter(){
 		counter++;
 	}
+
+
+
+	public static void restartCounter(){counter = 0;}
 }

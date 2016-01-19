@@ -48,12 +48,15 @@ public class Collisions {
 		return false;
 	}
 	
-	public static boolean collideAnimals(Circle c1, ArrayList<Animal> circles){
-		// check collision against other bugs	
-		for (int i = 0; i < circles.size(); i++){
-			if (Collisions.efficientCollide(c1, circles.get(i).getBody())){
-				if (Collisions.nonEfficientCollide(c1, circles.get(i).getBody())){
-					return true;
+	public static boolean collideAnimals(Circle c1, ArrayList<ArrayList<Animal>> circles){
+		// check collision against other bugs
+
+		for (ArrayList<Animal> a : circles){
+			for (int i = 0; i < a.size(); i++){
+				if (Collisions.efficientCollide(c1, a.get(i).getBody())){
+					if (Collisions.nonEfficientCollide(c1, a.get(i).getBody())){
+						return true;
+					}
 				}
 			}
 		}

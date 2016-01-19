@@ -426,7 +426,6 @@ public class Configuration implements Serializable{
         alert.setContentText(print);
         alert.showAndWait();
 
-        //JOptionPane.showMessageDialog(null, print);
 	}
 	
 	public void displayMap(){
