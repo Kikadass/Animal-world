@@ -26,9 +26,9 @@ public class Collisions {
 	}
 	
 	public static boolean collideObstacle(Circle c1, World world){
-		for (int i = 0; i < world.obstacleList.size(); i++){
-			if (Collisions.efficientCollide(c1, world.obstacleList.get(i).getBody())){
-				if (Collisions.nonEfficientCollide(c1, world.obstacleList.get(i).getBody())){
+		for (int i = 0; i < world.getObstacleList().size(); i++){
+			if (Collisions.efficientCollide(c1, world.getObstacleList().get(i).getBody())){
+				if (Collisions.nonEfficientCollide(c1, world.getObstacleList().get(i).getBody())){
 					return true;
 				}
 			}
@@ -37,9 +37,9 @@ public class Collisions {
 	}
 	
 	public static boolean collideFood(Circle c1, World world){
-		for (int i = 0; i < world.foodList.size(); i++){
-				if (Collisions.efficientCollide(c1, world.foodList.get(i).getBody())){
-					if (Collisions.nonEfficientCollide(c1, world.foodList.get(i).getBody())){
+		for (int i = 0; i < world.getFoodList().size(); i++){
+				if (Collisions.efficientCollide(c1, world.getFoodList().get(i).getBody())){
+					if (Collisions.nonEfficientCollide(c1, world.getFoodList().get(i).getBody())){
 						return true;
 					}
 				}
@@ -64,9 +64,9 @@ public class Collisions {
 	}
 
 	public static boolean collideHabitatsArea(Circle c1, World world){
-		for (int i = 0; i < world.habitatsList.size(); i++){
-			if (Collisions.efficientCollide(c1, world.habitatsList.get(i).getArea())){
-				if (Collisions.nonEfficientCollide(c1, world.habitatsList.get(i).getArea())){
+		for (int i = 0; i < world.getHabitatsList().size(); i++){
+			if (Collisions.efficientCollide(c1, world.getHabitatsList().get(i).getArea())){
+				if (Collisions.nonEfficientCollide(c1, world.getHabitatsList().get(i).getArea())){
 					return true;
 				}
 			}
@@ -76,11 +76,11 @@ public class Collisions {
 	}
 
 	public static boolean collideHabitats(Animal animal, World world, int hab){
-		for (int i = 0; i < world.habitatsList.size(); i++){
+		for (int i = 0; i < world.getHabitatsList().size(); i++){
 			//if the animal's house is this habitat, than see if he is colliding
-			if (animal.getHouseTarget().getBody().getCenterX() == world.habitatsList.get(i).getBody().getCenterX() && animal.getHouseTarget().getBody().getCenterY() == world.habitatsList.get(i).getBody().getCenterY()) {
-				if (Collisions.efficientCollide(animal.getBody(), world.habitatsList.get(i).getBody())) {
-					if (Collisions.nonEfficientCollide(animal.getBody(), world.habitatsList.get(i).getBody())) {
+			if (animal.getHouseTarget().getBody().getCenterX() == world.getHabitatsList().get(i).getBody().getCenterX() && animal.getHouseTarget().getBody().getCenterY() == world.getHabitatsList().get(i).getBody().getCenterY()) {
+				if (Collisions.efficientCollide(animal.getBody(), world.getHabitatsList().get(i).getBody())) {
+					if (Collisions.nonEfficientCollide(animal.getBody(), world.getHabitatsList().get(i).getBody())) {
 						hab = i;
 						return true;
 					}

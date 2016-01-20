@@ -14,10 +14,10 @@ public class World {
     private ArrayList<Group> smellRangeGroup = new  ArrayList<Group>();
     private ArrayList<Group> statsGroup = new  ArrayList<Group>();
     private ArrayList<Group> idsGroup = new  ArrayList<Group>();
-    ArrayList<Food> foodList = new ArrayList<Food>();
-    ArrayList<Habitat> habitatsList = new ArrayList<Habitat>();
-    ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
-	ArrayList<ArrayList<Animal>> animalList = new ArrayList<ArrayList<Animal>>();
+    private ArrayList<Food> foodList = new ArrayList<Food>();
+    private ArrayList<Habitat> habitatsList = new ArrayList<Habitat>();
+    private ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
+    private ArrayList<ArrayList<Animal>> animalList = new ArrayList<ArrayList<Animal>>();
 	private int width;
 	private int height;
 	private int day;
@@ -246,7 +246,27 @@ public class World {
 		return year;
 	}
 
-	public void setYear(int year) {
+    public ArrayList<ArrayList<Animal>> getAnimalList() {
+        return animalList;
+    }
+
+    public ArrayList<Obstacle> getObstacleList() {
+        return obstacleList;
+    }
+
+    public ArrayList<Habitat> getHabitatsList() {
+        return habitatsList;
+    }
+
+    public ArrayList<Food> getFoodList() {
+        return foodList;
+    }
+
+    public void setAnimalList(ArrayList<ArrayList<Animal>> animalList) {
+        this.animalList = animalList;
+    }
+
+    public void setYear(int year) {
 		this.year = year;
 	}
 
@@ -332,5 +352,38 @@ public class World {
         showSmellRange();
         showStats();
         showTargets();
+    }
+
+    public void deleteAll(){
+        for (int i = 0; i < getAnimalList().size(); i++){
+            while (0 < animalList.get(i).size()) {
+                this.removeAnimal(i, 0);
+            }
+        }
+
+        while (0 < foodGroup.getChildren().size()){
+            foodGroup.getChildren().remove(0);
+        }
+
+        while (0 < habitatsGroup.getChildren().size()){
+            habitatsGroup.getChildren().remove(0);
+        }
+
+        while (0 < obstacleGroup.get(0).getChildren().size()){
+            obstacleGroup.get(0).getChildren().remove(0);
+        }
+
+
+        while (0 < foodList.size()){
+            foodList.remove(0);
+        }
+
+
+        while (0 < habitatsList.size()){
+            habitatsList.remove(0);
+        }
+        while (0 < obstacleList.size()){
+            obstacleList.remove(0);
+        }
     }
 }

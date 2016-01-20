@@ -59,6 +59,37 @@ public class NewMenu extends Application {
         stop = true;
     }
 
+    public void clear(World world, Stage stage1, Configuration config){
+        if (startOver) {
+            //clear(world);
+            world.deleteAll();
+            System.out.println(config.getZebras());
+            stage1.hide();
+            startOver = false;
+            mainProgram(stage1, config);
+        }
+
+        /*//world.setAnimalList(null);
+       // int i = world.getAnimalList().get(0).size();
+        for (int i = 0; i < world.getAnimalList().size(); i++){
+            while ( 0 < world.getAnimalList().get(i).size()){
+                System.out.println(world.getAnimalList().get(i).size());
+                world.removeAnimal(i,0);
+                i--;
+            }
+        }
+
+        for (int i = 0; i < world.getAnimalList().size(); i++){
+            for (int j = 0; j < world.getAnimalList().get(i).size(); j++) {
+                System.out.println("                                                                       " + world.getAnimalList().get(i).size());
+                world.removeAnimal(i, j);
+                j--;
+            }
+            //i--;
+        }
+*/
+    }
+
     public void addLifeForm(final World world, final Configuration config){
         GridPane grid = new GridPane();
         Scene scene = new Scene(grid, 250, 100);
@@ -223,7 +254,7 @@ public class NewMenu extends Application {
 
 
         //Defining the remove button
-        Button remove = new Button("Remove");
+        final Button remove = new Button("Remove");
         remove.alignmentProperty();
         GridPane.setHalignment(remove, HPos.CENTER);
         GridPane.setConstraints(remove, 2, 3);
@@ -261,7 +292,7 @@ public class NewMenu extends Application {
                 }
 
                 if (newValue.intValue() >= 2) {
-                    for (Animal animal : world.animalList.get(value)) {
+                    for (Animal animal : world.getAnimalList().get(value)) {
                         idCb.getItems().add(animal.getID().getText());
                     }
                     idCb.setVisible(true);
@@ -284,7 +315,7 @@ public class NewMenu extends Application {
                 int value = typeCb.getSelectionModel().getSelectedIndex()-2;
                 if (value >= 0 && value2 >= 0) {
                     // show information for that animal
-                    world.animalList.get(value).get(value2).displayAnimal();
+                    world.getAnimalList().get(value).get(value2).displayAnimal();
                 }
                 else label.setText("Please choose an animal type and an ID");
             }
@@ -300,7 +331,7 @@ public class NewMenu extends Application {
                 int value2 = idCb.getSelectionModel().getSelectedIndex() -2;
                 int value = typeCb.getSelectionModel().getSelectedIndex()-2;
                 if (value >= 0 && value2 >= 0) {
-                    world.animalList.get(value).get(value2).modifyAnimal();
+                    world.getAnimalList().get(value).get(value2).modifyAnimal();
                 }
             }
         });
@@ -328,8 +359,10 @@ public class NewMenu extends Application {
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
                         world.removeAnimal(value, value2);
+                        world.deleteAll();
+
                         if (value == 0) config.setLions(config.getLions() - 1);
-                        if (value == 0) config.setZebras(config.getZebras() - 1);
+                        if (value == 1) config.setZebras(config.getZebras() - 1);
 
                         idCb.getItems().remove(0, idCb.getItems().size());
                         idCb.getItems().addAll(
@@ -339,7 +372,7 @@ public class NewMenu extends Application {
                         idCb.getSelectionModel().selectFirst();
 
 
-                        for (Animal animal : world.animalList.get(value)) {
+                        for (Animal animal : world.getAnimalList().get(value)) {
                             idCb.getItems().add(animal.getID().getText());
                         }
 
@@ -397,7 +430,7 @@ public class NewMenu extends Application {
         alert.showAndWait();
     }
 
-	public MenuBar CreateMenuBar(final World world, final Configuration config) {
+	public MenuBar CreateMenuBar(final World world, final Stage stage1, final Configuration config) {
 
 		MenuBar menuBar = new MenuBar();
 
@@ -454,6 +487,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.NewConfiguration2();
+                clear(world, stage1, config);
 			}
 		});
 
@@ -464,6 +498,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.OpenConfigurationFile2();
+                clear(world, stage1, config);
 			}
 		});
 
@@ -473,6 +508,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.Save();
+
             }
 		});
 
@@ -622,6 +658,7 @@ public class NewMenu extends Application {
 			@Override
 			public void handle(ActionEvent arg0) {
 				config.EditConfig2();
+                clear(world, stage1, config);
 			}
 		});
 
@@ -653,21 +690,21 @@ public class NewMenu extends Application {
 	}
 
     public void eat(World world, ArrayList<Animal> animalTypeList, int i) {
-        for (int j = 0; j < world.foodList.size(); j++) {
-            if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.foodList.get(j).getBody())) {
+        for (int j = 0; j < world.getFoodList().size(); j++) {
+            if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.getFoodList().get(j).getBody())) {
                 for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
                     if (j < 0) break;
-                    if (world.foodList.get(j).getType().equals(foodPreference)) {
+                    if (world.getFoodList().get(j).getType().equals(foodPreference)) {
                         // if hungry: eat one by one until not hungry or finished
                         // if there is still food, carry what you can depending on strenght
 
-                        double amount = world.foodList.get(j).getEnergy() + animalTypeList.get(i).getFood();
+                        double amount = world.getFoodList().get(j).getEnergy() + animalTypeList.get(i).getFood();
                         if (amount >= animalTypeList.get(i).getMaxFood()) {
                             animalTypeList.get(i).setFood(animalTypeList.get(i).getMaxFood());
                             amount -= animalTypeList.get(i).getMaxFood();
 
                             //if food is poisoned metabolism is doubled and speed halfed
-                            if (world.foodList.get(j).isPoisonous()){
+                            if (world.getFoodList().get(j).isPoisonous()){
                                 animalTypeList.get(i).setPoisoned(true);
                             }
 
@@ -680,34 +717,34 @@ public class NewMenu extends Application {
 
                                     // if not strong enough leave extra food
                                     if (amount2 > 0) {
-                                        world.foodList.get(j).setEnergy(amount2);
+                                        world.getFoodList().get(j).setEnergy(amount2);
                                     } else {
-                                        if (!world.foodList.get(j).getType().equals("Grass")) {
+                                        if (!world.getFoodList().get(j).getType().equals("Grass")) {
                                             world.deleteFood(j);
                                             j--;
-                                        } else world.foodList.get(j).setEnergy(0);
+                                        } else world.getFoodList().get(j).setEnergy(0);
                                     }
                                 } else {
                                     animalTypeList.get(i).setFoodCarring(amount2);
-                                    if (!world.foodList.get(j).getType().equals("Grass")) {
+                                    if (!world.getFoodList().get(j).getType().equals("Grass")) {
                                         world.deleteFood(j);
                                         j--;
-                                    } else world.foodList.get(j).setEnergy(0);
+                                    } else world.getFoodList().get(j).setEnergy(0);
 
                                 }
                             } else {
-                                if (!world.foodList.get(j).getType().equals("Grass")) {
+                                if (!world.getFoodList().get(j).getType().equals("Grass")) {
                                     world.deleteFood(j);
                                     j--;
-                                } else world.foodList.get(j).setEnergy(0);
+                                } else world.getFoodList().get(j).setEnergy(0);
 
                             }
                         } else {
                             animalTypeList.get(i).setFood(amount);
-                            if (!world.foodList.get(j).getType().equals("Grass")) {
+                            if (!world.getFoodList().get(j).getType().equals("Grass")) {
                                 world.deleteFood(j);
                                 j--;
-                            } else world.foodList.get(j).setEnergy(0);
+                            } else world.getFoodList().get(j).setEnergy(0);
                         }
                     }
                 }
@@ -721,9 +758,12 @@ public class NewMenu extends Application {
     }
 
     public void animalTypeUpdate(int type, World world){
-        ArrayList<Animal> animalTypeList = world.animalList.get(type);
+        ArrayList<Animal> animalTypeList = world.getAnimalList().get(type);
+
 
         for (int i = 0; i < animalTypeList.size(); i++) {
+            System.out.println("                                 " + world.getAnimalList().get(type).size());
+
             //if animal is not in the habitat
             if (animalTypeList.get(i).getBody().isVisible()) {
 
@@ -757,7 +797,7 @@ public class NewMenu extends Application {
                 }
 
                 // Body collisions between animals
-                if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.animalList)) {
+                if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.getAnimalList())) {
                     // reproduce
                 }
 
@@ -787,7 +827,7 @@ public class NewMenu extends Application {
                     int hab = 0;
                     if (Collisions.collideHabitats(animalTypeList.get(i), world, hab)) {
                         //add animal into habitat's list
-                        world.habitatsList.get(hab).addAnimal(animalTypeList.get(i));
+                        world.getHabitatsList().get(hab).addAnimal(animalTypeList.get(i));
                         animalTypeList.get(i).getBody().setVisible(false);
                         animalTypeList.get(i).getBody().isVisible();
                         animalTypeList.get(i).clearMainTarget();
@@ -805,27 +845,27 @@ public class NewMenu extends Application {
                         if (animalTypeList.get(i).getFoodCarring() < animalTypeList.get(i).getStrenght()) {
                             // SMELL
                             if (Collisions.collideFood(animalTypeList.get(i).getSmellRange(), world)) {
-                                for (int j = 0; j < world.foodList.size(); j++) {
+                                for (int j = 0; j < world.getFoodList().size(); j++) {
                                     for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
                                         // if this type of animal eats that type food
-                                        if (world.foodList.get(j).getType().equals(foodPreference)) {
+                                        if (world.getFoodList().get(j).getType().equals(foodPreference)) {
                                             // if energy is > than the minimum acceptable for the animal, than eat
-                                            if (world.foodList.get(j).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
-                                                if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
+                                            if (world.getFoodList().get(j).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
+                                                if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.getFoodList().get(j).getBody())) {
 
 
                                                     // if food is closer than actual main target --> go to it
-                                                    if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
+                                                    if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.getFoodList().get(j).getBody().getCenterX(), world.getFoodList().get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
                                                         // main target: center of that food.
 
                                                         int tx;
                                                         int ty;
                                                         int rad;
 
-                                                        ty = (int) world.foodList.get(j).getBody().getCenterY();
+                                                        ty = (int) world.getFoodList().get(j).getBody().getCenterY();
 
-                                                        tx = (int) world.foodList.get(j).getBody().getCenterX();
-                                                        rad = (int) world.foodList.get(j).getBody().getRadius();
+                                                        tx = (int) world.getFoodList().get(j).getBody().getCenterX();
+                                                        rad = (int) world.getFoodList().get(j).getBody().getRadius();
 
                                                         // create the main target depending on tx and ty
                                                         animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
@@ -846,15 +886,15 @@ public class NewMenu extends Application {
                         System.out.println("SMELLLLIIIINGGGGGGGGGGGGGGGGGGGGGGG");
                         //smelling the habitats area
                         if (Collisions.collideHabitatsArea(animalTypeList.get(i).getSmellRange(), world)) {
-                            for (int j = 0; j < world.habitatsList.size(); j++) {
+                            for (int j = 0; j < world.getHabitatsList().size(); j++) {
                                 //if habitat has not been set in the animal
                                 if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
                                     // if the habitat's species has not been set or is the same as the animal
-                                    if (world.habitatsList.get(j).getSpecie() == -1 || world.habitatsList.get(j).getSpecie() == type) {
-                                        if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.habitatsList.get(j).getArea())) {
+                                    if (world.getHabitatsList().get(j).getSpecie() == -1 || world.getHabitatsList().get(j).getSpecie() == type) {
+                                        if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.getHabitatsList().get(j).getArea())) {
                                             // if habitat has no specie specified set it
-                                            if (world.habitatsList.get(j).getSpecie() == -1) {
-                                                world.habitatsList.get(j).setSpecie(type);
+                                            if (world.getHabitatsList().get(j).getSpecie() == -1) {
+                                                world.getHabitatsList().get(j).setSpecie(type);
                                             }
 
                                             // house target: center of that Habitat.
@@ -862,10 +902,10 @@ public class NewMenu extends Application {
                                             int ty;
                                             int rad;
 
-                                            ty = (int) world.habitatsList.get(j).getBody().getCenterY();
+                                            ty = (int) world.getHabitatsList().get(j).getBody().getCenterY();
 
-                                            tx = (int) world.habitatsList.get(j).getBody().getCenterX();
-                                            rad = (int) world.habitatsList.get(j).getBody().getRadius();
+                                            tx = (int) world.getHabitatsList().get(j).getBody().getCenterX();
+                                            rad = (int) world.getHabitatsList().get(j).getBody().getRadius();
 
                                             // create the main target depending on tx and ty
                                             animalTypeList.get(i).setHouseTarget(new Target(tx, ty, rad));
@@ -892,14 +932,14 @@ public class NewMenu extends Application {
         final Group root = new Group();
         final World world = new World(root, config, animalTypes.length, foodTypes.length);
         final Scene scene = new Scene(root, config.getWidth(), config.getHeight());
-
+        stage1.setResizable(false);
 
         final Rectangle rectangle = new Rectangle(0, height - 50, width, 50);
         root.getChildren().add(rectangle);
 
         //Menu
         MenuBar menuBar1 = new MenuBar();
-        menuBar1 = CreateMenuBar(world, config);
+        menuBar1 = CreateMenuBar(world, stage1, config);
         menuBar1.setMinWidth(width);
         final MenuBar menuBar = menuBar1;
 
@@ -937,8 +977,10 @@ public class NewMenu extends Application {
                     stopBtn.setText("STOP");
                     stop = false;
                     pause = false;
+
                 } else {
                     setStartOver();
+                    clear(world, stage1, config);
                     pauseBtn.setVisible(false);
                     stopBtn.setText("START");
 
@@ -988,25 +1030,28 @@ public class NewMenu extends Application {
                             world.setDay(0);
                         }
                     }
-                    for (int i = 0; i < world.animalList.size(); i++){
+                    for (int i = 0; i < world.getAnimalList().size(); i++){
                         animalTypeUpdate(i, world);
                     }
 
-                    for (int i = 0; i < world.foodList.size(); i++){
-                        world.foodList.get(i).update();
+                    for (int i = 0; i < world.getFoodList().size(); i++){
+                        world.getFoodList().get(i).update();
                     }
 
-                    for (int i = 0; i < world.habitatsList.size(); i++){
-                        world.habitatsList.get(i).update();
+                    for (int i = 0; i < world.getHabitatsList().size(); i++){
+                        world.getHabitatsList().get(i).update();
                     }
 
                 }
-                if (startOver){
-                    stage1.close();
+                /*if (startOver){
+                    world.deleteAll();
+                    clear(world);
+                    System.out.println(config.getZebras());
+                    stage1.hide();
                     startOver = false;
-
+                    stopBtn.setVisible(false);
                     mainProgram(stage1, config);
-                }
+                }*/
                 if (exit){
                     stage1.close();
                 }
@@ -1016,6 +1061,7 @@ public class NewMenu extends Application {
         });
 
         TimelineBuilder.create().cycleCount(javafx.animation.Animation.INDEFINITE).keyFrames(frame).build().play();
+        TimelineBuilder.create().cycleCount(javafx.animation.Animation.INDEFINITE).keyFrames(frame).build().stop();
 
         stage1.setTitle("Animal World");
         stage1.setScene(scene);
