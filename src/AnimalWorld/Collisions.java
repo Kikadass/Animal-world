@@ -36,10 +36,11 @@ public class Collisions {
 		return false;
 	}
 	
-	public static boolean collideFood(Circle c1, World world){
+	public static boolean collideFood(Circle c1, World world, int food){
 		for (int i = 0; i < world.getFoodList().size(); i++){
 				if (Collisions.efficientCollide(c1, world.getFoodList().get(i).getBody())){
 					if (Collisions.nonEfficientCollide(c1, world.getFoodList().get(i).getBody())){
+                        food = i;
 						return true;
 					}
 				}
@@ -48,13 +49,14 @@ public class Collisions {
 		return false;
 	}
 	
-	public static boolean collideAnimals(Circle c1, ArrayList<ArrayList<Animal>> circles){
+	public static boolean collideAnimals(Circle c1, ArrayList<ArrayList<Animal>> circles, int animal){
 		// check collision against other bugs
 
 		for (ArrayList<Animal> a : circles){
 			for (int i = 0; i < a.size(); i++){
 				if (Collisions.efficientCollide(c1, a.get(i).getBody())){
 					if (Collisions.nonEfficientCollide(c1, a.get(i).getBody())){
+                        animal = i;
 						return true;
 					}
 				}
@@ -63,10 +65,11 @@ public class Collisions {
 		return false;
 	}
 
-	public static boolean collideHabitatsArea(Circle c1, World world){
+	public static boolean collideHabitatsArea(Circle c1, World world, int hab){
 		for (int i = 0; i < world.getHabitatsList().size(); i++){
 			if (Collisions.efficientCollide(c1, world.getHabitatsList().get(i).getArea())){
 				if (Collisions.nonEfficientCollide(c1, world.getHabitatsList().get(i).getArea())){
+                    hab = i;
 					return true;
 				}
 			}

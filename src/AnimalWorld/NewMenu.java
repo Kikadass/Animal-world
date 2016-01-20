@@ -762,17 +762,13 @@ public class NewMenu extends Application {
 
 
         for (int i = 0; i < animalTypeList.size(); i++) {
-            System.out.println("                                 " + world.getAnimalList().get(type).size());
-
             //if animal is not in the habitat
             if (animalTypeList.get(i).getBody().isVisible()) {
 
                 if (animalTypeList.get(i).getCollisionCycles() + 50 * animalTypeList.get(i).getTries() < cycle) {
-                    System.out.println(cycle + " " + (animalTypeList.get(i).getCollisionCycles() + 100 * animalTypeList.get(i).getTries() <= cycle) + " " + animalTypeList.get(i).getID().getText());
                     animalTypeList.get(i).updateMainTarget();
                 }
                 else {
-                    System.out.println(cycle + " " + animalTypeList.get(i).getID().getText());
                     animalTypeList.get(i).clearMainTarget();
                 }
 
@@ -797,13 +793,13 @@ public class NewMenu extends Application {
                 }
 
                 // Body collisions between animals
-                if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.getAnimalList())) {
+                int animal = 0;
+                if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.getAnimalList(), animal)) {
                     // reproduce
                 }
 
                 // if Body collides an obstacle try to avoid it and find a new target
                 if (Collisions.collideObstacle(animalTypeList.get(i).getBody(), world)) {
-                    System.out.println(cycle + " COLLIDING" + animalTypeList.get(i).getID().getText());
                     // choose new target
                     animalTypeList.get(i).getOut();
                     animalTypeList.get(i).getRandomLocalTarget();
@@ -817,7 +813,7 @@ public class NewMenu extends Application {
                 }
 
                 //body collides with food
-                if (Collisions.collideFood(animalTypeList.get(i).getBody(), world)) {
+                if (Collisions.collideFood(animalTypeList.get(i).getBody(), world, 0)) {
                     eat(world, animalTypeList, i);
                 }
 
@@ -844,37 +840,34 @@ public class NewMenu extends Application {
                         //if foodCarring is full don't smell
                         if (animalTypeList.get(i).getFoodCarring() < animalTypeList.get(i).getStrenght()) {
                             // SMELL
-                            if (Collisions.collideFood(animalTypeList.get(i).getSmellRange(), world)) {
-                                for (int j = 0; j < world.getFoodList().size(); j++) {
-                                    for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
-                                        // if this type of animal eats that type food
-                                        if (world.getFoodList().get(j).getType().equals(foodPreference)) {
-                                            // if energy is > than the minimum acceptable for the animal, than eat
-                                            if (world.getFoodList().get(j).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
-                                                if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.getFoodList().get(j).getBody())) {
+                            int food = 0;
+                            if (Collisions.collideFood(animalTypeList.get(i).getSmellRange(), world, food)) {
+                                for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
+                                    // if this type of animal eats that type food
+                                    if (world.getFoodList().get(food).getType().equals(foodPreference)) {
+                                        // if energy is > than the minimum acceptable for the animal, than eat
+                                        if (world.getFoodList().get(food).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
 
+                                            // if food is closer than actual main target --> go to it
+                                            if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.getFoodList().get(food).getBody().getCenterX(), world.getFoodList().get(food).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
+                                                // main target: center of that food.
 
-                                                    // if food is closer than actual main target --> go to it
-                                                    if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.getFoodList().get(j).getBody().getCenterX(), world.getFoodList().get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
-                                                        // main target: center of that food.
+                                                int tx;
+                                                int ty;
+                                                int rad;
 
-                                                        int tx;
-                                                        int ty;
-                                                        int rad;
+                                                ty = (int) world.getFoodList().get(food).getBody().getCenterY();
 
-                                                        ty = (int) world.getFoodList().get(j).getBody().getCenterY();
+                                                tx = (int) world.getFoodList().get(food).getBody().getCenterX();
+                                                rad = (int) world.getFoodList().get(food).getBody().getRadius();
 
-                                                        tx = (int) world.getFoodList().get(j).getBody().getCenterX();
-                                                        rad = (int) world.getFoodList().get(j).getBody().getRadius();
+                                                // create the main target depending on tx and ty
+                                                animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
 
-                                                        // create the main target depending on tx and ty
-                                                        animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
-                                                    }
-
-                                                }
                                             }
                                         }
                                     }
+
                                 }
                             }
                         }
@@ -883,35 +876,31 @@ public class NewMenu extends Application {
 
                     //if animal has no habitat, smell
                     if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
-                        System.out.println("SMELLLLIIIINGGGGGGGGGGGGGGGGGGGGGGG");
+                        System.out.println("SMELLING");
                         //smelling the habitats area
-                        if (Collisions.collideHabitatsArea(animalTypeList.get(i).getSmellRange(), world)) {
-                            for (int j = 0; j < world.getHabitatsList().size(); j++) {
-                                //if habitat has not been set in the animal
-                                if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
-                                    // if the habitat's species has not been set or is the same as the animal
-                                    if (world.getHabitatsList().get(j).getSpecie() == -1 || world.getHabitatsList().get(j).getSpecie() == type) {
-                                        if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.getHabitatsList().get(j).getArea())) {
-                                            // if habitat has no specie specified set it
-                                            if (world.getHabitatsList().get(j).getSpecie() == -1) {
-                                                world.getHabitatsList().get(j).setSpecie(type);
-                                            }
-
-                                            // house target: center of that Habitat.
-                                            int tx;
-                                            int ty;
-                                            int rad;
-
-                                            ty = (int) world.getHabitatsList().get(j).getBody().getCenterY();
-
-                                            tx = (int) world.getHabitatsList().get(j).getBody().getCenterX();
-                                            rad = (int) world.getHabitatsList().get(j).getBody().getRadius();
-
-                                            // create the main target depending on tx and ty
-                                            animalTypeList.get(i).setHouseTarget(new Target(tx, ty, rad));
-                                        }
-
+                        int hab = 0;
+                        if (Collisions.collideHabitatsArea(animalTypeList.get(i).getSmellRange(), world, hab)) {
+                            //if habitat has not been set in the animal
+                            if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
+                                // if the habitat's species has not been set or is the same as the animal
+                                if (world.getHabitatsList().get(hab).getSpecie() == -1 || world.getHabitatsList().get(hab).getSpecie() == type) {
+                                    // if habitat has no specie specified set it
+                                    if (world.getHabitatsList().get(hab).getSpecie() == -1) {
+                                        world.getHabitatsList().get(hab).setSpecie(type);
                                     }
+
+                                    // house target: center of that Habitat.
+                                    int tx;
+                                    int ty;
+                                    int rad;
+
+                                    ty = (int) world.getHabitatsList().get(hab).getBody().getCenterY();
+
+                                    tx = (int) world.getHabitatsList().get(hab).getBody().getCenterX();
+                                    rad = (int) world.getHabitatsList().get(hab).getBody().getRadius();
+
+                                    // create the main target depending on tx and ty
+                                    animalTypeList.get(i).setHouseTarget(new Target(tx, ty, rad));
                                 }
                             }
                         }

@@ -34,7 +34,7 @@ public class Habitat {
 			tries++;
 			this.getArea().setCenterX(rnd.nextInt(world.getWidth() - (int) this.getArea().getRadius()*2) + this.getArea().getRadius());
 			this.getArea().setCenterY(rnd.nextInt(world.getHeight() - (int)this.getArea().getRadius()*2 - 80) + this.getArea().getRadius() + 30);
-		}while((Collisions.collideObstacle(getArea(), world) || Collisions.collideAnimals(getArea(), world.getAnimalList()) || Collisions.collideFood(getArea(), world) || Collisions.collideHabitatsArea(getArea(), world)) && tries <= 100);
+		}while((Collisions.collideObstacle(getArea(), world) || Collisions.collideAnimals(getArea(), world.getAnimalList(), 0) || Collisions.collideFood(getArea(), world, 0) || Collisions.collideHabitatsArea(getArea(), world, 0)) && tries <= 100);
 		if (tries >= 100) {
 			this.body.setRadius(0);
 			System.out.println("No space to add another Habitat");
@@ -97,7 +97,26 @@ public class Habitat {
 
     public void addAnimal(Animal animal){
         this.animalList.add(animal);
+        //eat
+        if (animal.getFood() + this.Food < animal.getMaxFood()){
+            this.Food = 0;
+            animal.setFood(animal.getFood() + this.Food);
+        }
+        else {
+            this.Food = (int)(this.Food - animal.getMaxFood() - animal.getFood());
+            animal.setFood(animal.getMaxFood());
+        }
+
         //put food that he is carrying into the habitat
+        if (this.Food + (int) animal.getFoodCarring() >= this.maxFood){
+            animal.setFoodCarring(this.Food + (int) animal.getFoodCarring() - this.maxFood);
+            this.Food = this.maxFood;
+        }
+        else {
+            this.Food += (int) animal.getFoodCarring();
+            animal.setFoodCarring(0);
+        }
+
     }
 
     public void update(){

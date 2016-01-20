@@ -448,6 +448,12 @@ public abstract class Animal{
         this.mainTarget = mainTarget;
     }
 
+    public void setMainTarget(double x, double y, double rad) {
+        this.mainTarget.getBody().setCenterX(x);
+        this.mainTarget.getBody().setCenterY(y);
+        this.mainTarget.getBody().setRadius(rad);
+    }
+
     public void clearMainTarget() {
         this.mainTarget.getBody().setCenterX(0);
         this.mainTarget.getBody().setCenterY(0);
@@ -643,7 +649,7 @@ public abstract class Animal{
                         this.setMainTarget(this.houseTarget);
                     }
                 }
-                else this.setMainTarget(this.houseTarget);
+                else this.setMainTarget(this.houseTarget.getBody().getCenterX(), this.houseTarget.getBody().getCenterY(), this.houseTarget.getBody().getRadius());
             }
         }
     }
@@ -732,9 +738,6 @@ public abstract class Animal{
                 detect position of detection
                 set its position as provisional target
 		*/
-
-        System.out.println(this.getMainTarget().getBody().getCenterX());
-
 
         this.updateTarget();
 
