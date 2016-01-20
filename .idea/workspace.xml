@@ -2,35 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f36b9717-ceb3-4d3e-a9b6-eb842308fbbd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Animal.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Animal.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Configuration.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Configuration.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Food.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Food.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Lion.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Lion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$1.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$10.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$11.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$12.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$13.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$14.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$14.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$2.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$3.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$4.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$5.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$6.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$7.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$8.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$9.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu$9.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/NewMenu.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/World.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/World.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/defConfiguration.ser" afterPath="$PROJECT_DIR$/defConfiguration.ser" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Animal.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Animal.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Food.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Food.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Grass.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Grass.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Lion.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Lion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/NewMenu.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/NewMenu.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/World.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/World.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" />
     </list>
     <ignored path="Animal world.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/NewMenu.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="672" column="72" selection-start-line="672" selection-start-column="72" selection-end-line="672" selection-end-column="72" />
+              <caret line="735" column="28" selection-start-line="735" selection-start-column="28" selection-end-line="735" selection-end-column="28" />
               <folding>
                 <element signature="method#setStartOver#0;class#NewMenu#0" expanded="false" />
                 <element signature="method#addLifeForm#0;class#NewMenu#0" expanded="false" />
@@ -70,10 +50,9 @@
                 <element signature="e#15532#15549#0" expanded="false" />
                 <element signature="e#17802#17810#0" expanded="false" />
                 <element signature="e#18662#18678#0" expanded="false" />
+                <element signature="method#eat#0;class#NewMenu#0" expanded="false" />
                 <element signature="e#19662#19719#0" expanded="false" />
                 <element signature="method#distance#0;class#NewMenu#0" expanded="false" />
-                <element signature="method#animalTypeUpdate#0;class#NewMenu#0" expanded="false" />
-                <element signature="method#mainProgram#0;class#NewMenu#0" expanded="false" />
                 <element signature="method#start#0;class#NewMenu#0" expanded="false" />
                 <element signature="method#main#0;class#NewMenu#0" expanded="false" />
               </folding>
@@ -85,14 +64,15 @@
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/World.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+              <caret line="170" column="40" selection-start-line="170" selection-start-column="40" selection-end-line="170" selection-end-column="40" />
               <folding>
+                <element signature="method#World#0;class#World#0" expanded="false" />
                 <element signature="method#addObstacle#0;class#World#0" expanded="false" />
+                <element signature="method#addGrass#0;class#World#0" expanded="false" />
                 <element signature="method#deleteFood#0;class#World#0" expanded="false" />
                 <element signature="method#addAnimal#0;class#World#0" expanded="false" />
                 <element signature="method#addLion#0;class#World#0" expanded="false" />
                 <element signature="method#addZebra#0;class#World#0" expanded="false" />
-                <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
                 <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
                 <element signature="method#hideTargets#0;class#World#0" expanded="false" />
                 <element signature="method#hideStats#0;class#World#0" expanded="false" />
@@ -140,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Animal.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="638" column="62" selection-start-line="638" selection-start-column="62" selection-end-line="638" selection-end-column="62" />
+              <caret line="403" column="23" selection-start-line="403" selection-start-column="23" selection-end-line="403" selection-end-column="23" />
               <folding>
                 <element signature="e#1424#1432#0" expanded="true" />
                 <element signature="method#Animal#0;class#Animal#0" expanded="false" />
@@ -151,6 +131,8 @@
                 <element signature="e#12661#12662#0" expanded="true" />
                 <element signature="e#12710#12711#0" expanded="true" />
                 <element signature="e#12750#12751#0" expanded="true" />
+                <element signature="e#12811#12812#0" expanded="true" />
+                <element signature="e#12867#12868#0" expanded="true" />
                 <element signature="method#setStats#0;class#Animal#0" expanded="false" />
                 <element signature="e#13867#13868#0" expanded="true" />
                 <element signature="e#13892#13893#0" expanded="true" />
@@ -169,9 +151,11 @@
       <file leaf-file-name="Lion.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Lion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-              <folding />
+            <state vertical-scroll-proportion="-8.444445">
+              <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -191,12 +175,21 @@
       <file leaf-file-name="Food.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Food.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8566929">
-              <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.67874014">
+              <caret line="129" column="29" selection-start-line="129" selection-start-column="29" selection-end-line="129" selection-end-column="29" />
               <folding>
-                <element signature="e#1000#1001#0" expanded="true" />
-                <element signature="e#1032#1033#0" expanded="true" />
-                <element signature="method#setPos#0;class#Food#0" expanded="false" />
+                <element signature="e#1555#1556#0" expanded="true" />
+                <element signature="e#1580#1581#0" expanded="true" />
+                <element signature="e#1607#1608#0" expanded="true" />
+                <element signature="e#1630#1631#0" expanded="true" />
+                <element signature="e#1658#1659#0" expanded="true" />
+                <element signature="e#1676#1677#0" expanded="true" />
+                <element signature="e#1712#1713#0" expanded="true" />
+                <element signature="e#1744#1745#0" expanded="true" />
+                <element signature="e#2029#2030#0" expanded="true" />
+                <element signature="e#2052#2053#0" expanded="true" />
+                <element signature="e#2093#2094#0" expanded="true" />
+                <element signature="e#2120#2121#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -243,11 +236,11 @@
         <option value="$PROJECT_DIR$/src/AnimalWorld/Collisions.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Configuration.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Grass.java" />
-        <option value="$PROJECT_DIR$/src/AnimalWorld/Lion.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" />
+        <option value="$PROJECT_DIR$/src/AnimalWorld/Animal.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/World.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/NewMenu.java" />
-        <option value="$PROJECT_DIR$/src/AnimalWorld/Animal.java" />
+        <option value="$PROJECT_DIR$/src/AnimalWorld/Lion.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Food.java" />
       </list>
     </option>
@@ -803,7 +796,7 @@
       <workItem from="1453035630795" duration="24900000" />
       <workItem from="1453117266355" duration="6480000" />
       <workItem from="1453152393243" duration="27262000" />
-      <workItem from="1453181702173" duration="13388000" />
+      <workItem from="1453181702173" duration="18184000" />
     </task>
     <task id="LOCAL-00001" summary="This is a try">
       <created>1452509382263</created>
@@ -859,11 +852,17 @@
       <option name="project" value="LOCAL" />
       <updated>1453192310219</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="grass bug fixed&#10;Poisoned food aded and its effects">
+      <created>1453195495926</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1453195495926</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126897000" />
+    <option name="totallyTimeSpent" value="131693000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -915,7 +914,8 @@
     <MESSAGE value="ALL MENUS COMPLETE even the help :)" />
     <MESSAGE value="Zebras created" />
     <MESSAGE value="Grass created&#10;There is a bug that comes once in a while and I cannot see why is created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Grass created&#10;There is a bug that comes once in a while and I cannot see why is created" />
+    <MESSAGE value="grass bug fixed&#10;Poisoned food aded and its effects" />
+    <option name="LAST_COMMIT_MESSAGE" value="grass bug fixed&#10;Poisoned food aded and its effects" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -960,10 +960,9 @@
             <element signature="e#15532#15549#0" expanded="false" />
             <element signature="e#17802#17810#0" expanded="false" />
             <element signature="e#18662#18678#0" expanded="false" />
+            <element signature="method#eat#0;class#NewMenu#0" expanded="false" />
             <element signature="e#19662#19719#0" expanded="false" />
             <element signature="method#distance#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#animalTypeUpdate#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#mainProgram#0;class#NewMenu#0" expanded="false" />
             <element signature="method#start#0;class#NewMenu#0" expanded="false" />
             <element signature="method#main#0;class#NewMenu#0" expanded="false" />
           </folding>
@@ -999,12 +998,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="16" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="16" />
           <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
             <element signature="method#addObstacle#0;class#World#0" expanded="false" />
+            <element signature="method#addGrass#0;class#World#0" expanded="false" />
             <element signature="method#deleteFood#0;class#World#0" expanded="false" />
             <element signature="method#addAnimal#0;class#World#0" expanded="false" />
             <element signature="method#addLion#0;class#World#0" expanded="false" />
             <element signature="method#addZebra#0;class#World#0" expanded="false" />
-            <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
             <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
             <element signature="method#hideTargets#0;class#World#0" expanded="false" />
             <element signature="method#hideStats#0;class#World#0" expanded="false" />
@@ -1080,10 +1080,9 @@
             <element signature="e#15532#15549#0" expanded="false" />
             <element signature="e#17802#17810#0" expanded="false" />
             <element signature="e#18662#18678#0" expanded="false" />
+            <element signature="method#eat#0;class#NewMenu#0" expanded="false" />
             <element signature="e#19662#19719#0" expanded="false" />
             <element signature="method#distance#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#animalTypeUpdate#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#mainProgram#0;class#NewMenu#0" expanded="false" />
             <element signature="method#start#0;class#NewMenu#0" expanded="false" />
             <element signature="method#main#0;class#NewMenu#0" expanded="false" />
           </folding>
@@ -1130,12 +1129,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="16" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="16" />
           <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
             <element signature="method#addObstacle#0;class#World#0" expanded="false" />
+            <element signature="method#addGrass#0;class#World#0" expanded="false" />
             <element signature="method#deleteFood#0;class#World#0" expanded="false" />
             <element signature="method#addAnimal#0;class#World#0" expanded="false" />
             <element signature="method#addLion#0;class#World#0" expanded="false" />
             <element signature="method#addZebra#0;class#World#0" expanded="false" />
-            <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
             <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
             <element signature="method#hideTargets#0;class#World#0" expanded="false" />
             <element signature="method#hideStats#0;class#World#0" expanded="false" />
@@ -1211,10 +1211,9 @@
             <element signature="e#15532#15549#0" expanded="false" />
             <element signature="e#17802#17810#0" expanded="false" />
             <element signature="e#18662#18678#0" expanded="false" />
+            <element signature="method#eat#0;class#NewMenu#0" expanded="false" />
             <element signature="e#19662#19719#0" expanded="false" />
             <element signature="method#distance#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#animalTypeUpdate#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#mainProgram#0;class#NewMenu#0" expanded="false" />
             <element signature="method#start#0;class#NewMenu#0" expanded="false" />
             <element signature="method#main#0;class#NewMenu#0" expanded="false" />
           </folding>
@@ -1253,12 +1252,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="72" column="45" selection-start-line="72" selection-start-column="45" selection-end-line="72" selection-end-column="45" />
           <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
             <element signature="method#addObstacle#0;class#World#0" expanded="false" />
+            <element signature="method#addGrass#0;class#World#0" expanded="false" />
             <element signature="method#deleteFood#0;class#World#0" expanded="false" />
             <element signature="method#addAnimal#0;class#World#0" expanded="false" />
             <element signature="method#addLion#0;class#World#0" expanded="false" />
             <element signature="method#addZebra#0;class#World#0" expanded="false" />
-            <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
             <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
             <element signature="method#hideTargets#0;class#World#0" expanded="false" />
             <element signature="method#hideStats#0;class#World#0" expanded="false" />
@@ -1334,10 +1334,9 @@
             <element signature="e#15532#15549#0" expanded="false" />
             <element signature="e#17802#17810#0" expanded="false" />
             <element signature="e#18662#18678#0" expanded="false" />
+            <element signature="method#eat#0;class#NewMenu#0" expanded="false" />
             <element signature="e#19662#19719#0" expanded="false" />
             <element signature="method#distance#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#animalTypeUpdate#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#mainProgram#0;class#NewMenu#0" expanded="false" />
             <element signature="method#start#0;class#NewMenu#0" expanded="false" />
             <element signature="method#main#0;class#NewMenu#0" expanded="false" />
           </folding>
@@ -1376,12 +1375,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="72" column="45" selection-start-line="72" selection-start-column="45" selection-end-line="72" selection-end-column="45" />
           <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
             <element signature="method#addObstacle#0;class#World#0" expanded="false" />
+            <element signature="method#addGrass#0;class#World#0" expanded="false" />
             <element signature="method#deleteFood#0;class#World#0" expanded="false" />
             <element signature="method#addAnimal#0;class#World#0" expanded="false" />
             <element signature="method#addLion#0;class#World#0" expanded="false" />
             <element signature="method#addZebra#0;class#World#0" expanded="false" />
-            <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
             <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
             <element signature="method#hideTargets#0;class#World#0" expanded="false" />
             <element signature="method#hideStats#0;class#World#0" expanded="false" />
@@ -1457,10 +1457,9 @@
             <element signature="e#15532#15549#0" expanded="false" />
             <element signature="e#17802#17810#0" expanded="false" />
             <element signature="e#18662#18678#0" expanded="false" />
+            <element signature="method#eat#0;class#NewMenu#0" expanded="false" />
             <element signature="e#19662#19719#0" expanded="false" />
             <element signature="method#distance#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#animalTypeUpdate#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#mainProgram#0;class#NewMenu#0" expanded="false" />
             <element signature="method#start#0;class#NewMenu#0" expanded="false" />
             <element signature="method#main#0;class#NewMenu#0" expanded="false" />
           </folding>
@@ -1483,12 +1482,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="75" column="51" selection-start-line="75" selection-start-column="51" selection-end-line="75" selection-end-column="51" />
           <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
             <element signature="method#addObstacle#0;class#World#0" expanded="false" />
+            <element signature="method#addGrass#0;class#World#0" expanded="false" />
             <element signature="method#deleteFood#0;class#World#0" expanded="false" />
             <element signature="method#addAnimal#0;class#World#0" expanded="false" />
             <element signature="method#addLion#0;class#World#0" expanded="false" />
             <element signature="method#addZebra#0;class#World#0" expanded="false" />
-            <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
             <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
             <element signature="method#hideTargets#0;class#World#0" expanded="false" />
             <element signature="method#hideStats#0;class#World#0" expanded="false" />
@@ -1634,35 +1634,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Zebra.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Lion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/World.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <caret line="170" column="40" selection-start-line="170" selection-start-column="40" selection-end-line="170" selection-end-column="40" />
           <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
             <element signature="method#addObstacle#0;class#World#0" expanded="false" />
+            <element signature="method#addGrass#0;class#World#0" expanded="false" />
             <element signature="method#deleteFood#0;class#World#0" expanded="false" />
             <element signature="method#addAnimal#0;class#World#0" expanded="false" />
             <element signature="method#addLion#0;class#World#0" expanded="false" />
             <element signature="method#addZebra#0;class#World#0" expanded="false" />
-            <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
             <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
             <element signature="method#hideTargets#0;class#World#0" expanded="false" />
             <element signature="method#hideStats#0;class#World#0" expanded="false" />
@@ -1680,7 +1663,7 @@
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/NewMenu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="672" column="72" selection-start-line="672" selection-start-column="72" selection-end-line="672" selection-end-column="72" />
+          <caret line="735" column="28" selection-start-line="735" selection-start-column="28" selection-end-line="735" selection-end-column="28" />
           <folding>
             <element signature="method#setStartOver#0;class#NewMenu#0" expanded="false" />
             <element signature="method#addLifeForm#0;class#NewMenu#0" expanded="false" />
@@ -1693,12 +1676,21 @@
             <element signature="e#15532#15549#0" expanded="false" />
             <element signature="e#17802#17810#0" expanded="false" />
             <element signature="e#18662#18678#0" expanded="false" />
+            <element signature="method#eat#0;class#NewMenu#0" expanded="false" />
             <element signature="e#19662#19719#0" expanded="false" />
             <element signature="method#distance#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#animalTypeUpdate#0;class#NewMenu#0" expanded="false" />
-            <element signature="method#mainProgram#0;class#NewMenu#0" expanded="false" />
             <element signature="method#start#0;class#NewMenu#0" expanded="false" />
             <element signature="method#main#0;class#NewMenu#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Zebra.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1706,7 +1698,7 @@
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Animal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="638" column="62" selection-start-line="638" selection-start-column="62" selection-end-line="638" selection-end-column="62" />
+          <caret line="403" column="23" selection-start-line="403" selection-start-column="23" selection-end-line="403" selection-end-column="23" />
           <folding>
             <element signature="e#1424#1432#0" expanded="true" />
             <element signature="method#Animal#0;class#Animal#0" expanded="false" />
@@ -1717,6 +1709,8 @@
             <element signature="e#12661#12662#0" expanded="true" />
             <element signature="e#12710#12711#0" expanded="true" />
             <element signature="e#12750#12751#0" expanded="true" />
+            <element signature="e#12811#12812#0" expanded="true" />
+            <element signature="e#12867#12868#0" expanded="true" />
             <element signature="method#setStats#0;class#Animal#0" expanded="false" />
             <element signature="e#13867#13868#0" expanded="true" />
             <element signature="e#13892#13893#0" expanded="true" />
@@ -1731,14 +1725,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Lion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.444445">
+          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Food.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8566929">
-          <caret line="64" column="13" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.67874014">
+          <caret line="129" column="29" selection-start-line="129" selection-start-column="29" selection-end-line="129" selection-end-column="29" />
           <folding>
-            <element signature="e#1000#1001#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
-            <element signature="method#setPos#0;class#Food#0" expanded="false" />
+            <element signature="e#1555#1556#0" expanded="true" />
+            <element signature="e#1580#1581#0" expanded="true" />
+            <element signature="e#1607#1608#0" expanded="true" />
+            <element signature="e#1630#1631#0" expanded="true" />
+            <element signature="e#1658#1659#0" expanded="true" />
+            <element signature="e#1676#1677#0" expanded="true" />
+            <element signature="e#1712#1713#0" expanded="true" />
+            <element signature="e#1744#1745#0" expanded="true" />
+            <element signature="e#2029#2030#0" expanded="true" />
+            <element signature="e#2052#2053#0" expanded="true" />
+            <element signature="e#2093#2094#0" expanded="true" />
+            <element signature="e#2120#2121#0" expanded="true" />
           </folding>
         </state>
       </provider>

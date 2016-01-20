@@ -166,8 +166,27 @@ public class World {
 		statsGroup.get(j).getChildren().remove(i);
 		targetsGroup.get(j).getChildren().remove(i);
         idsGroup.get(j).getChildren().remove(i);
-
 	}
+
+    public void dieAnimal(int j, int i){
+        Food food;
+        if (j == 0) {
+            food = new Food(this, "LionMeat", true, (int) animalList.get(j).get(i).getBody().getRadius(), animalList.get(j).get(i).getPosX(), animalList.get(j).get(i).getPosY());
+        }
+        else if (j == 1) {
+            food = new Food(this, "ZebraMeat", true, (int) animalList.get(j).get(i).getBody().getRadius(), animalList.get(j).get(i).getPosX(), animalList.get(j).get(i).getPosY());
+        }
+        else{
+            food = new Food(this, "Meat", true, (int) animalList.get(j).get(i).getBody().getRadius(), animalList.get(j).get(i).getPosX(), animalList.get(j).get(i).getPosY());
+        }
+
+        if (food.getBody().getRadius() > 0) {
+            foodList.add(food);
+            foodGroup.getChildren().add(food.getBody());
+        }
+
+        removeAnimal(j, i);
+    }
 
 	public int getDay() {
 		return day;

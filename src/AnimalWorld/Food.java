@@ -15,24 +15,10 @@ public class Food{
 
 	public Food(World world){
 		Random rnd = new Random();
-		this.energy = rnd.nextInt(200)+5;
 
-		switch (rnd.nextInt(2)+1) {
-	        case 1: 
-	        	this.type = "Meat";
-				this.Body.setFill(Color.RED);
-	            break;
-	        case 2: 
-	        	this.type = "NonMeat";
-	        	this.Body.setFill(Color.GREEN);
-	            break;
-	        default:
-	        	this.type = "NonMeat";
-	        	this.Body.setFill(Color.GREEN);
-	            break;
-	    }
-
-
+        // 10% of meat compared to non meat
+        if (rnd.nextInt(100)%10 == 0) createMeat("ZebraMeat");
+        else createNonMeat();
 
 		this.Body.setRadius(rnd.nextInt(5)+5);
 
@@ -40,7 +26,56 @@ public class Food{
 
 
 	}
-	
+
+    public Food(World world, String type, boolean meat){
+        Random rnd = new Random();
+
+        if (meat) {
+            createMeat(type);
+        }
+        else {
+            createNonMeat();
+        }
+
+        this.Body.setRadius(rnd.nextInt(5)+5);
+
+        this.setPos(world);
+
+
+    }
+
+    public Food(World world, String type, boolean meat, int rad, int x, int y){
+        if (meat) {
+            createMeat(type);
+        }
+
+        else {
+            createNonMeat();
+        }
+
+        this.Body.setRadius(rad);
+
+        this.Body.setCenterX(x);
+        this.Body.setCenterY(y);
+    }
+
+    public void createMeat(String type){
+        Random rnd = new Random();
+
+        this.type = type;
+        this.Body.setFill(Color.RED);
+
+        this.energy = rnd.nextInt(100)+100;
+
+    }
+
+    public void createNonMeat(){
+        Random rnd = new Random();
+        this.type = "NonMeat";
+        this.Body.setFill(Color.GREEN);
+        this.energy = rnd.nextInt(50)+10;
+    }
+
 	public double getEnergy(){
 		return this.energy;
 	}
@@ -62,7 +97,7 @@ public class Food{
         if (this.getBody().getFill() == Color.RED){
             this.getBody().setFill(Color.DARKSALMON);
         }
-        else this.getBody().setFill(Color.DARKSEAGREEN);
+        else  this.getBody().setFill(Color.DARKSEAGREEN);
     }
 
     public void setType(String type) {
@@ -92,7 +127,7 @@ public class Food{
         Random rnd = new Random();
         int chance = rnd.nextInt(100000);
 
-        if (chance == 20){
+        if (chance == 20 && !this.isPoisonous()){
             setPoisonous();
         }
     }

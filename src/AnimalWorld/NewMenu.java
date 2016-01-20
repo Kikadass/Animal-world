@@ -722,9 +722,18 @@ public class NewMenu extends Application {
         return distance;
     }
 
-    public void animalTypeUpdate(ArrayList<Animal> animalTypeList, World world){
+    public void animalTypeUpdate(int type, World world){
+        ArrayList<Animal> animalTypeList = world.animalList.get(type);
+
         for (int i = 0; i < animalTypeList.size(); i++) {
             animalTypeList.get(i).update();
+            // if food < 0 die
+            if (animalTypeList.get(i).getFood() < 0) {
+                world.dieAnimal(type, i);
+                break;
+            }
+            // if energy < 0 die
+            // if killed die
 
             // ANIMAL COLISIONS
             if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), animalTypeList.get(i).getProvisionalTarget().getBody())) {
@@ -756,6 +765,7 @@ public class NewMenu extends Application {
                         for (int j = 0; j < world.foodList.size(); j++) {
                             for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
                                 if (world.foodList.get(j).getType().equals(foodPreference)) {
+                                    // if energy is > than the minimum acceptable for the animal, than eat
                                     if (world.foodList.get(j).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
                                         if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
 
@@ -899,8 +909,8 @@ public class NewMenu extends Application {
                             world.setDay(0);
                         }
                     }
-                    for (ArrayList<Animal> animalTypeList : world.animalList){
-                        animalTypeUpdate(animalTypeList, world);
+                    for (int i = 0; i < world.animalList.size(); i++){
+                        animalTypeUpdate(i, world);
                     }
 
                     for (int i = 0; i < world.foodList.size(); i++){

@@ -32,6 +32,7 @@ public class Lion extends Predator {
 		this.setMinSize(10);
 		this.setMaxSize(20);
 		this.addFoodPreferences("Meat");
+		this.addFoodPreferences("ZebraMeat");
 
 		int tries = 0;
 		do{
