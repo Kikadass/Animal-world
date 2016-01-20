@@ -1,17 +1,12 @@
 package AnimalWorld;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
-import javax.swing.JOptionPane;
-
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -36,6 +31,7 @@ public class NewMenu extends Application {
     static boolean startOver = false;
     static boolean exit = false;
     static int cycle = 0;
+    static int day = 4000; //4000 = 1min
 
     public static int getWidth() {
         return width;
@@ -66,6 +62,7 @@ public class NewMenu extends Application {
             System.out.println(config.getZebras());
             stage1.hide();
             startOver = false;
+            cycle = 0;
             mainProgram(stage1, config);
         }
 
@@ -276,7 +273,7 @@ public class NewMenu extends Application {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 // action
                 final int value = newValue.intValue() - 2;
-                if (newValue != oldValue){
+                if (!newValue.equals(oldValue)){
                     if (oldValue.intValue()-2 >= 0) {
                         world.hideSpecificID(oldValue.intValue() - 2);
                     }
@@ -753,8 +750,7 @@ public class NewMenu extends Application {
     }
 
     public double distance(double x1, double y1, double x2, double y2) {
-        double distance = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
-        return distance;
+        return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
     }
 
     public void animalTypeUpdate(int type, World world){
@@ -928,7 +924,7 @@ public class NewMenu extends Application {
 
 
         final Group root = new Group();
-        final World world = new World(root, config, animalTypes.length, foodTypes.length);
+        final World world = new World(root, config, animalTypes.length);
         final Scene scene = new Scene(root, config.getWidth(), config.getHeight());
         stage1.setResizable(false);
 
@@ -936,7 +932,7 @@ public class NewMenu extends Application {
         root.getChildren().add(rectangle);
 
         //Menu
-        MenuBar menuBar1 = new MenuBar();
+        MenuBar menuBar1;
         menuBar1 = CreateMenuBar(world, stage1, config);
         menuBar1.setMinWidth(width);
         final MenuBar menuBar = menuBar1;
@@ -1020,8 +1016,8 @@ public class NewMenu extends Application {
                     cycle++;
 
                     // 4000 cycles = 1day == 1 real minute
-                    if (cycle%4000 == 0){
-                        System.out.println("Day 1");
+                    if (cycle%day == 0){
+                        System.out.println("Day " + cycle/day);
                         world.setDay(world.getDay() + 1);
                         if (world.getDay() == 365 ){
                             world.setYear(world.getYear() +1);

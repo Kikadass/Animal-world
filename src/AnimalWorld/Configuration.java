@@ -26,7 +26,6 @@ public class Configuration implements Serializable{
     private int width;
 
 	public Configuration(){
-		this.lastFile = new String();
 		this.lastFile = "/defConfiguration.ser";
 		this.amountFood = 10;
         this.amountGrass = 1;
@@ -367,9 +366,8 @@ public class Configuration implements Serializable{
 
 
         if (file != null) {
-            String location = file.getPath();
 
-            this.lastFile = location;
+            this.lastFile = file.getPath();
             this.EditConfig2();
         }
     }
@@ -402,9 +400,7 @@ public class Configuration implements Serializable{
 		File file = fileChooser.showOpenDialog(stage);
 
         if (file != null) {
-            String location = file.getPath();
-
-            this.lastFile = location;
+            this.lastFile = file.getPath();
             this.Load();
             NewMenu.setStartOver();
         }
@@ -580,9 +576,8 @@ public class Configuration implements Serializable{
 
 
         if (file != null) {
-            String location = file.getPath();
 
-            this.lastFile = location;
+            this.lastFile = file.getPath();
 
             this.Save();
         }
@@ -620,7 +615,6 @@ public class Configuration implements Serializable{
 		{
 			System.out.println("Configuration class not found");
 			c.printStackTrace();
-			return e;
 		}
 		return e;
 	}
@@ -630,11 +624,10 @@ public class Configuration implements Serializable{
 		//e.lastFile = "defConfiguration.ser";
 
         if (e == null){
-            Configuration config = new Configuration();
-            e = config;
+            e = new Configuration();
         }
 
-		if (e.lastFile != "/defConfiguration.ser"){
+		if (!e.lastFile.equals("/defConfiguration.ser")){
 			e = tryLoad(e.lastFile);
 			e.Save();
 		}

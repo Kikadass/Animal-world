@@ -24,7 +24,7 @@ public class World {
 	private int year;
     private static boolean full = false;
 	
-	public World(Group root, Configuration config, int animalTypes, int foodTypes){
+	public World(Group root, Configuration config, int animalTypes){
 
         Lion.restartCounter();
 		Zebra.restartCounter();

@@ -16,7 +16,7 @@ public class Lion extends Predator {
 		this.setEnergy(rnd.nextInt(200)+100);
         this.setMaxEnergy((int)this.getEnergy());
         this.setFood(rnd.nextInt(200)+100);
-		this.setMetabolism(rnd.nextInt(10)*0.01 + 0.05);
+		this.setMetabolism(rnd.nextInt(5)*0.001 + 0.020);
         this.setMaxFood((int) this.getFood());
 		this.setStrenght(rnd.nextInt(100)+100);
 		this.setFoodCarring(0);

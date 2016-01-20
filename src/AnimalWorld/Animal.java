@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -54,7 +53,6 @@ public abstract class Animal{
     private int collisionCycles = -50;
 
     public Animal(){
-		this.name = new String();
 		this.energy = 0;
 	}
 
