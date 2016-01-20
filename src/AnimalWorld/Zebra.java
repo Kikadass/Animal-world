@@ -17,7 +17,7 @@ public class Zebra extends Animal{
         this.setName(names[rnd.nextInt(2)]);
         this.setID(counter);
         this.setEnergy(rnd.nextInt(100)+200);
-        this.setMaxEnergy(this.getEnergy());
+        this.setMaxEnergy((int)this.getEnergy());
         this.setFood(rnd.nextInt(100)+200);
         this.setMetabolism(rnd.nextInt(10)*0.01 + 0.05);
         this.setMaxFood((int) this.getFood());
@@ -43,7 +43,7 @@ public class Zebra extends Animal{
             tries++;
             this.getBody().setCenterX(rnd.nextInt(world.getWidth() - (int) this.getBody().getRadius()*2) + this.getBody().getRadius());
             this.getBody().setCenterY(rnd.nextInt(world.getHeight() - (int)this.getBody().getRadius()*2 - 80) + this.getBody().getRadius() + 30);
-        }while((Collisions.collideObstacle(getBody(), world) || Collisions.collideAnimals(getBody(), world.animalList) || Collisions.collideFood(getBody(), world)) && tries <= 100);
+        }while((Collisions.collideObstacle(getBody(), world) || Collisions.collideAnimals(getBody(), world.animalList)) && tries <= 100);
 
         if (tries >= 100) {
             this.getBody().setRadius(0);
@@ -75,8 +75,6 @@ public class Zebra extends Animal{
     public void addCounter(){
         counter++;
     }
-
-
 
     public static void restartCounter(){counter = 0;}
 

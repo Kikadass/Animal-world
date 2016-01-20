@@ -22,7 +22,7 @@ public abstract class Animal{
     private Text stats = new Text();
 	private String name;
 	private Text ID = new Text();
-	private int energy;
+	private double energy;
     private double food;
     private double metabolism;
     private int maxEnergy;
@@ -44,14 +44,16 @@ public abstract class Animal{
 	private double dy;
 	private double speed;
     private ArrayList<String> foodPreferences = new ArrayList<String>();
-    private Target houseTarget;
+    private Target houseTarget = new Target(0, 0, 1);
     private Target foodTarget;
     private Target waterTarget;
     private Target mainTarget = new Target (0,0, 1);
     private Target provisionalTarget = new Target(0, 0, 3);
+    private int byeHome = 0;
+    private int tries = 0;
+    private int collisionCycles = -50;
 
-	
-	public Animal(){
+    public Animal(){
 		this.name = new String();
 		this.energy = 0;
 	}
@@ -250,7 +252,7 @@ public abstract class Animal{
 		return this.ID;
 	}
 	
-	public int getEnergy(){
+	public double getEnergy(){
 		return this.energy;
 	}
 	
@@ -397,6 +399,39 @@ public abstract class Animal{
         return poisoned;
     }
 
+    public Target getHouseTarget() {
+        return houseTarget;
+    }
+
+    public int getByeHome() {
+        return byeHome;
+    }
+
+    public int getTries() {
+        return tries;
+    }
+
+    public int getCollisionCycles() {
+        return collisionCycles;
+    }
+
+    public void setCollisionCycles(int collisionCycles) {
+        this.collisionCycles = collisionCycles;
+    }
+
+
+    public void setTries(int tries) {
+        this.tries = tries;
+    }
+
+    public void setByeHome(int byeHome) {
+        this.byeHome = byeHome;
+    }
+
+    public void setHouseTarget(Target houseTarget) {
+        this.houseTarget = houseTarget;
+    }
+
     public void setPoisoned(boolean poisoned) {
         this.poisoned = poisoned;
     }
@@ -411,6 +446,11 @@ public abstract class Animal{
 
     public void setMainTarget(Target mainTarget) {
         this.mainTarget = mainTarget;
+    }
+
+    public void clearMainTarget() {
+        this.mainTarget.getBody().setCenterX(0);
+        this.mainTarget.getBody().setCenterY(0);
     }
 
     public void setStats() {
@@ -453,7 +493,7 @@ public abstract class Animal{
 		this.ID.setTranslateY(this.getBody().getTranslateY());
 	}
 
-	public void setEnergy(int energy){
+	public void setEnergy(double energy){
 		this.energy = energy;
 	}
 	
@@ -570,7 +610,7 @@ public abstract class Animal{
         this.Body.setTranslateX(this.Body.getTranslateX() - this.dx);
         this.Body.setTranslateY(this.Body.getTranslateY() - this.dy);
 
-        this.lastAngle += rnd.nextInt(360);
+        this.lastAngle += rnd.nextInt(180)+90;
         if (this.lastAngle >= 360) this.lastAngle -= 360;
 
     }
@@ -595,6 +635,19 @@ public abstract class Animal{
 		alert.showAndWait();
 	}
 
+    public void updateMainTarget(){
+        if (this.houseTarget.getBody().getCenterX() != 0 && this.houseTarget.getBody().getCenterY() != 0) {
+            if (this.energy <= this.maxEnergy/3){
+                if(this.food <= this.maxFood/3){
+                    if (this.energy <= this.food){
+                        this.setMainTarget(this.houseTarget);
+                    }
+                }
+                else this.setMainTarget(this.houseTarget);
+            }
+        }
+    }
+
 	public void updateTarget(){
         double x1 = this.mainTarget.getBody().getCenterX();
         double x2 = this.getPosX();
@@ -607,7 +660,7 @@ public abstract class Animal{
         // if animal has reached main target delete it and look for new target
 		if (this.mainTarget.getBody().getCenterX() != 0 &&  this.mainTarget.getBody().getCenterY() != 0) {
 			if (distance1 <= distance2) {
-				this.setMainTarget(new Target(0, 0, 1));
+				this.clearMainTarget();
                 getRandomLocalTarget();
 			}
 			else getLocalTarget();
@@ -680,6 +733,9 @@ public abstract class Animal{
                 set its position as provisional target
 		*/
 
+        System.out.println(this.getMainTarget().getBody().getCenterX());
+
+
         this.updateTarget();
 
         directDxDy();
@@ -692,7 +748,7 @@ public abstract class Animal{
 		this.ID.setTranslateY(this.Body.getTranslateY());
 
         this.updateFood();
-        this.setEnergy(this.getEnergy()-1);
+        this.setEnergy(this.getEnergy()-1*this.getMetabolism());
 
         this.setStats();
 	}

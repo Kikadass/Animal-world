@@ -18,6 +18,7 @@ public class Configuration implements Serializable{
 	private String lastFile;
 	private int amountFood;
     private int amountGrass;
+    private int amountHabitats;
 	private int amountObstacles;
 	private int amountLions;
 	private int amountZebras;
@@ -29,6 +30,7 @@ public class Configuration implements Serializable{
 		this.lastFile = "/defConfiguration.ser";
 		this.amountFood = 10;
         this.amountGrass = 1;
+        this.amountHabitats = 1;
         this.amountObstacles = 10;
 		this.amountLions = 1;
 		this.amountZebras = 1;
@@ -36,10 +38,11 @@ public class Configuration implements Serializable{
 		this.width = 1280;
 	}
 	
-	public Configuration(String lastFile, int amountFood, int amountGrass, int amountObstacles, int amountLions, int amountZebras, int height, int width){
+	public Configuration(String lastFile, int amountFood, int amountGrass, int amountHabitats, int amountObstacles, int amountLions, int amountZebras, int height, int width){
 		this.lastFile = lastFile;
 		this.amountFood = amountFood;
         this.amountGrass = amountGrass;
+        this.amountHabitats = amountHabitats;
         this.amountObstacles = amountObstacles;
 		this.amountLions = amountLions;
 		this.amountZebras = amountZebras;
@@ -51,6 +54,7 @@ public class Configuration implements Serializable{
 		this.lastFile = config.lastFile;
 		this.amountFood = config.amountFood;
         this.amountGrass = config.amountGrass;
+        this.amountHabitats = config.amountHabitats;
 		this.amountObstacles = config.amountObstacles;
 		this.amountLions = config.amountLions;
 		this.amountZebras = config.amountZebras;
@@ -98,6 +102,19 @@ public class Configuration implements Serializable{
         Label label7 = new Label("Grass:");
         GridPane.setConstraints(label7, 0, configThings);
         grid.getChildren().add(label7);
+
+        configThings++;
+
+        //Defining the Habitats text field
+        final TextField habitats = new TextField();
+        habitats.setPromptText("Enter amount of habitats.");
+        habitats.setPrefColumnCount(10);
+        habitats.getText();
+        GridPane.setConstraints(habitats, 1, configThings);
+        grid.getChildren().add(habitats);
+        Label label8 = new Label("Habitats:");
+        GridPane.setConstraints(label8, 0, configThings);
+        grid.getChildren().add(label8);
 
         configThings++;
 
@@ -194,6 +211,7 @@ public class Configuration implements Serializable{
 			public void handle(ActionEvent e) {
 				if ((food.getText() != null && !food.getText().isEmpty()) &&
                     (grass.getText() != null && !grass.getText().isEmpty()) &&
+                    (habitats.getText() != null && !habitats.getText().isEmpty()) &&
                     (obstacles.getText() != null && !obstacles.getText().isEmpty()) &&
                     (lions.getText() != null && !lions.getText().isEmpty()) &&
 					(zebras.getText() != null && !zebras.getText().isEmpty()) &&
@@ -203,6 +221,7 @@ public class Configuration implements Serializable{
                     if (Integer.parseInt(height.getText()) >= 300 && Integer.parseInt(width.getText()) >= 300){
                         setFood(Integer.parseInt(food.getText()));
                         setGrass(Integer.parseInt(grass.getText()));
+                        setHabitats(Integer.parseInt(habitats.getText()));
                         setObstacles(Integer.parseInt(obstacles.getText()));
                         setLions(Integer.parseInt(lions.getText()));
 						setZebras(Integer.parseInt(zebras.getText()));
@@ -210,13 +229,14 @@ public class Configuration implements Serializable{
                             setHeight(Integer.parseInt(height.getText()));
                             setWidth(Integer.parseInt(width.getText()));
                             NewMenu.setStartOver();
-                            stage.close();
                         }
+                        stage.close();
                         NewMenu.setStartOver();
                     }
                     else label.setText("Height and width have to be greater than 300.");
 
-				} else {
+				}
+                else {
 					label.setText("Please enter all details.");
 				}
 			}
@@ -229,6 +249,7 @@ public class Configuration implements Serializable{
             public void handle(ActionEvent e) {
                 food.setText(String.valueOf(amountFood));
                 grass.setText(String.valueOf(amountGrass));
+                habitats.setText(String.valueOf(amountHabitats));
                 obstacles.setText(String.valueOf(amountObstacles));
                 lions.setText(String.valueOf(amountLions));
 				zebras.setText(String.valueOf(amountZebras));
@@ -245,6 +266,7 @@ public class Configuration implements Serializable{
 			public void handle(ActionEvent e) {
 				food.clear();
                 grass.clear();
+                habitats.clear();
 				obstacles.clear();
                 lions.clear();
 				zebras.clear();
@@ -430,6 +452,13 @@ public class Configuration implements Serializable{
         this.amountGrass = amountGrass;
     }
 
+    public int getHabitats() {
+        return amountHabitats;
+    }
+
+    public void setHabitats(int amountHabitats) {
+        this.amountHabitats = amountHabitats;
+    }
 
     public int getObstacles(){
 		return this.amountObstacles;
@@ -489,6 +518,7 @@ public class Configuration implements Serializable{
 		print = "Name of file: " + nameOfFile + "\n" +
 				"Amount of Food: " + this.amountFood + "\n" +
                 "Amount of Grass: " + this.amountGrass + "\n" +
+                "Amount of Habitats: " + this.amountHabitats + "\n" +
                 "Amount of Obstacles: " + this.amountObstacles + "\n" +
 				"Amount of Lions: " + this.amountLions + "\n" +
                 "Amount of Zebras: " + this.amountZebras + "\n" +
@@ -506,6 +536,7 @@ public class Configuration implements Serializable{
 		String print;
 		print = "Amount of Food: " + this.amountFood + "\n" +
                 "Amount of Grass: " + this.amountGrass + "\n" +
+                "Amount of Habitats: " + this.amountHabitats + "\n" +
                 "Amount of Obstacles: " + this.amountObstacles + "\n" +
                 "Amount of Lions: " + this.amountLions + "\n" +
                 "Amount of Zebras: " + this.amountZebras + "\n" +

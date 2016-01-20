@@ -8,18 +8,21 @@ import javafx.scene.Group;
 public class World {
     private ArrayList<Group> targetsGroup = new  ArrayList<Group>();
     private Group foodGroup = new Group();
+    private Group habitatsGroup = new Group();
     private ArrayList<Group> obstacleGroup = new  ArrayList<Group>();
     private ArrayList<Group> animalGroup = new  ArrayList<Group>();
     private ArrayList<Group> smellRangeGroup = new  ArrayList<Group>();
     private ArrayList<Group> statsGroup = new  ArrayList<Group>();
     private ArrayList<Group> idsGroup = new  ArrayList<Group>();
     ArrayList<Food> foodList = new ArrayList<Food>();
-	ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
+    ArrayList<Habitat> habitatsList = new ArrayList<Habitat>();
+    ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
 	ArrayList<ArrayList<Animal>> animalList = new ArrayList<ArrayList<Animal>>();
 	private int width;
 	private int height;
 	private int day;
 	private int year;
+    private static boolean full = false;
 	
 	public World(Group root, Configuration config, int animalTypes, int foodTypes){
 
@@ -44,6 +47,8 @@ public class World {
 
 		root.getChildren().add(foodGroup);
 
+        root.getChildren().add(habitatsGroup);
+
 		for (Group g : obstacleGroup){
             root.getChildren().add(g);
 		}
@@ -64,30 +69,46 @@ public class World {
 		this.height =  NewMenu.getHeight();
 
 		// creating Obstacles
-		for (int i = 0; i < config.getObstacles(); i++){
+		for (int i = 0; i < config.getObstacles() && !full; i++){
 			this.addObstacle();
 		}
 
+        full = false;
+
         // creating Grass
-        for (int i = 0; i < config.getGrass(); i++){
+        for (int i = 0; i < config.getGrass() && !full; i++){
             this.addGrass();
         }
 
+        full = false;
+
 		// creating Food
-		for (int i = 0; i < config.getFood(); i++){
+		for (int i = 0; i < config.getFood() && !full; i++){
 			this.addFood();
 		}
 
+        full = false;
+
+        // creating Habitats
+        for (int i = 0; i < config.getHabitats() && !full; i++){
+            this.addHabitat();
+        }
+
+        full = false;
 
 		// create Lions
-		for (int i = 0; i < config.getLions(); i++){
+		for (int i = 0; i < config.getLions() && !full; i++){
 			this.addLion();
 		}
 
+        full = false;
+
 		// create Zebras
-		for (int i = 0; i < config.getZebras(); i++){
+		for (int i = 0; i < config.getZebras() && !full; i++){
 			this.addZebra();
 		}
+
+        full = false;
 
         hideAll();
 	}
@@ -108,6 +129,17 @@ public class World {
             foodList.add(food);
             foodGroup.getChildren().add(food.getBody());
         }
+        else full = true;
+    }
+
+    public void addHabitat(){
+        Habitat habitat = new Habitat(this);
+
+        if (habitat.getBody().getRadius() > 0) {
+            habitatsList.add(habitat);
+            habitatsGroup.getChildren().add(habitat.getArea());
+        }
+        else full = true;
     }
 
 	public void addGrass() {
@@ -117,7 +149,9 @@ public class World {
 			foodList.add(food);
 			foodGroup.getChildren().add(food.getBody());
 		}
-	}
+        else full = true;
+
+    }
 
 	public void deleteFood(int i){
         foodList.remove(i);
@@ -133,6 +167,11 @@ public class World {
 		}
     }
 
+    public void addAnimal(Animal animal, int i){
+        animalList.get(i).add(animal);
+        animalGroup.get(i).getChildren().add(animal.getBody());
+    }
+
 	public void addLion(){
 		Lion lion = new Lion(this);
 
@@ -144,6 +183,8 @@ public class World {
             targetsGroup.get(0).getChildren().add(lion.getProvisionalTarget().getBody());
             idsGroup.get(0).getChildren().add(lion.getID());
         }
+        else full = true;
+
     }
 
 	public void addZebra(){
@@ -157,7 +198,8 @@ public class World {
 			targetsGroup.get(1).getChildren().add(zebra.getProvisionalTarget().getBody());
 			idsGroup.get(1).getChildren().add(zebra.getID());
 		}
-	}
+        else full = true;
+    }
 
 	public void removeAnimal(int j, int i){
 		animalList.get(j).remove(i);

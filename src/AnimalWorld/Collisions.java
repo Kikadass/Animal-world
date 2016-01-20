@@ -62,4 +62,33 @@ public class Collisions {
 		}
 		return false;
 	}
+
+	public static boolean collideHabitatsArea(Circle c1, World world){
+		for (int i = 0; i < world.habitatsList.size(); i++){
+			if (Collisions.efficientCollide(c1, world.habitatsList.get(i).getArea())){
+				if (Collisions.nonEfficientCollide(c1, world.habitatsList.get(i).getArea())){
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean collideHabitats(Animal animal, World world, int hab){
+		for (int i = 0; i < world.habitatsList.size(); i++){
+			//if the animal's house is this habitat, than see if he is colliding
+			if (animal.getHouseTarget().getBody().getCenterX() == world.habitatsList.get(i).getBody().getCenterX() && animal.getHouseTarget().getBody().getCenterY() == world.habitatsList.get(i).getBody().getCenterY()) {
+				if (Collisions.efficientCollide(animal.getBody(), world.habitatsList.get(i).getBody())) {
+					if (Collisions.nonEfficientCollide(animal.getBody(), world.habitatsList.get(i).getBody())) {
+						hab = i;
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
 }

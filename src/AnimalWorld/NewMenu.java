@@ -35,9 +35,7 @@ public class NewMenu extends Application {
 	static boolean stop = true;
     static boolean startOver = false;
     static boolean exit = false;
-    int cycle = 0;
-    int collisionCycles = -50;
-    int tries = 0;
+    static int cycle = 0;
 
     public static int getWidth() {
         return width;
@@ -726,86 +724,167 @@ public class NewMenu extends Application {
         ArrayList<Animal> animalTypeList = world.animalList.get(type);
 
         for (int i = 0; i < animalTypeList.size(); i++) {
-            animalTypeList.get(i).update();
-            // if food < 0 die
-            if (animalTypeList.get(i).getFood() < 0) {
-                world.dieAnimal(type, i);
-                break;
-            }
-            // if energy < 0 die
-            // if killed die
+            //if animal is not in the habitat
+            if (animalTypeList.get(i).getBody().isVisible()) {
 
-            // ANIMAL COLISIONS
-            if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), animalTypeList.get(i).getProvisionalTarget().getBody())) {
-                animalTypeList.get(i).getRandomLocalTarget();
-            }
-
-            if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.animalList)) {
-                // reproduce
-            }
-
-            // if it finds an obstacle try to avoid it and find a new target
-            if (Collisions.collideObstacle(animalTypeList.get(i).getBody(), world)) {
-                // choose new target
-                animalTypeList.get(i).getOut();
-                animalTypeList.get(i).getRandomLocalTarget();
-                if (animalTypeList.get(i).getMainTarget().getBody().getCenterX() != 0) {
-                    animalTypeList.get(i).setMainTarget(new Target(0, 0, 2));
-                    collisionCycles = cycle;
-                    tries++;
+                if (animalTypeList.get(i).getCollisionCycles() + 50 * animalTypeList.get(i).getTries() < cycle) {
+                    System.out.println(cycle + " " + (animalTypeList.get(i).getCollisionCycles() + 100 * animalTypeList.get(i).getTries() <= cycle) + " " + animalTypeList.get(i).getID().getText());
+                    animalTypeList.get(i).updateMainTarget();
+                }
+                else {
+                    System.out.println(cycle + " " + animalTypeList.get(i).getID().getText());
+                    animalTypeList.get(i).clearMainTarget();
                 }
 
-            }
+                animalTypeList.get(i).update();
 
-            // SMELLING COLLISIONS
-            if (collisionCycles + 50 * tries <= cycle) {
-                if (animalTypeList.get(i).getFoodCarring() < animalTypeList.get(i).getStrenght()) {
-                    if (Collisions.collideFood(animalTypeList.get(i).getSmellRange(), world)) {
-                        // main target: center of that food.
-                        for (int j = 0; j < world.foodList.size(); j++) {
-                            for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
-                                if (world.foodList.get(j).getType().equals(foodPreference)) {
-                                    // if energy is > than the minimum acceptable for the animal, than eat
-                                    if (world.foodList.get(j).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
-                                        if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
+                // if food < 0 die
+                if (animalTypeList.get(i).getFood() < 0) {
+                    world.dieAnimal(type, i);
+                    break;
+                }
+                // if energy < 0 die
+                if (animalTypeList.get(i).getEnergy() < 0) {
+                    world.dieAnimal(type, i);
+                    break;
+                }
+                // if killed die
 
-                                            // if food is closer than actual main target --> go to it
-                                            if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
 
-                                                int tx;
-                                                int ty;
-                                                int rad;
+                //body arrived to Target
+                if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), animalTypeList.get(i).getProvisionalTarget().getBody())) {
+                    animalTypeList.get(i).getRandomLocalTarget();
+                }
 
-                                                ty = (int) world.foodList.get(j).getBody().getCenterY();
+                // Body collisions between animals
+                if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.animalList)) {
+                    // reproduce
+                }
 
-                                                tx = (int) world.foodList.get(j).getBody().getCenterX();
-                                                rad = (int) world.foodList.get(j).getBody().getRadius();
+                // if Body collides an obstacle try to avoid it and find a new target
+                if (Collisions.collideObstacle(animalTypeList.get(i).getBody(), world)) {
+                    System.out.println(cycle + " COLLIDING" + animalTypeList.get(i).getID().getText());
+                    // choose new target
+                    animalTypeList.get(i).getOut();
+                    animalTypeList.get(i).getRandomLocalTarget();
+                    if (animalTypeList.get(i).getMainTarget().getBody().getCenterX() != 0) {
+                        animalTypeList.get(i).clearMainTarget();
+                        animalTypeList.get(i).setCollisionCycles(cycle);
+                        if (animalTypeList.get(i).getTries() <= 5) animalTypeList.get(i).setTries(animalTypeList.get(i).getTries() +1);
+                        else animalTypeList.get(i).setTries(0);
+                    }
 
-                                                // create the main target depending on tx and ty
-                                                animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+                }
+
+                //body collides with food
+                if (Collisions.collideFood(animalTypeList.get(i).getBody(), world)) {
+                    eat(world, animalTypeList, i);
+                }
+
+
+                if(animalTypeList.get(i).getByeHome() == 0) {
+                    //body collides with his house body
+                    int hab = 0;
+                    if (Collisions.collideHabitats(animalTypeList.get(i), world, hab)) {
+                        //add animal into habitat's list
+                        world.habitatsList.get(hab).addAnimal(animalTypeList.get(i));
+                        animalTypeList.get(i).getBody().setVisible(false);
+                        animalTypeList.get(i).getBody().isVisible();
+                        animalTypeList.get(i).clearMainTarget();
+                        animalTypeList.get(i).setByeHome(350);
+                    }
+                }
+                else animalTypeList.get(i).setByeHome(animalTypeList.get(i).getByeHome() - 1);
+
+
+                // if main target is set, do not smell
+                if (animalTypeList.get(i).getMainTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getMainTarget().getBody().getCenterY() == 0) {
+                    //smells food unless he has tried recently and gonne into an obstacle and if no MainTarget
+                    if (animalTypeList.get(i).getCollisionCycles() + 50 * animalTypeList.get(i).getTries() < cycle) {
+                        //if foodCarring is full don't smell
+                        if (animalTypeList.get(i).getFoodCarring() < animalTypeList.get(i).getStrenght()) {
+                            // SMELL
+                            if (Collisions.collideFood(animalTypeList.get(i).getSmellRange(), world)) {
+                                for (int j = 0; j < world.foodList.size(); j++) {
+                                    for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
+                                        // if this type of animal eats that type food
+                                        if (world.foodList.get(j).getType().equals(foodPreference)) {
+                                            // if energy is > than the minimum acceptable for the animal, than eat
+                                            if (world.foodList.get(j).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
+                                                if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.foodList.get(j).getBody())) {
+
+
+                                                    // if food is closer than actual main target --> go to it
+                                                    if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.foodList.get(j).getBody().getCenterX(), world.foodList.get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
+                                                        // main target: center of that food.
+
+                                                        int tx;
+                                                        int ty;
+                                                        int rad;
+
+                                                        ty = (int) world.foodList.get(j).getBody().getCenterY();
+
+                                                        tx = (int) world.foodList.get(j).getBody().getCenterX();
+                                                        rad = (int) world.foodList.get(j).getBody().getRadius();
+
+                                                        // create the main target depending on tx and ty
+                                                        animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+                                                    }
+
+                                                }
                                             }
-
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                } else if (animalTypeList.get(i).getMainTarget().getBody().getCenterX() != 0) {
-                    animalTypeList.get(i).setMainTarget(new Target(0, 0, 1));
+
+
+                    //if animal has no habitat, smell
+                    if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
+                        System.out.println("SMELLLLIIIINGGGGGGGGGGGGGGGGGGGGGGG");
+                        //smelling the habitats area
+                        if (Collisions.collideHabitatsArea(animalTypeList.get(i).getSmellRange(), world)) {
+                            for (int j = 0; j < world.habitatsList.size(); j++) {
+                                //if habitat has not been set in the animal
+                                if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
+                                    // if the habitat's species has not been set or is the same as the animal
+                                    if (world.habitatsList.get(j).getSpecie() == -1 || world.habitatsList.get(j).getSpecie() == type) {
+                                        if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.habitatsList.get(j).getArea())) {
+                                            // if habitat has no specie specified set it
+                                            if (world.habitatsList.get(j).getSpecie() == -1) {
+                                                world.habitatsList.get(j).setSpecie(type);
+                                            }
+
+                                            // house target: center of that Habitat.
+                                            int tx;
+                                            int ty;
+                                            int rad;
+
+                                            ty = (int) world.habitatsList.get(j).getBody().getCenterY();
+
+                                            tx = (int) world.habitatsList.get(j).getBody().getCenterX();
+                                            rad = (int) world.habitatsList.get(j).getBody().getRadius();
+
+                                            // create the main target depending on tx and ty
+                                            animalTypeList.get(i).setHouseTarget(new Target(tx, ty, rad));
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-            }
-
-
-            if (Collisions.collideFood(animalTypeList.get(i).getBody(), world)) {
-                eat(world, animalTypeList, i);
-                tries = 0;
             }
         }
 
     }
 
     public void mainProgram(final Stage stage1, final Configuration config){
+
+
         setHeight(config.getHeight());
         setWidth(config.getWidth());
 
@@ -917,10 +996,15 @@ public class NewMenu extends Application {
                         world.foodList.get(i).update();
                     }
 
+                    for (int i = 0; i < world.habitatsList.size(); i++){
+                        world.habitatsList.get(i).update();
+                    }
+
                 }
                 if (startOver){
                     stage1.close();
                     startOver = false;
+
                     mainProgram(stage1, config);
                 }
                 if (exit){
