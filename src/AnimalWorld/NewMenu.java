@@ -765,6 +765,8 @@ public class NewMenu extends Application {
             //if animal is not in the habitat
             if (animalTypeList.get(i).getBody().isVisible()) {
 
+
+
                 if (animalTypeList.get(i).getCollisionCycles() + 50 * animalTypeList.get(i).getTries() < cycle) {
                     animalTypeList.get(i).updateMainTarget();
                 }
@@ -822,15 +824,22 @@ public class NewMenu extends Application {
                     //body collides with his house body
                     int hab = 0;
                     if (Collisions.collideHabitats(animalTypeList.get(i), world, hab)) {
-                        //add animal into habitat's list
-                        world.getHabitatsList().get(hab).addAnimal(animalTypeList.get(i));
-                        animalTypeList.get(i).getBody().setVisible(false);
-                        animalTypeList.get(i).getBody().isVisible();
-                        animalTypeList.get(i).clearMainTarget();
-                        animalTypeList.get(i).setByeHome(350);
+                        //if there is space in the habitat
+                        if (world.getHabitatsList().get(hab).getMaxCapacity() > world.getHabitatsList().get(hab).getAmountOfAnimals()) {
+                            //add animal into habitat's list
+                            world.getHabitatsList().get(hab).addAnimal(animalTypeList.get(i));
+                            animalTypeList.get(i).getBody().setVisible(false);
+                            world.hideSpecificStats(type, i);
+                            animalTypeList.get(i).clearMainTarget();
+                            animalTypeList.get(i).setByeHome(350);
+                        }
+                        else System.out.println("Full capacity");
                     }
                 }
-                else animalTypeList.get(i).setByeHome(animalTypeList.get(i).getByeHome() - 1);
+                else {
+                    if (animalTypeList.get(i).getByeHome() == 350) world.showSpecificStats(type, i);
+                    animalTypeList.get(i).setByeHome(animalTypeList.get(i).getByeHome() - 1);
+                }
 
 
                 // if main target is set, do not smell
@@ -876,12 +885,12 @@ public class NewMenu extends Application {
 
                     //if animal has no habitat, smell
                     if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
-                        System.out.println("SMELLING");
                         //smelling the habitats area
                         int hab = 0;
                         if (Collisions.collideHabitatsArea(animalTypeList.get(i).getSmellRange(), world, hab)) {
                             //if habitat has not been set in the animal
                             if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
+
                                 // if the habitat's species has not been set or is the same as the animal
                                 if (world.getHabitatsList().get(hab).getSpecie() == -1 || world.getHabitatsList().get(hab).getSpecie() == type) {
                                     // if habitat has no specie specified set it

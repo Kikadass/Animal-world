@@ -461,11 +461,11 @@ public abstract class Animal{
 
     public void setStats() {
         String print = "MaxFood: " + this.maxFood + "\n" +
-                "Food: " + this.food + "\n" +
+                "Food: " + String.format( "%.2f", this.food) + "\n" +
                 "MaxEnergy: " + this.maxEnergy + "\n" +
-                "Energy: " + this.energy + "\n" +
+                "Energy: " +  String.format( "%.2f", this.energy) + "\n" +
                 "Strenght: " + this.strenght + "\n" +
-                "FoodCarrier: " + this.foodCarring + "\n";
+                "FoodCarrier: " + String.format( "%.2f", this.foodCarring) + "\n";
         this.stats.setText(print);
         this.stats.setTranslateX(this.getBody().getTranslateX());
         this.stats.setTranslateY(this.getBody().getTranslateY());
@@ -635,9 +635,11 @@ public abstract class Animal{
 				"Angle of movement: " + this.angleRange + "\n" +
 				"Speed: " + this.speed ;
 
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Animal Chosen:");
 		alert.setContentText(print);
+        alert.setHeaderText(null);
+        alert.getDialogPane().setMaxWidth(300);
 		alert.showAndWait();
 	}
 

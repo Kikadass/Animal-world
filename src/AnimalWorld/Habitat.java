@@ -70,6 +70,10 @@ public class Habitat {
         return area;
     }
 
+    public int getAmountOfAnimals(){
+        return animalList.size();
+    }
+
     public void setArea(Circle area) {
         this.area = area;
     }

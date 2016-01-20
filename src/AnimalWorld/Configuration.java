@@ -525,9 +525,11 @@ public class Configuration implements Serializable{
 				"Height: " + this.height + "\n" +
                 "Width: " + this.width;
 
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Configuration loaded:");
         alert.setContentText(print);
+        alert.setHeaderText(null);
+        alert.getDialogPane().setMaxWidth(300);
         alert.showAndWait();
 
 	}
@@ -543,9 +545,11 @@ public class Configuration implements Serializable{
                 "Height: " + this.height + "\n" +
                 "Width: " + this.width;
 
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Configuration loaded:");
         alert.setContentText(print);
+        alert.setHeaderText(null);
+        alert.getDialogPane().setMaxWidth(300);
         alert.showAndWait();
 	}
 	

@@ -300,6 +300,10 @@ public class World {
 		}
 	}
 
+    public void hideSpecificStats(int j, int i){
+        statsGroup.get(j).getChildren().get(i).setVisible(false);
+    }
+
     public void hideID(){
         for (Group g : idsGroup) {
             g.setVisible(false);
@@ -345,6 +349,10 @@ public class World {
 		for (Group g : statsGroup) {
 			g.setVisible(true);
 		}
+    }
+
+    public void showSpecificStats(int j, int i){
+       statsGroup.get(j).getChildren().get(i).setVisible(true);
     }
 
     public void showAll(){

@@ -20,7 +20,7 @@ public class Lion extends Predator {
         this.setMaxFood((int) this.getFood());
 		this.setStrenght(rnd.nextInt(100)+100);
 		this.setFoodCarring(0);
-		this.setMinFoodCons(5);
+		this.setMinFoodCons(10);
         this.setSize(rnd.nextInt(10)+10);
         this.setSmellRange(rnd.nextInt(10)+(int)getBody().getRadius()*3);
 		this.setAge(0);			
