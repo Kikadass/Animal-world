@@ -69,7 +69,7 @@ public abstract class Collisions {
 	 * This function takes into account the pass by "reference" of java by returning the index of the piece of Food c1 collided with outside the function
 	 * @param c1 circle input
 	 * @param world main world
-	 * @param food
+	 * @param food index of the food c1 has collided with
 	 * @return true if circle collides with food and it indirectly returns the index of the food c1 has collided with
 	 */
 	public static boolean collideFood(Circle c1, World world, int food){

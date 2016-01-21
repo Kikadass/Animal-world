@@ -852,11 +852,13 @@ public abstract class Animal{
             }
 
         }
+        /*
         else if (this.foodTarget.getBody().getCenterX() != 0 && this.foodTarget.getBody().getCenterY() != 0){
             if (this.food <= this.maxFood / 3) {
                 // go to food
             }
         }
+        */
     }
 
     /**

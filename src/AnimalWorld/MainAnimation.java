@@ -1130,10 +1130,9 @@ public class MainAnimation extends Application {
     /**
      * Starts the program
      * @param stage1 main stage taken through the arguments
-     * @throws Exception
      */
     @Override
-	public void start(Stage stage1) throws Exception {
+	public void start(Stage stage1) {
         final Configuration config = new Configuration();
         config.StartLoad();
 

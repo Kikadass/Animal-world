@@ -47,7 +47,7 @@ public class Configuration implements Serializable{
 
     /**
      * Sets a Configuration with the one input
-     * @param config
+     * @param config main config
      */
     public void setConfiguration(Configuration config){
 		this.lastFile = config.lastFile;
