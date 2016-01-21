@@ -14,6 +14,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
+/**
+ *Configuration represents all the details needed to Load, Save or Modify a world
+ *
+ * @author Kikadass
+ */
 public class Configuration implements Serializable{
 	private String lastFile;
 	private int amountFood;
@@ -25,7 +30,10 @@ public class Configuration implements Serializable{
     private int height;
     private int width;
 
-	public Configuration(){
+    /**
+     * Constructs andinitializes a Configuration file
+     */
+    public Configuration(){
 		this.lastFile = "/defConfiguration.ser";
 		this.amountFood = 10;
         this.amountGrass = 1;
@@ -36,20 +44,12 @@ public class Configuration implements Serializable{
 		this.height = 720;
 		this.width = 1280;
 	}
-	
-	public Configuration(String lastFile, int amountFood, int amountGrass, int amountHabitats, int amountObstacles, int amountLions, int amountZebras, int height, int width){
-		this.lastFile = lastFile;
-		this.amountFood = amountFood;
-        this.amountGrass = amountGrass;
-        this.amountHabitats = amountHabitats;
-        this.amountObstacles = amountObstacles;
-		this.amountLions = amountLions;
-		this.amountZebras = amountZebras;
-        this.height = height;
-        this.width = width;
-	}
-	
-	public void setConfiguration(Configuration config){
+
+    /**
+     * Sets a Configuration with the one input
+     * @param config
+     */
+    public void setConfiguration(Configuration config){
 		this.lastFile = config.lastFile;
 		this.amountFood = config.amountFood;
         this.amountGrass = config.amountGrass;
@@ -61,7 +61,10 @@ public class Configuration implements Serializable{
         this.width = config.width;
 	}
 
-	public void EditConfig2(){
+    /**
+     *The user can Edit the configuration through a GUI based on one single menu
+     */
+    public void EditConfig2(){
 
 		//Creating a GridPane container
 		GridPane grid = new GridPane();
@@ -227,10 +230,10 @@ public class Configuration implements Serializable{
 						if (Integer.parseInt(height.getText()) != getHeight() || Integer.parseInt(width.getText()) != getWidth()) {
                             setHeight(Integer.parseInt(height.getText()));
                             setWidth(Integer.parseInt(width.getText()));
-                            NewMenu.setStartOver();
+                            MainAnimation.setStartOver();
                         }
                         stage.close();
-                        NewMenu.setStartOver();
+                        MainAnimation.setStartOver();
                     }
                     else label.setText("Height and width have to be greater than 300.");
 
@@ -278,7 +281,10 @@ public class Configuration implements Serializable{
         stage.showAndWait();
 	}
 
-	public void EditConfig1(){
+    /**
+     *The user can Edit the configuration with continuous Pop ups
+     */
+    public void EditConfig1(){
 		String check = null;
 
         do {
@@ -351,10 +357,10 @@ public class Configuration implements Serializable{
 	}
 
     /**
-     * I think those are java docs comments
+     * The User can create a new Configuration and save it in a new directory through a pop up and the EditConfig2
      *
      */
-    public void NewConfiguration2(){
+    public void newConfiguration(){
         Stage stage = new Stage();
 
         FileChooser fileChooser = new FileChooser();
@@ -369,27 +375,14 @@ public class Configuration implements Serializable{
 
             this.lastFile = file.getPath();
             this.EditConfig2();
+            this.EndSave();
         }
     }
 
-	public void NewConfiguration1(){
-		String check = null;
-        do {
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("New Location");
-            dialog.setHeaderText("What is the location where you want to safe the config file?");
-            Optional<String> result = dialog.showAndWait();
-
-            if (result.isPresent()) {
-                check = result.get();
-            }
-        }while(check == null);
-		this.lastFile = check;
-		
-		this.EditConfig2();
-	}
-
-	public void OpenConfigurationFile2(){
+    /**
+     * Opens a configuration chose by the user through a FileChooser
+     */
+    public void openConfigurationFile(){
 		Stage stage = new Stage();
 
 		FileChooser fileChooser = new FileChooser();
@@ -402,101 +395,144 @@ public class Configuration implements Serializable{
         if (file != null) {
             this.lastFile = file.getPath();
             this.Load();
-            NewMenu.setStartOver();
+            MainAnimation.setStartOver();
+            this.EndSave();
         }
 	}
 
-	public void OpenConfigurationFile1(){
-		String location = null;
-        do {
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("File Location");
-            dialog.setHeaderText("What is the location of the config file?");
-            Optional<String> result = dialog.showAndWait();
 
-            if (result.isPresent()) {
-                location = result.get();
-            }
-        }while(location == null);
-
-        System.out.println(location);
-        this.lastFile = location;
-		this.Load();
-	}
-	
-	public String getLastFile(){
-		return this.lastFile;
-	}
-	
-	public void setLastFile(String lastFile){
-		this.lastFile = lastFile;
-	} 
-	
-	public int getFood(){
-		return this.amountFood;
-	}
-	
-	public void setFood(int amountFood){
+    /**
+     * AmountFood Setter
+     *
+     * @param amountFood amount of food in the world
+     */
+    public void setFood(int amountFood){
 		this.amountFood = amountFood;
 	}
 
-    public int getGrass(){
-        return this.amountGrass;
-    }
-
+    /**
+     * Grass Setter
+     * @param amountGrass amount of Grass circles in the world
+     */
     public void setGrass(int amountGrass){
         this.amountGrass = amountGrass;
     }
 
-    public int getHabitats() {
-        return amountHabitats;
-    }
-
+    /**Habitats Setter
+     * @param amountHabitats amount of Habitats in the world
+     */
     public void setHabitats(int amountHabitats) {
         this.amountHabitats = amountHabitats;
     }
 
-    public int getObstacles(){
-		return this.amountObstacles;
-	}
-	
-	public void setObstacles(int amountObstacles){
+    /**
+     * Obstacles Setter
+     * @param amountObstacles amount of Obstacles in the world
+     */
+    public void setObstacles(int amountObstacles){
 		this.amountObstacles = amountObstacles;
-	} 
-	
-	public int getLions(){
-		return this.amountLions;
 	}
 
-	public void setLions(int amountBugs){
-		this.amountLions = amountBugs;
+    /**
+     * Lions Setter
+     * @param amountLions amount of Lions in the world
+     */
+    public void setLions(int amountLions){
+		this.amountLions = amountLions;
 	}
 
-    public int getZebras(){
-        return this.amountZebras;
+    /**
+     * Zebras Setter
+     * @param amountZebras amount of Zebras in the world
+     */
+    public void setZebras(int amountZebras){
+        this.amountZebras = amountZebras;
     }
 
-    public void setZebras(int amountBugs){
-        this.amountZebras = amountBugs;
-    }
-
-    public int getWidth(){
-		return this.width;
-	}
-	
-	public void setWidth(int width){
+    /**
+     * Width Setter
+     * @param width width of the world in pixels
+     */
+    public void setWidth(int width){
 		this.width = width;
 	}
 
-    public int getHeight() {
-        return height;
-    }
-
+    /**Height Setter
+     * @param height Height of the world in pixels
+     */
     public void setHeight(int height) {
         this.height = height;
     }
 
-	public void displayConfig(){
+    /**
+     * AmountFood Getter
+     * @return amount of food that has to be created
+     */
+    public int getFood(){
+        return this.amountFood;
+    }
+
+    /**
+     * Grass Getter
+     * @return amount of Grass circles in the world
+     */
+    public int getGrass(){
+        return this.amountGrass;
+    }
+
+    /**
+     * Habitats Getter
+     * @return amount of Habitats in the world
+     */
+    public int getHabitats() {
+        return amountHabitats;
+    }
+
+    /**
+     * Obstacles Setter
+     * @return amount of Obstacles in the world
+     */
+    public int getObstacles(){
+        return this.amountObstacles;
+    }
+
+    /**
+     * Lions Getter
+     * @return amount of Lions in the world
+     */
+    public int getLions(){
+        return this.amountLions;
+    }
+
+    /**
+     * Zebras Getter
+     * @return amount of Zebras in the world
+     */
+    public int getZebras(){
+        return this.amountZebras;
+    }
+
+    /**
+     * Width Getter
+     * @return width of the world in pixels
+     */
+    public int getWidth(){
+        return this.width;
+    }
+
+    /**
+     * Height Getter
+     * @return height of the world in pixels
+     */
+    public int getHeight() {
+        return height;
+    }
+
+
+    /**
+     * Displays the All the Configuration throught an Alert.
+     */
+    public void displayConfig(){
 		String print;
 
         String nameOfFile;
@@ -529,8 +565,12 @@ public class Configuration implements Serializable{
         alert.showAndWait();
 
 	}
-	
-	public void displayMap(){
+
+    /**
+     * Displays The amounts of each thing in the world and its size
+     *
+     */
+    public void displayMap(){
 		String print;
 		print = "Amount of Food: " + this.amountFood + "\n" +
                 "Amount of Grass: " + this.amountGrass + "\n" +
@@ -548,8 +588,11 @@ public class Configuration implements Serializable{
         alert.getDialogPane().setMaxWidth(300);
         alert.showAndWait();
 	}
-	
-	public void Save(){
+
+    /**
+     * Saves a Configuration File in the "lastFile" directory
+     */
+    public void Save(){
 		try{
 	         FileOutputStream fileOut = new FileOutputStream(this.lastFile);
 	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -564,6 +607,9 @@ public class Configuration implements Serializable{
 		this.EndSave();
 	}
 
+    /**
+     * Modifies the lastFile of the Configuration and executes Save()
+     */
     public void SaveAs(){
         Stage stage = new Stage();
 
@@ -583,6 +629,9 @@ public class Configuration implements Serializable{
         }
     }
 
+    /**
+     * Saves in the default Configuration file "defConfiguration.ser" the last Configuration used
+     */
     public void EndSave(){
 		try{
 	         FileOutputStream fileOut = new FileOutputStream("defConfiguration.ser");
@@ -596,8 +645,14 @@ public class Configuration implements Serializable{
 	          i.printStackTrace();
 	      }
 	}
-	
-	public static Configuration tryLoad(String lastFile){
+
+    /**
+     * Tries to load a Configuration file in the directory given
+     *
+     * @param lastFile directory given (location)
+     * @return Configuration file found in the given directory or If not found it returns a null configuration file
+     */
+    public static Configuration tryLoad(String lastFile){
 		Configuration e = null;
 		
 		try{
@@ -618,10 +673,20 @@ public class Configuration implements Serializable{
 		}
 		return e;
 	}
-	
-	public void StartLoad(){
+
+    /**
+     * Loads the starting file
+     *
+     * Tries to load the default configuraion file
+     * if found
+     *      if the lastFile is not the default configuration file it tryes to load that file
+     *      else ir creates a default configuration file
+     * else it creates one
+     *
+     * finally it displays it
+     */
+    public void StartLoad(){
 		Configuration e = tryLoad("defConfiguration.ser");
-		//e.lastFile = "defConfiguration.ser";
 
         if (e == null){
             e = new Configuration();
@@ -629,6 +694,9 @@ public class Configuration implements Serializable{
 
 		if (!e.lastFile.equals("/defConfiguration.ser")){
 			e = tryLoad(e.lastFile);
+            if (e == null){
+                e = new Configuration();
+            }
 			e.Save();
 		}
 
@@ -638,11 +706,22 @@ public class Configuration implements Serializable{
 
 		this.setConfiguration(e);
 	}
-	
-	public void Load(){
+
+    /**
+     *
+     * Loads a configuration in lastFile directory
+     * if not found it creates a default config file
+     *
+     * finally it dislays it
+     */
+    public void Load(){
 		Configuration e;
 
 		e = tryLoad(this.lastFile);
+
+        if (e == null){
+            e = new Configuration();
+        }
 		
 		System.out.println("Deserialized Configuration...");
 		e.displayConfig();

@@ -6,12 +6,20 @@ import javafx.scene.text.Font;
 import java.util.Random;
 
 /**
+ * Zebra represents the Zebra type of animal in the world
+ *
  * Created by Kikadass on 19/01/2016.
+ *
+ * @author Kikadass
  */
 public class Zebra extends Animal{
     private static int counter;
     private String[] names = {"Alex", "Melvin"};
 
+    /**
+     * Constructs Zebra and initializes it
+     * @param world world of the animation
+     */
     public Zebra(World world){
         Random rnd = new Random();
         this.setName(names[rnd.nextInt(2)]);
@@ -27,13 +35,8 @@ public class Zebra extends Animal{
         this.setSize(rnd.nextInt(10)+10);
         this.setSmellRange(rnd.nextInt(10)+(int)getBody().getRadius()*3);
         this.setAge(0);
-        this.setForgetfulness(rnd.nextInt(1000));
-        this.setNestX(20);
-        this.setNestY(20);
         this.setAngleRange(rnd.nextInt(10)+20);
         this.setLifeExpectancy(rnd.nextInt(1500)+4000);
-        this.setMinSize(10);
-        this.setMaxSize(20);
         this.addFoodPreferences("NonMeat");
         this.addFoodPreferences("Grass");
 
@@ -72,10 +75,17 @@ public class Zebra extends Animal{
         addCounter();
     }
 
+    /**
+     * Adds 1 to the counter
+     *
+     */
     public void addCounter(){
         counter++;
     }
 
+    /**
+     *Restarts the counter
+     */
     public static void restartCounter(){counter = 0;}
 
 }

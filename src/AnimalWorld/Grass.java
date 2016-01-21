@@ -5,10 +5,17 @@ import javafx.scene.paint.Color;
 import java.util.Random;
 
 /**
+ * Grass represents all the grass in the world
  * Created by Kikadass on 19/01/2016.
+ *
+ * @author Kikadass
  */
 public class Grass extends Food {
 
+    /**
+     * Constructs and initializes Grass
+     * @param world main world
+     */
     public Grass(World world) {
         Random rnd = new Random();
         this.setEnergy(rnd.nextInt(100)+10);
@@ -22,6 +29,9 @@ public class Grass extends Food {
         this.setPos(world);
     }
 
+    /**
+     * Updates grass in order to grow and get poisonous
+     */
     public void update(){
         this.setEnergy(this.getEnergy() + 0.1);
         this.getBody().setRadius(this.getEnergy()/10);
@@ -29,7 +39,7 @@ public class Grass extends Food {
         Random rnd = new Random();
         int chance = rnd.nextInt(100000);
 
-        if (chance == 20){
+        if (chance == 1){
             setPoisonous();
         }
     }

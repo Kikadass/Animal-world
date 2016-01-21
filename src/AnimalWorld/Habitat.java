@@ -6,6 +6,11 @@ import javafx.scene.shape.Circle;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Habitat represents all the Habitats in the world where Animals can live and go to gan energy
+ *
+ * @author Kikadass
+ */
 public class Habitat {
     private Circle area = new Circle();
 	private Circle body = new Circle();
@@ -15,7 +20,11 @@ public class Habitat {
     private int maxFood;
     private int Food = 0;
 
-	public Habitat(World world){
+    /**
+     * Constructs and initialises Habitat
+     * @param world main world
+     */
+    public Habitat(World world){
 		Random rnd = new Random();
 
         // setting radius
@@ -45,62 +54,68 @@ public class Habitat {
 	}
 
 
-
-	public Circle getBody() {
+    /**
+     * Body Getter
+     *
+     * @return Habitat Body: invisible circle in the middle of the Habbitats area
+     */
+    public Circle getBody() {
 		return body;
 	}
 
+    /**
+     * MaxCapacity Getter
+     * @return maximum amount of animals that fit in the habitat at the same time
+     */
     public int getMaxCapacity() {
         return maxCapacity;
     }
 
-    public int getMaxFood() {
-        return maxFood;
-    }
-
+    /**
+     * Specie Getter
+     * @return species for which the Habitat is exclusive
+     */
     public int getSpecie() {
         return specie;
     }
 
-    public int getFood() {
-        return Food;
-    }
-
+    /**
+     * Area Getter
+     * @return Habbitat Area: Visible Circle that represents the Habitat, but the animal has to get to the middle to enter the habitat
+     */
     public Circle getArea() {
         return area;
     }
 
+    /**
+     * AmountOfAnimals Getter
+     * @return Amount of animals inside the habbitat at that instant
+     */
     public int getAmountOfAnimals(){
         return animalList.size();
     }
 
-    public void setArea(Circle area) {
-        this.area = area;
-    }
-
-
-    public void setFood(int food) {
-        this.Food = food;
-    }
-
+    /**
+     * Specie Getter
+     * @param specie species for which the Habitat is exclusive
+     */
     public void setSpecie(int specie) {
         this.specie = specie;
     }
 
-    public void setMaxFood(int maxFood) {
-        this.maxFood = maxFood;
-    }
-
-    public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
-    }
-
-	public void setBody(Circle body) {
-		this.body = body;
-	}
-
+    /**
+     * Adds an animal into the Habbitat
+     *
+     * Adds animal given into the animalList of the Habbitat
+     * Feeds the animal that has arrived qith the supplies
+     * Takes the Food that the animals carries and stores it
+     *
+     * @param animal animal that has arrived into the habitat
+     */
     public void addAnimal(Animal animal){
         this.animalList.add(animal);
+
+
         //eat
         if (animal.getFood() + this.Food < animal.getMaxFood()){
             this.Food = 0;
@@ -110,6 +125,7 @@ public class Habitat {
             this.Food = (int)(this.Food - animal.getMaxFood() - animal.getFood());
             animal.setFood(animal.getMaxFood());
         }
+
 
         //put food that he is carrying into the habitat
         if (this.Food + (int) animal.getFoodCarring() >= this.maxFood){
@@ -123,6 +139,11 @@ public class Habitat {
 
     }
 
+    /**
+     * Updates the habbitat adding energy to every animal inside it
+     *
+     * If animal is full of energy the habitat releases him into the world
+     */
     public void update(){
         for (int i = 0; i < this.animalList.size(); i++){
             this.animalList.get(i).setEnergy(this.animalList.get(i).getEnergy()+this.animalList.get(i).getMetabolism()*2);

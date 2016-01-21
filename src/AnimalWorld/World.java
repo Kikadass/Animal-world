@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import javafx.scene.Group;
 
 
+/**
+ *World represents the Whole world in which the animals are going to live
+ * @author Kikadass
+ */
 public class World {
     private ArrayList<Group> targetsGroup = new  ArrayList<Group>();
     private Group foodGroup = new Group();
@@ -23,8 +27,14 @@ public class World {
 	private int day;
 	private int year;
     private static boolean full = false;
-	
-	public World(Group root, Configuration config, int animalTypes){
+
+    /**
+     * Constructs and initializes a World with a root, a config file and animal types chosen
+     * @param root main root
+     * @param config    config file
+     * @param animalTypes   chosen animal types
+     */
+    public World(Group root, Configuration config, int animalTypes){
 
         Lion.restartCounter();
 		Zebra.restartCounter();
@@ -65,8 +75,8 @@ public class World {
             root.getChildren().add(g);
         }
 
-		this.width =  NewMenu.getWidth();
-		this.height =  NewMenu.getHeight();
+		this.width =  MainAnimation.getWidth();
+		this.height =  MainAnimation.getHeight();
 
 		// creating Obstacles
 		for (int i = 0; i < config.getObstacles() && !full; i++){
@@ -113,7 +123,10 @@ public class World {
         hideAll();
 	}
 
-	public void addObstacle(){
+    /**
+     *Adds obstacles to the world
+     */
+    public void addObstacle(){
 		Obstacle obstacle = new Obstacle(this);
 
         if (obstacle.getBody().getRadius() > 0){
@@ -121,8 +134,11 @@ public class World {
             obstacleGroup.get(0).getChildren().add(obstacle.getBody());
         }
 	}
-	
-	public void addFood() {
+
+    /**
+     *Adds Food to the World
+     */
+    public void addFood() {
         Food food = new Food(this);
 
         if (food.getBody().getRadius() > 0) {
@@ -132,6 +148,9 @@ public class World {
         else full = true;
     }
 
+    /**
+     *Adds a habitat to the world
+     */
     public void addHabitat(){
         Habitat habitat = new Habitat(this);
 
@@ -142,7 +161,10 @@ public class World {
         else full = true;
     }
 
-	public void addGrass() {
+    /**
+     *adds grass to the world
+     */
+    public void addGrass() {
 		Grass food = new Grass(this);
 
 		if (food.getBody().getRadius() > 0) {
@@ -153,11 +175,19 @@ public class World {
 
     }
 
-	public void deleteFood(int i){
+    /**
+     * deletes food from the world
+     * @param i index for food that is going to be deleted
+     */
+    public void deleteFood(int i){
         foodList.remove(i);
         foodGroup.getChildren().remove(i);
 	}
 
+    /**
+     * Adds animal into the world
+     * @param i type of animal wanted
+     */
     public void addAnimal(int i){
         if (i == 0){
             addLion();
@@ -167,12 +197,11 @@ public class World {
 		}
     }
 
-    public void addAnimal(Animal animal, int i){
-        animalList.get(i).add(animal);
-        animalGroup.get(i).getChildren().add(animal.getBody());
-    }
-
-	public void addLion(){
+    /**
+     *Adds Lion into the world
+     *
+     */
+    public void addLion(){
 		Lion lion = new Lion(this);
 
         if (lion.getBody().getRadius() > 0) {
@@ -187,7 +216,10 @@ public class World {
 
     }
 
-	public void addZebra(){
+    /**
+     * Adds Zebra into the world
+     */
+    public void addZebra(){
 		Zebra zebra = new Zebra(this);
 
 		if (zebra.getBody().getRadius() > 0) {
@@ -201,7 +233,12 @@ public class World {
         else full = true;
     }
 
-	public void removeAnimal(int j, int i){
+    /**
+     * Removes chosen animal from the world
+     * @param j type of animal
+     * @param i exact animal
+     */
+    public void removeAnimal(int j, int i){
 		animalList.get(j).remove(i);
 		animalGroup.get(j).getChildren().remove(i);
 		smellRangeGroup.get(j).getChildren().remove(i);
@@ -210,6 +247,11 @@ public class World {
         idsGroup.get(j).getChildren().remove(i);
 	}
 
+    /**
+     * Kills a chosen animal and it converts it into a certain type of meat
+     * @param j type of animal
+     * @param i exact animal
+     */
     public void dieAnimal(int j, int i){
         Food food;
         if (j == 0) {
@@ -230,90 +272,158 @@ public class World {
         removeAnimal(j, i);
     }
 
-	public int getDay() {
+    /**
+     * Day Getter
+     * @return day
+     */
+    public int getDay() {
 		return day;
 	}
 
-	public int getWidth(){
+    /**
+     * World width getter
+     * @return world's width
+     */
+    public int getWidth(){
 		return this.width;
 	}
-	
-	public int getHeight(){
+
+    /**
+     * World's Height Getter
+     * @return world's height
+     */
+    public int getHeight(){
 		return this.height;
 	}
 
-	public int getYear() {
+    /**
+     * Year getter
+     * @return year
+     */
+    public int getYear() {
 		return year;
 	}
 
+    /**
+     * AnimalList getter
+     * @return All animals in a 2D array
+     */
     public ArrayList<ArrayList<Animal>> getAnimalList() {
         return animalList;
     }
 
+    /**
+     * ObstacleList Getter
+     * @return All obstacles in an array
+     */
     public ArrayList<Obstacle> getObstacleList() {
         return obstacleList;
     }
 
+    /**
+     * HabitatsList Getter
+     * @return All habitats in an array
+     */
     public ArrayList<Habitat> getHabitatsList() {
         return habitatsList;
     }
 
+    /**
+     * FoodList Getter
+     * @return All food in an array
+     */
     public ArrayList<Food> getFoodList() {
         return foodList;
     }
 
-    public void setAnimalList(ArrayList<ArrayList<Animal>> animalList) {
-        this.animalList = animalList;
-    }
-
+    /**
+     * Year Setter
+     * @param year world's year
+     */
     public void setYear(int year) {
 		this.year = year;
 	}
 
-	public void setDay(int day) {
+    /**
+     * Day setter
+     * @param day world's day
+     */
+    public void setDay(int day) {
 		this.day = day;
 	}
 
-	public void setWidth(int width){
+    /**
+     * Width Setter
+     * @param width world's width
+     */
+    public void setWidth(int width){
 		this.width = width;
 	}
 
-	public void setHeight(int height){
+    /**
+     * Height Setter
+     * @param height world's height
+     */
+    public void setHeight(int height){
 		this.height = height;
 	}
 
-	public void hideSmellRange(){
+    /**
+     *Hides all Smell Ranges from the scene
+     */
+    public void hideSmellRange(){
 		for (Group g : smellRangeGroup) {
 			g.setVisible(false);
 		}
 	}
 
-	public void hideTargets(){
+    /**
+     *Hides all Targets from the scene
+     */
+    public void hideTargets(){
 		for (Group g : targetsGroup) {
 			g.setVisible(false);
 		}
 	}
 
-	public void hideStats(){
+    /**
+     *Hides all Stats from the scene
+     */
+    public void hideStats(){
 		for (Group g : statsGroup) {
 			g.setVisible(false);
 		}
 	}
 
+    /**
+     * Hides Specific Stats from a specific animal
+     * @param j animal type
+     * @param i exact animal
+     */
     public void hideSpecificStats(int j, int i){
         statsGroup.get(j).getChildren().get(i).setVisible(false);
     }
 
+    /**
+     * Hides All IDs
+     */
     public void hideID(){
         for (Group g : idsGroup) {
             g.setVisible(false);
         }
     }
 
+    /**
+     * Hides specific ID from a specific Type of animal
+     * @param i animal's type
+     */
     public void hideSpecificID(int i){
             idsGroup.get(i).setVisible(false);
     }
 
+    /**
+     *Hides all: Stats, Targets, ID's and Smell Ranges
+     */
     public void hideAll(){
         hideSmellRange();
         hideTargets();
@@ -321,10 +431,17 @@ public class World {
         hideID();
     }
 
+    /**
+     * Shows specific ID from a specific animal type
+     * @param i animal type
+     */
     public void showSpecificID(int i){
         idsGroup.get(i).setVisible(true);
     }
 
+    /**
+     * Shows All IDs
+     */
     public void showID(){
         for (Group g : idsGroup) {
             g.setVisible(true);
@@ -332,6 +449,9 @@ public class World {
 
     }
 
+    /**
+     *Shows All Smell Range
+     */
     public void showSmellRange(){
 		for (Group g : smellRangeGroup) {
 			g.setVisible(true);
@@ -339,29 +459,37 @@ public class World {
 
     }
 
+    /**
+     *Shows All Targets
+     */
     public void showTargets(){
 		for (Group g : targetsGroup) {
 			g.setVisible(true);
 		}
     }
 
+    /**
+     *Shows All Stats
+     */
     public void showStats(){
 		for (Group g : statsGroup) {
 			g.setVisible(true);
 		}
     }
 
+    /**
+     * Shows Specific Stats from a specifi animal
+     * @param j animal type
+     * @param i exact animal
+     */
     public void showSpecificStats(int j, int i){
        statsGroup.get(j).getChildren().get(i).setVisible(true);
     }
 
-    public void showAll(){
-        showID();
-        showSmellRange();
-        showStats();
-        showTargets();
-    }
 
+    /**
+     * Deletes all data from world
+     */
     public void deleteAll(){
         for (int i = 0; i < getAnimalList().size(); i++){
             while (0 < animalList.get(i).size()) {

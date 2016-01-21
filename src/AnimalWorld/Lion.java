@@ -5,11 +5,20 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+
+/**
+ * Lion represents all Lions in the world
+ * @author Kikadass
+ * @since Java 8.0
+ */
 public class Lion extends Predator {
 	private static int counter;
 	private String[] names = {"Alex", "Melvin"};
-	
-	public Lion(World world){
+
+    /**Constructs and initializes Lion inside the world
+     * @param world animation's world
+     */
+    public Lion(World world){
 		Random rnd = new Random();
 		this.setName(names[rnd.nextInt(2)]);
 		this.setID(counter);
@@ -23,14 +32,9 @@ public class Lion extends Predator {
 		this.setMinFoodCons(10);
         this.setSize(rnd.nextInt(10)+10);
         this.setSmellRange(rnd.nextInt(10)+(int)getBody().getRadius()*3);
-		this.setAge(0);			
-		this.setForgetfulness(rnd.nextInt(1000));
-		this.setNestX(20);
-		this.setNestY(20);
+		this.setAge(0);
 		this.setAngleRange(rnd.nextInt(10)+20);
-		this.setLifeExpectancy(rnd.nextInt(1500)+4000);	
-		this.setMinSize(10);
-		this.setMaxSize(20);
+		this.setLifeExpectancy(rnd.nextInt(1500)+4000);
 		this.addFoodPreferences("Meat");
 		this.addFoodPreferences("ZebraMeat");
 
@@ -66,12 +70,16 @@ public class Lion extends Predator {
 
 		addCounter();
 	}
-	
-	public void addCounter(){
+
+    /**
+     * Adds 1 to the Lion counter
+     */
+    public void addCounter(){
 		counter++;
 	}
 
-
-
-	public static void restartCounter(){counter = 0;}
+    /**
+     * Restarts the Lion counter
+     */
+    public static void restartCounter(){counter = 0;}
 }

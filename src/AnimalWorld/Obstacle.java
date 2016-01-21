@@ -4,10 +4,19 @@ import java.util.Random;
 
 import javafx.scene.shape.*;
 
+/**
+ *Obstacle represents the obstacles in the world
+ *
+ * @author Kikadass
+ */
 public class Obstacle{
 	private int weight;
 	private Circle Body = new Circle();
-	
+
+	/**
+	 * Constructs and initializes the Obstacle in the world
+	 * @param world animation's world
+	 */
 	public Obstacle(World world){
 		Random rnd = new Random();
 		this.weight = rnd.nextInt(200)+ 10;
@@ -28,39 +37,19 @@ public class Obstacle{
 
 
 	}
-	
-	public void setX(int x){
-		this.Body.setCenterX(x);
-	}
-	
-	public void setY(int y){
-		this.Body.setCenterY(y);
-	}
-	
-	public void setSize(int size){
-		this.Body.setRadius(size);
-	}
-	
-	public void setWeight(int weight){
-		this.weight = weight;
-	}
-	
-	public int getX(){
-		return (int) this.Body.getCenterX();
-	}
-	
-	public int getY(){
-		return (int) this.Body.getCenterY();
-	}
-	
-	public int getSize(){
-		return (int) this.Body.getRadius();
-	}
-	
+
+	/**
+	 * Weight Getter
+	 * @return Obstacle's weight
+	 */
 	public int getWeight(){
 		return this.weight;
 	}
-	
+
+	/**
+	 * Body Getter
+	 * @return Obstacle's Body
+	 */
 	public Circle getBody(){
 		return this.Body;
 	}

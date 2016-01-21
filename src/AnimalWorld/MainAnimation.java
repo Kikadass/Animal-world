@@ -17,7 +17,12 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class NewMenu extends Application {
+
+/**
+ *MainAnimation represents the main part of the animation of the Animal World and where the KeyFrame is created
+ *@author Kikadass
+ */
+public class MainAnimation extends Application {
 
     String[] animalTypes = {"Lion", "Zebra"};
     String[] foodTypes = {"Meat", "NonMeat", "Grass"};
@@ -33,60 +38,74 @@ public class NewMenu extends Application {
     static int cycle = 0;
     static int day = 4000; //4000 = 1min
 
+    /**
+     * Gives the Width of the animation
+     * @return width
+     */
     public static int getWidth() {
         return width;
     }
 
+    /**
+     * Gives the height of the animation
+     * @return  height
+     */
     public static int getHeight() {
         return height;
     }
 
+    /**
+     * Sets the height of the animation
+     * @param height height of the animation
+     */
     public static void setHeight(int height) {
-        NewMenu.height = height;
+        MainAnimation.height = height;
     }
 
+    /**
+     * Sets the width of the animation
+     * @param width width of the animation
+     */
     public static void setWidth(int width) {
-        NewMenu.width = width;
+        MainAnimation.width = width;
     }
 
+    /**
+     * Sets startOver pause and stop to true
+     *
+     * In order to restart the program with new config file or edited config
+     *
+     */
     public static void setStartOver(){
         startOver = true;
         pause = true;
         stop = true;
     }
 
+    /**
+     * Clears all the content from world
+     *
+     * In order to restart the program from fresh with no saved data
+     * @param world world of the animation
+     * @param stage1 main stage
+     * @param config config file
+     */
     public void clear(World world, Stage stage1, Configuration config){
         if (startOver) {
             //clear(world);
             world.deleteAll();
-            System.out.println(config.getZebras());
             stage1.hide();
             startOver = false;
             cycle = 0;
             mainProgram(stage1, config);
         }
-
-        /*//world.setAnimalList(null);
-       // int i = world.getAnimalList().get(0).size();
-        for (int i = 0; i < world.getAnimalList().size(); i++){
-            while ( 0 < world.getAnimalList().get(i).size()){
-                System.out.println(world.getAnimalList().get(i).size());
-                world.removeAnimal(i,0);
-                i--;
-            }
-        }
-
-        for (int i = 0; i < world.getAnimalList().size(); i++){
-            for (int j = 0; j < world.getAnimalList().get(i).size(); j++) {
-                System.out.println("                                                                       " + world.getAnimalList().get(i).size());
-                world.removeAnimal(i, j);
-                j--;
-            }
-            //i--;
-        }
-*/
     }
 
+    /**
+     * Adds a Life Form chosen by the user into the world
+     * @param world world of the animation
+     * @param config config file
+     */
     public void addLifeForm(final World world, final Configuration config){
         GridPane grid = new GridPane();
         Scene scene = new Scene(grid, 250, 100);
@@ -180,6 +199,15 @@ public class NewMenu extends Application {
 
     }
 
+    /**
+     * Opens a menu in order to choose a Life Form
+     *
+     * Gives the option of seeing the Life Form details
+     * Gives the option of modifying the Life Form details
+     * Gives the oprion of removing the Life Form from the world
+     * @param world world of the animation
+     * @param config config file
+     */
     public void chooseLifeForm(final World world, final Configuration config){
         GridPane grid = new GridPane();
         Scene scene = new Scene(grid, 300, 100);
@@ -399,6 +427,9 @@ public class NewMenu extends Application {
         stage.showAndWait();
     }
 
+    /**
+     *Displays the details of the application
+     */
     public void displayApplication(){
         String print  =
                         "Built since: 09/01/2016" + "\n" +
@@ -412,6 +443,9 @@ public class NewMenu extends Application {
         alert.showAndWait();
     }
 
+    /**
+     *Displays the details of the author
+     */
     public void displayAuthor(){
         String print  =
                     "Student number: 23021090" + "\n" +
@@ -427,7 +461,16 @@ public class NewMenu extends Application {
         alert.showAndWait();
     }
 
-	public MenuBar CreateMenuBar(final World world, final Stage stage1, final Configuration config) {
+    /**
+     * Creates the MenuBar with all its options
+     *
+     * File, View, Edit and Help
+     * @param world world of the animation
+     * @param stage1 main stage
+     * @param config config file
+     * @return menubar created
+     */
+    public MenuBar CreateMenuBar(final World world, final Stage stage1, final Configuration config) {
 
 		MenuBar menuBar = new MenuBar();
 
@@ -483,7 +526,7 @@ public class NewMenu extends Application {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				config.NewConfiguration2();
+				config.newConfiguration();
                 clear(world, stage1, config);
 			}
 		});
@@ -494,7 +537,7 @@ public class NewMenu extends Application {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				config.OpenConfigurationFile2();
+				config.openConfigurationFile();
                 clear(world, stage1, config);
 			}
 		});
@@ -686,6 +729,14 @@ public class NewMenu extends Application {
 		return menuBar;
 	}
 
+    /**
+     * Makes the Animals eat
+     *
+     * It calculates if the animals of one type are colliding with the food that they like and they can eat it and store it
+     * @param world world of the animation
+     * @param animalTypeList    list of a certain type of animals
+     * @param i type of animals
+     */
     public void eat(World world, ArrayList<Animal> animalTypeList, int i) {
         for (int j = 0; j < world.getFoodList().size(); j++) {
             if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.getFoodList().get(j).getBody())) {
@@ -749,10 +800,26 @@ public class NewMenu extends Application {
         }
     }
 
+    /**
+     * Calculates the distance between two points passed through the argument
+     * @param x1    x coordinate of the first point
+     * @param y1    y coordinate of the first point
+     * @param x2    x coordinate of the second point
+     * @param y2    y coordinate of the second point
+     * @return distance between the two points
+     */
     public double distance(double x1, double y1, double x2, double y2) {
         return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
     }
 
+    /**
+     * Updates a list of animals of a certain type
+     *
+     * Checks for collisions between animals and  obstacles, houses, food, other animals
+     * Calculates if the animals smell food or houses
+     * @param type  type of animals
+     * @param world world of the animation
+     */
     public void animalTypeUpdate(int type, World world){
         ArrayList<Animal> animalTypeList = world.getAnimalList().get(type);
 
@@ -916,6 +983,11 @@ public class NewMenu extends Application {
 
     }
 
+    /**
+     * Creates the whole animation given a stage and a configuration
+     * @param stage1 main stage
+     * @param config config file
+     */
     public void mainProgram(final Stage stage1, final Configuration config){
 
 
@@ -993,22 +1065,22 @@ public class NewMenu extends Application {
             @Override
             public void handle(ActionEvent t) {
 
-                NewMenu.setHeight((int)scene.getHeight());
-                NewMenu.setWidth((int)scene.getWidth());
+                MainAnimation.setHeight((int)scene.getHeight());
+                MainAnimation.setWidth((int)scene.getWidth());
 
-                pauseBtn.setLayoutX(NewMenu.getWidth() / 2 - 50);
-                pauseBtn.setLayoutY(NewMenu.getHeight() - 40);
+                pauseBtn.setLayoutX(MainAnimation.getWidth() / 2 - 50);
+                pauseBtn.setLayoutY(MainAnimation.getHeight() - 40);
 
-                stopBtn.setLayoutX(NewMenu.getWidth() / 2 + 10);
-                stopBtn.setLayoutY(NewMenu.getHeight() - 40);
+                stopBtn.setLayoutX(MainAnimation.getWidth() / 2 + 10);
+                stopBtn.setLayoutY(MainAnimation.getHeight() - 40);
 
                 rectangle.setY(getHeight()-50);
-                rectangle.setWidth(NewMenu.getWidth());
+                rectangle.setWidth(MainAnimation.getWidth());
 
-                menuBar.setMinWidth(NewMenu.getWidth());
+                menuBar.setMinWidth(MainAnimation.getWidth());
 
-                world.setWidth(NewMenu.getWidth());
-                world.setHeight(NewMenu.getHeight());
+                world.setWidth(MainAnimation.getWidth());
+                world.setHeight(MainAnimation.getHeight());
 
 
 
@@ -1037,15 +1109,6 @@ public class NewMenu extends Application {
                     }
 
                 }
-                /*if (startOver){
-                    world.deleteAll();
-                    clear(world);
-                    System.out.println(config.getZebras());
-                    stage1.hide();
-                    startOver = false;
-                    stopBtn.setVisible(false);
-                    mainProgram(stage1, config);
-                }*/
                 if (exit){
                     stage1.close();
                 }
@@ -1064,7 +1127,12 @@ public class NewMenu extends Application {
 
     }
 
-	@Override
+    /**
+     * Starts the program
+     * @param stage1 main stage taken through the arguments
+     * @throws Exception
+     */
+    @Override
 	public void start(Stage stage1) throws Exception {
         final Configuration config = new Configuration();
         config.StartLoad();
@@ -1072,7 +1140,11 @@ public class NewMenu extends Application {
         mainProgram(stage1, config);
     }
 
-	public static void main(String[] args) {
+    /**
+     * launches the program
+     * @param args main arguments
+     */
+    public static void main(String[] args) {
             launch(args);
 
 	}

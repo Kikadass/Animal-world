@@ -16,6 +16,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Animal is an abstract class that represents any animal in the world
+ *@author Kikadass
+ */
 public abstract class Animal{
 	private Circle Body= new Circle(), smellRange = new Circle();
     private Text stats = new Text();
@@ -30,14 +34,9 @@ public abstract class Animal{
 	private double foodCarring;
 	private int minFoodCons;	// minimum of calories that the meat has to be in order to eat it
 	private int age;			// in days
-	private int forgetfulness;
-	private int nestX;
-	private int nestY;
 	private int angleRange;			// angleRange of normal movement
     private int lastAngle;
 	private int lifeExpectancy;	// how old are can that specie live for
-	private int minSize;
-	private int maxSize;
     private boolean poisoned = false;
 	private double dx;
 	private double dy;
@@ -45,17 +44,22 @@ public abstract class Animal{
     private ArrayList<String> foodPreferences = new ArrayList<String>();
     private Target houseTarget = new Target(0, 0, 1);
     private Target foodTarget;
-    private Target waterTarget;
     private Target mainTarget = new Target (0,0, 1);
     private Target provisionalTarget = new Target(0, 0, 3);
     private int byeHome = 0;
     private int tries = 0;
     private int collisionCycles = -50;
 
+    /**
+     * Constructs and initializes Animal
+     */
     public Animal(){
 		this.energy = 0;
 	}
 
+    /**
+     * Creates a Window so that the user can modify the attributes of an animal
+     */
     public void modifyAnimal(){
 
         //Creating a GridPane container
@@ -242,122 +246,181 @@ public abstract class Animal{
         stage.showAndWait();
     }
 
-	public String getName(){
+    /**
+     * Name Getter
+     * @return the animal's name
+     */
+    public String getName(){
 		return this.name;
 	}
-	
-	public Text getID(){
+
+    /**
+     * ID Getter
+     * @return animal's ID
+     */
+    public Text getID(){
 		return this.ID;
 	}
-	
-	public double getEnergy(){
+
+    /**
+     * Energy Getter
+     * @return animal's energy
+     */
+    public double getEnergy(){
 		return this.energy;
 	}
-	
-	public int getStrenght(){
+
+    /**
+     * Strenght Getter
+     * @return animal's strenght
+     */
+    public int getStrenght(){
 		return this.strenght;
 	}
-	
-	public double getFoodCarring(){
+
+    /**
+     * FoodCarring Getter
+     * @return animal's amount of food that its carrying
+     */
+    public double getFoodCarring(){
 		return this.foodCarring;
 	}
-	
-	public int getMinFoodCons(){
+
+    /**
+     * MinFoodCons Getter
+     * @return minimum amount energy that an food needs to have in order to eat it
+     */
+    public int getMinFoodCons(){
 		return this.minFoodCons;
 	}
-	
-	public Circle getSmellRange(){
+
+    /**
+     * SmellRange Getter
+     * @return animal's Smell Range as a circle
+     */
+    public Circle getSmellRange(){
 		return this.smellRange;
 	}
-	
-	public int getAge(){
+
+    /**
+     * Age Getter
+     * @return animal's Getter
+     */
+    public int getAge(){
 		return this.age;
 	}
-	
-	public int getForgetfulness(){
-		return this.forgetfulness;
-	}
-	
-	public int getNestX(){
-		return this.nestX;
-	}
-	
-	public int getNestY(){
-		return this.nestY;
-	}
-	
-	public int getAngleRange(){
+
+    /**
+     * AngleRange Getter
+     *
+     * @return animal's angle range to move in
+     */
+    public int getAngleRange(){
 		return this.angleRange;
 	}
-	
-	public int getLifeExpectancy(){
+
+    /**
+     * LifeExpectancy Getter
+     * @return animal's LifeExpectancy
+     */
+    public int getLifeExpectancy(){
 		return this.lifeExpectancy;
 	}
-	
-	public int getSize(){
-		return (int) this.Body.getRadius();
-	}
-	
-	public int getMinSize(){
-		return this.minSize;
-	}
-	
-	public int getMaxSize(){
-		return this.maxSize;
-	}
-	
-	public double getDx(){
-		return this.dx;
-	}
-	
-	public double getDy(){
-		return this.dy;
-	}
-	
-	public Circle getBody(){
+
+    /**
+     * Body Getter
+     * @return animal's Body as a Circle
+     */
+    public Circle getBody(){
 		return this.Body;
 	}
 
-	public double getSpeed() {
+    /**
+     * Speed Getter
+     * @return animal's speed
+     */
+    public double getSpeed() {
 		return this.speed;
 	}
 
+    /**
+     * Provisional Target Getter
+     * @return animal's provisional target
+     */
     public Target getProvisionalTarget() {
         return provisionalTarget;
     }
 
+    /**
+     * Food Getter
+     * @return animal's amount of food consumed (in its body)
+     */
     public double getFood() {
         return food;
     }
 
+    /**
+     * MaxFood Getter
+     * @return animal's maximum amount of food consumption
+     */
     public int getMaxFood() {
         return maxFood;
     }
 
+    /**
+     * MaxEnergy Getter
+     * @return animal's maximum amount of energy
+     */
     public int getMaxEnergy() {
         return maxEnergy;
     }
 
+    /**
+     * Stats Getter
+     * @return animal's Stats as Text
+     */
     public Text getStats() {
         return stats;
     }
 
+    /**
+     * MainTarget Getter
+     * @return animal's main target
+     */
     public Target getMainTarget() {
         return mainTarget;
     }
 
+    /**
+     * Metabolism Getter
+     * @return animal's metabolism
+     */
     public double getMetabolism() {
         return metabolism;
     }
 
-	public int getPosX(){
+    /**
+     * PosX Getter
+     * @return anmimal's position x in the world in pixels
+     */
+    public int getPosX(){
 		return (int)(this.Body.getCenterX() + this.Body.getTranslateX());
 	}
 
-	public int getPosY(){
+    /**
+     * PosY Getter
+     * @return animal's position y in the world in pixels
+     */
+    public int getPosY(){
 		return (int)(this.Body.getCenterY() + this.Body.getTranslateY());
 	}
 
+    /**
+     * Calculates animal's Provisional Target taking into account the main target
+     *
+     * Not taking into account the angle Range
+     * The aim is to get to the main target directly
+     */
     public void getLocalTarget(){
         double angle = getAngleTo(this.mainTarget.getBody().getCenterX(), this.mainTarget.getBody().getCenterY());
         int path = (int)this.smellRange.getRadius();
@@ -367,6 +430,10 @@ public abstract class Animal{
         this.provisionalTarget.getBody().setCenterY(tY);
     }
 
+    /**
+     * Calculates a Random animal's Provisional Target taking into account the angleRange
+     * not taking into account the main target
+     */
     public void getRandomLocalTarget(){
         Random rand = new Random();
         int randomAttemptTracker = 0;
@@ -389,74 +456,142 @@ public abstract class Animal{
         this.lastAngle = anAngle;
     }
 
+    /**
+     * FoodPreferences Getter
+     * @return animal's Food Preferences in an array of strings
+     */
     public ArrayList<String> getFoodPreferences() {
         return foodPreferences;
     }
 
+    /**
+     * Checks if animal is poisoned
+     * @return true if animal is poisoned
+     */
     public boolean isPoisoned() {
         return poisoned;
     }
 
+    /**
+     * HouseTarget Getter
+     * @return  animal's house target
+     */
     public Target getHouseTarget() {
         return houseTarget;
     }
 
+    /**
+     * ByeHome Getter
+     * @return animal's time for not checking collisions with the habbitat
+     */
     public int getByeHome() {
         return byeHome;
     }
 
+    /**
+     * Tries Getter
+     * @return animal's amount of tries to get to a main target but colliding with obstacles
+     */
     public int getTries() {
         return tries;
     }
 
+    /**
+     * CollisionCycles Getter
+     * @return Cycle in which the animal collided against an obstacle while trying to go to the main target
+     */
     public int getCollisionCycles() {
         return collisionCycles;
     }
 
+    /**
+     * Collision Cycles Setter
+     * @param collisionCycles Cycle in which the animal collided against an obstacle while trying to go to the main target
+     */
     public void setCollisionCycles(int collisionCycles) {
         this.collisionCycles = collisionCycles;
     }
 
 
+    /**
+     * Tries Setter
+     * @param tries animal's amount of tries to get to a main target but colliding with obstacles
+     */
     public void setTries(int tries) {
         this.tries = tries;
     }
 
+    /**
+     * ByeHome Setter
+     * @param byeHome animal's time for not checking collisions with the habbitat
+     */
     public void setByeHome(int byeHome) {
         this.byeHome = byeHome;
     }
 
+    /**
+     * HouseTarget Setter
+     * @param houseTarget animal's house target
+     */
     public void setHouseTarget(Target houseTarget) {
         this.houseTarget = houseTarget;
     }
 
+    /**
+     *Poisoned Setter
+     * @param poisoned boolean that states if the animal is poisoned or not
+     */
     public void setPoisoned(boolean poisoned) {
         this.poisoned = poisoned;
     }
 
+    /**
+     * Adds a Food Preference into the array of Food Preferences
+     * @param foodPreference food Preference to add into the Array
+     */
     public void addFoodPreferences(String foodPreference) {
         this.foodPreferences.add(foodPreference);
     }
 
+    /**
+     * Metabolism Setter
+     * @param metabolism amount of food and energy consumed in every cycle
+     */
     public void setMetabolism(double metabolism) {
         this.metabolism = metabolism;
     }
 
+    /**
+     * Main Target Setter with a target as input
+     * @param mainTarget animal's main target
+     */
     public void setMainTarget(Target mainTarget) {
         this.mainTarget = mainTarget;
     }
 
+    /**
+     * Main Target Setter with x and y coordinates and radius
+     * @param x x coordinate in pixels
+     * @param y y coordinate in pixels
+     * @param rad Main target radius
+     */
     public void setMainTarget(double x, double y, double rad) {
         this.mainTarget.getBody().setCenterX(x);
         this.mainTarget.getBody().setCenterY(y);
         this.mainTarget.getBody().setRadius(rad);
     }
 
+    /**
+     * Clears the Main Target setting it's center position at (0, 0)
+     */
     public void clearMainTarget() {
         this.mainTarget.getBody().setCenterX(0);
         this.mainTarget.getBody().setCenterY(0);
     }
 
+    /**
+     * Animal Stats Setter with maximum 2 decimal figures
+     */
     public void setStats() {
         String print = "MaxFood: " + this.maxFood + "\n" +
                 "Food: " + String.format( "%.2f", this.food) + "\n" +
@@ -469,27 +604,51 @@ public abstract class Animal{
         this.stats.setTranslateY(this.getBody().getTranslateY());
     }
 
+    /**
+     * Max Enery Setter
+     * @param maxEnergy animal's maximum amount of energy
+     */
     public void setMaxEnergy(int maxEnergy) {
         this.maxEnergy = maxEnergy;
     }
 
+    /**
+     * MaxFood Setter
+     * @param maxFood animal's maximum amount of food in its body
+     */
     public void setMaxFood(int maxFood) {
         this.maxFood = maxFood;
     }
 
+    /**
+     * Food Setter
+     * @param food animal's amount of food in its body
+     */
     public void setFood(double food) {
         this.food = food;
     }
 
-	public void setSpeed(double speed) {
+    /**
+     * Speed Setter
+     * @param speed animal's speed
+     */
+    public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 
-	public void setName(String name){
+    /**
+     * Name Setter
+     * @param name animal's name
+     */
+    public void setName(String name){
 		this.name = name;
 	}
-	
-	public void setID(int ID){
+
+    /**
+     * ID Setter
+     * @param ID animal's ID
+     */
+    public void setID(int ID){
 		String print = "ID: " + ID + "\n";
 
 		this.ID.setText(print);
@@ -497,86 +656,107 @@ public abstract class Animal{
 		this.ID.setTranslateY(this.getBody().getTranslateY());
 	}
 
-	public void setEnergy(double energy){
+    /**
+     * Energy Setter
+     * @param energy animal's energy
+     */
+    public void setEnergy(double energy){
 		this.energy = energy;
 	}
-	
-	public void setStrenght(int strenght){
+
+    /**
+     * Strenght Setter
+     * @param strenght animals strength
+     */
+    public void setStrenght(int strenght){
 		this.strenght = strenght;
 	}
-	
-	public void setFoodCarring(double foodCarring){
+
+    /**
+     * FoodCarring Setter
+     * @param foodCarring animal's amount of food that its carrying
+     */
+    public void setFoodCarring(double foodCarring){
 		this.foodCarring = foodCarring;
 	}
-	
-	public void setMinFoodCons(int minFoodCons){
+
+    /**
+     * MinFoodConsumtion Setter
+     * @param minFoodCons animal's minimum acceptable amount of energy that food needs to have in order to eat it
+     */
+    public void setMinFoodCons(int minFoodCons){
 		this.minFoodCons = minFoodCons;
 	}
-	
-	public void setSmellRange(double smellRange){
+
+    /**
+     * SmellRange Setter
+     *
+     * Sets a Circle with it's center at the animal's center with a radius as the one input
+     * @param smellRange radius of animal's SmellRange
+     */
+    public void setSmellRange(double smellRange){
 		this.smellRange.setRadius(smellRange);
 		this.smellRange.setCenterX(this.Body.getCenterX());
 		this.smellRange.setCenterY(this.Body.getCenterY());
 	}
-	
-	public void setAge(int age){
+
+    /**
+     * Age Setter
+     * @param age animal's Age
+     */
+    public void setAge(int age){
 		this.age = age;
 	}
-	
-	public void setForgetfulness(int forgetfulness){
-		this.forgetfulness = forgetfulness;
-	}
-	
-	public void setNestX(int nestX){
-		this.nestX = nestX;
-	}
-	
-	public void setNestY(int nestY){
-		this.nestY = nestY;
-	}
-	
-	public void setAngleRange(int angleRange){
+
+    /**
+     * AngleRange Setter
+     * @param angleRange animal's angle range to move in
+     */
+    public void setAngleRange(int angleRange){
 		this.angleRange = angleRange;
 	}
-	
-	public void setLifeExpectancy(int lifeExpectancy){
+
+    /**
+     * Life Expectancy Setter
+     * @param lifeExpectancy animal's Life expectancy
+     */
+    public void setLifeExpectancy(int lifeExpectancy){
 		this.lifeExpectancy = lifeExpectancy;
 	}
-	
-	public void setSize(int size){
+
+    /**
+     * Size Setter
+     *
+     * @param size animal's Size (Body's Radius)
+     */
+    public void setSize(int size){
 		this.Body.setRadius(size);
 	}
-	
-	public void setMinSize(int minSize){
-		this.minSize = minSize;
-	}
-	
-	public void setMaxSize(int maxSize){
-		this.minSize = maxSize;
-	}
 
-	public void setDx(double dx){
+    /**
+     * Dx Setter
+     * @param dx change of the animal's x coordinate in every cicle
+     */
+    public void setDx(double dx){
 		this.dx = dx;
 	}
-	
-	public void setDy(double dy){
+
+    /**
+     * Dy Setter
+     * @param dy change of the animal's x coordinate in every cicle
+     */
+    public void setDy(double dy){
 		this.dy = dy;
 	}
 
-    public void setProvisionalTarget(Target provisionalTarget) {
-        this.provisionalTarget = provisionalTarget;
-    }
-	
-	public void collideWalls(World world){
-		// check collision against walls
-		if (this.Body.getTranslateX()+ this.Body.getCenterX() < this.Body.getRadius() && dx < 0)	dx = -dx;
-		else if (world.getWidth() - this.Body.getTranslateX()- this.Body.getCenterX()  < this.Body.getRadius() && dx > 0) dx = -dx;
-		if (this.Body.getTranslateY()+ this.Body.getCenterY()  < this.Body.getRadius()+25 && dy < 0)	dy = -dy;
-		else if (world.getHeight() - 50 - this.Body.getCenterY() - this.Body.getTranslateY()  < this.Body.getRadius() && dy > 0) dy = -dy;
-	
-	}
-	
-	// get angle for going to the target
+    /**
+     * Calculates The angle the animal needs to get to the coordinates input
+     *
+     * @param targetX x coordinate
+     * @param targetY y coordinate
+     * @return angle needed to go to (TargetX, TargetY)
+     */
+    // get angle for going to the target
 	public double getAngleTo(double targetX, double targetY){
         double thisX = Body.getCenterX() + Body.getTranslateX();
         double thisY = Body.getCenterY() + Body.getTranslateY();
@@ -584,7 +764,12 @@ public abstract class Animal{
     }
 
 
-	// Direct the bug to the target
+    /**
+     * Calculates Dx and Dy needed in order to go to the provisional Target
+     *
+     * It takes into account the Speed, The angle and if the animal is poisoned or not
+     */
+    // Direct the bug to the target
     public void directDxDy(){
         double targetX = (this.provisionalTarget.getBody().getCenterX() + this.provisionalTarget.getBody().getTranslateX());
         double targetY = (this.provisionalTarget.getBody().getCenterY() + this.provisionalTarget.getBody().getTranslateY());
@@ -600,15 +785,24 @@ public abstract class Animal{
         }
     }
 
+    /**
+     * Checks if the target with the coordinates given is valid or not
+     *
+     * if the target is in a reachable place: enough far away from the walls  so that the animal can get as closest as possible to the wall without going passed it
+     * @param tx x coordinate of the target
+     * @param ty y coordinates of the target
+     * @return return true if valid false if not
+     */
     public boolean isValidTarget(int tx, int ty){
-        if (tx > (NewMenu.width-Body.getRadius()+smellRange.getRadius()) || ty > (NewMenu.height-Body.getRadius()+smellRange.getRadius()-50) || tx < Body.getRadius()-smellRange.getRadius() || ty < Body.getRadius()+30-smellRange.getRadius()) {
-            if (this.Body.getCenterX() + this.Body.getTranslateX() > (NewMenu.width - Body.getRadius()) || this.Body.getCenterY() + this.Body.getTranslateY() > (NewMenu.height - Body.getRadius() - 50) || this.Body.getCenterX() + this.Body.getTranslateX() < Body.getRadius() || this.Body.getCenterY() + this.Body.getTranslateY() < Body.getRadius() + 30) {
-                return false;
-            }
+        if (tx > (MainAnimation.width-Body.getRadius()+smellRange.getRadius()) || ty > (MainAnimation.height-Body.getRadius()+smellRange.getRadius()-50) || tx < -smellRange.getRadius()+Body.getRadius() || ty < -smellRange.getRadius()+Body.getRadius()+30) {
+            return false;
         }
         return true;
     }
 
+    /**
+     * Makes the Animal go back one step and turn from 90 to 270 degrees in order to avoid obstacles or walls
+     */
     public void getOut(){
         Random rnd = new Random();
         this.Body.setTranslateX(this.Body.getTranslateX() - this.dx);
@@ -619,7 +813,10 @@ public abstract class Animal{
 
     }
 
-	public void displayAnimal(){
+    /**
+     * Displays Animal Fixed parameters
+     */
+    public void displayAnimal(){
 		String print;
 
 		print = "Name: " + this.name + "\n" +
@@ -641,20 +838,34 @@ public abstract class Animal{
 		alert.showAndWait();
 	}
 
+    /**
+     * Updates The main target
+     *
+     * if house target exists and the energy or the food are low (33%) go to house
+     * else if food target exists and food is low(33%) go to food
+     *
+¡     */
     public void updateMainTarget(){
         if (this.houseTarget.getBody().getCenterX() != 0 && this.houseTarget.getBody().getCenterY() != 0) {
-            if (this.energy <= this.maxEnergy/3){
-                if(this.food <= this.maxFood/3){
-                    if (this.energy <= this.food){
-                        this.setMainTarget(this.houseTarget);
-                    }
-                }
-                else this.setMainTarget(this.houseTarget.getBody().getCenterX(), this.houseTarget.getBody().getCenterY(), this.houseTarget.getBody().getRadius());
+            if (this.energy <= this.maxEnergy/3 || this.food <= this.maxFood/3){
+                this.setMainTarget(this.houseTarget.getBody().getCenterX(), this.houseTarget.getBody().getCenterY(), this.houseTarget.getBody().getRadius());
+            }
+
+        }
+        else if (this.foodTarget.getBody().getCenterX() != 0 && this.foodTarget.getBody().getCenterY() != 0){
+            if (this.food <= this.maxFood / 3) {
+                // go to food
             }
         }
     }
 
-	public void updateTarget(){
+    /**
+     * Update animal's target to reach main target
+     *
+     * if Reached main target or not
+     *      get random target
+     */
+    public void updateTarget(){
         double x1 = this.mainTarget.getBody().getCenterX();
         double x2 = this.getPosX();
         double y1 = this.mainTarget.getBody().getCenterY();
@@ -675,13 +886,19 @@ public abstract class Animal{
 			getRandomLocalTarget();
 		}
 
-		if (this.getPosX() > (NewMenu.width - Body.getRadius()) || this.getPosY() > (NewMenu.height - Body.getRadius() - 50) || this.getPosX() < Body.getRadius() || this.getPosY() < Body.getRadius() + 30) {
+        //if animal is tauching the inside the wall, go back and change angle and look for random target
+		if (this.getPosX() > (MainAnimation.width - Body.getRadius()) || this.getPosY() > (MainAnimation.height - Body.getRadius() - 50) || this.getPosX() < Body.getRadius() || this.getPosY() < Body.getRadius() + 30) {
 			this.getOut();
 			getRandomLocalTarget();
 
 		}
 	}
 
+    /**
+     * Animal Consumes food that his body has.
+     *
+     * if he has consumed half of his food, he starts consuming from the carried food
+     */
     public void updateFood(){
         double metabolism;
 
@@ -697,47 +914,20 @@ public abstract class Animal{
                 this.setFood(this.getFood() + 1*metabolism);
                 this.setFoodCarring(this.getFoodCarring() - 1*metabolism);
             }
-            else {
-                //goHome
-            }
         }
 
     }
 
-	public void update(){
-		/*
-        select maintarget
-            if energy too low
-             go home to sleep
-            else if food too low
-                if distance of food is more than distance of home
-                    go home
-                else go foodTarget
-
-
-            ...... optional if additional time ......
-            else if water too low
-                if distance of water is more than distance of home
-                    go home
-                else go waterTarget
-             ...... optional if additional time ......
-
-
-
-        select provisionaltarget
-            go in the direction of main target
-                getting a random point inside the angle.
-
-		go to provisionaltarget
-		    each cycle substract 1 energy, 1 food, (1 water)
-
-		    if collision with obstacle (inner circle)
-		        ...... optional if additional time...... if obstacle's weight < strenght move obstacle
-		        choose random target not taking into account the angle
-            if collision with food (smell circle)
-                detect position of detection
-                set its position as provisional target
-		*/
+    /**
+     *Update animal
+     *
+     * Update Target
+     * Move
+     * Update Food
+     * Update Energy
+     * Set Stats
+     */
+    public void update(){
 
         this.updateTarget();
 
