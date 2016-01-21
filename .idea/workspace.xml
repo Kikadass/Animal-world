@@ -8,14 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f36b9717-ceb3-4d3e-a9b6-eb842308fbbd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Animal.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Animal.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/defConfiguration.ser" afterPath="$PROJECT_DIR$/defConfiguration.ser" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Animal world.iml" afterPath="$PROJECT_DIR$/Animal world.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Lion.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Lion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Prey.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Prey.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" />
     </list>
     <ignored path="Animal world.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1036,7 +1029,7 @@
       <workItem from="1453181702173" duration="99971000" />
       <workItem from="1453353855102" duration="4639000" />
       <workItem from="1453366517109" duration="8646000" />
-      <workItem from="1453378154710" duration="1839000" />
+      <workItem from="1453378154710" duration="1871000" />
     </task>
     <task id="LOCAL-00001" summary="This is a try">
       <created>1452509382263</created>
@@ -1158,11 +1151,17 @@
       <option name="project" value="LOCAL" />
       <updated>1453369374960</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Before habitats modifications">
+      <created>1453381679023</created>
+      <option name="number" value="00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1453381679023</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="228604000" />
+    <option name="totallyTimeSpent" value="228636000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -1223,7 +1222,8 @@
     <MESSAGE value="Java Doc comments" />
     <MESSAGE value="Breed" />
     <MESSAGE value="Errors in breeding and house entering fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Errors in breeding and house entering fixed" />
+    <MESSAGE value="Before habitats modifications" />
+    <option name="LAST_COMMIT_MESSAGE" value="Before habitats modifications" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
