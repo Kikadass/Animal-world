@@ -739,41 +739,50 @@ public class MainAnimation extends Application {
      */
     public void eat(World world, ArrayList<Animal> animalTypeList, int i) {
         for (int j = 0; j < world.getFoodList().size(); j++) {
-            if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.getFoodList().get(j).getBody())) {
-                for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
-                    if (j < 0) break;
-                    if (world.getFoodList().get(j).getType().equals(foodPreference)) {
-                        // if hungry: eat one by one until not hungry or finished
-                        // if there is still food, carry what you can depending on strenght
+            if (Collisions.efficientCollide(animalTypeList.get(i).getBody(), world.getFoodList().get(j).getBody())) {
+                if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.getFoodList().get(j).getBody())) {
+                    for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
+                        if (j < 0) break;
+                        if (world.getFoodList().get(j).getType().equals(foodPreference)) {
+                            // if hungry: eat one by one until not hungry or finished
+                            // if there is still food, carry what you can depending on strenght
 
-                        double amount = world.getFoodList().get(j).getEnergy() + animalTypeList.get(i).getFood();
-                        if (amount >= animalTypeList.get(i).getMaxFood()) {
-                            animalTypeList.get(i).setFood(animalTypeList.get(i).getMaxFood());
-                            amount -= animalTypeList.get(i).getMaxFood();
+                            double amount = world.getFoodList().get(j).getEnergy() + animalTypeList.get(i).getFood();
+                            if (amount >= animalTypeList.get(i).getMaxFood()) {
+                                animalTypeList.get(i).setFood(animalTypeList.get(i).getMaxFood());
+                                amount -= animalTypeList.get(i).getMaxFood();
 
-                            //if food is poisoned metabolism is doubled and speed halfed
-                            if (world.getFoodList().get(j).isPoisonous()){
-                                animalTypeList.get(i).setPoisoned(true);
-                            }
+                                //if food is poisoned metabolism is doubled and speed halfed
+                                if (world.getFoodList().get(j).isPoisonous()) {
+                                    animalTypeList.get(i).setPoisoned(true);
+                                }
 
-                            // if after eating there is still food left take it or leave it:
-                            if (amount > 0) {
-                                double amount2 = amount + animalTypeList.get(i).getFoodCarring();
-                                if (amount2 >= animalTypeList.get(i).getStrenght()) {
-                                    animalTypeList.get(i).setFoodCarring(animalTypeList.get(i).getStrenght());
-                                    amount2 -= animalTypeList.get(i).getStrenght();
+                                // if after eating there is still food left take it or leave it:
+                                if (amount > 0) {
+                                    double amount2 = amount + animalTypeList.get(i).getFoodCarring();
+                                    if (amount2 >= animalTypeList.get(i).getStrenght()) {
+                                        animalTypeList.get(i).setFoodCarring(animalTypeList.get(i).getStrenght());
+                                        amount2 -= animalTypeList.get(i).getStrenght();
 
-                                    // if not strong enough leave extra food
-                                    if (amount2 > 0) {
-                                        world.getFoodList().get(j).setEnergy(amount2);
+                                        // if not strong enough leave extra food
+                                        if (amount2 > 0) {
+                                            world.getFoodList().get(j).setEnergy(amount2);
+                                        } else {
+                                            if (!world.getFoodList().get(j).getType().equals("Grass")) {
+                                                world.deleteFood(j);
+                                                j--;
+                                            } else world.getFoodList().get(j).setEnergy(0);
+                                        }
                                     } else {
+                                        animalTypeList.get(i).setFoodCarring(amount2);
                                         if (!world.getFoodList().get(j).getType().equals("Grass")) {
                                             world.deleteFood(j);
                                             j--;
                                         } else world.getFoodList().get(j).setEnergy(0);
+
                                     }
-                                } else {
-                                    animalTypeList.get(i).setFoodCarring(amount2);
+                                }
+                                else {
                                     if (!world.getFoodList().get(j).getType().equals("Grass")) {
                                         world.deleteFood(j);
                                         j--;
@@ -781,18 +790,12 @@ public class MainAnimation extends Application {
 
                                 }
                             } else {
+                                animalTypeList.get(i).setFood(amount);
                                 if (!world.getFoodList().get(j).getType().equals("Grass")) {
                                     world.deleteFood(j);
                                     j--;
                                 } else world.getFoodList().get(j).setEnergy(0);
-
                             }
-                        } else {
-                            animalTypeList.get(i).setFood(amount);
-                            if (!world.getFoodList().get(j).getType().equals("Grass")) {
-                                world.deleteFood(j);
-                                j--;
-                            } else world.getFoodList().get(j).setEnergy(0);
                         }
                     }
                 }
@@ -858,8 +861,7 @@ public class MainAnimation extends Application {
                 }
 
                 // Body collisions between animals
-                int animal = 0;
-                if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.getAnimalList(), animal)) {
+                if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.getAnimalList())) {
                     // Kill
                 }
 
@@ -878,25 +880,27 @@ public class MainAnimation extends Application {
                 }
 
                 //body collides with food
-                if (Collisions.collideFood(animalTypeList.get(i).getBody(), world, 0)) {
-                    eat(world, animalTypeList, i);
-                }
-
+                eat(world, animalTypeList, i);
 
                 if(animalTypeList.get(i).getByeHome() == 0) {
                     //body collides with his house body
-                    int hab = 0;
-                    if (Collisions.collideHabitats(animalTypeList.get(i), world, hab)) {
-                        //if there is space in the habitat
-                        if (world.getHabitatsList().get(hab).getMaxCapacity() > world.getHabitatsList().get(hab).getAmountOfAnimals()) {
-                            //add animal into habitat's list
-                            world.getHabitatsList().get(hab).addAnimal(animalTypeList.get(i));
-                            animalTypeList.get(i).getBody().setVisible(false);
-                            world.hideSpecificStats(type, i);
-                            animalTypeList.get(i).clearMainTarget();
-                            animalTypeList.get(i).setByeHome(350);
+                    for (int j = 0; j < world.getHabitatsList().size(); j++) {
+                        // if habitat is the animal's house
+                        if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == world.getHabitatsList().get(j).getBody().getCenterX() && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == world.getHabitatsList().get(j).getBody().getCenterY()) {
+                            if (Collisions.efficientCollide(animalTypeList.get(i).getBody(), world.getHabitatsList().get(j).getBody())) {
+                                if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), world.getHabitatsList().get(j).getBody())) {
+                                    //if there is space in the habitat
+                                    if (world.getHabitatsList().get(j).getMaxCapacity() > world.getHabitatsList().get(j).getAmountOfAnimals()) {
+                                        //add animal into habitat's list
+                                        world.getHabitatsList().get(j).addAnimal(animalTypeList.get(i));
+                                        animalTypeList.get(i).getBody().setVisible(false);
+                                        world.hideSpecificStats(type, i);
+                                        animalTypeList.get(i).clearMainTarget();
+                                        animalTypeList.get(i).setByeHome(350);
+                                    } else System.out.println("Full capacity");
+                                }
+                            }
                         }
-                        else System.out.println("Full capacity");
                     }
                 }
                 else {
@@ -912,84 +916,97 @@ public class MainAnimation extends Application {
                         //if foodCarring is full don't smell
                         if (animalTypeList.get(i).getFoodCarring() < animalTypeList.get(i).getStrenght()) {
                             // SMELL
-                            int food = 0;
-                            if (Collisions.collideFood(animalTypeList.get(i).getSmellRange(), world, food)) {
-                                for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
-                                    // if this type of animal eats that type food
-                                    if (world.getFoodList().get(food).getType().equals(foodPreference)) {
-                                        // if energy is > than the minimum acceptable for the animal, than eat
-                                        if (world.getFoodList().get(food).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
+                            for (int j = 0; j < world.getFoodList().size(); j++) {
+                                if (Collisions.efficientCollide(animalTypeList.get(i).getSmellRange(), world.getFoodList().get(j).getBody())) {
+                                    if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.getFoodList().get(j).getBody())) {
 
-                                            // if food is closer than actual main target --> go to it
-                                            if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.getFoodList().get(food).getBody().getCenterX(), world.getFoodList().get(food).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
-                                                // main target: center of that food.
+                                        for (String foodPreference : animalTypeList.get(i).getFoodPreferences()) {
+                                            // if this type of animal eats that type food
+                                            if (world.getFoodList().get(j).getType().equals(foodPreference)) {
+                                                // if energy is > than the minimum acceptable for the animal, than eat
+                                                if (world.getFoodList().get(j).getEnergy() >= animalTypeList.get(i).getMinFoodCons()) {
 
-                                                int tx;
-                                                int ty;
-                                                int rad;
+                                                    // if food is closer than actual main target --> go to it
+                                                    if (Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), world.getFoodList().get(j).getBody().getCenterX(), world.getFoodList().get(j).getBody().getCenterY())) < Math.abs(distance(animalTypeList.get(i).getPosX(), animalTypeList.get(i).getPosY(), animalTypeList.get(i).getMainTarget().getBody().getCenterX(), animalTypeList.get(i).getMainTarget().getBody().getCenterY()))) {
+                                                        // main target: center of that food.
 
-                                                ty = (int) world.getFoodList().get(food).getBody().getCenterY();
+                                                        int tx;
+                                                        int ty;
+                                                        int rad;
 
-                                                tx = (int) world.getFoodList().get(food).getBody().getCenterX();
-                                                rad = (int) world.getFoodList().get(food).getBody().getRadius();
+                                                        ty = (int) world.getFoodList().get(j).getBody().getCenterY();
 
-                                                // create the main target depending on tx and ty
-                                                animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+                                                        tx = (int) world.getFoodList().get(j).getBody().getCenterX();
+                                                        rad = (int) world.getFoodList().get(j).getBody().getRadius();
 
+                                                        // create the main target depending on tx and ty
+                                                        animalTypeList.get(i).setMainTarget(new Target(tx, ty, rad));
+
+                                                    }
+                                                }
                                             }
+
                                         }
                                     }
-
                                 }
                             }
                         }
                     }
 
-
                     //if animal has no habitat, smell
                     if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
                         //smelling the habitats area
-                        int hab = 0;
-                        if (Collisions.collideHabitatsArea(animalTypeList.get(i).getSmellRange(), world, hab)) {
-                            // if the habitat's species has not been set or is the same as the animal
-                            if (world.getHabitatsList().get(hab).getSpecie() == -1 || world.getHabitatsList().get(hab).getSpecie() == type) {
-                                // if habitat has no specie specified set it
-                                if (world.getHabitatsList().get(hab).getSpecie() == -1) {
-                                    world.getHabitatsList().get(hab).setSpecie(type);
+                        for (int j = 0; j < world.getHabitatsList().size(); j++) {
+                            if (Collisions.efficientCollide(animalTypeList.get(i).getSmellRange(), world.getHabitatsList().get(j).getArea())) {
+                                if (Collisions.nonEfficientCollide(animalTypeList.get(i).getSmellRange(), world.getHabitatsList().get(j).getArea())) {
+
+                                    // if the habitat's species has not been set or is the same as the animal
+                                    if (world.getHabitatsList().get(j).getSpecie() == -1 || world.getHabitatsList().get(j).getSpecie() == type) {
+                                        // if habitat has no specie specified set it
+                                        if (world.getHabitatsList().get(j).getSpecie() == -1) {
+                                            world.getHabitatsList().get(j).setSpecie(type);
+                                        }
+
+                                        // house target: center of that Habitat.
+                                        int tx;
+                                        int ty;
+                                        int rad;
+
+                                        ty = (int) world.getHabitatsList().get(j).getBody().getCenterY();
+
+                                        tx = (int) world.getHabitatsList().get(j).getBody().getCenterX();
+                                        rad = (int) world.getHabitatsList().get(j).getBody().getRadius();
+
+                                        // create the main target depending on tx and ty
+                                        animalTypeList.get(i).setHouseTarget(new Target(tx, ty, rad));
+
+                                    }
                                 }
-
-                                // house target: center of that Habitat.
-                                int tx;
-                                int ty;
-                                int rad;
-
-                                ty = (int) world.getHabitatsList().get(hab).getBody().getCenterY();
-
-                                tx = (int) world.getHabitatsList().get(hab).getBody().getCenterX();
-                                rad = (int) world.getHabitatsList().get(hab).getBody().getRadius();
-
-                                // create the main target depending on tx and ty
-                                animalTypeList.get(i).setHouseTarget(new Target(tx, ty, rad));
-
                             }
                         }
                     }
                 }
             }
+            //if animal is inside the habbitat
             else {
+                System.out.println(i + " " + animalTypeList.get(i).getGender() + " " +  animalTypeList.get(i).getPregnant());
                 if (animalTypeList.get(i).getPregnant() == 0) {
-                    // Body collisions between animals
+                    // Body collisions between animals of the same type
                     for (int j = 0; j < animalTypeList.size(); j++) {
-                        // reproduce
                         if (animalTypeList.get(j).getPregnant() == 0) {
+
+                            // if animal is from the oposite sex
                             boolean gender = !animalTypeList.get(i).getGender();
                             if (animalTypeList.get(j).getGender() == gender) {
+                                // Check collisions between animals
                                 if (Collisions.efficientCollide(animalTypeList.get(i).getBody(), animalTypeList.get(j).getBody())) {
                                     if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), animalTypeList.get(j).getBody())) {
-                                        world.addAnimal(i);
+                                        // add animal into the world
+                                        world.addAnimal(type);
+
+                                        // set pregnant to the women so that it cannot have kids for 4 days
                                         if (gender) animalTypeList.get(j).setPregnant(4 * day);
                                         else animalTypeList.get(i).setPregnant(4 * day);
-
                                     }
                                 }
                             }

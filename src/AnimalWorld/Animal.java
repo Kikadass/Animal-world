@@ -903,8 +903,10 @@ public abstract class Animal{
 ¡     */
     public void updateMainTarget(){
         if (this.houseTarget.getBody().getCenterX() != 0 && this.houseTarget.getBody().getCenterY() != 0) {
-            if (this.energy <= this.maxEnergy/3 || this.food <= this.maxFood/3){
-                this.setMainTarget(this.houseTarget.getBody().getCenterX(), this.houseTarget.getBody().getCenterY(), this.houseTarget.getBody().getRadius());
+            if (this.byeHome == 0) {
+                if (this.energy <= this.maxEnergy / 3 || this.food <= this.maxFood / 3) {
+                    this.setMainTarget(this.houseTarget.getBody().getCenterX(), this.houseTarget.getBody().getCenterY(), this.houseTarget.getBody().getRadius());
+                }
             }
 
         }

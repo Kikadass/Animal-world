@@ -43,7 +43,7 @@ public class Habitat {
 			tries++;
 			this.getArea().setCenterX(rnd.nextInt(world.getWidth() - (int) this.getArea().getRadius()*2) + this.getArea().getRadius());
 			this.getArea().setCenterY(rnd.nextInt(world.getHeight() - (int)this.getArea().getRadius()*2 - 80) + this.getArea().getRadius() + 30);
-		}while((Collisions.collideObstacle(getArea(), world) || Collisions.collideAnimals(getArea(), world.getAnimalList(), 0) || Collisions.collideFood(getArea(), world, 0) || Collisions.collideHabitatsArea(getArea(), world, 0)) && tries <= 100);
+		}while((Collisions.collideObstacle(getArea(), world) || Collisions.collideAnimals(getArea(), world.getAnimalList()) || Collisions.collideFood(getArea(), world) || Collisions.collideHabitatsArea(getArea(), world)) && tries <= 100);
 		if (tries >= 100) {
 			this.body.setRadius(0);
 			System.out.println("No space to add another Habitat");

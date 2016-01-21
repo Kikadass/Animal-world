@@ -66,17 +66,14 @@ public abstract class Collisions {
 	/**
 	 * Checks the collisions between circle c1 and Food in the world
 	 *
-	 * This function takes into account the pass by "reference" of java by returning the index of the piece of Food c1 collided with outside the function
 	 * @param c1 circle input
 	 * @param world main world
-	 * @param food index of the food c1 has collided with
-	 * @return true if circle collides with food and it indirectly returns the index of the food c1 has collided with
+	 * @return true if circle collides with food
 	 */
-	public static boolean collideFood(Circle c1, World world, int food){
+	public static boolean collideFood(Circle c1, World world){
 		for (int i = 0; i < world.getFoodList().size(); i++){
 				if (Collisions.efficientCollide(c1, world.getFoodList().get(i).getBody())){
 					if (Collisions.nonEfficientCollide(c1, world.getFoodList().get(i).getBody())){
-                        food = i;
 						return true;
 					}
 				}
@@ -88,18 +85,15 @@ public abstract class Collisions {
 	/**
 	 * Checks the collisions between circle c1 and all the other animals in the world
 	 *
-	 * This function takes into account the pass by "reference" of java by returning the index of the animal c1 collided with outside the function
 	 * @param c1 circle input
 	 * @param circles All the animals
-	 * @param animal value that "stores" the index of the animal c1 has collided with
-	 * @return true if circle collides with animals and it indirectly returns the index of the animal c1 has collided with
+	 * @return true if circle collides with animals
 	 */
-	public static boolean collideAnimals(Circle c1, ArrayList<ArrayList<Animal>> circles, int animal){
+	public static boolean collideAnimals(Circle c1, ArrayList<ArrayList<Animal>> circles){
 		for (ArrayList<Animal> a : circles){
 			for (int i = 0; i < a.size(); i++){
 				if (Collisions.efficientCollide(c1, a.get(i).getBody())){
 					if (Collisions.nonEfficientCollide(c1, a.get(i).getBody())){
-                        animal = i;
 						return true;
 					}
 				}
@@ -111,17 +105,14 @@ public abstract class Collisions {
 	/**
 	 * Checks the collisions between circle c1 and Habitats Area in the world
 	 *
-	 * This function takes into account the pass by "reference" of java by returning the index of the Habitat Area c1 collided with outside the function
 	 * @param c1 circle input
 	 * @param world main world
-	 * @param hab value that "stores" the index of the habitat c1 has collided with
-	 * @return true if circle collides with habitat area and it indirectly returns the index of the habitat c1 has collided with
+	 * @return true if circle collides with habitat area
 	 */
-	public static boolean collideHabitatsArea(Circle c1, World world, int hab){
+	public static boolean collideHabitatsArea(Circle c1, World world){
 		for (int i = 0; i < world.getHabitatsList().size(); i++){
 			if (Collisions.efficientCollide(c1, world.getHabitatsList().get(i).getArea())){
 				if (Collisions.nonEfficientCollide(c1, world.getHabitatsList().get(i).getArea())){
-                    hab = i;
 					return true;
 				}
 			}
@@ -137,16 +128,14 @@ public abstract class Collisions {
 	 * This function takes into account the pass by "reference" of java by returning the index of the Habitat c1 collided with outside the function
 	 * @param animal animal to check the collections with
 	 * @param world main world
-	 * @param hab value that "stores" the index of the habitat c1 has collided with
 	 * @return true if circle collides with habitat and it indirectly returns the index of the habitat c1 has collided with
 	 */
-	public static boolean collideHabitats(Animal animal, World world, int hab){
+	public static boolean collideHabitats(Animal animal, World world){
 		for (int i = 0; i < world.getHabitatsList().size(); i++){
 			//if the animal's house is this habitat, than see if he is colliding
 			if (animal.getHouseTarget().getBody().getCenterX() == world.getHabitatsList().get(i).getBody().getCenterX() && animal.getHouseTarget().getBody().getCenterY() == world.getHabitatsList().get(i).getBody().getCenterY()) {
 				if (Collisions.efficientCollide(animal.getBody(), world.getHabitatsList().get(i).getBody())) {
 					if (Collisions.nonEfficientCollide(animal.getBody(), world.getHabitatsList().get(i).getBody())) {
-						hab = i;
 						return true;
 					}
 				}

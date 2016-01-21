@@ -195,7 +195,7 @@ public class Food{
             tries++;
             this.Body.setCenterX(rnd.nextInt(world.getWidth() - (int)this.Body.getRadius()*2) + this.Body.getRadius());
             this.Body.setCenterY(rnd.nextInt(world.getHeight() - (int)this.Body.getRadius()*2 - 80) + this.Body.getRadius() + 30);
-        }while((Collisions.collideObstacle(Body, world) || Collisions.collideAnimals(Body, world.getAnimalList(), 0) || Collisions.collideFood(Body, world, 0) || Collisions.collideHabitatsArea(Body, world, 0)) && tries <= 100);
+        }while((Collisions.collideObstacle(Body, world) || Collisions.collideAnimals(Body, world.getAnimalList()) || Collisions.collideFood(Body, world) || Collisions.collideHabitatsArea(Body, world)) && tries <= 100);
         if (tries >= 100) {
             this.Body.setRadius(0);
             System.out.println("No space to add another piece of food");

@@ -44,7 +44,7 @@ public class Lion extends Predator {
 			tries++;
 			this.getBody().setCenterX(rnd.nextInt(world.getWidth() - (int) this.getBody().getRadius()*2) + this.getBody().getRadius());
 			this.getBody().setCenterY(rnd.nextInt(world.getHeight() - (int)this.getBody().getRadius()*2 - 80) + this.getBody().getRadius() + 30);
-		}while((Collisions.collideObstacle(getBody(), world) || Collisions.collideAnimals(getBody(), world.getAnimalList(), 0)) && tries <= 100);
+		}while((Collisions.collideObstacle(getBody(), world) || Collisions.collideAnimals(getBody(), world.getAnimalList())) && tries <= 100);
 
         if (tries >= 100) {
             this.getBody().setRadius(0);
