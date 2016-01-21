@@ -37,6 +37,7 @@ public class Lion extends Predator {
 		this.setLifeExpectancy(rnd.nextInt(1500)+4000);
 		this.addFoodPreferences("Meat");
 		this.addFoodPreferences("ZebraMeat");
+        this.getPreys().add("Zebra");
         this.setGender(rnd.nextBoolean());
 
 		int tries = 0;

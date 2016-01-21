@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author Kikadass
  */
-public class Zebra extends Animal{
+public class Zebra extends Prey {
     private static int counter;
     private String[] names = {"Alex", "Melvin"};
 

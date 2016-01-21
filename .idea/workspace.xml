@@ -2,22 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f36b9717-ceb3-4d3e-a9b6-eb842308fbbd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Animal.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Animal.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Collisions.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Collisions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Configuration.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Configuration.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Food.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Food.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Habitat.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Habitat.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AnimalWorld/Prey.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Lion.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Lion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Obstacle.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Obstacle.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/defConfiguration.ser" afterPath="$PROJECT_DIR$/defConfiguration.ser" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Predator.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Predator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Animal.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Animal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Collisions.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Collisions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Food.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Food.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Habitat.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Habitat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Grass.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Grass.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Lion.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Lion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Obstacle.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Obstacle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Predator.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Predator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" />
     </list>
     <ignored path="Animal world.iws" />
@@ -44,20 +37,22 @@
       <file leaf-file-name="MainAnimation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.10541311">
-              <caret line="991" column="40" selection-start-line="991" selection-start-column="40" selection-end-line="991" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.6367521">
+              <caret line="1017" column="80" selection-start-line="1017" selection-start-column="80" selection-end-line="1017" selection-end-column="80" />
               <folding>
                 <element signature="docComment;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#getWidth#0;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#getHeight#0;class#MainAnimation#0" expanded="false" />
-                <element signature="docComment;method#setHeight#0;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#setWidth#0;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#setStartOver#0;class#MainAnimation#0" expanded="false" />
                 <element signature="method#setStartOver#0;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#clear#0;class#MainAnimation#0" expanded="false" />
+                <element signature="method#clear#0;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
+                <element signature="method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
                 <element signature="e#3848#3857#0" expanded="false" />
                 <element signature="docComment;method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
+                <element signature="method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#displayApplication#0;class#MainAnimation#0" expanded="false" />
                 <element signature="method#displayApplication#0;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
@@ -68,10 +63,46 @@
                 <element signature="e#17665#17682#0" expanded="false" />
                 <element signature="e#19935#19943#0" expanded="false" />
                 <element signature="e#20841#20857#0" expanded="false" />
+                <element signature="docComment;method#eat#0;class#MainAnimation#0" expanded="false" />
+                <element signature="method#eat#0;class#MainAnimation#0" expanded="false" />
                 <element signature="e#22311#22368#0" expanded="false" />
+                <element signature="docComment;method#distance#0;class#MainAnimation#0" expanded="false" />
                 <element signature="method#distance#0;class#MainAnimation#0" expanded="false" />
                 <element signature="docComment;method#animalTypeUpdate#0;class#MainAnimation#0" expanded="false" />
-                <element signature="e#27515#27531#0" expanded="false" />
+                <element signature="e#27880#27896#0" expanded="false" />
+                <element signature="docComment;method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+                <element signature="method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+                <element signature="docComment;method#start#0;class#MainAnimation#0" expanded="false" />
+                <element signature="method#start#0;class#MainAnimation#0" expanded="false" />
+                <element signature="docComment;method#main#0;class#MainAnimation#0" expanded="false" />
+                <element signature="method#main#0;class#MainAnimation#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Predator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Predator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="9" selection-start-line="15" selection-start-column="8" selection-end-line="28" selection-end-column="9" />
+              <folding>
+                <element signature="e#230#238#0" expanded="true" />
+                <element signature="e#2174#2175#0" expanded="true" />
+                <element signature="e#2198#2199#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Prey.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Prey.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="66" column="34" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
+              <folding>
+                <element signature="e#200#201#0" expanded="true" />
+                <element signature="e#231#232#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,48 +138,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Habitat.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Habitat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="218" selection-start-line="45" selection-start-column="218" selection-end-line="45" selection-end-column="218" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#2001#2002#0" expanded="false" />
-                <element signature="e#2019#2020#0" expanded="false" />
-                <element signature="e#2178#2179#0" expanded="false" />
-                <element signature="e#2212#2213#0" expanded="false" />
-                <element signature="e#2337#2338#0" expanded="false" />
-                <element signature="e#2366#2367#0" expanded="false" />
-                <element signature="e#2567#2568#0" expanded="false" />
-                <element signature="e#2594#2595#0" expanded="false" />
-                <element signature="e#2747#2748#0" expanded="false" />
-                <element signature="e#2787#2788#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Food.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Food.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="197" column="198" selection-start-line="197" selection-start-column="198" selection-end-line="197" selection-end-column="198" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#2926#2927#0" expanded="false" />
-                <element signature="e#2951#2952#0" expanded="false" />
-                <element signature="e#3045#3046#0" expanded="false" />
-                <element signature="e#3068#3069#0" expanded="false" />
-                <element signature="e#3162#3163#0" expanded="false" />
-                <element signature="e#3180#3181#0" expanded="false" />
-                <element signature="e#3295#3296#0" expanded="false" />
-                <element signature="e#3327#3328#0" expanded="false" />
-                <element signature="e#3827#3828#0" expanded="false" />
-                <element signature="e#3850#3851#0" expanded="false" />
-                <element signature="e#3985#3986#0" expanded="false" />
-                <element signature="e#4012#4013#0" expanded="false" />
-              </folding>
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Grass.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Grass.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -167,7 +172,7 @@
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Animal.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="916" column="13" selection-start-line="916" selection-start-column="13" selection-end-line="916" selection-end-column="13" />
+              <caret line="455" column="16" selection-start-line="455" selection-start-column="16" selection-end-line="455" selection-end-column="16" />
               <folding>
                 <element signature="docComment;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#Animal#0;class#Animal#0" expanded="false" />
@@ -186,6 +191,8 @@
                 <element signature="docComment;method#getBody#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getSpeed#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getProvisionalTarget#0;class#Animal#0" expanded="false" />
+                <element signature="e#12216#12217#0" expanded="true" />
+                <element signature="e#12256#12257#0" expanded="true" />
                 <element signature="docComment;method#getFood#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getMaxFood#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getMaxEnergy#0;class#Animal#0" expanded="false" />
@@ -195,9 +202,7 @@
                 <element signature="docComment;method#getPosX#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getPosY#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getLocalTarget#0;class#Animal#0" expanded="false" />
-                <element signature="method#getLocalTarget#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
-                <element signature="method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getFoodPreferences#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#isPoisoned#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getHouseTarget#0;class#Animal#0" expanded="false" />
@@ -219,7 +224,6 @@
                 <element signature="e#19025#19026#0" expanded="true" />
                 <element signature="e#19069#19070#0" expanded="true" />
                 <element signature="docComment;method#setMainTarget#1;class#Animal#0" expanded="false" />
-                <element signature="method#setMainTarget#1;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#clearMainTarget#0;class#Animal#0" expanded="false" />
                 <element signature="method#clearMainTarget#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#setStats#0;class#Animal#0" expanded="false" />
@@ -243,10 +247,10 @@
                 <element signature="docComment;method#setSize#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#setDx#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#setDy#0;class#Animal#0" expanded="false" />
+                <element signature="e#23714#23715#0" expanded="true" />
+                <element signature="e#23756#23757#0" expanded="true" />
                 <element signature="docComment;method#getAngleTo#0;class#Animal#0" expanded="false" />
-                <element signature="method#getAngleTo#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#directDxDy#0;class#Animal#0" expanded="false" />
-                <element signature="method#directDxDy#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#isValidTarget#0;class#Animal#0" expanded="false" />
                 <element signature="method#isValidTarget#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#getOut#0;class#Animal#0" expanded="false" />
@@ -254,7 +258,6 @@
                 <element signature="docComment;method#displayAnimal#0;class#Animal#0" expanded="false" />
                 <element signature="method#displayAnimal#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#updateMainTarget#0;class#Animal#0" expanded="false" />
-                <element signature="method#updateTarget#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#updateFood#0;class#Animal#0" expanded="false" />
                 <element signature="method#updateFood#0;class#Animal#0" expanded="false" />
                 <element signature="docComment;method#update#0;class#Animal#0" expanded="false" />
@@ -267,10 +270,9 @@
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Zebra.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="122" selection-start-line="49" selection-start-column="122" selection-end-line="49" selection-end-column="122" />
+              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
               <folding>
-                <element signature="e#2756#2757#0" expanded="false" />
-                <element signature="e#2781#2782#0" expanded="false" />
+                <element signature="imports" expanded="true" />
                 <element signature="method#restartCounter#0;class#Zebra#0" expanded="false" />
               </folding>
             </state>
@@ -281,28 +283,9 @@
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Lion.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="122" selection-start-line="46" selection-start-column="122" selection-end-line="46" selection-end-column="122" />
+              <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#2519#2520#0" expanded="false" />
-                <element signature="e#2535#2536#0" expanded="false" />
                 <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Obstacle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Obstacle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="198" selection-start-line="29" selection-start-column="198" selection-end-line="29" selection-end-column="198" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#1197#1198#0" expanded="false" />
-                <element signature="e#1222#1223#0" expanded="false" />
-                <element signature="e#1303#1304#0" expanded="false" />
-                <element signature="e#1326#1327#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -334,17 +317,19 @@
         <option value="$PROJECT_DIR$/src/AnimalWorld/EditMenu.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/NewMenu.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/World.java" />
-        <option value="$PROJECT_DIR$/src/AnimalWorld/Predator.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Target.java" />
-        <option value="$PROJECT_DIR$/src/AnimalWorld/Grass.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Configuration.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Habitat.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Food.java" />
-        <option value="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" />
-        <option value="$PROJECT_DIR$/src/AnimalWorld/Lion.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Obstacle.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Collisions.java" />
+        <option value="$PROJECT_DIR$/src/AnimalWorld/Lion.java" />
+        <option value="$PROJECT_DIR$/src/AnimalWorld/Grass.java" />
+        <option value="$PROJECT_DIR$/src/AnimalWorld/Predator.java" />
+        <option value="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" />
+        <option value="$PROJECT_DIR$/src/AnimalWorld/Pray.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/Animal.java" />
+        <option value="$PROJECT_DIR$/src/AnimalWorld/Prey.java" />
         <option value="$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java" />
       </list>
     </option>
@@ -392,8 +377,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -433,6 +416,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -909,7 +894,7 @@
       <workItem from="1453152393243" duration="27262000" />
       <workItem from="1453181702173" duration="99971000" />
       <workItem from="1453353855102" duration="4639000" />
-      <workItem from="1453366517109" duration="2831000" />
+      <workItem from="1453366517109" duration="8646000" />
     </task>
     <task id="LOCAL-00001" summary="This is a try">
       <created>1452509382263</created>
@@ -1025,15 +1010,21 @@
       <option name="project" value="LOCAL" />
       <updated>1453352793159</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Errors in breeding and house entering fixed">
+      <created>1453369374960</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1453369374960</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220950000" />
+    <option name="totallyTimeSpent" value="226765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1045,7 +1036,7 @@
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22832981" sideWeight="0.49583334" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13072917" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13072917" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1059,31 +1050,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1807611" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1744186" sideWeight="0.49583334" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30232558" sideWeight="0.50416666" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957717" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22832981" sideWeight="0.49583334" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13072917" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1807611" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -1114,7 +1080,8 @@
     <MESSAGE value="Stats hiden when inside Habitat&#10;" />
     <MESSAGE value="Java Doc comments" />
     <MESSAGE value="Breed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Breed" />
+    <MESSAGE value="Errors in breeding and house entering fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Errors in breeding and house entering fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1135,57 +1102,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Configuration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="211" column="0" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#Configuration#0;class#Configuration#0" expanded="false" />
-            <element signature="method#Configuration#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setConfiguration#0;class#Configuration#0" expanded="false" />
-            <element signature="method#setConfiguration#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#EditConfig1#0;class#Configuration#0" expanded="false" />
-            <element signature="method#EditConfig1#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#newConfiguration#0;class#Configuration#0" expanded="false" />
-            <element signature="method#newConfiguration#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#openConfigurationFile#0;class#Configuration#0" expanded="false" />
-            <element signature="method#openConfigurationFile#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setFood#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setGrass#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setHabitats#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setObstacles#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setLions#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setZebras#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setWidth#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#setHeight#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#getFood#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#getGrass#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#getHabitats#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#getObstacles#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#getLions#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#getZebras#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#getWidth#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#getHeight#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#displayMap#0;class#Configuration#0" expanded="false" />
-            <element signature="method#displayMap#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#Save#0;class#Configuration#0" expanded="false" />
-            <element signature="method#Save#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#SaveAs#0;class#Configuration#0" expanded="false" />
-            <element signature="method#SaveAs#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#EndSave#0;class#Configuration#0" expanded="false" />
-            <element signature="method#EndSave#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#tryLoad#0;class#Configuration#0" expanded="false" />
-            <element signature="method#tryLoad#0;class#Configuration#0" expanded="false" />
-            <element signature="e#21855#21906#0" expanded="false" />
-            <element signature="docComment;method#StartLoad#0;class#Configuration#0" expanded="false" />
-            <element signature="method#StartLoad#0;class#Configuration#0" expanded="false" />
-            <element signature="docComment;method#Load#0;class#Configuration#0" expanded="false" />
-            <element signature="method#Load#0;class#Configuration#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/World.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1218,21 +1134,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2926#2927#0" expanded="false" />
-            <element signature="e#2951#2952#0" expanded="false" />
-            <element signature="e#3045#3046#0" expanded="false" />
-            <element signature="e#3068#3069#0" expanded="false" />
-            <element signature="e#3162#3163#0" expanded="false" />
-            <element signature="e#3180#3181#0" expanded="false" />
-            <element signature="e#3295#3296#0" expanded="false" />
-            <element signature="e#3327#3328#0" expanded="false" />
-            <element signature="e#3827#3828#0" expanded="false" />
-            <element signature="e#3850#3851#0" expanded="false" />
-            <element signature="e#3985#3986#0" expanded="false" />
-            <element signature="e#4012#4013#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1258,6 +1160,8 @@
             <element signature="docComment;method#getBody#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getSpeed#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getProvisionalTarget#0;class#Animal#0" expanded="false" />
+            <element signature="e#12216#12217#0" expanded="true" />
+            <element signature="e#12256#12257#0" expanded="true" />
             <element signature="docComment;method#getFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxEnergy#0;class#Animal#0" expanded="false" />
@@ -1267,9 +1171,7 @@
             <element signature="docComment;method#getPosX#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getPosY#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getFoodPreferences#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isPoisoned#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getHouseTarget#0;class#Animal#0" expanded="false" />
@@ -1291,7 +1193,6 @@
             <element signature="e#19025#19026#0" expanded="true" />
             <element signature="e#19069#19070#0" expanded="true" />
             <element signature="docComment;method#setMainTarget#1;class#Animal#0" expanded="false" />
-            <element signature="method#setMainTarget#1;class#Animal#0" expanded="false" />
             <element signature="docComment;method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setStats#0;class#Animal#0" expanded="false" />
@@ -1315,10 +1216,10 @@
             <element signature="docComment;method#setSize#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDx#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDy#0;class#Animal#0" expanded="false" />
+            <element signature="e#23714#23715#0" expanded="true" />
+            <element signature="e#23756#23757#0" expanded="true" />
             <element signature="docComment;method#getAngleTo#0;class#Animal#0" expanded="false" />
-            <element signature="method#getAngleTo#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#directDxDy#0;class#Animal#0" expanded="false" />
-            <element signature="method#directDxDy#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getOut#0;class#Animal#0" expanded="false" />
@@ -1326,7 +1227,6 @@
             <element signature="docComment;method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateMainTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#updateTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#update#0;class#Animal#0" expanded="false" />
@@ -1339,9 +1239,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2519#2520#0" expanded="false" />
-            <element signature="e#2535#2536#0" expanded="false" />
             <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
           </folding>
         </state>
@@ -1355,14 +1252,16 @@
             <element signature="docComment;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getHeight#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#setHeight#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#clear#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#clear#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#3848#3857#0" expanded="false" />
             <element signature="docComment;method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
@@ -1373,10 +1272,19 @@
             <element signature="e#17665#17682#0" expanded="false" />
             <element signature="e#19935#19943#0" expanded="false" />
             <element signature="e#20841#20857#0" expanded="false" />
+            <element signature="docComment;method#eat#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#eat#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#22311#22368#0" expanded="false" />
+            <element signature="docComment;method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#animalTypeUpdate#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#27515#27531#0" expanded="false" />
+            <element signature="e#27880#27896#0" expanded="false" />
+            <element signature="docComment;method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#main#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#main#0;class#MainAnimation#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1480,21 +1388,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2926#2927#0" expanded="false" />
-            <element signature="e#2951#2952#0" expanded="false" />
-            <element signature="e#3045#3046#0" expanded="false" />
-            <element signature="e#3068#3069#0" expanded="false" />
-            <element signature="e#3162#3163#0" expanded="false" />
-            <element signature="e#3180#3181#0" expanded="false" />
-            <element signature="e#3295#3296#0" expanded="false" />
-            <element signature="e#3327#3328#0" expanded="false" />
-            <element signature="e#3827#3828#0" expanded="false" />
-            <element signature="e#3850#3851#0" expanded="false" />
-            <element signature="e#3985#3986#0" expanded="false" />
-            <element signature="e#4012#4013#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1520,6 +1414,8 @@
             <element signature="docComment;method#getBody#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getSpeed#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getProvisionalTarget#0;class#Animal#0" expanded="false" />
+            <element signature="e#12216#12217#0" expanded="true" />
+            <element signature="e#12256#12257#0" expanded="true" />
             <element signature="docComment;method#getFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxEnergy#0;class#Animal#0" expanded="false" />
@@ -1529,9 +1425,7 @@
             <element signature="docComment;method#getPosX#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getPosY#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getFoodPreferences#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isPoisoned#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getHouseTarget#0;class#Animal#0" expanded="false" />
@@ -1553,7 +1447,6 @@
             <element signature="e#19025#19026#0" expanded="true" />
             <element signature="e#19069#19070#0" expanded="true" />
             <element signature="docComment;method#setMainTarget#1;class#Animal#0" expanded="false" />
-            <element signature="method#setMainTarget#1;class#Animal#0" expanded="false" />
             <element signature="docComment;method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setStats#0;class#Animal#0" expanded="false" />
@@ -1577,10 +1470,10 @@
             <element signature="docComment;method#setSize#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDx#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDy#0;class#Animal#0" expanded="false" />
+            <element signature="e#23714#23715#0" expanded="true" />
+            <element signature="e#23756#23757#0" expanded="true" />
             <element signature="docComment;method#getAngleTo#0;class#Animal#0" expanded="false" />
-            <element signature="method#getAngleTo#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#directDxDy#0;class#Animal#0" expanded="false" />
-            <element signature="method#directDxDy#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getOut#0;class#Animal#0" expanded="false" />
@@ -1588,7 +1481,6 @@
             <element signature="docComment;method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateMainTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#updateTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#update#0;class#Animal#0" expanded="false" />
@@ -1601,9 +1493,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2519#2520#0" expanded="false" />
-            <element signature="e#2535#2536#0" expanded="false" />
             <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
           </folding>
         </state>
@@ -1617,14 +1506,16 @@
             <element signature="docComment;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getHeight#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#setHeight#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#clear#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#clear#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#3848#3857#0" expanded="false" />
             <element signature="docComment;method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
@@ -1635,10 +1526,19 @@
             <element signature="e#17665#17682#0" expanded="false" />
             <element signature="e#19935#19943#0" expanded="false" />
             <element signature="e#20841#20857#0" expanded="false" />
+            <element signature="docComment;method#eat#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#eat#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#22311#22368#0" expanded="false" />
+            <element signature="docComment;method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#animalTypeUpdate#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#27515#27531#0" expanded="false" />
+            <element signature="e#27880#27896#0" expanded="false" />
+            <element signature="docComment;method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#main#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#main#0;class#MainAnimation#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1734,21 +1634,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2926#2927#0" expanded="false" />
-            <element signature="e#2951#2952#0" expanded="false" />
-            <element signature="e#3045#3046#0" expanded="false" />
-            <element signature="e#3068#3069#0" expanded="false" />
-            <element signature="e#3162#3163#0" expanded="false" />
-            <element signature="e#3180#3181#0" expanded="false" />
-            <element signature="e#3295#3296#0" expanded="false" />
-            <element signature="e#3327#3328#0" expanded="false" />
-            <element signature="e#3827#3828#0" expanded="false" />
-            <element signature="e#3850#3851#0" expanded="false" />
-            <element signature="e#3985#3986#0" expanded="false" />
-            <element signature="e#4012#4013#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1774,6 +1660,8 @@
             <element signature="docComment;method#getBody#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getSpeed#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getProvisionalTarget#0;class#Animal#0" expanded="false" />
+            <element signature="e#12216#12217#0" expanded="true" />
+            <element signature="e#12256#12257#0" expanded="true" />
             <element signature="docComment;method#getFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxEnergy#0;class#Animal#0" expanded="false" />
@@ -1783,9 +1671,7 @@
             <element signature="docComment;method#getPosX#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getPosY#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getFoodPreferences#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isPoisoned#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getHouseTarget#0;class#Animal#0" expanded="false" />
@@ -1807,7 +1693,6 @@
             <element signature="e#19025#19026#0" expanded="true" />
             <element signature="e#19069#19070#0" expanded="true" />
             <element signature="docComment;method#setMainTarget#1;class#Animal#0" expanded="false" />
-            <element signature="method#setMainTarget#1;class#Animal#0" expanded="false" />
             <element signature="docComment;method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setStats#0;class#Animal#0" expanded="false" />
@@ -1831,10 +1716,10 @@
             <element signature="docComment;method#setSize#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDx#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDy#0;class#Animal#0" expanded="false" />
+            <element signature="e#23714#23715#0" expanded="true" />
+            <element signature="e#23756#23757#0" expanded="true" />
             <element signature="docComment;method#getAngleTo#0;class#Animal#0" expanded="false" />
-            <element signature="method#getAngleTo#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#directDxDy#0;class#Animal#0" expanded="false" />
-            <element signature="method#directDxDy#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getOut#0;class#Animal#0" expanded="false" />
@@ -1842,7 +1727,6 @@
             <element signature="docComment;method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateMainTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#updateTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#update#0;class#Animal#0" expanded="false" />
@@ -1855,9 +1739,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2519#2520#0" expanded="false" />
-            <element signature="e#2535#2536#0" expanded="false" />
             <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
           </folding>
         </state>
@@ -1871,14 +1752,16 @@
             <element signature="docComment;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getHeight#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#setHeight#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#clear#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#clear#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#3848#3857#0" expanded="false" />
             <element signature="docComment;method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
@@ -1889,10 +1772,19 @@
             <element signature="e#17665#17682#0" expanded="false" />
             <element signature="e#19935#19943#0" expanded="false" />
             <element signature="e#20841#20857#0" expanded="false" />
+            <element signature="docComment;method#eat#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#eat#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#22311#22368#0" expanded="false" />
+            <element signature="docComment;method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#animalTypeUpdate#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#27515#27531#0" expanded="false" />
+            <element signature="e#27880#27896#0" expanded="false" />
+            <element signature="docComment;method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#main#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#main#0;class#MainAnimation#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1988,21 +1880,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2926#2927#0" expanded="false" />
-            <element signature="e#2951#2952#0" expanded="false" />
-            <element signature="e#3045#3046#0" expanded="false" />
-            <element signature="e#3068#3069#0" expanded="false" />
-            <element signature="e#3162#3163#0" expanded="false" />
-            <element signature="e#3180#3181#0" expanded="false" />
-            <element signature="e#3295#3296#0" expanded="false" />
-            <element signature="e#3327#3328#0" expanded="false" />
-            <element signature="e#3827#3828#0" expanded="false" />
-            <element signature="e#3850#3851#0" expanded="false" />
-            <element signature="e#3985#3986#0" expanded="false" />
-            <element signature="e#4012#4013#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2028,6 +1906,8 @@
             <element signature="docComment;method#getBody#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getSpeed#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getProvisionalTarget#0;class#Animal#0" expanded="false" />
+            <element signature="e#12216#12217#0" expanded="true" />
+            <element signature="e#12256#12257#0" expanded="true" />
             <element signature="docComment;method#getFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxEnergy#0;class#Animal#0" expanded="false" />
@@ -2037,9 +1917,7 @@
             <element signature="docComment;method#getPosX#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getPosY#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getFoodPreferences#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isPoisoned#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getHouseTarget#0;class#Animal#0" expanded="false" />
@@ -2061,7 +1939,6 @@
             <element signature="e#19025#19026#0" expanded="true" />
             <element signature="e#19069#19070#0" expanded="true" />
             <element signature="docComment;method#setMainTarget#1;class#Animal#0" expanded="false" />
-            <element signature="method#setMainTarget#1;class#Animal#0" expanded="false" />
             <element signature="docComment;method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setStats#0;class#Animal#0" expanded="false" />
@@ -2085,10 +1962,10 @@
             <element signature="docComment;method#setSize#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDx#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDy#0;class#Animal#0" expanded="false" />
+            <element signature="e#23714#23715#0" expanded="true" />
+            <element signature="e#23756#23757#0" expanded="true" />
             <element signature="docComment;method#getAngleTo#0;class#Animal#0" expanded="false" />
-            <element signature="method#getAngleTo#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#directDxDy#0;class#Animal#0" expanded="false" />
-            <element signature="method#directDxDy#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getOut#0;class#Animal#0" expanded="false" />
@@ -2096,7 +1973,6 @@
             <element signature="docComment;method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateMainTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#updateTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#update#0;class#Animal#0" expanded="false" />
@@ -2109,9 +1985,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2519#2520#0" expanded="false" />
-            <element signature="e#2535#2536#0" expanded="false" />
             <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
           </folding>
         </state>
@@ -2125,14 +1998,16 @@
             <element signature="docComment;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getHeight#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#setHeight#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#clear#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#clear#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#3848#3857#0" expanded="false" />
             <element signature="docComment;method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
@@ -2143,10 +2018,19 @@
             <element signature="e#17665#17682#0" expanded="false" />
             <element signature="e#19935#19943#0" expanded="false" />
             <element signature="e#20841#20857#0" expanded="false" />
+            <element signature="docComment;method#eat#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#eat#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#22311#22368#0" expanded="false" />
+            <element signature="docComment;method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#animalTypeUpdate#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#27515#27531#0" expanded="false" />
+            <element signature="e#27880#27896#0" expanded="false" />
+            <element signature="docComment;method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#main#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#main#0;class#MainAnimation#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2191,21 +2075,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2926#2927#0" expanded="false" />
-            <element signature="e#2951#2952#0" expanded="false" />
-            <element signature="e#3045#3046#0" expanded="false" />
-            <element signature="e#3068#3069#0" expanded="false" />
-            <element signature="e#3162#3163#0" expanded="false" />
-            <element signature="e#3180#3181#0" expanded="false" />
-            <element signature="e#3295#3296#0" expanded="false" />
-            <element signature="e#3327#3328#0" expanded="false" />
-            <element signature="e#3827#3828#0" expanded="false" />
-            <element signature="e#3850#3851#0" expanded="false" />
-            <element signature="e#3985#3986#0" expanded="false" />
-            <element signature="e#4012#4013#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2231,6 +2101,8 @@
             <element signature="docComment;method#getBody#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getSpeed#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getProvisionalTarget#0;class#Animal#0" expanded="false" />
+            <element signature="e#12216#12217#0" expanded="true" />
+            <element signature="e#12256#12257#0" expanded="true" />
             <element signature="docComment;method#getFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxEnergy#0;class#Animal#0" expanded="false" />
@@ -2240,9 +2112,7 @@
             <element signature="docComment;method#getPosX#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getPosY#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getFoodPreferences#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isPoisoned#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getHouseTarget#0;class#Animal#0" expanded="false" />
@@ -2264,7 +2134,6 @@
             <element signature="e#19025#19026#0" expanded="true" />
             <element signature="e#19069#19070#0" expanded="true" />
             <element signature="docComment;method#setMainTarget#1;class#Animal#0" expanded="false" />
-            <element signature="method#setMainTarget#1;class#Animal#0" expanded="false" />
             <element signature="docComment;method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setStats#0;class#Animal#0" expanded="false" />
@@ -2288,10 +2157,10 @@
             <element signature="docComment;method#setSize#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDx#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDy#0;class#Animal#0" expanded="false" />
+            <element signature="e#23714#23715#0" expanded="true" />
+            <element signature="e#23756#23757#0" expanded="true" />
             <element signature="docComment;method#getAngleTo#0;class#Animal#0" expanded="false" />
-            <element signature="method#getAngleTo#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#directDxDy#0;class#Animal#0" expanded="false" />
-            <element signature="method#directDxDy#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getOut#0;class#Animal#0" expanded="false" />
@@ -2299,7 +2168,6 @@
             <element signature="docComment;method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateMainTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#updateTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#update#0;class#Animal#0" expanded="false" />
@@ -2312,9 +2180,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2519#2520#0" expanded="false" />
-            <element signature="e#2535#2536#0" expanded="false" />
             <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
           </folding>
         </state>
@@ -2350,13 +2215,6 @@
         <state vertical-scroll-proportion="0.09116809">
           <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Grass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66096866">
-          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -2426,60 +2284,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Predator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.072649576">
-          <caret line="3" column="62" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Food.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="197" column="198" selection-start-line="197" selection-start-column="198" selection-end-line="197" selection-end-column="198" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2926#2927#0" expanded="false" />
-            <element signature="e#2951#2952#0" expanded="false" />
-            <element signature="e#3045#3046#0" expanded="false" />
-            <element signature="e#3068#3069#0" expanded="false" />
-            <element signature="e#3162#3163#0" expanded="false" />
-            <element signature="e#3180#3181#0" expanded="false" />
-            <element signature="e#3295#3296#0" expanded="false" />
-            <element signature="e#3327#3328#0" expanded="false" />
-            <element signature="e#3827#3828#0" expanded="false" />
-            <element signature="e#3850#3851#0" expanded="false" />
-            <element signature="e#3985#3986#0" expanded="false" />
-            <element signature="e#4012#4013#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Zebra.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="122" selection-start-line="49" selection-start-column="122" selection-end-line="49" selection-end-column="122" />
-          <folding>
-            <element signature="e#2756#2757#0" expanded="false" />
-            <element signature="e#2781#2782#0" expanded="false" />
-            <element signature="method#restartCounter#0;class#Zebra#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Lion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="122" selection-start-line="46" selection-start-column="122" selection-end-line="46" selection-end-column="122" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2519#2520#0" expanded="false" />
-            <element signature="e#2535#2536#0" expanded="false" />
-            <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Obstacle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2490,34 +2294,6 @@
             <element signature="e#1222#1223#0" expanded="false" />
             <element signature="e#1303#1304#0" expanded="false" />
             <element signature="e#1326#1327#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="190" column="16" selection-start-line="190" selection-start-column="16" selection-end-line="190" selection-end-column="16" />
-          <folding>
-            <element signature="method#World#0;class#World#0" expanded="false" />
-            <element signature="method#addObstacle#0;class#World#0" expanded="false" />
-            <element signature="method#addFood#0;class#World#0" expanded="false" />
-            <element signature="method#addHabitat#0;class#World#0" expanded="false" />
-            <element signature="method#deleteFood#0;class#World#0" expanded="false" />
-            <element signature="method#addLion#0;class#World#0" expanded="false" />
-            <element signature="method#addZebra#0;class#World#0" expanded="false" />
-            <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
-            <element signature="method#dieAnimal#0;class#World#0" expanded="false" />
-            <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
-            <element signature="method#hideTargets#0;class#World#0" expanded="false" />
-            <element signature="method#hideStats#0;class#World#0" expanded="false" />
-            <element signature="method#hideID#0;class#World#0" expanded="false" />
-            <element signature="method#hideAll#0;class#World#0" expanded="false" />
-            <element signature="method#showID#0;class#World#0" expanded="false" />
-            <element signature="method#showSmellRange#0;class#World#0" expanded="false" />
-            <element signature="method#showTargets#0;class#World#0" expanded="false" />
-            <element signature="method#showStats#0;class#World#0" expanded="false" />
-            <element signature="method#deleteAll#0;class#World#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2550,10 +2326,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="190" column="16" selection-start-line="190" selection-start-column="16" selection-end-line="190" selection-end-column="16" />
+          <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
+            <element signature="method#addObstacle#0;class#World#0" expanded="false" />
+            <element signature="method#addFood#0;class#World#0" expanded="false" />
+            <element signature="method#addHabitat#0;class#World#0" expanded="false" />
+            <element signature="method#deleteFood#0;class#World#0" expanded="false" />
+            <element signature="method#addLion#0;class#World#0" expanded="false" />
+            <element signature="method#addZebra#0;class#World#0" expanded="false" />
+            <element signature="method#removeAnimal#0;class#World#0" expanded="false" />
+            <element signature="method#dieAnimal#0;class#World#0" expanded="false" />
+            <element signature="method#hideSmellRange#0;class#World#0" expanded="false" />
+            <element signature="method#hideTargets#0;class#World#0" expanded="false" />
+            <element signature="method#hideStats#0;class#World#0" expanded="false" />
+            <element signature="method#hideID#0;class#World#0" expanded="false" />
+            <element signature="method#hideAll#0;class#World#0" expanded="false" />
+            <element signature="method#showID#0;class#World#0" expanded="false" />
+            <element signature="method#showSmellRange#0;class#World#0" expanded="false" />
+            <element signature="method#showTargets#0;class#World#0" expanded="false" />
+            <element signature="method#showStats#0;class#World#0" expanded="false" />
+            <element signature="method#deleteAll#0;class#World#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Food.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="197" column="198" selection-start-line="197" selection-start-column="198" selection-end-line="197" selection-end-column="198" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Grass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Animal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="916" column="13" selection-start-line="916" selection-start-column="13" selection-end-line="916" selection-end-column="13" />
+          <caret line="455" column="16" selection-start-line="455" selection-start-column="16" selection-end-line="455" selection-end-column="16" />
           <folding>
             <element signature="docComment;class#Animal#0" expanded="false" />
             <element signature="docComment;method#Animal#0;class#Animal#0" expanded="false" />
@@ -2572,6 +2392,8 @@
             <element signature="docComment;method#getBody#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getSpeed#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getProvisionalTarget#0;class#Animal#0" expanded="false" />
+            <element signature="e#12216#12217#0" expanded="true" />
+            <element signature="e#12256#12257#0" expanded="true" />
             <element signature="docComment;method#getFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getMaxEnergy#0;class#Animal#0" expanded="false" />
@@ -2581,9 +2403,7 @@
             <element signature="docComment;method#getPosX#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getPosY#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#getRandomLocalTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getFoodPreferences#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isPoisoned#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getHouseTarget#0;class#Animal#0" expanded="false" />
@@ -2605,7 +2425,6 @@
             <element signature="e#19025#19026#0" expanded="true" />
             <element signature="e#19069#19070#0" expanded="true" />
             <element signature="docComment;method#setMainTarget#1;class#Animal#0" expanded="false" />
-            <element signature="method#setMainTarget#1;class#Animal#0" expanded="false" />
             <element signature="docComment;method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#clearMainTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setStats#0;class#Animal#0" expanded="false" />
@@ -2629,10 +2448,10 @@
             <element signature="docComment;method#setSize#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDx#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#setDy#0;class#Animal#0" expanded="false" />
+            <element signature="e#23714#23715#0" expanded="true" />
+            <element signature="e#23756#23757#0" expanded="true" />
             <element signature="docComment;method#getAngleTo#0;class#Animal#0" expanded="false" />
-            <element signature="method#getAngleTo#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#directDxDy#0;class#Animal#0" expanded="false" />
-            <element signature="method#directDxDy#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="method#isValidTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#getOut#0;class#Animal#0" expanded="false" />
@@ -2640,7 +2459,6 @@
             <element signature="docComment;method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="method#displayAnimal#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateMainTarget#0;class#Animal#0" expanded="false" />
-            <element signature="method#updateTarget#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="method#updateFood#0;class#Animal#0" expanded="false" />
             <element signature="docComment;method#update#0;class#Animal#0" expanded="false" />
@@ -2648,22 +2466,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Lion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+          <folding>
+            <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Zebra.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#restartCounter#0;class#Zebra#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Predator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="9" selection-start-line="15" selection-start-column="8" selection-end-line="28" selection-end-column="9" />
+          <folding>
+            <element signature="e#230#238#0" expanded="true" />
+            <element signature="e#2174#2175#0" expanded="true" />
+            <element signature="e#2198#2199#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Prey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="34" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
+          <folding>
+            <element signature="e#200#201#0" expanded="true" />
+            <element signature="e#231#232#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10541311">
-          <caret line="991" column="40" selection-start-line="991" selection-start-column="40" selection-end-line="991" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.6367521">
+          <caret line="1017" column="80" selection-start-line="1017" selection-start-column="80" selection-end-line="1017" selection-end-column="80" />
           <folding>
             <element signature="docComment;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#getHeight#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#setHeight#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setWidth#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#setStartOver#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#clear#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#clear#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#3848#3857#0" expanded="false" />
             <element signature="docComment;method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#displayApplication#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
@@ -2674,10 +2538,19 @@
             <element signature="e#17665#17682#0" expanded="false" />
             <element signature="e#19935#19943#0" expanded="false" />
             <element signature="e#20841#20857#0" expanded="false" />
+            <element signature="docComment;method#eat#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#eat#0;class#MainAnimation#0" expanded="false" />
             <element signature="e#22311#22368#0" expanded="false" />
+            <element signature="docComment;method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="method#distance#0;class#MainAnimation#0" expanded="false" />
             <element signature="docComment;method#animalTypeUpdate#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#27515#27531#0" expanded="false" />
+            <element signature="e#27880#27896#0" expanded="false" />
+            <element signature="docComment;method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#main#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#main#0;class#MainAnimation#0" expanded="false" />
           </folding>
         </state>
       </provider>

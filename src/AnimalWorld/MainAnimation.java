@@ -842,6 +842,15 @@ public class MainAnimation extends Application {
 
                 animalTypeList.get(i).update();
 
+                if (animalTypeList.get(i) instanceof Predator){
+                    ((Predator) animalTypeList.get(i)).chace(world);
+                    ((Predator) animalTypeList.get(i)).kill(world);
+                }
+
+                if (animalTypeList.get(i) instanceof Prey){
+                    ((Prey) animalTypeList.get(i)).escape(world);
+                }
+
                 // if food < 0 die
                 if (animalTypeList.get(i).getFood() < 0) {
                     world.dieAnimal(type, i);
@@ -987,7 +996,7 @@ public class MainAnimation extends Application {
                     }
                 }
             }
-            //if animal is inside the habbitat
+            //if animal is inside the habitat
             else {
                 System.out.println(i + " " + animalTypeList.get(i).getGender() + " " +  animalTypeList.get(i).getPregnant());
                 if (animalTypeList.get(i).getPregnant() == 0) {
@@ -1005,8 +1014,8 @@ public class MainAnimation extends Application {
                                         world.addAnimal(type);
 
                                         // set pregnant to the women so that it cannot have kids for 4 days
-                                        if (gender) animalTypeList.get(j).setPregnant(4 * day);
-                                        else animalTypeList.get(i).setPregnant(4 * day);
+                                        if (gender) animalTypeList.get(j).setPregnant(3 * day);
+                                        else animalTypeList.get(i).setPregnant(3 * day);
                                     }
                                 }
                             }

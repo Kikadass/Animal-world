@@ -801,6 +801,15 @@ public abstract class Animal{
 	}
 
     /**
+     * Last Angle Setter
+     * @param lastAngle last angle used by the animal
+     */
+    public void setLastAngle(int lastAngle) {
+        this.lastAngle = lastAngle;
+    }
+
+
+    /**
      * Calculates The angle the animal needs to get to the coordinates input
      *
      * @param targetX x coordinate
