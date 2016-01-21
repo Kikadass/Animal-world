@@ -33,7 +33,7 @@ public class Zebra extends Prey {
         this.setFoodCarring(0);
         this.setMinFoodCons(10);
         this.setSize(rnd.nextInt(10)+10);
-        this.setSmellRange(rnd.nextInt(10)+(int)getBody().getRadius()*3);
+        this.setSmellRange(rnd.nextInt(10)+(int)getBody().getRadius()*5);
         this.setAge(0);
         this.setAngleRange(rnd.nextInt(10)+20);
         this.setLifeExpectancy(rnd.nextInt(1500)+4000);

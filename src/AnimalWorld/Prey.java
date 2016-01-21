@@ -3,20 +3,22 @@ package AnimalWorld;
 import java.util.Random;
 
 /**
+ * Prey represents all the Preys in the world
+ *
  * Created by Kikadass on 21/01/2016.
+ * @author Kikadass
  */
 public class Prey extends Animal{
     private boolean escaping = false;
 
 
-    public boolean isEscaping() {
-        return escaping;
-    }
-
-    public void setEscaping(boolean escaping) {
-        this.escaping = escaping;
-    }
-
+    /**
+     * Calculates the direction in which the prey has to escape and it modifies escaping
+     *
+     * The calculation is only made once ever time escaping goes from false to true.
+     * After that the program waits for escaping to be false again
+     * @param world main world
+     */
     public void escape(World world){
         boolean collided = false;
         // check collision between smell range and Predators

@@ -91,8 +91,8 @@ public class MainAnimation extends Application {
      * @param config config file
      */
     public void clear(World world, Stage stage1, Configuration config){
+        // if the program wants to start over
         if (startOver) {
-            //clear(world);
             world.deleteAll();
             stage1.hide();
             startOver = false;
