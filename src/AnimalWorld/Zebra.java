@@ -39,6 +39,7 @@ public class Zebra extends Animal{
         this.setLifeExpectancy(rnd.nextInt(1500)+4000);
         this.addFoodPreferences("NonMeat");
         this.addFoodPreferences("Grass");
+        this.setGender(rnd.nextBoolean());
 
 
         int tries = 0;

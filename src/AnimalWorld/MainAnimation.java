@@ -860,7 +860,7 @@ public class MainAnimation extends Application {
                 // Body collisions between animals
                 int animal = 0;
                 if (Collisions.collideAnimals(animalTypeList.get(i).getBody(), world.getAnimalList(), animal)) {
-                    // reproduce
+                    // Kill
                 }
 
                 // if Body collides an obstacle try to avoid it and find a new target
@@ -951,30 +951,49 @@ public class MainAnimation extends Application {
                         //smelling the habitats area
                         int hab = 0;
                         if (Collisions.collideHabitatsArea(animalTypeList.get(i).getSmellRange(), world, hab)) {
-                            //if habitat has not been set in the animal
-                            if (animalTypeList.get(i).getHouseTarget().getBody().getCenterX() == 0 && animalTypeList.get(i).getHouseTarget().getBody().getCenterY() == 0) {
+                            // if the habitat's species has not been set or is the same as the animal
+                            if (world.getHabitatsList().get(hab).getSpecie() == -1 || world.getHabitatsList().get(hab).getSpecie() == type) {
+                                // if habitat has no specie specified set it
+                                if (world.getHabitatsList().get(hab).getSpecie() == -1) {
+                                    world.getHabitatsList().get(hab).setSpecie(type);
+                                }
 
-                                // if the habitat's species has not been set or is the same as the animal
-                                if (world.getHabitatsList().get(hab).getSpecie() == -1 || world.getHabitatsList().get(hab).getSpecie() == type) {
-                                    // if habitat has no specie specified set it
-                                    if (world.getHabitatsList().get(hab).getSpecie() == -1) {
-                                        world.getHabitatsList().get(hab).setSpecie(type);
+                                // house target: center of that Habitat.
+                                int tx;
+                                int ty;
+                                int rad;
+
+                                ty = (int) world.getHabitatsList().get(hab).getBody().getCenterY();
+
+                                tx = (int) world.getHabitatsList().get(hab).getBody().getCenterX();
+                                rad = (int) world.getHabitatsList().get(hab).getBody().getRadius();
+
+                                // create the main target depending on tx and ty
+                                animalTypeList.get(i).setHouseTarget(new Target(tx, ty, rad));
+
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                if (animalTypeList.get(i).getPregnant() == 0) {
+                    // Body collisions between animals
+                    for (int j = 0; j < animalTypeList.size(); j++) {
+                        // reproduce
+                        if (animalTypeList.get(j).getPregnant() == 0) {
+                            boolean gender = !animalTypeList.get(i).getGender();
+                            if (animalTypeList.get(j).getGender() == gender) {
+                                if (Collisions.efficientCollide(animalTypeList.get(i).getBody(), animalTypeList.get(j).getBody())) {
+                                    if (Collisions.nonEfficientCollide(animalTypeList.get(i).getBody(), animalTypeList.get(j).getBody())) {
+                                        world.addAnimal(i);
+                                        if (gender) animalTypeList.get(j).setPregnant(4 * day);
+                                        else animalTypeList.get(i).setPregnant(4 * day);
+
                                     }
-
-                                    // house target: center of that Habitat.
-                                    int tx;
-                                    int ty;
-                                    int rad;
-
-                                    ty = (int) world.getHabitatsList().get(hab).getBody().getCenterY();
-
-                                    tx = (int) world.getHabitatsList().get(hab).getBody().getCenterX();
-                                    rad = (int) world.getHabitatsList().get(hab).getBody().getRadius();
-
-                                    // create the main target depending on tx and ty
-                                    animalTypeList.get(i).setHouseTarget(new Target(tx, ty, rad));
                                 }
                             }
+
                         }
                     }
                 }
@@ -1089,7 +1108,7 @@ public class MainAnimation extends Application {
 
                     // 4000 cycles = 1day == 1 real minute
                     if (cycle%day == 0){
-                        System.out.println("Day " + cycle/day);
+                        System.out.println("Day " + world.getDay());
                         world.setDay(world.getDay() + 1);
                         if (world.getDay() == 365 ){
                             world.setYear(world.getYear() +1);

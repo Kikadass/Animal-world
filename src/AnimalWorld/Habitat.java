@@ -100,6 +100,7 @@ public class Habitat {
      * @param specie species for which the Habitat is exclusive
      */
     public void setSpecie(int specie) {
+        System.out.println(specie);
         this.specie = specie;
     }
 
@@ -153,8 +154,8 @@ public class Habitat {
                 this.animalList.get(i).getBody().setVisible(true);
                 this.animalList.remove(i);
             }
-        }
 
+        }
 
     }
 

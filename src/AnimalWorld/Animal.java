@@ -3,14 +3,12 @@ package AnimalWorld;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -34,6 +32,8 @@ public abstract class Animal{
 	private double foodCarring;
 	private int minFoodCons;	// minimum of calories that the meat has to be in order to eat it
 	private int age;			// in days
+    private boolean gender;     // true = female
+    private int pregnant = 0;
 	private int angleRange;			// angleRange of normal movement
     private int lastAngle;
 	private int lifeExpectancy;	// how old are can that specie live for
@@ -85,6 +85,7 @@ public abstract class Animal{
         Label label1 = new Label("Name:");
         GridPane.setConstraints(label1, 0, 0);
         grid.getChildren().add(label1);
+
 
         //Defining the smellRange text field
         final TextField smellRange = new TextField();
@@ -152,24 +153,39 @@ public abstract class Animal{
         GridPane.setConstraints(label9, 0, 7);
         grid.getChildren().add(label9);
 
+        //Defining the gender ChoiceBox
+        final ChoiceBox genderCb  = new ChoiceBox(FXCollections.observableArrayList (
+                "Choose Gender",
+                new Separator(),
+                "Male",
+                "Female"
+        ));
+        genderCb.getSelectionModel().selectFirst();     // In order to have "Choose Gender" already selected
+
+        GridPane.setConstraints(genderCb, 1, 8);
+        grid.getChildren().add(genderCb);
+        Label label10 = new Label("Gender:");
+        GridPane.setConstraints(label10, 0, 8);
+        grid.getChildren().add(label10);
+
         //Defining the Apply button
         Button apply = new Button("Apply");
-        GridPane.setConstraints(apply, 0, 9);
+        GridPane.setConstraints(apply, 0, 10);
         grid.getChildren().add(apply);
 
         //Defining the Current Values button
         Button current = new Button("Current Values");
-        GridPane.setConstraints(current, 1, 9);
+        GridPane.setConstraints(current, 1, 10);
         grid.getChildren().add(current);
 
         //Defining the Clear button
         Button clear = new Button("Clear");
-        GridPane.setConstraints(clear, 2, 9);
+        GridPane.setConstraints(clear, 2, 10);
         grid.getChildren().add(clear);
 
         //Adding a Label
         final Label label = new Label();
-        GridPane.setConstraints(label, 0, 8);
+        GridPane.setConstraints(label, 0, 9);
         GridPane.setColumnSpan(label, 2);
         grid.getChildren().add(label);
 
@@ -181,13 +197,14 @@ public abstract class Animal{
             @Override
             public void handle(ActionEvent e) {
                 if ((name.getText() != null && !name.getText().isEmpty()) &&
-                    (smellRange.getText() != null && !smellRange.getText().isEmpty()) &&
-                    (maxEnergy.getText() != null && !maxEnergy.getText().isEmpty()) &&
-                    (maxFood.getText() != null && !maxFood.getText().isEmpty()) &&
-                    (metabolism.getText() != null && !metabolism.getText().isEmpty()) &&
-                    (strength.getText() != null && !strength.getText().isEmpty()) &&
-                    (angle.getText() != null && !angle.getText().isEmpty()) &&
-                    (speed.getText() != null && !speed.getText().isEmpty())){
+                    (smellRange.getText() != null && !smellRange.getText().isEmpty()) && Configuration.checkStrInt(smellRange.getText()) &&
+                    (maxEnergy.getText() != null && !maxEnergy.getText().isEmpty()) && Configuration.checkStrInt(maxEnergy.getText()) &&
+                    (maxFood.getText() != null && !maxFood.getText().isEmpty()) && Configuration.checkStrInt(maxFood.getText()) &&
+                    (metabolism.getText() != null && !metabolism.getText().isEmpty()) && Configuration.checkStrDb(maxEnergy.getText()) &&
+                    (strength.getText() != null && !strength.getText().isEmpty()) && Configuration.checkStrInt(strength.getText()) &&
+                    (angle.getText() != null && !angle.getText().isEmpty()) && Configuration.checkStrInt(angle.getText()) &&
+                    (speed.getText() != null && !speed.getText().isEmpty()) && Configuration.checkStrDb(speed.getText()) &&
+                    (genderCb.getSelectionModel().getSelectedIndex() >= 2 )){
 
                     if (Double.parseDouble(smellRange.getText()) >= getBody().getRadius()+10) {
                         setName(name.getText());
@@ -198,6 +215,8 @@ public abstract class Animal{
                         setStrenght(Integer.parseInt(strength.getText()));
                         setAngleRange(Integer.parseInt(angle.getText()));
                         setSpeed(Double.parseDouble(speed.getText()));
+                        if (genderCb.getSelectionModel().getSelectedIndex() == 2) setGender(false);
+                        else setGender(true);
                         label.setText("Life Form changed!");
                     }
                     else    label.setText("Smell Range has to be bigger or equals than " + (getBody().getRadius()+10) + "!");
@@ -215,7 +234,7 @@ public abstract class Animal{
             @Override
             public void handle(ActionEvent e) {
                 name.setText(getName());
-                smellRange.setText(String.valueOf(getSmellRange().getRadius()));
+                smellRange.setText(String.valueOf((int)getSmellRange().getRadius()));
                 maxEnergy.setText(String.valueOf(getMaxEnergy()));
                 maxFood.setText(String.valueOf(getMaxFood()));
                 metabolism.setText(String.valueOf(getMetabolism()));
@@ -502,6 +521,38 @@ public abstract class Animal{
      */
     public int getCollisionCycles() {
         return collisionCycles;
+    }
+
+    /**
+     * Gender Getter
+     * @return animal's gender
+     */
+    public boolean getGender() {
+        return gender;
+    }
+
+    /**
+     * Pregnant Getter
+     * @return time left in order to have another baby in cycles
+     */
+    public int getPregnant() {
+        return pregnant;
+    }
+
+    /**
+     * Pregnant Setter
+     * @param pregnant time left in order to have another baby
+     */
+    public void setPregnant(int pregnant) {
+        this.pregnant = pregnant;
+    }
+
+    /**
+     * Gender Setter
+     * @param gender animal's gender
+     */
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 
     /**
@@ -819,8 +870,13 @@ public abstract class Animal{
     public void displayAnimal(){
 		String print;
 
+        String g;
+        if (this.gender) g = "Female";
+        else g = "Male";
+
 		print = "Name: " + this.name + "\n" +
 				this.ID.getText() +
+                "Gender: " + g + "\n"+
 				"Size: " + this.getBody().getRadius() + "\n" +
 				"Smell Range: " + this.smellRange.getRadius() + "\n" +
 				"Max Energy: " + this.maxEnergy + "\n" +
@@ -944,6 +1000,7 @@ public abstract class Animal{
 
         this.updateFood();
         this.setEnergy(this.getEnergy()-1*this.getMetabolism());
+        if (this.getPregnant() > 0) this.setPregnant(this.getPregnant()-1);
 
         this.setStats();
 	}

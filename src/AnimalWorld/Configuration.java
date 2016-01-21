@@ -62,6 +62,56 @@ public class Configuration implements Serializable{
 	}
 
     /**
+     * Creates an error message informing that the input is invalid
+     */
+    public static void errorMessage(){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("ERROR:");
+        alert.setContentText("WARNING: You are trying to enter an invalid input.");
+        alert.setHeaderText(null);
+        alert.getDialogPane().setMaxWidth(300);
+        alert.showAndWait();
+    }
+
+    /**
+     * Checks if the string is a double
+     * @param str string getting checked
+     * @return true if string is double
+     */
+    public static boolean checkStrDb(String str){
+        str.replace(" ", "");
+        try
+        {
+            Double.parseDouble(str);
+            return true;
+        }
+        catch(NumberFormatException e)
+        {
+            errorMessage();
+            return false;
+        }
+    }
+
+    /**
+     * Check if string is an Int
+     * @param str string getting checked
+     * @return true if string is Int
+     */
+    public static boolean checkStrInt(String str){
+        str.replace(" ", "");
+        try
+        {
+            Integer.parseInt(str);
+            return true;
+        }
+        catch(NumberFormatException e)
+        {
+            errorMessage();
+            return false;
+        }
+    }
+
+    /**
      *The user can Edit the configuration through a GUI based on one single menu
      */
     public void EditConfig2(){
@@ -211,14 +261,14 @@ public class Configuration implements Serializable{
 
 			@Override
 			public void handle(ActionEvent e) {
-				if ((food.getText() != null && !food.getText().isEmpty()) &&
-                    (grass.getText() != null && !grass.getText().isEmpty()) &&
-                    (habitats.getText() != null && !habitats.getText().isEmpty()) &&
-                    (obstacles.getText() != null && !obstacles.getText().isEmpty()) &&
-                    (lions.getText() != null && !lions.getText().isEmpty()) &&
-					(zebras.getText() != null && !zebras.getText().isEmpty()) &&
-					(height.getText() != null && !height.getText().isEmpty()) &&
-                    (width.getText() != null && !width.getText().isEmpty())){
+				if ((food.getText() != null && !food.getText().isEmpty()) && checkStrInt(food.getText()) &&
+                    (grass.getText() != null && !grass.getText().isEmpty()) && checkStrInt(grass.getText()) &&
+                    (habitats.getText() != null && !habitats.getText().isEmpty()) && checkStrInt(habitats.getText()) &&
+                    (obstacles.getText() != null && !obstacles.getText().isEmpty()) && checkStrInt(obstacles.getText()) &&
+                    (lions.getText() != null && !lions.getText().isEmpty()) && checkStrInt(lions.getText()) &&
+					(zebras.getText() != null && !zebras.getText().isEmpty()) && checkStrInt(zebras.getText()) &&
+					(height.getText() != null && !height.getText().isEmpty()) && checkStrInt(height.getText()) &&
+                    (width.getText() != null && !width.getText().isEmpty()) && checkStrInt(width.getText())){
 
                     if (Integer.parseInt(height.getText()) >= 300 && Integer.parseInt(width.getText()) >= 300){
                         setFood(Integer.parseInt(food.getText()));
@@ -694,6 +744,7 @@ public class Configuration implements Serializable{
 
 		if (!e.lastFile.equals("/defConfiguration.ser")){
 			e = tryLoad(e.lastFile);
+
             if (e == null){
                 e = new Configuration();
             }
