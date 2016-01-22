@@ -80,7 +80,7 @@ public abstract class Animal{
         name.setPromptText("Enter a Name.");
         name.setPrefColumnCount(10);
         name.getText();
-        GridPane.setConstraints(name, 1, 0);
+        GridPane.setConstraints(name, 1, 0, 2, 1);
         grid.getChildren().add(name);
         Label label1 = new Label("Name:");
         GridPane.setConstraints(label1, 0, 0);
@@ -92,7 +92,7 @@ public abstract class Animal{
         smellRange.setPromptText("eg. 30");
         smellRange.setPrefColumnCount(10);
         smellRange.getText();
-        GridPane.setConstraints(smellRange, 1, 1);
+        GridPane.setConstraints(smellRange, 1, 1, 2, 1);
         grid.getChildren().add(smellRange);
         Label label3 = new Label("Smell Range:");
         GridPane.setConstraints(label3, 0, 1);
@@ -102,7 +102,7 @@ public abstract class Animal{
         //Defining the maxEnergy text field
         final TextField maxEnergy = new TextField();
         maxEnergy.setPromptText("eg. 200");
-        GridPane.setConstraints(maxEnergy, 1, 2);
+        GridPane.setConstraints(maxEnergy, 1, 2, 2, 1);
         grid.getChildren().add(maxEnergy);
         Label label4 = new Label("Max Energy:");
         GridPane.setConstraints(label4, 0, 2);
@@ -111,7 +111,7 @@ public abstract class Animal{
         //Defining the Max Food text field
         final TextField maxFood = new TextField();
         maxFood.setPromptText("eg. 200");
-        GridPane.setConstraints(maxFood, 1, 3);
+        GridPane.setConstraints(maxFood, 1, 3, 2, 1);
         grid.getChildren().add(maxFood);
         Label label5 = new Label("Max Food:");
         GridPane.setConstraints(label5, 0, 3);
@@ -120,7 +120,7 @@ public abstract class Animal{
         //Defining the Metabolism text field
         final TextField metabolism = new TextField();
         metabolism.setPromptText("eg. 0.05");
-        GridPane.setConstraints(metabolism, 1, 4);
+        GridPane.setConstraints(metabolism, 1, 4, 2, 1);
         grid.getChildren().add(metabolism);
         Label label6 = new Label("Metabolism:");
         GridPane.setConstraints(label6, 0, 4);
@@ -129,7 +129,7 @@ public abstract class Animal{
         //Defining the Strength text field
         final TextField strength = new TextField();
         strength.setPromptText("eg. 200");
-        GridPane.setConstraints(strength, 1, 5);
+        GridPane.setConstraints(strength, 1, 5, 2, 1);
         grid.getChildren().add(strength);
         Label label7 = new Label("Strength:");
         GridPane.setConstraints(label7, 0, 5);
@@ -138,7 +138,7 @@ public abstract class Animal{
         //Defining the Angle of Movement text field
         final TextField angle = new TextField();
         angle.setPromptText("eg. 30");
-        GridPane.setConstraints(angle, 1, 6);
+        GridPane.setConstraints(angle, 1, 6, 2, 1);
         grid.getChildren().add(angle);
         Label label8 = new Label("Angle of Movement:");
         GridPane.setConstraints(label8, 0, 6);
@@ -147,7 +147,7 @@ public abstract class Animal{
         //Defining the Speed text field
         final TextField speed = new TextField();
         speed.setPromptText("eg. 1.5");
-        GridPane.setConstraints(speed, 1, 7);
+        GridPane.setConstraints(speed, 1, 7, 2, 1);
         grid.getChildren().add(speed);
         Label label9 = new Label("Speed:");
         GridPane.setConstraints(label9, 0, 7);
@@ -162,7 +162,7 @@ public abstract class Animal{
         ));
         genderCb.getSelectionModel().selectFirst();     // In order to have "Choose Gender" already selected
 
-        GridPane.setConstraints(genderCb, 1, 8);
+        GridPane.setConstraints(genderCb, 1, 8, 2, 1);
         grid.getChildren().add(genderCb);
         Label label10 = new Label("Gender:");
         GridPane.setConstraints(label10, 0, 8);

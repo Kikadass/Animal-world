@@ -91,7 +91,7 @@ public class MainAnimation extends Application {
      * @param config config file
      */
     public void clear(World world, Stage stage1, Configuration config){
-        // if the program wants to start over
+        // if the program wants to start over errase all data from the world and open a new stage
         if (startOver) {
             world.deleteAll();
             stage1.hide();
@@ -175,7 +175,7 @@ public class MainAnimation extends Application {
                         // ... user chose OK
                         world.addAnimal(value);
                         if (value == 0) config.setLions(config.getLions() + 1);
-                        if (value == 0) config.setZebras(config.getZebras() + 1);
+                        if (value == 1) config.setZebras(config.getZebras() + 1);
 
                     }
                 }

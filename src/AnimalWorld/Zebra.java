@@ -3,6 +3,7 @@ package AnimalWorld;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -14,7 +15,18 @@ import java.util.Random;
  */
 public class Zebra extends Prey {
     private static int counter;
-    private String[] names = {"Alex", "Melvin"};
+    private String[][] names = {
+            //girls
+            {"Sophia", "Emma", "Olivia", "Ava", "Isabella", "Mia", "Zoe", "Lily", "Emily", "Madelyn", "Madison", "Chloe", "Charlotte", "Aubrey",
+                    "Avery", "Abigail", "Kaylee", "Layla", "Harper", "Ella", "Amelia", "Arianna", "Riley", "Aria", "Hailey", "Hannah", "Aaliyah", "Evelyn", "Addison",
+                    "Mackenzie", "Adalyn", "Ellie", "Nora", "Scarlett", "Grace", "Anna", "Isabelle", "Natalie", "Kaitlyn", "Lillian", "Sarah", "Audrey" , "Nei",
+                    "Elizabeth", "Leah", "Annabelle", "Kylie", "Mila", "Claire", "Victoria", "Maya", "Lila", "Elena"},
+
+            //Boys
+            {"Alex", "Melvin", "John", "Papadopolous", "Marty",}
+            };
+
+
 
     /**
      * Constructs Zebra and initializes it
@@ -22,7 +34,15 @@ public class Zebra extends Prey {
      */
     public Zebra(World world){
         Random rnd = new Random();
-        this.setName(names[rnd.nextInt(2)]);
+
+        this.setGender(rnd.nextBoolean());
+        //girls
+        if (this.getGender()) {
+            this.setName(names[0][rnd.nextInt(names[0].length)]);
+        }
+        //boys
+        else  this.setName(names[1][rnd.nextInt(names[1].length)]);
+
         this.setID(counter);
         this.setEnergy(rnd.nextInt(100)+200);
         this.setMaxEnergy((int)this.getEnergy());
@@ -39,7 +59,6 @@ public class Zebra extends Prey {
         this.setLifeExpectancy(rnd.nextInt(1500)+4000);
         this.addFoodPreferences("NonMeat");
         this.addFoodPreferences("Grass");
-        this.setGender(rnd.nextBoolean());
 
 
         int tries = 0;
