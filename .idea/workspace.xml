@@ -7,13 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f36b9717-ceb3-4d3e-a9b6-eb842308fbbd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Animal.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Animal.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/AnimalWorld/Lion.class" afterPath="$PROJECT_DIR$/bin/AnimalWorld/Lion.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Animal.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Animal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Lion.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Lion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" afterPath="$PROJECT_DIR$/src/AnimalWorld/Zebra.java" />
     </list>
     <ignored path="Animal world.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -173,7 +167,7 @@
       <file leaf-file-name="Animal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Animal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="11.666667">
+            <state vertical-scroll-proportion="0.0">
               <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
               <folding>
                 <element signature="docComment;class#Animal#0" expanded="false" />
@@ -261,7 +255,7 @@
       <file leaf-file-name="Zebra.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Zebra.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.444445">
+            <state vertical-scroll-proportion="0.0">
               <caret line="43" column="67" selection-start-line="37" selection-start-column="8" selection-end-line="43" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -379,6 +373,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -431,8 +427,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -445,116 +439,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$USER_HOME$/workspace/week 3" />
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RunManager" selected="Application.MainAnimation">
     <configuration default="false" name="MainAnimation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -1021,7 +906,8 @@
       <workItem from="1453181702173" duration="99971000" />
       <workItem from="1453353855102" duration="4639000" />
       <workItem from="1453366517109" duration="8646000" />
-      <workItem from="1453378154710" duration="4587000" />
+      <workItem from="1453378154710" duration="4747000" />
+      <workItem from="1453573587147" duration="18000" />
     </task>
     <task id="LOCAL-00001" summary="This is a try">
       <created>1452509382263</created>
@@ -1155,39 +1041,45 @@
       <option name="project" value="LOCAL" />
       <updated>1453381691279</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Presentation">
+      <created>1453468497013</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1453468497013</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231352000" />
+    <option name="totallyTimeSpent" value="231530000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17397079" sideWeight="0.49583334" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22709164" sideWeight="0.50703126" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22709164" sideWeight="0.49296874" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2015625" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2015625" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17397079" sideWeight="0.49583334" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957717" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22709164" sideWeight="0.49296874" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1807611" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1221,7 +1113,8 @@
     <MESSAGE value="Breed" />
     <MESSAGE value="Errors in breeding and house entering fixed" />
     <MESSAGE value="Before habitats modifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="Before habitats modifications" />
+    <MESSAGE value="Presentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Presentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1557,7 +1450,6 @@
             <element signature="docComment;method#newConfiguration#0;class#Configuration#0" expanded="false" />
             <element signature="method#newConfiguration#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#openConfigurationFile#0;class#Configuration#0" expanded="false" />
-            <element signature="method#openConfigurationFile#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setFood#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setGrass#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setHabitats#0;class#Configuration#0" expanded="false" />
@@ -1581,12 +1473,10 @@
             <element signature="docComment;method#SaveAs#0;class#Configuration#0" expanded="false" />
             <element signature="method#SaveAs#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#EndSave#0;class#Configuration#0" expanded="false" />
-            <element signature="method#EndSave#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#tryLoad#0;class#Configuration#0" expanded="false" />
             <element signature="method#tryLoad#0;class#Configuration#0" expanded="false" />
             <element signature="e#21855#21906#0" expanded="false" />
             <element signature="docComment;method#StartLoad#0;class#Configuration#0" expanded="false" />
-            <element signature="method#StartLoad#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#Load#0;class#Configuration#0" expanded="false" />
             <element signature="method#Load#0;class#Configuration#0" expanded="false" />
           </folding>
@@ -1791,7 +1681,6 @@
             <element signature="docComment;method#newConfiguration#0;class#Configuration#0" expanded="false" />
             <element signature="method#newConfiguration#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#openConfigurationFile#0;class#Configuration#0" expanded="false" />
-            <element signature="method#openConfigurationFile#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setFood#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setGrass#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setHabitats#0;class#Configuration#0" expanded="false" />
@@ -1815,12 +1704,10 @@
             <element signature="docComment;method#SaveAs#0;class#Configuration#0" expanded="false" />
             <element signature="method#SaveAs#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#EndSave#0;class#Configuration#0" expanded="false" />
-            <element signature="method#EndSave#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#tryLoad#0;class#Configuration#0" expanded="false" />
             <element signature="method#tryLoad#0;class#Configuration#0" expanded="false" />
             <element signature="e#21855#21906#0" expanded="false" />
             <element signature="docComment;method#StartLoad#0;class#Configuration#0" expanded="false" />
-            <element signature="method#StartLoad#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#Load#0;class#Configuration#0" expanded="false" />
             <element signature="method#Load#0;class#Configuration#0" expanded="false" />
           </folding>
@@ -2025,7 +1912,6 @@
             <element signature="docComment;method#newConfiguration#0;class#Configuration#0" expanded="false" />
             <element signature="method#newConfiguration#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#openConfigurationFile#0;class#Configuration#0" expanded="false" />
-            <element signature="method#openConfigurationFile#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setFood#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setGrass#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#setHabitats#0;class#Configuration#0" expanded="false" />
@@ -2049,12 +1935,10 @@
             <element signature="docComment;method#SaveAs#0;class#Configuration#0" expanded="false" />
             <element signature="method#SaveAs#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#EndSave#0;class#Configuration#0" expanded="false" />
-            <element signature="method#EndSave#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#tryLoad#0;class#Configuration#0" expanded="false" />
             <element signature="method#tryLoad#0;class#Configuration#0" expanded="false" />
             <element signature="e#21855#21906#0" expanded="false" />
             <element signature="docComment;method#StartLoad#0;class#Configuration#0" expanded="false" />
-            <element signature="method#StartLoad#0;class#Configuration#0" expanded="false" />
             <element signature="docComment;method#Load#0;class#Configuration#0" expanded="false" />
             <element signature="method#Load#0;class#Configuration#0" expanded="false" />
           </folding>
@@ -2450,6 +2334,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="291" column="50" selection-start-line="291" selection-start-column="50" selection-end-line="291" selection-end-column="50" />
+          <folding>
+            <element signature="docComment;method#getWidth#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#getHeight#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#setWidth#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#setStartOver#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#setStartOver#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#clear#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#clear#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="e#3918#3927#0" expanded="false" />
+            <element signature="docComment;method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#displayApplication#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#displayApplication#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#CreateMenuBar#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#CreateMenuBar#0;class#MainAnimation#0" expanded="false" />
+            <element signature="e#16700#16735#0" expanded="false" />
+            <element signature="e#17735#17752#0" expanded="false" />
+            <element signature="e#20005#20013#0" expanded="false" />
+            <element signature="e#20911#20927#0" expanded="false" />
+            <element signature="docComment;method#eat#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#eat#0;class#MainAnimation#0" expanded="false" />
+            <element signature="e#22381#22438#0" expanded="false" />
+            <element signature="docComment;method#distance#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#distance#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#animalTypeUpdate#0;class#MainAnimation#0" expanded="false" />
+            <element signature="e#27950#27966#0" expanded="false" />
+            <element signature="docComment;method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#mainProgram#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#start#0;class#MainAnimation#0" expanded="false" />
+            <element signature="docComment;method#main#0;class#MainAnimation#0" expanded="false" />
+            <element signature="method#main#0;class#MainAnimation#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Predator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78519857">
+          <caret line="29" column="5" selection-start-line="14" selection-start-column="34" selection-end-line="29" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2498,34 +2432,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Habitat.java">
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Prey.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="218" selection-start-line="45" selection-start-column="218" selection-end-line="45" selection-end-column="218" />
+          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Zebra.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.444445">
-          <caret line="43" column="67" selection-start-line="37" selection-start-column="8" selection-end-line="43" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3645#3646#0" expanded="true" />
-            <element signature="e#3670#3671#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Lion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="63" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2545,17 +2456,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Prey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Animal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="11.666667">
+        <state vertical-scroll-proportion="0.0">
           <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
           <folding>
             <element signature="docComment;class#Animal#0" expanded="false" />
@@ -2639,52 +2542,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/MainAnimation.java">
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Zebra.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="291" column="50" selection-start-line="291" selection-start-column="50" selection-end-line="291" selection-end-column="50" />
+          <caret line="43" column="67" selection-start-line="37" selection-start-column="8" selection-end-line="43" selection-end-column="67" />
           <folding>
-            <element signature="docComment;method#getWidth#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#getHeight#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#setWidth#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#setStartOver#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#setStartOver#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#clear#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#clear#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#addLifeForm#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#3918#3927#0" expanded="false" />
-            <element signature="docComment;method#chooseLifeForm#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#displayApplication#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#displayApplication#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#displayAuthor#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#CreateMenuBar#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#CreateMenuBar#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#16700#16735#0" expanded="false" />
-            <element signature="e#17735#17752#0" expanded="false" />
-            <element signature="e#20005#20013#0" expanded="false" />
-            <element signature="e#20911#20927#0" expanded="false" />
-            <element signature="docComment;method#eat#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#eat#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#22381#22438#0" expanded="false" />
-            <element signature="docComment;method#distance#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#distance#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#animalTypeUpdate#0;class#MainAnimation#0" expanded="false" />
-            <element signature="e#27950#27966#0" expanded="false" />
-            <element signature="docComment;method#mainProgram#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#mainProgram#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#start#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#start#0;class#MainAnimation#0" expanded="false" />
-            <element signature="docComment;method#main#0;class#MainAnimation#0" expanded="false" />
-            <element signature="method#main#0;class#MainAnimation#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3645#3646#0" expanded="true" />
+            <element signature="e#3670#3671#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Predator.java">
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Lion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78519857">
-          <caret line="29" column="5" selection-start-line="14" selection-start-column="34" selection-end-line="29" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="63" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#restartCounter#0;class#Lion#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AnimalWorld/Habitat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="218" selection-start-line="45" selection-start-column="218" selection-end-line="45" selection-end-column="218" />
           <folding />
         </state>
       </provider>
