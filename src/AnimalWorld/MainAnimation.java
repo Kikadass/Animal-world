@@ -745,7 +745,7 @@ public class MainAnimation extends Application {
                         if (j < 0) break;
                         if (world.getFoodList().get(j).getType().equals(foodPreference)) {
                             // if hungry: eat one by one until not hungry or finished
-                            // if there is still food, carry what you can depending on strenght
+                            // if there is still food, carry what you can depending on strength
 
                             double amount = world.getFoodList().get(j).getEnergy() + animalTypeList.get(i).getFood();
                             if (amount >= animalTypeList.get(i).getMaxFood()) {
