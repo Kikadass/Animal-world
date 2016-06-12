@@ -921,7 +921,7 @@
       <option name="project" value="LOCAL" />
       <updated>1452539369512</updated>
     </task>
-    <task id="LOCAL-00003" summary="lion eating  and carrying propperly">
+    <task id="LOCAL-00003" summary="lion eating  and carrying properly">
       <created>1452557300550</created>
       <option name="number" value="00003" />
       <option name="project" value="LOCAL" />
@@ -1096,7 +1096,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="This is a try" />
     <MESSAGE value="lion moving and avoiding walls" />
-    <MESSAGE value="lion eating  and carrying propperly" />
+    <MESSAGE value="lion eating  and carrying properly" />
     <MESSAGE value="multiple lions&#10;if too many obstacles or lions or food fixed&#10;Editing configuration changed with button for current config&#10;" />
     <MESSAGE value="Fixed all File drop down menu and added FileChooser&#10;Fixed display config" />
     <MESSAGE value="Groups and lists are 2D in order to have more options (eg. animalGroup[0] = ALL LIONS and animalGroup[1] = other type of animals)&#10;IDs are into the root&#10;Editing life forms is half way done" />

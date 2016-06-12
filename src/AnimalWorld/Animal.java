@@ -28,7 +28,7 @@ public abstract class Animal{
     private double metabolism;
     private int maxEnergy;
     private int maxFood;
-	private int strenght;
+	private int strength;
 	private double foodCarring;
 	private int minFoodCons;	// minimum of calories that the meat has to be in order to eat it
 	private int age;			// in days
@@ -290,11 +290,11 @@ public abstract class Animal{
 	}
 
     /**
-     * Strenght Getter
-     * @return animal's strenght
+     * Strength Getter
+     * @return animal's strength
      */
     public int getStrenght(){
-		return this.strenght;
+		return this.strength;
 	}
 
     /**
@@ -648,7 +648,7 @@ public abstract class Animal{
                 "Food: " + String.format( "%.2f", this.food) + "\n" +
                 "MaxEnergy: " + this.maxEnergy + "\n" +
                 "Energy: " +  String.format( "%.2f", this.energy) + "\n" +
-                "Strenght: " + this.strenght + "\n" +
+                "Strength: " + this.strength + "\n" +
                 "FoodCarrier: " + String.format( "%.2f", this.foodCarring) + "\n";
         this.stats.setText(print);
         this.stats.setTranslateX(this.getBody().getTranslateX());
@@ -716,11 +716,11 @@ public abstract class Animal{
 	}
 
     /**
-     * Strenght Setter
-     * @param strenght animals strength
+     * Strength Setter
+     * @param strength animals strength
      */
-    public void setStrenght(int strenght){
-		this.strenght = strenght;
+    public void setStrenght(int strength){
+		this.strength = strength;
 	}
 
     /**
@@ -891,7 +891,7 @@ public abstract class Animal{
 				"Max Energy: " + this.maxEnergy + "\n" +
 				"Max Food: " + this.maxFood + "\n" +
 				"Metabolism: " + this.metabolism + "\n" +
-				"Strength: " + this.strenght + "\n" +
+				"Strength: " + this.strength + "\n" +
 				"Angle of movement: " + this.angleRange + "\n" +
 				"Speed: " + this.speed ;
 

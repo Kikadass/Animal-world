@@ -580,7 +580,7 @@ public class Configuration implements Serializable{
 
 
     /**
-     * Displays the All the Configuration throught an Alert.
+     * Displays the All the Configuration thought an Alert.
      */
     public void displayConfig(){
 		String print;
